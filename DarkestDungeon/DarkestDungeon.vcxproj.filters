@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Framework\main.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Framework.cpp">
+      <Filter>Framework\1.Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scene.cpp">
+      <Filter>Framework\3.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Anim.cpp">
+      <Filter>Framework\4.Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\stdafx.cpp">
+      <Filter>Framework\PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\GameObject.cpp">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\SpriteGo.cpp">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TextGo.cpp">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\SceneDev1.cpp">
+      <Filter>Scenes\Dev1</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\SceneDev2.cpp">
+      <Filter>Scenes\Dev2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneGame.cpp">
+      <Filter>Scenes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ball.cpp">
+      <Filter>Scenes\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bat.cpp">
+      <Filter>Scenes\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Utils.cpp">
+      <Filter>Framework\6.Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\InputManager.cpp">
+      <Filter>Framework\2.Manager\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\SceneManager.cpp">
+      <Filter>Framework\2.Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\SceneResourceManager.cpp">
+      <Filter>Framework\2.Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharacterContainer.cpp">
+      <Filter>Scenes\Dev1</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleManager.cpp">
+      <Filter>Scenes\Dev1</Filter>
+    </ClCompile>
+    <ClCompile Include="ExploreManager.cpp">
+      <Filter>Scenes\Dev1</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Scenes\Dev1</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Framework\Framework.h">
+      <Filter>Framework\1.Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scene.h">
+      <Filter>Framework\3.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Anim.h">
+      <Filter>Framework\4.Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\stdafx.h">
+      <Filter>Framework\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\GameObject.h">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\SpriteGo.h">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TextGo.h">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Defines.h">
+      <Filter>Framework\7.Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Singleton.h">
+      <Filter>Framework\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\ObjectPool.h">
+      <Filter>Framework\Template</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\SceneDev1.h">
+      <Filter>Scenes\Dev1</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\SceneDev2.h">
+      <Filter>Scenes\Dev2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneGame.h">
+      <Filter>Scenes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bat.h">
+      <Filter>Scenes\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ball.h">
+      <Filter>Scenes\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Utils.h">
+      <Filter>Framework\6.Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\InputManager.h">
+      <Filter>Framework\2.Manager\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\SceneManager.h">
+      <Filter>Framework\2.Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\ResourceManager.h">
+      <Filter>Framework\2.Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\SceneResourceManager.h">
+      <Filter>Framework\2.Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CharacterContainer.h">
+      <Filter>Scenes\Dev1</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleManager.h">
+      <Filter>Scenes\Dev1</Filter>
+    </ClInclude>
+    <ClInclude Include="ExploreManager.h">
+      <Filter>Scenes\Dev1</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Scenes\Dev1</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{b37c1bdf-1b12-4425-b24b-f688fee408dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{e534f2e5-780a-4e9e-8a9c-d5ec11ea1df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\1.Framework">
+      <UniqueIdentifier>{0c2ad317-dcd4-4727-a631-34f6397ed935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\3.Scene">
+      <UniqueIdentifier>{e267ffde-0f44-4ad0-b4f1-ba3dc0fb1d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\4.Anim">
+      <UniqueIdentifier>{3591b251-4844-48e9-a896-eea79329e3d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\PCH">
+      <UniqueIdentifier>{a7620a5f-f901-4d45-b381-93e6fb72af59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\5.GameObject">
+      <UniqueIdentifier>{f247a2d0-ef3f-450a-bb0e-e91868336ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\2.Manager">
+      <UniqueIdentifier>{dc125e2c-2447-4eea-a2a8-f6c95c55d4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Template">
+      <UniqueIdentifier>{bdac7c89-29d6-45cc-b775-c66ab82000dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{d019ae7b-2b01-4e89-97f8-3efbd40ae83c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1">
+      <UniqueIdentifier>{d9f51e8b-2f08-4f5e-90c8-64d029e2022d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev2">
+      <UniqueIdentifier>{6a5cf147-9c1d-4618-8f70-2f48b3a2c043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Game">
+      <UniqueIdentifier>{b8b89110-e28e-44c0-8219-94caa44f3919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Game\Component">
+      <UniqueIdentifier>{66b5cc20-48ed-43b1-bdfc-07f89d1c0b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\7.Define">
+      <UniqueIdentifier>{e9031e08-28fe-40ab-b731-8514ff7c2e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\6.Utils">
+      <UniqueIdentifier>{f3a0cb27-0a30-421d-8946-d8a3cb96d7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\2.Manager\InputManager">
+      <UniqueIdentifier>{e49e54ed-1437-43f5-93c8-4b67a396dbf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\2.Manager\SceneManager">
+      <UniqueIdentifier>{144029c9-17a1-4432-b7ce-57716a786aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\2.Manager\ResourceManager">
+      <UniqueIdentifier>{c4a62eaf-1297-4b16-a9d3-f5f5f26acb36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Battle">
+      <UniqueIdentifier>{10566202-c489-4b2d-bf6c-b018e50c0615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Explore">
+      <UniqueIdentifier>{05263364-ee39-41a5-843d-46654f49b5d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\UI">
+      <UniqueIdentifier>{3784f399-981e-40a9-b664-e630868a7267}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

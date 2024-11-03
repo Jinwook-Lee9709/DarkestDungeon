@@ -1,0 +1,27 @@
+
+attack_overlay.sprite.png
+size: 2044,733
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+combatbg_crit
+  rotate: false
+  xy: 2, 31
+  size: 963, 700
+  orig: 963, 700
+  offset: 0, 0
+  index: -1
+combatbg_hit
+  rotate: false
+  xy: 1542, 31
+  size: 500, 700
+  orig: 500, 700
+  offset: 0, 0
+  index: -1
+combatbg_miss
+  rotate: true
+  xy: 967, 2
+  size: 729, 573
+  orig: 729, 573
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,55 @@
+
+combat.sprite.png
+size: 1796,876
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood
+  rotate: true
+  xy: 1231, 462
+  size: 412, 398
+  orig: 412, 398
+  offset: 0, 0
+  index: -1
+blood_drips
+  rotate: true
+  xy: 1418, 13
+  size: 65, 257
+  orig: 65, 257
+  offset: 0, 0
+  index: -1
+blood_shadow
+  rotate: false
+  xy: 2, 2
+  size: 896, 872
+  orig: 896, 872
+  offset: 0, 0
+  index: -1
+skull
+  rotate: true
+  xy: 1631, 726
+  size: 148, 158
+  orig: 148, 158
+  offset: 0, 0
+  index: -1
+skull_shadow
+  rotate: false
+  xy: 1418, 80
+  size: 376, 380
+  orig: 376, 380
+  offset: 0, 0
+  index: -1
+sword_left
+  rotate: true
+  xy: 900, 33
+  size: 314, 516
+  orig: 314, 516
+  offset: 0, 0
+  index: -1
+sword_right
+  rotate: false
+  xy: 900, 349
+  size: 329, 525
+  orig: 329, 525
+  offset: 0, 0
+  index: -1

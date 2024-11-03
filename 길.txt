@@ -1,0 +1,55 @@
+#include "stdafx.h"
+#include "SceneDev1.h"
+#include "SpriteGo.h"
+#include "CharacterContainer.h"
+
+
+
+SceneDev1::SceneDev1()
+	: Scene(SceneIds::Dev1)
+{
+	animIdle.LoadFromFile("graphics/playerAnimation.png");
+}
+
+void SceneDev1::Init()
+{
+	//animIdle.LoadFromFile("Resource/Crusader/spriteSheetWalk.png");
+
+	//animIdle.SetAnimSequence(
+	//	{ 0, 0, 226, 375 },                     // 프레임의 x, y, width, height
+	//	0,                                    // 프레임간의 간격
+	//	0.03,     // 프레임 별 재생 시간
+	//	32);									  // 생성할 프레임 개수
+
+	//animIdle.SetPosition({ 0.f, 0.f });
+}
+
+void SceneDev1::Enter()
+{
+	SCENE_RES_MGR.Load("Dev1");
+	Scene::Enter();
+}
+
+void SceneDev1::Exit()
+{
+	SCENE_RES_MGR.UnLoad("Dev1");
+
+}
+
+void SceneDev1::Update(float dt)
+{
+	animIdle.Update(dt);
+	
+}
+
+void SceneDev1::Draw(sf::RenderWindow& window)
+{
+
+	animIdle.SetPosition({ 1920.0f * 0.5f, 200.0f });
+	animIdle.Draw(window);
+	
+	
+}
+
+
+

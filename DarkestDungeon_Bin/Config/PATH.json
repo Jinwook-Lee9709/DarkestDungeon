@@ -1,0 +1,47 @@
+
+{
+    "window":{
+        "width" : 800,
+        "height" : 600,
+        "title" : "Timber!"
+    },
+    "scene":{
+        "General":{
+            "Texture" : {
+
+            },
+            "Fonts" :{
+                "Sansation" : "fonts/Sansation.ttf"
+            },
+            "Sound" :{
+
+            }
+        },
+        "Dev1":{
+            "Texture" :{
+                "background" :  "Resource/Crusader/spriteSheetWalk.png",
+                "combat" : "Resource/Crusader/armatureName_combat_00.png",
+                "room_empty" : "Resource/Dungeons/crypts.room_wall.empty.png",
+
+                "panel_hero" : "Resource/Panels/panel_hero.png",
+                "panel_monster" : "Resource/Panels/panel_monster.png",
+                "panel_inventory" : "Resource/Panels/panel_inventory.png",
+                "panel_banner" : "Resource/Panels/panel_banner.png",
+                "ability_move" : "Resource/Panels/icons_ability/ability_move.png",
+                "ability_pass" : "Resource/Panels/icons_ability/ability_pass.png",
+
+                "side_decor" : "Resource/Panels/side_decor.png"
+
+            },
+            "Font" :{
+                "KOMIKAP_":      "fonts/KOMIKAP_.ttf"
+            },
+            "Sound:" :{
+                "chop":          "sound/chop.wav",
+                "death":         "sound/death.wav",
+                "out_of_time":    "sound/out_of_time.wav"
+            }
+        }
+    }
+
+}
