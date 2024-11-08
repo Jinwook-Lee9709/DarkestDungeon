@@ -18,7 +18,6 @@ void SceneDev1::Init()
 		auto obj = AddGo(new CharacterContainer("character" + std::to_string(i)));
 		obj->sortingLayer = SortingLayers::Foreground;
 		characters.push_back(obj);
-		
 	}
 	background = AddGo(new SpriteGo("Resource/Dungeons/crypts.room_wall.empty.png"));
 	background->SetOrigin(Origins::TC);

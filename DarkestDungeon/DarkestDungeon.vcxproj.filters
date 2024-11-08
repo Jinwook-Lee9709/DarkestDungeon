@@ -52,17 +52,17 @@
     <ClCompile Include="Framework\SceneResourceManager.cpp">
       <Filter>Framework\2.Manager\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\CharacterContainer.cpp">
-      <Filter>Scenes\Dev1</Filter>
-    </ClCompile>
     <ClCompile Include="BattleManager.cpp">
-      <Filter>Scenes\Dev1</Filter>
+      <Filter>Scenes\Dev1\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharacterContainer.cpp">
+      <Filter>Scenes\Dev1\General</Filter>
     </ClCompile>
     <ClCompile Include="ExploreManager.cpp">
-      <Filter>Scenes\Dev1</Filter>
+      <Filter>Scenes\Dev1\Explore</Filter>
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
-      <Filter>Scenes\Dev1</Filter>
+      <Filter>Scenes\Dev1\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,17 +126,17 @@
     <ClInclude Include="Framework\SceneResourceManager.h">
       <Filter>Framework\2.Manager\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="src\CharacterContainer.h">
-      <Filter>Scenes\Dev1</Filter>
-    </ClInclude>
     <ClInclude Include="BattleManager.h">
-      <Filter>Scenes\Dev1</Filter>
+      <Filter>Scenes\Dev1\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CharacterContainer.h">
+      <Filter>Scenes\Dev1\General</Filter>
     </ClInclude>
     <ClInclude Include="ExploreManager.h">
-      <Filter>Scenes\Dev1</Filter>
+      <Filter>Scenes\Dev1\Explore</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
-      <Filter>Scenes\Dev1</Filter>
+      <Filter>Scenes\Dev1\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +205,9 @@
     </Filter>
     <Filter Include="Scenes\Dev1\UI">
       <UniqueIdentifier>{3784f399-981e-40a9-b664-e630868a7267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\General">
+      <UniqueIdentifier>{4472138b-18b1-411c-96fc-174b15228645}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

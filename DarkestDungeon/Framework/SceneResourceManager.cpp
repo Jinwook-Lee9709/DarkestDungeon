@@ -52,3 +52,21 @@ bool SceneResourceManager::UnLoad(const std::string& scene)
 	}
 	return true;
 }
+
+sf::Texture& SceneResourceManager::GetTex(const std::string& scene, const std::string& textureId)
+{
+	auto path = PATH["scene"][scene]["Texture"][textureId];
+	return 	RES_MGR(sf::Texture).Get(path);
+}
+
+sf::Font& SceneResourceManager::GetFont(const std::string& scene, const std::string& textureId)
+{
+	auto path = PATH["scene"][scene]["Texture"]["textureId"];
+	return 	RES_MGR(sf::Font).Get(path);
+}
+
+sf::SoundBuffer& SceneResourceManager::GetSound(const std::string& scene, const std::string& textureId)
+{
+	auto path = PATH["scene"][scene]["Texture"]["textureId"];
+	return 	RES_MGR(sf::SoundBuffer).Get(path);
+}

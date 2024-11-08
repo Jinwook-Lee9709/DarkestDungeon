@@ -19,9 +19,12 @@
         },
         "Dev1":{
             "Texture" :{
-                "background" :  "Resource/Crusader/spriteSheetWalk.png",
-                "combat" : "Resource/Crusader/armatureName_combat_00.png",
+                "crusader_background" :  "Resource/Heroes/Crusader/spriteSheetWalk.png",
+                "crusader_combat" : "Resource/Heroes/Crusader/armatureName_combat_00.png",
                 "room_empty" : "Resource/Dungeons/crypts.room_wall.empty.png",
+
+                "skeleton_common_combat" : "Resource/Enemy/skeleton_common/armatureName_combat_00.png",
+
 
                 "panel_hero" : "Resource/Panels/panel_hero.png",
                 "panel_monster" : "Resource/Panels/panel_monster.png",
