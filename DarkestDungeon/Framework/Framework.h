@@ -33,6 +33,7 @@ public:
 	void SetTimeScale(float newTimeScale) { timeScale = newTimeScale; }
 	float GetTimeScale() { return timeScale; }
 
+	sf::RenderWindow& GetWindow() { return window; }
 
 	sf::Vector2u GetWindowSize() const { return window.getSize(); }
 	sf::Vector2f GetWindowSizeF() const { return (sf::Vector2f)window.getSize(); }

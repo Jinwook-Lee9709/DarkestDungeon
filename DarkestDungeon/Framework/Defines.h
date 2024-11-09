@@ -5,8 +5,9 @@ enum class SortingLayers
 	Background,
 	Test,
 	Foreground,
+	Default,
 	UI,
-	Default
+
 };
 
 
@@ -33,3 +34,5 @@ enum class Sides
 	Right,
 	None
 };
+
+using json = nlohmann::json;

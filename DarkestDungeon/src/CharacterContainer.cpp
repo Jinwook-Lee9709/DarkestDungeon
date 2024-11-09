@@ -93,3 +93,16 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 	}
 
 }
+
+void CharacterContainer::SetInitialStatus(json& info)
+{
+	hp = info["hp"];
+	maxHp = info["maxHp"];
+	stress = info["stress"];
+	speed = info["speed"];
+	accuracy = info["accuracy"];
+	crtical = info["critical"];
+	minDamage = info["minDamage"];
+	maxDamage = info["maxDamage"];
+	prot = info["prot"];;
+}

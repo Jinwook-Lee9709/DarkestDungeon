@@ -8,6 +8,9 @@ protected:
 	std::list<GameObject*> addGameObjects;
 	std::list<GameObject*> removeGameObjects;
 
+	sf::View uiView;
+	sf::View worldView;
+
 public:
 	Scene(SceneIds id);
 	virtual ~Scene() = default;
@@ -44,4 +47,8 @@ public:
 	void ApplyAddGo();
 	void ApplyDeleteGo();
 
+	sf::Vector2f ScreenToWorld(sf::Vector2i screenPos); //스크린 좌표를 월드 포지션으로
+	sf::Vector2i WorldToScreen(sf::Vector2f worldPos); //월드 좌표를 스크린 포지션으로
+	sf::Vector2f ScreenToUi(sf::Vector2i screenPos); //스크린 좌표를 월드 포지션으로
+	sf::Vector2i UiToScreen(sf::Vector2f worldPos);
 };

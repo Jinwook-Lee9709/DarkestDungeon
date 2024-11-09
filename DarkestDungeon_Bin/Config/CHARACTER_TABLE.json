@@ -1,0 +1,61 @@
+
+{
+   "Character1":
+   {
+        "name": "Crusader",
+        "type": "Crusader",
+        "hp" : 25,
+        "maxHp" : 25,
+        "stress" : 34,
+        "speed" : 6,
+        "critical" : 15.0,
+        "minDamage" : 8,
+        "maxDamage" : 10,
+        "protect" : 4
+   },
+
+   "Character2":
+   {
+        "name": "Crusader",
+        "type": "Crusader",
+        "hp" : 25,
+        "maxHp" : 25,
+        "stress" : 34,
+        "speed" : 6,
+        "critical" : 15.0,
+        "minDamage" : 8,
+        "maxDamage" : 10,
+        "protect" : 4
+   },
+
+   "Character3":
+   {
+        "name": "Crusader",
+        "type": "Crusader",
+        "hp" : 25,
+        "maxHp" : 25,
+        "stress" : 34,
+        "speed" : 6,
+        "critical" : 15.0,
+        "minDamage" : 8,
+        "maxDamage" : 10,
+        "protect" : 4
+   },
+
+   "Character4":
+   {
+        "name": "Crusader",
+        "type": "Crusader",
+        "hp" : 25,
+        "maxHp" : 25,
+        "stress" : 34,
+        "speed" : 6,
+        "accuracy" : 0,
+        "critical" : 15.0,
+        "minDamage" : 8,
+        "maxDamage" : 10,
+        "protect" : 4
+   }
+
+    
+}

@@ -1,5 +1,5 @@
 #pragma once
-#include "stdafx.h"
+
 
 class GameObject
 {
@@ -7,10 +7,13 @@ protected:
 	std::string name;
 	bool active = true; //determine object run Update, Draw
 	sf::Vector2f position;
+	float rotation = 0.f;
 	sf::Vector2f scale;
+
 	sf::Vector2f origin;
 	Origins originPreset;
 
+	HitBox hitbox;
 public:
 	SortingLayers sortingLayer = SortingLayers::Default;
 	int sortingOrder = 0;
@@ -28,6 +31,9 @@ public:
 	sf::Vector2f GetPosition() const { return position; }
 	virtual void SetPosition(const sf::Vector2f& pos) { position = pos; }
 
+	float GetRotation() const { return rotation; }
+	virtual void SetRotation(float angle) { rotation = angle; }
+
 	sf::Vector2f GetScale() const { return scale; }
 	virtual void SetScale(const sf::Vector2f& size) { scale = size; }
 
@@ -40,6 +46,23 @@ public:
 	{
 		origin = newOrigin;
 		originPreset = Origins::Custom;
+	}
+	virtual sf::FloatRect GetLocalBounds() const {
+		return { 0.f, 0.f, 0.f, 0.f };
+	}
+	virtual sf::FloatRect GetGlobalBounds() const
+	{
+		return { 0.f, 0.f, 0.f, 0.f };
+	}
+
+	virtual const HitBox& GetHitBox() const
+	{
+		return hitbox;
+	}
+
+	virtual HitBox& GetHitBox()
+	{
+		return hitbox;
 	}
 
 	virtual void Init();

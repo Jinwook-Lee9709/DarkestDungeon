@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="ExploreManager.cpp" />
+    <ClCompile Include="Framework\HitBox.cpp" />
+    <ClCompile Include="Framework\Variables.cpp" />
     <ClCompile Include="src\CharacterContainer.cpp" />
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Bat.cpp" />
@@ -41,11 +43,13 @@
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="src\SceneGame.cpp" />
-    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="UiDungeon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleManager.h" />
     <ClInclude Include="ExploreManager.h" />
+    <ClInclude Include="Framework\HitBox.h" />
+    <ClInclude Include="Framework\Variables.h" />
     <ClInclude Include="src\CharacterContainer.h" />
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\Bat.h" />
@@ -67,7 +71,7 @@
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="src\SceneGame.h" />
-    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="UiDungeon.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

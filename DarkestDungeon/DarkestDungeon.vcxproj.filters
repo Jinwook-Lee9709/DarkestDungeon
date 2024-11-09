@@ -61,7 +61,13 @@
     <ClCompile Include="ExploreManager.cpp">
       <Filter>Scenes\Dev1\Explore</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
+    <ClCompile Include="Framework\HitBox.cpp">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Variables.cpp">
+      <Filter>Framework\7.Define</Filter>
+    </ClCompile>
+    <ClCompile Include="UiDungeon.cpp">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,7 +141,13 @@
     <ClInclude Include="ExploreManager.h">
       <Filter>Scenes\Dev1\Explore</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h">
+    <ClInclude Include="Framework\HitBox.h">
+      <Filter>Framework\5.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Variables.h">
+      <Filter>Framework\7.Define</Filter>
+    </ClInclude>
+    <ClInclude Include="UiDungeon.h">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClInclude>
   </ItemGroup>

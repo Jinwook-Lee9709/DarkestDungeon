@@ -35,6 +35,7 @@ void Framework::Do()
                 window.close();
         }
         InputManager::Update(deltaTime);
+
         //Update
         SCENE_MGR.Update(deltaTime);
         SCENE_MGR.LateUpdate(deltaTime);

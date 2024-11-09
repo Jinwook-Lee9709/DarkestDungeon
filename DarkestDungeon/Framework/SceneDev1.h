@@ -4,6 +4,8 @@
 class CharacterContainer;
 class SpriteGo;
 
+class UiDungeon;
+
 class SceneDev1 : public Scene
 {
 public:
@@ -19,19 +21,25 @@ protected:
 	sf::Vector2f enemyContainerPos2[3];
 	std::vector<CharacterContainer*> characters;
 	SpriteGo* background;
+
+	UiDungeon* uiDungeon;
 public:
 	SceneDev1();
 	~SceneDev1() = default;;
 
 	void Init() override;
+
+
 	void Enter() override;
 	void Exit() override;
 
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	void InitPos(sf::Vector2f windowSize);
-	void InitUIBackground(sf::Vector2f windowSize);
+	void InitContaierPos(sf::Vector2f windowSize);
+	void SetCharacterInfo();
 
+
+	
 };
 

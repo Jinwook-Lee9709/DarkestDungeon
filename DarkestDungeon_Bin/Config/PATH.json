@@ -10,6 +10,9 @@
             "Texture" : {
 
             },
+            "SpriteSheet" :{
+
+            },
             "Fonts" :{
                 "Sansation" : "fonts/Sansation.ttf"
             },
@@ -18,23 +21,40 @@
             }
         },
         "Dev1":{
-            "Texture" :{
-                "crusader_background" :  "Resource/Heroes/Crusader/spriteSheetWalk.png",
+            "Texture" : {
                 "crusader_combat" : "Resource/Heroes/Crusader/armatureName_combat_00.png",
                 "room_empty" : "Resource/Dungeons/crypts.room_wall.empty.png",
 
                 "skeleton_common_combat" : "Resource/Enemy/skeleton_common/armatureName_combat_00.png",
 
-
                 "panel_hero" : "Resource/Panels/panel_hero.png",
                 "panel_monster" : "Resource/Panels/panel_monster.png",
                 "panel_inventory" : "Resource/Panels/panel_inventory.png",
                 "panel_banner" : "Resource/Panels/panel_banner.png",
+                
                 "ability_move" : "Resource/Panels/icons_ability/ability_move.png",
                 "ability_pass" : "Resource/Panels/icons_ability/ability_pass.png",
+                "selected_ability" : "Resource/Panels/icons_ability/selected_ability.png",
+
+                "crusader_ability_one" : "Resource/Heroes/Crusader/Icon/crusader.ability.one.png",
+                "crusader_ability_two" : "Resource/Heroes/Crusader/Icon/crusader.ability.two.png",
+                "crusader_ability_three" : "Resource/Heroes/Crusader/Icon/crusader.ability.three.png",
+                "crusader_ability_four" : "Resource/Heroes/Crusader/Icon/crusader.ability.four.png",
+
+            
+
 
                 "side_decor" : "Resource/Panels/side_decor.png"
-
+            }, 
+            "SpriteSheet" :{
+                "crusader_walk" :{
+                    "Texture": "Resource/Heroes/Crusader/spriteSheetWalk.png",
+                    "count" : ""
+                },
+                "crusader_heal.png" :{
+                    "Texture": "Resource/Heroes/Crusader/spriteSheetWalk.png",
+                    "count" : "56"
+                }  
             },
             "Font" :{
                 "KOMIKAP_":      "fonts/KOMIKAP_.ttf"
@@ -44,7 +64,9 @@
                 "death":         "sound/death.wav",
                 "out_of_time":    "sound/out_of_time.wav"
             }
-        }
-    }
 
+        }
+            
+    }
+    
 }
