@@ -70,6 +70,9 @@
     <ClCompile Include="UiDungeon.cpp">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Crusader.cpp">
+      <Filter>Scenes\Dev1\Character\Crusader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Framework.h">
@@ -150,6 +153,9 @@
     <ClInclude Include="UiDungeon.h">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Crusader.h">
+      <Filter>Scenes\Dev1\Character\Crusader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -220,6 +226,12 @@
     </Filter>
     <Filter Include="Scenes\Dev1\General">
       <UniqueIdentifier>{4472138b-18b1-411c-96fc-174b15228645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Character">
+      <UniqueIdentifier>{60e19c18-b8e8-4da8-883c-9c91d9d58689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Character\Crusader">
+      <UniqueIdentifier>{cadcf017-1db3-4bd4-bff7-798e4bb10174}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

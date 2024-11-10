@@ -31,7 +31,7 @@
                 "panel_monster" : "Resource/Panels/panel_monster.png",
                 "panel_inventory" : "Resource/Panels/panel_inventory.png",
                 "panel_banner" : "Resource/Panels/panel_banner.png",
-                
+
                 "ability_move" : "Resource/Panels/icons_ability/ability_move.png",
                 "ability_pass" : "Resource/Panels/icons_ability/ability_pass.png",
                 "selected_ability" : "Resource/Panels/icons_ability/selected_ability.png",
@@ -57,7 +57,9 @@
                 }  
             },
             "Font" :{
-                "KOMIKAP_":      "fonts/KOMIKAP_.ttf"
+                "KOMIKAP_":      "fonts/KOMIKAP_.ttf",
+                "LeeB":      "fonts/LeeB.ttf",
+                "LeeL":      "fonts/LeeL.ttf"
             },
             "Sound:" :{
                 "chop":          "sound/chop.wav",

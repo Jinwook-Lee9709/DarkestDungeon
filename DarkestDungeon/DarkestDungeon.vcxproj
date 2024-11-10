@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BattleManager.cpp" />
+    <ClCompile Include="Crusader.cpp" />
     <ClCompile Include="ExploreManager.cpp" />
     <ClCompile Include="Framework\HitBox.cpp" />
     <ClCompile Include="Framework\Variables.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BattleManager.h" />
+    <ClInclude Include="Crusader.h" />
     <ClInclude Include="ExploreManager.h" />
     <ClInclude Include="Framework\HitBox.h" />
     <ClInclude Include="Framework\Variables.h" />

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "UiDungeon.h"
-#include "SpriteGo.h"
 
 UiDungeon::UiDungeon(const std::string& name)
 	: GameObject(name)
@@ -41,6 +40,7 @@ void UiDungeon::Init()
 	windowSize = FRAMEWORK.GetWindowSizeF();
 	InitFixedUi(windowSize);
 	InitSkillUi(windowSize);
+	InitPlayerTextUi(windowSize);
 
 	inventory = new SpriteGo("Resource/Panels/panel_inventory.png");
 	SetSpriteInfo(inventory, Origins::BL, { windowSize.x * 0.5f,  windowSize.y * 0.999f }, 0);
@@ -58,7 +58,14 @@ void UiDungeon::Release()
 	for (auto it : skill) {
 		it->Release();
 		delete(it);
+		it = nullptr;
 	}
+	
+	for (auto it : playerText) {
+		it.second->Release();
+		delete(it.second);
+	}
+	playerText.clear();
 	instanceChk = false;
 }
 
@@ -72,6 +79,9 @@ void UiDungeon::Reset()
 	}
 	for (auto it : skill) {
 		it->Reset();
+	}
+	for (auto it : playerText) {
+		it.second->Reset();
 	}
 }
 
@@ -89,6 +99,11 @@ void UiDungeon::Draw(sf::RenderWindow& window)
 		for (auto ui : skill) {
 			if (ui->IsActive()) {
 				ui->Draw(window);
+			}
+		}
+		for (auto ui : playerText) {
+			if (ui.second->IsActive()) {
+				ui.second->Draw(window);
 			}
 		}
 	}
@@ -153,6 +168,91 @@ void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)
 	obj->SetActive(false);
 
 }
+
+void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
+{
+	TextGo* obj;
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::Red);
+	obj->SetPosition({ windowSize.x * 0.21f, windowSize.y * 0.81f });
+	obj->SetString("50 / 50");
+	obj->SetCharacterSize(20);
+	obj->SetOrigin(Origins::MR);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+
+	playerText.insert({ PlayerTextIndex::HP, obj });
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.21f, windowSize.y * 0.837f });
+	obj->SetString("3 / 200");
+	obj->SetCharacterSize(20);
+	obj->SetOrigin(Origins::MR);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::STRESS, obj });
+
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.865f });
+	obj->SetString("ACC");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::ACCURACY, obj });
+
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.885f });
+	obj->SetString("CRIT");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::CRITICAL, obj });
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.905f });
+	obj->SetString("DMG");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::DAMAGE, obj });
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.925f });
+	obj->SetString("DODGE");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::DODGE, obj });
+
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.945f });
+	obj->SetString("PROT");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::PROTECT, obj });
+
+	obj = new TextGo("fonts/LeeB.ttf");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.965f });
+	obj->SetString("SPD");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::SPEED, obj });
+
+}
+
+
 
 void UiDungeon::CheckSkillClick()
 {

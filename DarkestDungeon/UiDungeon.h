@@ -1,16 +1,16 @@
 #pragma once
 class SpriteGo;
+class TextGo;
 
 enum class PlayerTextIndex {
-	HP,
-	MAXHP,
-	STRESS,
 	ACCURACY,
 	CRITICAL,
-	MINDAMAGE,
-	MAXDAMAGE,
+	DAMAGE,
+	DODGE,
 	PROTECT,
 	SPEED,
+	HP,
+	STRESS,
 	COUNT
 };
 
@@ -20,11 +20,12 @@ private:
 	bool instanceChk = false;
 
 	std::vector<SpriteGo*> fixedUi;
+	std::vector<TextGo*> fixedText;
 
 	SpriteGo* skill[7];
 	std::string SkillTexId[4][4];
 
-	//std::unordered_map<PlayerTextIndex, > playerText;
+	std::unordered_map<PlayerTextIndex, TextGo*> playerText;
 
 	SpriteGo* inventory;
 
@@ -51,8 +52,12 @@ public:
 		const sf::Vector2f pos, const int& order,
 		const bool& flipX = false, const bool& flipY = false);
 
+
+
+
 	void InitFixedUi(const sf::Vector2f& windowSize);
 	void InitSkillUi(const sf::Vector2f& windowSize);
+	void InitPlayerTextUi(const sf::Vector2f& windowSize);
 
 	void CheckSkillClick();
 };

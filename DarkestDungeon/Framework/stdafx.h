@@ -26,5 +26,7 @@
 #include "SceneResourceManager.h"
 #include "Anim.h"
 #include "GameObject.h"
+#include "SpriteGo.h"
+#include "TextGo.h"
 
 

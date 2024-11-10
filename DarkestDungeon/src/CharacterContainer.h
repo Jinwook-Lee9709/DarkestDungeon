@@ -23,16 +23,7 @@ private:
 	sf::Sprite spriteSelect;
 	sf::RectangleShape hpBar;
 	sf::RectangleShape stressBar[10];
-	int hp;
-	int maxHp;
-	int stress;
-	int acc;
-	int speed;
-	float accuracy;
-	float crtical;
-	float minDamage;
-	float maxDamage;
-	float prot;
+	CharacterInfo info;
 	bool selected;
 
 	sf::Vector2f originalCharacterScale = { 0.8f, 0.8f };
@@ -53,7 +44,7 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
 
-	void SetInitialStatus(json& info);
+	void SetInitialStatus(const json& info);
 };
 
 	

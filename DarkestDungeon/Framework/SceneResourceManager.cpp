@@ -7,7 +7,11 @@ void SceneResourceManager::init()
 	RES_MGR(sf::Font);
 	RES_MGR(sf::SoundBuffer);
 	std::ifstream file("Config/PATH.json", std::ios::in);
+	if (!file) {
+		std::cerr << "Failed to Read File";
+	}
 	PATH = json::parse(file);
+	file.close();
 }
 
 bool SceneResourceManager::Load(const std::string& scene)

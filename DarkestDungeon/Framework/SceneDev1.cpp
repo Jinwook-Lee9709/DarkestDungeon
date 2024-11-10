@@ -77,10 +77,16 @@ void SceneDev1::InitContaierPos(sf::Vector2f windowSize)
 void SceneDev1::SetCharacterInfo()
 {
 	std::ifstream file("Config/CHARACTER_TABLE.json", std::ios::in);
+	if (!file){
+		std::cerr << "Failed to Read File";
+	}
 	json TABLE = json::parse(file);
+	file.close();
 	for (int i = 0; i < 4; i++) {
 		characters[i]->SetPosition(characterContainerPos[i]);
-		json info = TABLE["Character" + std::to_string(i)];
+		json info = TABLE["Character" + std::to_string(i+1)];
+
+		characters[i]->SetInitialStatus(info);
 	}
 }
 

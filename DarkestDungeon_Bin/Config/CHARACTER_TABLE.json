@@ -4,14 +4,51 @@
    {
         "name": "Crusader",
         "type": "Crusader",
-        "hp" : 25,
-        "maxHp" : 25,
-        "stress" : 34,
-        "speed" : 6,
-        "critical" : 15.0,
-        "minDamage" : 8,
-        "maxDamage" : 10,
-        "protect" : 4
+        "hp" : 33,
+        "maxHp" : 33,
+        "stress" : 5,
+        "speed" : 1,
+        "dodge" : 0,
+        "accuracy" : 0,
+        "critical" : 3.0,
+        "minDamage" : 6,
+        "maxDamage" : 12,
+        "protect" : 20,
+
+        "skill1":{
+          "type": 1001,
+          "targetEnemy": 1100,
+          "targetAliance": 1100,
+          "targetSelf": true,
+
+          "attack" : {
+               "damage" : 0,
+               "accuracy" : 0,
+               "critical" : 0
+          },
+          "buf" : {
+               "type" : 0,
+               "amount" : 0
+          },
+          "debuf" : {
+               "type" : 0,
+               "amount" : 0
+          },
+          "heal" : {
+               "amount" : 0,
+               "critical" : 0
+          }
+
+        },
+        "skill2":{
+
+        },
+        "skill3":{
+
+        },
+        "skill4":{
+
+        }
    },
 
    "Character2":
@@ -22,6 +59,8 @@
         "maxHp" : 25,
         "stress" : 34,
         "speed" : 6,
+        "dodge" : 0,
+        "accuracy" : 0,
         "critical" : 15.0,
         "minDamage" : 8,
         "maxDamage" : 10,
@@ -36,6 +75,8 @@
         "maxHp" : 25,
         "stress" : 34,
         "speed" : 6,
+        "dodge" : 0,
+        "accuracy" : 0,
         "critical" : 15.0,
         "minDamage" : 8,
         "maxDamage" : 10,
@@ -50,6 +91,7 @@
         "maxHp" : 25,
         "stress" : 34,
         "speed" : 6,
+        "dodge" : 0,
         "accuracy" : 0,
         "critical" : 15.0,
         "minDamage" : 8,
@@ -57,5 +99,4 @@
         "protect" : 4
    }
 
-    
 }
