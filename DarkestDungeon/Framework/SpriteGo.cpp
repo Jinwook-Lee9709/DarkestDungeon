@@ -58,6 +58,16 @@ void SpriteGo::Draw(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
+sf::FloatRect SpriteGo::GetLocalBounds() const
+{
+	return sprite.getLocalBounds();
+}
+
+sf::FloatRect SpriteGo::GetGlobalBounds() const
+{
+	return sprite.getGlobalBounds();
+}
+
 void SpriteGo::ChangeTexture(const std::string& texId)
 {
 	this->textureId = texId;

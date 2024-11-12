@@ -5,10 +5,10 @@ enum class SortingLayers
 	Background,
 	Test,
 	Foreground,
+	Default,
 	UI,
-	Default
-};
 
+};
 
 enum class SceneIds
 {
@@ -33,3 +33,20 @@ enum class Sides
 	Right,
 	None
 };
+
+struct CharacterInfo
+{
+	int hp;
+	int maxHp;
+	int stress;
+	int acc;
+	int speed;
+	int dodge;
+	float accuracy;
+	float crtical;
+	float minDamage;
+	float maxDamage;
+	float prot;
+};
+
+using json = nlohmann::json;

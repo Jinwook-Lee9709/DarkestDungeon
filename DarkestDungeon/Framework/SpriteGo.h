@@ -11,6 +11,8 @@ public:
 
 	void SetTextureId(const std::string& id) { textureId = id; }
 
+	void SetPosition(const sf::Vector2f& pos) override;
+	void SetScale(const sf::Vector2f& scale) override;
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
@@ -18,12 +20,14 @@ public:
     void FlipY(bool flag) override;
 
 	void Reset() override;
-	void SetPosition(const sf::Vector2f& pos) override;
-	void SetScale(const sf::Vector2f& scale) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	sf::FloatRect GetLocalBounds() const override;
+	sf::FloatRect GetGlobalBounds() const override;
 
 	void ChangeTexture(const std::string& texId);
 
+	
 	virtual sf::Vector2f GetSize();
 };
 

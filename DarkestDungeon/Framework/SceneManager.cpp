@@ -33,6 +33,7 @@ void SceneManager::ChangeScene(SceneIds id)
 
 }
 
+
 void SceneManager::Update(float dt)
 {
 	scenes[(int)currentScene]->Update(dt);

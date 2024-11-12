@@ -2,13 +2,14 @@
 #include "GameObject.h"
 
 enum class Animation {
-	idle,
-	walk,
-	combat,
-	skil1,
-	skil2,
-	skil3,
-	skil4
+	IDLE,
+	WALK,
+	COMBAT,
+	SKILL_ONE,
+	SKILL_TWO,
+	SKILL_THREE,
+	SKILL_FOUR,
+	HIT,
 };
 
 class Anim;
@@ -22,21 +23,13 @@ private:
 	sf::Sprite spriteSelect;
 	sf::RectangleShape hpBar;
 	sf::RectangleShape stressBar[10];
-	int hp;
-	int maxHp;
-	int stress;
-	int speed;
-	float crtical;
-	float minDamage;
-	float maxDamage;
-	float prot;
+	CharacterInfo info;
 	bool selected;
 
 	sf::Vector2f originalCharacterScale = { 0.8f, 0.8f };
 public:
 	CharacterContainer(const std::string& name = "");
 	virtual ~CharacterContainer();
-
 
 	virtual void SetPosition(const sf::Vector2f& pos);
 	virtual void SetScale(const sf::Vector2f& size);
@@ -50,6 +43,8 @@ public:
 
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
+
+	void SetInitialStatus(const json& info);
 };
 
 	

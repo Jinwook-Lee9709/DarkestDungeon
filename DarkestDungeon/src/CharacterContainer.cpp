@@ -49,10 +49,9 @@ void CharacterContainer::SetOrigin(const sf::Vector2f& newOrigin)
 
 void CharacterContainer::Init()
 {
-
 	hpBar.setSize({ 90.f,10.f });
 	hpBar.setFillColor(sf::Color(128, 0, 0, 255));
-	hpBar.setScale({ (float)hp / (float)maxHp, 1.0f });
+	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	for (int i = 0; i < 10; i++) {
 		stressBar[i].setSize({ 4.f, 5.f });
 		stressBar[i].setOutlineThickness(2.f);
@@ -92,4 +91,18 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 		window.draw(stressBar[i]);
 	}
 
+}
+
+void CharacterContainer::SetInitialStatus(const json& info)
+{
+	this->info.hp = info["hp"];
+	this->info.maxHp = info["maxHp"];
+	this->info.stress = info["stress"];
+	this->info.speed = info["speed"];
+	this->info.dodge = info["dodge"];
+	this->info.accuracy = info["accuracy"];
+	this->info.crtical = info["critical"];
+	this->info.minDamage = info["minDamage"];
+	this->info.maxDamage = info["maxDamage"];
+	this->info.prot = info["protect"];
 }
