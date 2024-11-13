@@ -1,29 +1,29 @@
 #include "stdafx.h"
 #include "AnimationClip.h"
 
-bool AnimationClip::loadFromFile(const std::string& fileId)
+bool AnimationClip::loadFromFile(const std::string& animationId)
 {
-	rapidcsv::Document Doc("animation/animation.csv");
-	auto row =  Doc.GetRow<std::string>(fileId);
-	id = fileId;
+	rapidcsv::Document Doc("animation/animations.csv", rapidcsv::LabelParams(0, 0));
+	auto row =  Doc.GetRow<std::string>(animationId);
+	id = animationId;
 	loopType = (AnimationLoopTypes)std::stoi(row[2]);
-	fps = std::stoi(row[3]);
-	int width = std::stoi(row[6]);
-	int height = std::stoi(row[7]);
-	int sheetWidth = width * std::stoi(row[4]);
+	fps = std::stoi(row[1]);
+	int width = std::stoi(row[5]);
+	int height = std::stoi(row[6]);
+	int sheetWidth = width * std::stoi(row[3]);
 
 	frames.clear();
 
 
 	sf::IntRect texCoord = { 0, 0, width, height };
-	for (int i = 0; i < std::stoi(row[5]); i++) 
+	for (int i = 0; i < std::stoi(row[4]); i++) 
 	{
-		frames.push_back({row[1], texCoord});
+		frames.push_back({animationId, texCoord});
 		texCoord.left += width;
 		if (texCoord.left == sheetWidth)
 		{
 			texCoord.left = 0;
-			texCoord.height += height;
+			texCoord.top += height;
 		}
 	}
 	return true;

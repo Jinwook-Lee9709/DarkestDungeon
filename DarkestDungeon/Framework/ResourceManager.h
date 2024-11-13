@@ -81,4 +81,5 @@ using TexMgr = ResourceManager<T>;
 #define TEX_MGR ResourceManager<sf::Texture>::Instance()
 #define FONT_MGR ResourceManager<sf::Font>::Instance()
 #define SOUND_MGR ResourceManager<sf::SoundBuffer>::Instance()
+#define ANIM_MGR ResourceManager<AnimationClip>::Instance()
 #define RES_MGR(X) (ResourceManager<X>::Instance())

@@ -2,7 +2,7 @@
 {
    "Character1":
    {
-        "name": "Crusader",
+        "name": "Arthur",
         "type": "Crusader",
         "hp" : 33,
         "maxHp" : 33,
@@ -15,23 +15,16 @@
         "maxDamage" : 12,
         "protect" : 20,
 
-        "skill1":{
-          "id": "crusader_ability_one"
-        },
-        "skill2":{
-          "id": "crusader_ability_two"
-        },
-        "skill3":{
-          "id": "crusader_ability_three"
-        },
-        "skill4":{
-          "id": "crusader_ability_four" 
-        }
+        "skill1":"crusader_ability_one",
+        "skill2":"crusader_ability_two",
+        "skill3":"crusader_ability_three",
+        "skill4":"crusader_ability_four" 
+        
    },
 
    "Character2":
    {
-        "name": "Crusader",
+        "name": "Hawkeye",
         "type": "Crusader",
         "hp" : 25,
         "maxHp" : 25,
@@ -42,12 +35,16 @@
         "critical" : 15.0,
         "minDamage" : 8,
         "maxDamage" : 10,
-        "protect" : 4
+        "protect" : 4,
+        "skill1":"crusader_ability_one",
+        "skill2":"crusader_ability_two",
+        "skill3":"crusader_ability_three",
+        "skill4":"crusader_ability_four" 
    },
 
    "Character3":
    {
-        "name": "Crusader",
+        "name": "Drake",
         "type": "Crusader",
         "hp" : 25,
         "maxHp" : 25,
@@ -58,12 +55,16 @@
         "critical" : 15.0,
         "minDamage" : 8,
         "maxDamage" : 10,
-        "protect" : 4
+        "protect" : 4,
+        "skill1":"crusader_ability_one",
+        "skill2":"crusader_ability_two",
+        "skill3":"crusader_ability_three",
+        "skill4":"crusader_ability_four" 
    },
 
    "Character4":
    {
-        "name": "Crusader",
+        "name": "Rock",
         "type": "Crusader",
         "hp" : 25,
         "maxHp" : 25,
@@ -74,7 +75,11 @@
         "critical" : 15.0,
         "minDamage" : 8,
         "maxDamage" : 10,
-        "protect" : 4
+        "protect" : 4,
+        "skill1":"crusader_ability_one",
+        "skill2":"crusader_ability_two",
+        "skill3":"crusader_ability_three",
+        "skill4":"crusader_ability_four" 
    }
 
 }

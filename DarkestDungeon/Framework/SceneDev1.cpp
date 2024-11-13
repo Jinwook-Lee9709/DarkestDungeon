@@ -15,7 +15,7 @@ void SceneDev1::Init()
 {	
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
 	for (int i = 0; i < 4; i++) {
-		auto obj = AddGo(new CharacterContainer("character" + std::to_string(i)));
+		auto obj = AddGo(new CharacterContainer("container" + std::to_string(i)));
 		obj->sortingLayer = SortingLayers::Foreground;
 		characters.push_back(obj);
 	}
@@ -41,14 +41,15 @@ void SceneDev1::Init()
 
 void SceneDev1::Enter()
 {
-	RES_TABLE_MGR.Load("Dev1");
+	RES_TABLE_MGR.LoadScene("Dev1");
 	SetCharacterInfo();
+	LoadCharacterResource();
 	Scene::Enter();
 }
 
 void SceneDev1::Exit()
 {
-	RES_TABLE_MGR.UnLoad("Dev1");
+	RES_TABLE_MGR.UnLoadScene("Dev1");
 
 }
 
@@ -76,7 +77,7 @@ void SceneDev1::InitContaierPos(sf::Vector2f windowSize)
 
 void SceneDev1::SetCharacterInfo()
 {
-	std::ifstream file("Config/CHARACTER_TABLE.json", std::ios::in);
+	std::ifstream file("tables/character_table.json", std::ios::in);
 	if (!file){
 		std::cerr << "Failed to Read File";
 	}
@@ -88,6 +89,18 @@ void SceneDev1::SetCharacterInfo()
 
 		characters[i]->SetInitialStatus(info);
 	}
+}
+
+void SceneDev1::LoadCharacterResource()
+{
+	for (auto& it : characters) {
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill1);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill2);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill3);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill4);
+		RES_TABLE_MGR.LoadCharacterAnimation(it->GetCharacterInfo().type);
+	}
+
 }
 
 

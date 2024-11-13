@@ -1,0 +1,86 @@
+{
+    "Crusader":
+    {
+        "IDLE":
+        {
+            "ID": "crusader_idle",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_idle_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        },
+        "COMBAT":
+        {
+            "ID": "crusader_combat",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_combat_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        },
+        "WALK":
+        {
+            "ID": "crusader_walk",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_walk_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        },
+        "SMITE":
+        {
+            "ID": "crusader_smite",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        },
+        "SCROLL":
+        {
+            "ID": "crusader_scroll",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        },
+        "STUN":
+        {
+            "ID": "crusader_stun",
+            "TEX_ID": "resource/Heroes/Crusader/Sheetcrusader_heal_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        },
+        "HEAL":
+        {
+            "ID": "crusader_heal",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 512
+        }
+        
+    }
+
+
+
+}

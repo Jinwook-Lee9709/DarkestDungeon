@@ -23,7 +23,7 @@
         },
         "Dev1":{
             "Texture" : {
-                "crusader_combat" : "resource/Heroes/Crusader/armatureName_combat_00.png",
+                "crusader_combat_sprite" : "resource/Heroes/Crusader/armatureName_combat_00.png",
                 "room_empty" : "resource/Dungeons/crypts.room_wall.empty.png",
 
                 "skeleton_common_combat" : "resource/Enemy/skeleton_common/armatureName_combat_00.png",
@@ -36,20 +36,6 @@
                 "ability_move" : "resource/Panels/icons_ability/ability_move.png",
                 "ability_pass" : "resource/Panels/icons_ability/ability_pass.png",
                 "selected_ability" : "resource/Panels/icons_ability/selected_ability.png",
-
-                "crusader_ability_one" : "resource/Heroes/Crusader/Icon/crusader.ability.one.png",
-                "crusader_ability_two" : "resource/Heroes/Crusader/Icon/crusader.ability.two.png",
-                "crusader_ability_three" : "resource/Heroes/Crusader/Icon/crusader.ability.three.png",
-                "crusader_ability_four" : "resource/Heroes/Crusader/Icon/crusader.ability.four.png",
-
-                "crusader_combat_sheet" : "resource/Heroes/Crusader/Sheet/crusader_combat_sheet.png",
-                "crusader_heal_sheet" : "resource/Heroes/Crusader/Sheetcrusader_heal_sheet.png",
-                "crusader_idle_sheet" : "resource/Heroes/Crusader/Sheet/crusader_idle_sheet.png",
-                "crusader_scroll_sheet" : "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
-                "crusader_smite_sheet" : "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png",
-                "crusader_stun_sheet" : "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
-            
-
 
                 "side_decor" : "resource/Panels/side_decor.png"
             },
@@ -66,6 +52,20 @@
 
         }
             
+    },
+    "Skill_icon": {
+        "crusader_ability_one" : "resource/Heroes/Crusader/Icon/crusader.ability.one.png",
+        "crusader_ability_two" : "resource/Heroes/Crusader/Icon/crusader.ability.two.png",
+        "crusader_ability_three" : "resource/Heroes/Crusader/Icon/crusader.ability.three.png",
+        "crusader_ability_four" : "resource/Heroes/Crusader/Icon/crusader.ability.four.png"
+    },
+    "Animation": {
+        "crusader_combat_sheet" : "resource/Heroes/Crusader/Sheet/crusader_combat_sheet.png",
+        "crusader_heal_sheet" : "resource/Heroes/Crusader/Sheetcrusader_heal_sheet.png",
+        "crusader_idle_sheet" : "resource/Heroes/Crusader/Sheet/crusader_idle_sheet.png",
+        "crusader_scroll_sheet" : "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
+        "crusader_smite_sheet" : "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png",
+        "crusader_stun_sheet" : "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png"
     }
     
 }

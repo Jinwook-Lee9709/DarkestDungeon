@@ -27,6 +27,7 @@ public:
 	void Stop();
 
 	void SetFrame(const AnimationFrame& frame);
+	void SetRect(const AnimationFrame& frame);
 
 	const std::string& GetCurrentClipId() const
 	{

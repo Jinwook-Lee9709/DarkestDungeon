@@ -1,5 +1,7 @@
 #pragma once
 
+using json = nlohmann::json;
+
 enum class SortingLayers
 {
 	Background,
@@ -34,19 +36,5 @@ enum class Sides
 	None
 };
 
-struct CharacterInfo
-{
-	int hp;
-	int maxHp;
-	int stress;
-	int acc;
-	int speed;
-	int dodge;
-	float accuracy;
-	float crtical;
-	float minDamage;
-	float maxDamage;
-	float prot;
-};
 
-using json = nlohmann::json;
+

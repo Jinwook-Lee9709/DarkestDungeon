@@ -52,9 +52,6 @@
     <ClCompile Include="BattleManager.cpp">
       <Filter>Scenes\Dev1\Battle</Filter>
     </ClCompile>
-    <ClCompile Include="src\CharacterContainer.cpp">
-      <Filter>Scenes\Dev1\General</Filter>
-    </ClCompile>
     <ClCompile Include="ExploreManager.cpp">
       <Filter>Scenes\Dev1\Explore</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Framework\4.Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharacterContainer.cpp">
+      <Filter>Scenes\Dev1\General</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +138,6 @@
     <ClInclude Include="BattleManager.h">
       <Filter>Scenes\Dev1\Battle</Filter>
     </ClInclude>
-    <ClInclude Include="src\CharacterContainer.h">
-      <Filter>Scenes\Dev1\General</Filter>
-    </ClInclude>
     <ClInclude Include="ExploreManager.h">
       <Filter>Scenes\Dev1\Explore</Filter>
     </ClInclude>
@@ -161,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>Framework\4.Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CharacterContainer.h">
+      <Filter>Scenes\Dev1\General</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

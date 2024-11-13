@@ -1,20 +1,53 @@
 #include "stdafx.h"
 #include "ResourceTableManager.h"
+#include "AnimationClip.h"
 
 void ResourceTableManager::init()
 {
 	RES_MGR(sf::Texture);
 	RES_MGR(sf::Font);
 	RES_MGR(sf::SoundBuffer);
-	std::ifstream file("Config/PATH.json", std::ios::in);
-	if (!file) {
+	RES_MGR(AnimationClip);
+	std::ifstream file1("Config/PATH.json", std::ios::in);
+	if (!file1) {
 		std::cerr << "Failed to Read File";
 	}
-	PATH = json::parse(file);
-	file.close();
+	PATH = json::parse(file1);
+	file1.close();
+	std::ifstream file2("animation/animations.json", std::ios::in);
+	if (!file2) {
+		std::cerr << "Failed to Read File";
+	}
+	ANIMATION = json::parse(file2);
+	file2.close();
+
 }
 
-bool ResourceTableManager::Load(const std::string& scene)
+bool ResourceTableManager::LoadCharacterAnimation(const std::string& character)
+{
+	auto animations = ANIMATION[character];
+	for (auto& animation : animations) {
+		RES_MGR(AnimationClip).Load(animation["ID"]);
+		RES_MGR(sf::Texture).Load(animation["TEX_ID"]);
+		if (resourceTable.find(animation["ID"]) == resourceTable.end()) {
+			resourceTable.insert({ (std::string)animation["ID"]
+			,(std::string)animation["TEX_ID"] });
+		}
+	}
+	return false;
+}
+
+bool ResourceTableManager::LoadSkillIcon(const std::string& skillName)
+{
+	std::string path = PATH["Skill_icon"][skillName];
+	if (!RES_MGR(sf::Texture).Load(path)) {
+		std::cout << "LoadFail:" << path << std::endl;
+	}
+	resourceTable.insert({ skillName, path });
+	return false;
+}
+
+bool ResourceTableManager::LoadScene(const std::string& scene)
 {
 	auto it = PATH["scene"][scene]["Texture"].begin();
 	while (it != PATH["scene"][scene]["Texture"].end()) {
@@ -23,7 +56,9 @@ bool ResourceTableManager::Load(const std::string& scene)
 		}
 		else
 		{
-			resourceTable.insert({it.key(), it.value()});
+			if (resourceTable.find(it.key()) == resourceTable.end()) {
+				resourceTable.insert({ it.key(), it.value() });
+			}
 		}
 		it++;
 	}
@@ -34,7 +69,9 @@ bool ResourceTableManager::Load(const std::string& scene)
 		}
 		else
 		{
-			resourceTable.insert({ it.key(), it.value() });
+			if (resourceTable.find(it.key()) == resourceTable.end()) {
+				resourceTable.insert({ it.key(), it.value() });
+			}
 		}
 		it++;
 		
@@ -46,7 +83,9 @@ bool ResourceTableManager::Load(const std::string& scene)
 		}
 		else
 		{
-			resourceTable.insert({ it.key(), it.value() });
+			if (resourceTable.find(it.key()) == resourceTable.end()) {
+				resourceTable.insert({ it.key(), it.value() });
+			}
 		}
 		it++;
 
@@ -55,7 +94,7 @@ bool ResourceTableManager::Load(const std::string& scene)
 	return true;
 }
 
-bool ResourceTableManager::UnLoad(const std::string& scene)
+bool ResourceTableManager::UnLoadScene(const std::string& scene)
 {
 	auto it = PATH["scene"][scene]["Texture"].begin();
 	while (it != PATH["scene"][scene]["Texture"].end()) {
@@ -118,6 +157,15 @@ sf::SoundBuffer& ResourceTableManager::GetSound(const std::string& soundKey)
 		std::cout << "No Value matched with Key: " << soundKey << std::endl;
 	}
 	return 	RES_MGR(sf::SoundBuffer).Get(it->second);
+}
+
+AnimationClip& ResourceTableManager::GetAnim(const std::string& AnimId)
+{
+	auto it = resourceTable.find(AnimId);
+	if (it == resourceTable.end()) {
+		std::cout << "No Value matched with Id: " << AnimId << std::endl;
+	}
+	return 	RES_MGR(AnimationClip).Get(it->first);
 }
 
 std::string& ResourceTableManager::GetPath(const std::string& key)

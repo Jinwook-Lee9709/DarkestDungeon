@@ -15,7 +15,6 @@ public:
 		Explore
 	};
 protected:
-	Anim animIdle;
 	sf::Vector2f characterContainerPos[4]; //for 1 size container
 	sf::Vector2f enemyContainerPos1[4];
 	sf::Vector2f enemyContainerPos2[3];
@@ -38,7 +37,7 @@ public:
 
 	void InitContaierPos(sf::Vector2f windowSize);
 	void SetCharacterInfo();
-
+	void LoadCharacterResource();
 
 	
 };

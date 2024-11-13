@@ -23,6 +23,7 @@
 #include "HitBox.h"
 #include "Framework.h"
 #include "InputManager.h"
+#include "Animator.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include "ResourceTableManager.h"

@@ -13,7 +13,7 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
 	character.setPosition(position);
-	Utils::SetOrigin(character, Origins::BC);
+	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(character.getPosition() + sf::Vector2f(-hpBarMargin, hpBar.getSize().y + 3.f));
@@ -41,10 +41,18 @@ void CharacterContainer::FlipY(bool flag)
 
 void CharacterContainer::SetOrigin(Origins preset)
 {
+	originPreset = preset;
+	if (originPreset != Origins::Custom) {
+		origin = Utils::SetOrigin(character, originPreset);
+	}
+
 }
 
 void CharacterContainer::SetOrigin(const sf::Vector2f& newOrigin)
 {
+	originPreset = Origins::Custom;
+	origin = newOrigin;
+	character.setOrigin(origin);
 }
 
 void CharacterContainer::Init()
@@ -62,9 +70,9 @@ void CharacterContainer::Init()
 
 void CharacterContainer::Reset()
 {
-	character.setTexture(RES_TABLE_MGR.GetTex("crusader_combat"));
+	character.setTexture(RES_TABLE_MGR.GetTex("crusader_combat_sprite"));
 	character.setScale(originalCharacterScale);
-	Utils::SetOrigin(character, Origins::BC);
+	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(character.getPosition() + sf::Vector2f(-hpBarMargin, hpBar.getSize().y + 3.f));
@@ -75,12 +83,18 @@ void CharacterContainer::Reset()
 		stressBar[i].setPosition(stressRectPos);
 		stressRectPos.x += rectGap;
 	}
-	
+	animator.SetTarget(&character);
 
 }
 
 void CharacterContainer::Update(float dt)
 {
+	if(InputManager::GetKeyDown(sf::Keyboard::A))
+	{
+		animator.Play("crusader_idle");
+		SetOrigin(Origins::BC);
+	}
+	animator.Update(dt);
 }
 
 void CharacterContainer::Draw(sf::RenderWindow& window)
@@ -95,14 +109,23 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 
 void CharacterContainer::SetInitialStatus(const json& info)
 {
+
+	this->info = info;
+	/*this->info.name = info["name"];
+	this->info.type = info["type"];
 	this->info.hp = info["hp"];
 	this->info.maxHp = info["maxHp"];
 	this->info.stress = info["stress"];
 	this->info.speed = info["speed"];
 	this->info.dodge = info["dodge"];
 	this->info.accuracy = info["accuracy"];
-	this->info.crtical = info["critical"];
+	this->info.critical = info["critical"];
 	this->info.minDamage = info["minDamage"];
 	this->info.maxDamage = info["maxDamage"];
 	this->info.prot = info["protect"];
+	this->info.skill1 = info["skill1"];
+	this->info.skill2 = info["skill2"];
+	this->info.skill3 = info["skill3"];
+	this->info.skill4 = info["skill4"];*/
+	
 }
