@@ -21,7 +21,7 @@ void SceneDev1::Init()
 	}
 	
 	uiDungeon = AddGo(new UiDungeon());
-	background = AddGo(new SpriteGo("Resource/Dungeons/crypts.room_wall.empty.png"));
+	background = AddGo(new SpriteGo("room_empty"));
 	background->SetOrigin(Origins::TC);
 	background->SetPosition({ FRAMEWORK.GetWindowSizeF().x * 0.5f, 0.f });
 	background->sortingLayer = SortingLayers::Background;
@@ -41,14 +41,14 @@ void SceneDev1::Init()
 
 void SceneDev1::Enter()
 {
-	SCENE_RES_MGR.Load("Dev1");
+	RES_TABLE_MGR.Load("Dev1");
 	SetCharacterInfo();
 	Scene::Enter();
 }
 
 void SceneDev1::Exit()
 {
-	SCENE_RES_MGR.UnLoad("Dev1");
+	RES_TABLE_MGR.UnLoad("Dev1");
 
 }
 

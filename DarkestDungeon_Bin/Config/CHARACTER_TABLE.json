@@ -16,38 +16,16 @@
         "protect" : 20,
 
         "skill1":{
-          "type": 1001,
-          "targetEnemy": 1100,
-          "targetAliance": 1100,
-          "targetSelf": true,
-
-          "attack" : {
-               "damage" : 0,
-               "accuracy" : 0,
-               "critical" : 0
-          },
-          "buf" : {
-               "type" : 0,
-               "amount" : 0
-          },
-          "debuf" : {
-               "type" : 0,
-               "amount" : 0
-          },
-          "heal" : {
-               "amount" : 0,
-               "critical" : 0
-          }
-
+          "id": "crusader_ability_one"
         },
         "skill2":{
-
+          "id": "crusader_ability_two"
         },
         "skill3":{
-
+          "id": "crusader_ability_three"
         },
         "skill4":{
-
+          "id": "crusader_ability_four" 
         }
    },
 

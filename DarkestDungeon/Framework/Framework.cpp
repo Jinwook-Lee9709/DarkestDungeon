@@ -5,7 +5,7 @@
 void Framework::Init(int width, int height, const std::string& name)
 {
 	window.create(sf::VideoMode(width, height), name, sf::Style::Fullscreen);
-    SCENE_RES_MGR.init();
+    RES_TABLE_MGR.init();
     SCENE_MGR.Init();
     InputManager::Init();
     Utils::Init();

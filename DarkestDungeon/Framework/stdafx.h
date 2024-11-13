@@ -8,7 +8,9 @@
 #include <string>
 #include <algorithm>
 #include <memory>
+
 #include <nlohmann/json.hpp>
+#include <rapidcsv.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -23,8 +25,7 @@
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
-#include "SceneResourceManager.h"
-#include "Anim.h"
+#include "ResourceTableManager.h"
 #include "GameObject.h"
 #include "SpriteGo.h"
 #include "TextGo.h"

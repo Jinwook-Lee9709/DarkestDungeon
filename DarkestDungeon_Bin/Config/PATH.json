@@ -15,6 +15,7 @@
             },
             "Fonts" :{
                 "Sansation" : "fonts/Sansation.ttf"
+
             },
             "Sound" :{
 
@@ -22,39 +23,35 @@
         },
         "Dev1":{
             "Texture" : {
-                "crusader_combat" : "Resource/Heroes/Crusader/armatureName_combat_00.png",
-                "room_empty" : "Resource/Dungeons/crypts.room_wall.empty.png",
+                "crusader_combat" : "resource/Heroes/Crusader/armatureName_combat_00.png",
+                "room_empty" : "resource/Dungeons/crypts.room_wall.empty.png",
 
-                "skeleton_common_combat" : "Resource/Enemy/skeleton_common/armatureName_combat_00.png",
+                "skeleton_common_combat" : "resource/Enemy/skeleton_common/armatureName_combat_00.png",
 
-                "panel_hero" : "Resource/Panels/panel_hero.png",
-                "panel_monster" : "Resource/Panels/panel_monster.png",
-                "panel_inventory" : "Resource/Panels/panel_inventory.png",
-                "panel_banner" : "Resource/Panels/panel_banner.png",
+                "panel_hero" : "resource/Panels/panel_hero.png",
+                "panel_monster" : "resource/Panels/panel_monster.png",
+                "panel_inventory" : "resource/Panels/panel_inventory.png",
+                "panel_banner" : "resource/Panels/panel_banner.png",
 
-                "ability_move" : "Resource/Panels/icons_ability/ability_move.png",
-                "ability_pass" : "Resource/Panels/icons_ability/ability_pass.png",
-                "selected_ability" : "Resource/Panels/icons_ability/selected_ability.png",
+                "ability_move" : "resource/Panels/icons_ability/ability_move.png",
+                "ability_pass" : "resource/Panels/icons_ability/ability_pass.png",
+                "selected_ability" : "resource/Panels/icons_ability/selected_ability.png",
 
-                "crusader_ability_one" : "Resource/Heroes/Crusader/Icon/crusader.ability.one.png",
-                "crusader_ability_two" : "Resource/Heroes/Crusader/Icon/crusader.ability.two.png",
-                "crusader_ability_three" : "Resource/Heroes/Crusader/Icon/crusader.ability.three.png",
-                "crusader_ability_four" : "Resource/Heroes/Crusader/Icon/crusader.ability.four.png",
+                "crusader_ability_one" : "resource/Heroes/Crusader/Icon/crusader.ability.one.png",
+                "crusader_ability_two" : "resource/Heroes/Crusader/Icon/crusader.ability.two.png",
+                "crusader_ability_three" : "resource/Heroes/Crusader/Icon/crusader.ability.three.png",
+                "crusader_ability_four" : "resource/Heroes/Crusader/Icon/crusader.ability.four.png",
 
+                "crusader_combat_sheet" : "resource/Heroes/Crusader/Sheet/crusader_combat_sheet.png",
+                "crusader_heal_sheet" : "resource/Heroes/Crusader/Sheetcrusader_heal_sheet.png",
+                "crusader_idle_sheet" : "resource/Heroes/Crusader/Sheet/crusader_idle_sheet.png",
+                "crusader_scroll_sheet" : "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
+                "crusader_smite_sheet" : "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png",
+                "crusader_stun_sheet" : "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
             
 
 
-                "side_decor" : "Resource/Panels/side_decor.png"
-            }, 
-            "SpriteSheet" :{
-                "crusader_walk" :{
-                    "Texture": "Resource/Heroes/Crusader/spriteSheetWalk.png",
-                    "count" : ""
-                },
-                "crusader_heal.png" :{
-                    "Texture": "Resource/Heroes/Crusader/spriteSheetWalk.png",
-                    "count" : "56"
-                }  
+                "side_decor" : "resource/Panels/side_decor.png"
             },
             "Font" :{
                 "KOMIKAP_":      "fonts/KOMIKAP_.ttf",

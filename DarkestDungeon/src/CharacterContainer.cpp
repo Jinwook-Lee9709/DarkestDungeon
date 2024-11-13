@@ -62,7 +62,7 @@ void CharacterContainer::Init()
 
 void CharacterContainer::Reset()
 {
-	character.setTexture(SCENE_RES_MGR.GetTex("crusader_combat"));
+	character.setTexture(RES_TABLE_MGR.GetTex("crusader_combat"));
 	character.setScale(originalCharacterScale);
 	Utils::SetOrigin(character, Origins::BC);
 

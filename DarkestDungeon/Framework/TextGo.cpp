@@ -44,7 +44,7 @@ void TextGo::SetOrigin(const sf::Vector2f& newOrigin)
 
 void TextGo::Reset()
 {
-	text.setFont(RES_MGR(sf::Font).Get(font));
+	text.setFont(GET_FONT(font));
 	SetOrigin(originPreset);
 }
 

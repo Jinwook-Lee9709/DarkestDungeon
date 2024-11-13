@@ -5,14 +5,14 @@
 
 using json = nlohmann::json;
 
-class SceneResourceManager :
-    public Singleton<SceneResourceManager>
+class ResourceTableManager :
+    public Singleton<ResourceTableManager>
 {
-    friend class Singleton<SceneResourceManager>;
+    friend class Singleton<ResourceTableManager>;
 private:
 	json PATH;
 	std::unordered_map <std::string, std::string> resourceTable;
-
+	std::string err = "";
 public:
 	void init();
 	bool Load(const std::string& scene);
@@ -20,6 +20,11 @@ public:
 	sf::Texture& GetTex(const std::string& texKey);
 	sf::Font& GetFont(const std::string& fontKey);
 	sf::SoundBuffer& GetSound(const std::string& soundKey);
+
+	std::string& GetPath(const std::string& key);
 };
 
-#define SCENE_RES_MGR (SceneResourceManager::Instance())
+#define RES_TABLE_MGR (ResourceTableManager::Instance())
+#define GET_TEX(X) (RES_TABLE_MGR.GetTex(X))
+#define GET_FONT(X) (RES_TABLE_MGR.GetFont(X))
+#define GET_SOUND(X) (RES_TABLE_MGR.GetSound(X))

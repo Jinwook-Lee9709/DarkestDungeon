@@ -121,22 +121,22 @@ void UiDungeon::SetSpriteInfo(SpriteGo* obj,const Origins& origin, const sf::Vec
 void UiDungeon::InitFixedUi(const sf::Vector2f& windowSize)
 {
 	SpriteGo* obj;
-	obj = new SpriteGo("Resource/Panels/side_decor.png");
+	obj = new SpriteGo("side_decor");
 	SetSpriteInfo(obj, Origins::BL, { 0.f, windowSize.y }, 5);
 	fixedUi.push_back(obj);
-	obj = new SpriteGo("Resource/Panels/side_decor.png");
+	obj = new SpriteGo("side_decor");
 	SetSpriteInfo(obj, Origins::BL, { windowSize.x, windowSize.y }, 5, true);
 	fixedUi.push_back(obj);
 
-	obj = new SpriteGo("Resource/Panels/panel_banner.png");
+	obj = new SpriteGo("panel_banner");
 	SetSpriteInfo(obj, Origins::BC, { windowSize.x * 0.302f, windowSize.y * 0.792f }, 4);
 	fixedUi.push_back(obj);
 
-	obj = new SpriteGo("Resource/Panels/panel_hero.png");
+	obj = new SpriteGo("panel_hero");
 	SetSpriteInfo(obj, Origins::BC, { windowSize.x * 0.31f, windowSize.y }, 5);
 	fixedUi.push_back(obj);
 
-	obj = new SpriteGo("Resource/Panels/panel_monster.png");
+	obj = new SpriteGo("panel_monster");
 	SetSpriteInfo(obj, Origins::BL, { windowSize.x * 0.493f,  windowSize.y }, 5);
 	fixedUi.push_back(obj);
 }
@@ -144,25 +144,25 @@ void UiDungeon::InitFixedUi(const sf::Vector2f& windowSize)
 void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)
 {
 	SpriteGo* obj;
-	obj = new SpriteGo("Resource/Heroes/Crusader/Icon/crusader.ability.one.png");
+	obj = new SpriteGo("crusader_ability_one");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.2885f, windowSize.y * 0.732f }, 5);
 	skill[0] = obj;
-	obj = new SpriteGo("Resource/Heroes/Crusader/Icon/crusader.ability.two.png");
+	obj = new SpriteGo("crusader_ability_two");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.3281f, windowSize.y * 0.732f }, 5);
 	skill[1] = obj;
-	obj = new SpriteGo("Resource/Heroes/Crusader/Icon/crusader.ability.three.png");
+	obj = new SpriteGo("crusader_ability_three");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.3677f, windowSize.y * 0.732f }, 5);
 	skill[2] = obj;
-	obj = new SpriteGo("Resource/Heroes/Crusader/Icon/crusader.ability.four.png");
+	obj = new SpriteGo("crusader_ability_four");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.4075f, windowSize.y * 0.732f }, 5);
 	skill[3] = obj;
-	obj = new SpriteGo("Resource/Panels/icons_ability/ability_move.png");
+	obj = new SpriteGo("ability_move");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.4471f, windowSize.y * 0.732f }, 5);
 	skill[4] = obj;
-	obj = new SpriteGo("Resource/Panels/icons_ability/ability_pass.png");
+	obj = new SpriteGo("ability_pass");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.473f, windowSize.y * 0.732f }, 8);
 	skill[5] = obj;
-	obj = new SpriteGo("Resource/Panels/icons_ability/selected_ability.png");
+	obj = new SpriteGo("selected_ability");
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.2885f, windowSize.y * 0.732f }, 6);
 	skill[6] = obj;
 	obj->SetActive(false);
@@ -172,7 +172,7 @@ void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)
 void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 {
 	TextGo* obj;
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::Red);
 	obj->SetPosition({ windowSize.x * 0.21f, windowSize.y * 0.81f });
 	obj->SetString("50 / 50");
@@ -182,7 +182,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 
 	playerText.insert({ PlayerTextIndex::HP, obj });
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.21f, windowSize.y * 0.837f });
 	obj->SetString("3 / 200");
@@ -192,7 +192,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::STRESS, obj });
 
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.865f });
 	obj->SetString("ACC");
@@ -202,7 +202,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::ACCURACY, obj });
 
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.885f });
 	obj->SetString("CRIT");
@@ -211,7 +211,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::CRITICAL, obj });
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.905f });
 	obj->SetString("DMG");
@@ -220,7 +220,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::DAMAGE, obj });
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.925f });
 	obj->SetString("DODGE");
@@ -230,7 +230,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::DODGE, obj });
 
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.945f });
 	obj->SetString("PROT");
@@ -240,7 +240,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::PROTECT, obj });
 
-	obj = new TextGo("fonts/LeeB.ttf");
+	obj = new TextGo("LeeB");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.965f });
 	obj->SetString("SPD");

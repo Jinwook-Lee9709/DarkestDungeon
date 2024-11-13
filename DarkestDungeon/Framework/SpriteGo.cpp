@@ -36,7 +36,7 @@ void SpriteGo::FlipY(bool flag)
 
 void SpriteGo::Reset()
 {
-	sprite.setTexture(RES_MGR(sf::Texture).Get(textureId));
+	sprite.setTexture(GET_TEX(textureId));
 	SetOrigin(originPreset);
 }
 
