@@ -62,7 +62,7 @@ void CharacterContainer::Init()
 
 void CharacterContainer::Reset()
 {
-	character.setTexture(TEX_MGR.Get("Resource/Heroes/Crusader/armatureName_combat_00.png"));
+	character.setTexture(SCENE_RES_MGR.GetTex("crusader_combat"));
 	character.setScale(originalCharacterScale);
 	Utils::SetOrigin(character, Origins::BC);
 

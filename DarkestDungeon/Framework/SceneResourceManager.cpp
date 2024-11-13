@@ -16,21 +16,29 @@ void SceneResourceManager::init()
 
 bool SceneResourceManager::Load(const std::string& scene)
 {
-	for (auto path : PATH["scene"][scene]["Texture"]) {
-		if (!RES_MGR(sf::Texture).Load(path)) {
-		std::cout << "LoadFail:" << path << std::endl;
+	auto it = PATH["scene"][scene]["Texture"].begin();
+	while (it != PATH["scene"][scene]["Texture"].end()) {
+		if (!RES_MGR(sf::Texture).Load(it.value())) {
+		std::cout << "LoadFail:" << it.value() << std::endl;
 		}
+		else
+		{
+			resourceTable.insert({it.key(), it.value()});
+		}
+		it++;
 	}
-	for (auto path : PATH["scene"][scene]["Font"]) {
+	for (auto& path : PATH["scene"][scene]["Font"]) {
 		if (!RES_MGR(sf::Font).Load(path)) {
 			std::cout << "LoadFail:" << path << std::endl;
 		}
+		
 	}
 
-	for (auto path : PATH["scene"][scene]["Sound"]) {
+	for (auto& path : PATH["scene"][scene]["Sound"]) {
 		if (!RES_MGR(sf::SoundBuffer).Load(path)) {
 			std::cout << "LoadFail:" << path << std::endl;
 		}
+	
 	}
 
 	return true;
@@ -38,18 +46,18 @@ bool SceneResourceManager::Load(const std::string& scene)
 
 bool SceneResourceManager::UnLoad(const std::string& scene)
 {
-	for (auto path : PATH["scene"][scene]["Texture"]) {
+	for (auto& path : PATH["scene"][scene]["Texture"]) {
 		if (!RES_MGR(sf::Texture).UnLoad(path)) {
 			std::cout << "UnLoadFail:" << path << std::endl;
 		}
 	}
-	for (auto path : PATH["scene"][scene]["Font"]) {
+	for (auto& path : PATH["scene"][scene]["Font"]) {
 		if (!RES_MGR(sf::Font).UnLoad(path)) {
 			std::cout << "UnLoadFail:" << path << std::endl;
 		}
 	}
 
-	for (auto path : PATH["scene"][scene]["Sound"]) {
+	for (auto& path : PATH["scene"][scene]["Sound"]) {
 		if (!RES_MGR(sf::SoundBuffer).UnLoad(path)) {
 			std::cout << "UnLoadFail:" << path << std::endl;
 		}
@@ -57,20 +65,20 @@ bool SceneResourceManager::UnLoad(const std::string& scene)
 	return true;
 }
 
-sf::Texture& SceneResourceManager::GetTex(const std::string& scene, const std::string& textureId)
+sf::Texture& SceneResourceManager::GetTex(const std::string& texKey)
 {
-	auto path = PATH["scene"][scene]["Texture"][textureId];
-	return 	RES_MGR(sf::Texture).Get(path);
+	auto it = resourceTable.find(texKey);
+	return 	RES_MGR(sf::Texture).Get(it->second);
 }
 
-sf::Font& SceneResourceManager::GetFont(const std::string& scene, const std::string& fontId)
+sf::Font& SceneResourceManager::GetFont(const std::string& fontKey)
 {
-	auto path = PATH["scene"][scene]["Font"][fontId];
-	return 	RES_MGR(sf::Font).Get(path);
+	auto it = resourceTable.find(fontKey);
+	return 	RES_MGR(sf::Font).Get(it->second);
 }
 
-sf::SoundBuffer& SceneResourceManager::GetSound(const std::string& scene, const std::string& soundId)
+sf::SoundBuffer& SceneResourceManager::GetSound(const std::string& soundKey)
 {
-	auto path = PATH["scene"][scene]["Sound"][soundId];
-	return 	RES_MGR(sf::SoundBuffer).Get(path);
+	auto it = resourceTable.find(soundKey);
+	return 	RES_MGR(sf::SoundBuffer).Get(it->second);
 }
