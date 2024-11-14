@@ -48,7 +48,7 @@
         "SCROLL":
         {
             "ID": "crusader_scroll",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
             "FPS": 30,
             "LOOPTYPE": 1,
             "ROW": 6,
@@ -59,7 +59,7 @@
         "STUN":
         {
             "ID": "crusader_stun",
-            "TEX_ID": "resource/Heroes/Crusader/Sheetcrusader_heal_sheet.png",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
             "FPS": 30,
             "LOOPTYPE": 1,
             "ROW": 6,
@@ -70,7 +70,7 @@
         "HEAL":
         {
             "ID": "crusader_heal",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_heal_sheet.png",
             "FPS": 30,
             "LOOPTYPE": 1,
             "ROW": 6,

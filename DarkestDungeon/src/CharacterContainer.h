@@ -29,7 +29,6 @@ class CharacterContainer :
 	public GameObject
 {
 private:
-	std::string characterName;
 	sf::Sprite character;
 	Animator animator;
 	sf::Sprite spriteSelect;

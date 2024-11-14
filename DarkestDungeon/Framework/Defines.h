@@ -36,5 +36,12 @@ enum class Sides
 	None
 };
 
+enum class DebufType
+{
+	Stun,
+	Bleeding,
+	Poison
+};
+
 
 

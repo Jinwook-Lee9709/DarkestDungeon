@@ -2,7 +2,7 @@
 #include "Crusader.h"
 
 Crusader::Crusader(const std::string& name)
-	: GameObject(name)
+	: Character(name)
 {
 }
 

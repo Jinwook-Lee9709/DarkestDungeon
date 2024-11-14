@@ -66,7 +66,7 @@ void SceneDev1::Draw(sf::RenderWindow& window)
 void SceneDev1::InitContaierPos(sf::Vector2f windowSize)
 {
 	float block = windowSize.x / 14.f;
-	float height = windowSize.y * 0.6f;
+	float height = windowSize.y * 0.62f;
 	float positionBuf = windowSize.x * 0.5f - block * 1.5f;
 	for (int i = 0; i < 4; i++) {
 		characterContainerPos[i] = sf::Vector2f({ positionBuf, height });

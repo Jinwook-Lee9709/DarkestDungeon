@@ -18,6 +18,7 @@ void Animator::Update(float dt)
 		case AnimationLoopTypes::Single:
 			currentFrame = -1;
 			isPlaying = false;
+			return;
 			break;
 		case AnimationLoopTypes::Loop:
 			currentFrame = 0;
