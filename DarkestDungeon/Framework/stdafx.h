@@ -15,6 +15,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 
+#include "FZLog.hpp"
 #include "Variables.h"
 #include "Defines.h"
 #include "Utils.h"

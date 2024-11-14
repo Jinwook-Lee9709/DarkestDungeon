@@ -12,6 +12,7 @@ public:
 	static int RandomRange(int min, int max);
 	static float RandomRange(float min, float max);
 	static float RandomValue();	// 0.0f ~ 1.0f
+	static bool RollTheDice(float probability);
 	static sf::Vector2f RandomOnUnitCircle();
 	static sf::Vector2f RandomInUnitCircle();
 	static sf::Color RandomColor(bool opaque = true);
@@ -25,6 +26,7 @@ public:
 	// Math
 	static float Clamp(float value, float min, float max);
 	static float Clamp01(float value);
+	static int Truncate(float value);
 
 	static float Lerp(float min, float max, float t, bool clamp = true);
 	static sf::Vector2f Lerp(const sf::Vector2f& min, const sf::Vector2f& max, float t, bool clamp = true);

@@ -1,42 +1,26 @@
 #pragma once
 #include "GameObject.h"
+#include "Character.h"
 
+class MonsterContainer;
 
-struct CharacterInfo
-{
-	std::string name;
-	std::string type;
-	int hp;
-	int maxHp;
-	int stress;
-	int speed;
-	int dodge;
-	float accuracy;
-	float critical;
-	float minDamage;
-	float maxDamage;
-	float protect;
-	std::string skill1;
-	std::string skill2;
-	std::string skill3;
-	std::string skill4;
-
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(CharacterInfo
-		,name, type, hp, maxHp, stress, speed ,dodge,
-		accuracy, critical, minDamage, maxDamage, protect, skill1, skill2, skill3, skill4);
-};
 class CharacterContainer :
 	public GameObject
 {
 private:
-	sf::Sprite character;
-	Animator animator;
+
+	Character character;
+
 	sf::Sprite spriteSelect;
 	sf::RectangleShape hpBar;
 	sf::RectangleShape stressBar[10];
-	CharacterInfo info;
-	bool selected;
 
+	short currentPos;
+
+	CharacterInfo info;
+
+	bool selected;
+	bool isAlive;
 
 	sf::Vector2f originalCharacterScale = { 0.8f, 0.8f };
 public:
@@ -56,9 +40,20 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
 
+	void ChangePos(short pos) { this->currentPos = pos; }
+
 	void SetInitialStatus(const json& info);
 
+	void UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num);
+
 	CharacterInfo& GetCharacterInfo() { return info; }
+
+	void OnHit(int damage, float acc);
+	void OnDebuffed(DebufType type, float acc);
+
+	void OnHeal(int amount);
+
+	bool IsAlive() { return isAlive; }
 };
 
 	

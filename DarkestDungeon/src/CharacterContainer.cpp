@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CharacterContainer.h"
+#include "MonsterContainer.h"
 
 CharacterContainer::CharacterContainer(const std::string& name)
 {
@@ -12,11 +13,11 @@ CharacterContainer::~CharacterContainer()
 void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
-	character.setPosition(position);
+	character.SetPosition(position);
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
-	hpBar.setPosition(character.getPosition() + sf::Vector2f(-hpBarMargin, 0));
+	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
 
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness() * 2) / 10 + hpBar.getSize().x / 10;
@@ -28,7 +29,7 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 
 void CharacterContainer::SetScale(const sf::Vector2f& size)
 {
-	character.setScale(scale);
+	character.SetScale(scale);
 }
 
 void CharacterContainer::FlipX(bool flag)
@@ -43,7 +44,7 @@ void CharacterContainer::SetOrigin(Origins preset)
 {
 	originPreset = preset;
 	if (originPreset != Origins::Custom) {
-		origin = Utils::SetOrigin(character, originPreset);
+		character.SetOrigin(originPreset);
 	}
 
 }
@@ -52,11 +53,12 @@ void CharacterContainer::SetOrigin(const sf::Vector2f& newOrigin)
 {
 	originPreset = Origins::Custom;
 	origin = newOrigin;
-	character.setOrigin(origin);
+	character.SetOrigin(origin);
 }
 
 void CharacterContainer::Init()
 {
+	character.Init();
 	hpBar.setSize({ 90.f,10.f });
 	hpBar.setFillColor(sf::Color(128, 0, 0, 255));
 	for (int i = 0; i < 10; i++) {
@@ -69,15 +71,14 @@ void CharacterContainer::Init()
 
 void CharacterContainer::Reset()
 {
-	animator.SetTarget(&character);
-	animator.Play("crusader_idle");
-	/*character.setTexture(RES_TABLE_MGR.GetTex("crusader_combat_sprite"));*/
-	character.setScale(originalCharacterScale);
+	character.Reset();
+	character.Reset(info);
+	character.SetScale(originalCharacterScale);
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
-	hpBar.setPosition(character.getPosition() + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
+	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
 
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness()*2) / 10 + hpBar.getSize().x / 10;
@@ -91,38 +92,40 @@ void CharacterContainer::Reset()
 
 void CharacterContainer::Update(float dt)
 {
-	if(InputManager::GetKeyDown(sf::Keyboard::A))
-	{
-		animator.Play("crusader_idle");
-		SetOrigin(Origins::BC);
-	}
-	if (InputManager::GetKeyDown(sf::Keyboard::Num1))
-	{
-		animator.Play("crusader_smite");
-		SetOrigin(Origins::BC);
-	}
-	if (InputManager::GetKeyDown(sf::Keyboard::Num2))
-	{
-		animator.Play("crusader_stun");
-		SetOrigin(Origins::BC);
-	}
-	if (InputManager::GetKeyDown(sf::Keyboard::Num3))
-	{
-		animator.Play("crusader_heal");
-		SetOrigin(Origins::BC);
-	}
-	if (InputManager::GetKeyDown(sf::Keyboard::Num4))
-	{
-		animator.Play("crusader_scroll");
-		SetOrigin(Origins::BC);
-	}
+	character.Update(dt);
+	//if(InputManager::GetKeyDown(sf::Keyboard::A))
+	//{
+	//	animator.Play("crusader_idle");
+	//	SetOrigin(Origins::BC);
+	//}
+	//if (InputManager::GetKeyDown(sf::Keyboard::Num1))
+	//{
+	//	animator.Play("crusader_smite");
+	//	SetOrigin(Origins::BC);
+	//}
+	//if (InputManager::GetKeyDown(sf::Keyboard::Num2))
+	//{
+	//	animator.Play("crusader_stun");
+	//	SetOrigin(Origins::BC);
+	//}
+	//if (InputManager::GetKeyDown(sf::Keyboard::Num3))
+	//{
+	//	animator.Play("crusader_heal");
+	//	SetOrigin(Origins::BC);
+	//}
+	//if (InputManager::GetKeyDown(sf::Keyboard::Num4))
+	//{
+	//	animator.Play("crusader_scroll");
+	//	SetOrigin(Origins::BC);
+	//}
 
-	animator.Update(dt);
+	//animator.Update(dt);
+	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 }
 
 void CharacterContainer::Draw(sf::RenderWindow& window)
 {
-	window.draw(character);
+	character.Draw(window);
 	window.draw(hpBar);
 	for (int i = 0; i < 10; i++) {
 		window.draw(stressBar[i]);
@@ -151,4 +154,15 @@ void CharacterContainer::SetInitialStatus(const json& info)
 	this->info.skill3 = info["skill3"];
 	this->info.skill4 = info["skill4"];*/
 	
+}
+
+void CharacterContainer::UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num)
+{
+	character.UseSkill(characters, monsters, user, target, num);
+}
+
+void CharacterContainer::OnHeal(int amount)
+{
+	info.hp += amount;
+
 }

@@ -25,7 +25,6 @@ void Animator::Update(float dt)
 			break;
 		}
 	}
-	std::cout << currentClip->frames[currentFrame].texCoord.top << std::endl;
 	SetRect(currentClip->frames[currentFrame]);
 }
 

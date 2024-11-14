@@ -2,6 +2,7 @@
 #include "SceneDev1.h"
 #include "SpriteGo.h"
 #include "CharacterContainer.h"
+#include "MonsterContainer.h"
 #include "UiDungeon.h"
 #include <fstream>
 
@@ -19,7 +20,11 @@ void SceneDev1::Init()
 		obj->sortingLayer = SortingLayers::Foreground;
 		characters.push_back(obj);
 	}
-	
+	for (int i = 0; i < 4; i++) {
+		auto obj2 = AddGo(new MonsterContainer("container" + std::to_string(i)));
+		obj2->sortingLayer = SortingLayers::Foreground;
+		monsters.push_back(obj2);
+	}
 	uiDungeon = AddGo(new UiDungeon());
 	background = AddGo(new SpriteGo("room_empty"));
 	background->SetOrigin(Origins::TC);
@@ -56,7 +61,9 @@ void SceneDev1::Exit()
 void SceneDev1::Update(float dt)
 {
 	Scene::Update(dt);
-	
+	if (InputManager::GetKeyDown(sf::Keyboard::Num1)) {
+		characters[0]->UseSkill(characters, monsters, 1, 0, 2);
+	}
 }
 
 void SceneDev1::Draw(sf::RenderWindow& window)

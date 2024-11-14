@@ -23,9 +23,9 @@ void ResourceTableManager::init()
 
 }
 
-bool ResourceTableManager::LoadCharacterAnimation(const std::string& character)
+bool ResourceTableManager::LoadCharacterAnimation(const CharacterType& character)
 {
-	auto animations = ANIMATION[character];
+	auto animations = ANIMATION[std::to_string((int)character)];
 	for (auto& animation : animations) {
 		RES_MGR(AnimationClip).Load(animation["ID"]);
 		RES_MGR(sf::Texture).Load(animation["TEX_ID"]);

@@ -12,16 +12,14 @@
 namespace _internal {
     namespace Realog {
 
-        static DWORD convert_unicode_to_ansi_string(
-            __out std::string& ansi,
-            __in const wchar_t* unicode,
-            __in const size_t unicode_size
+        static void convert_unicode_to_ansi_string(
+            std::string& ansi,
+            const wchar_t* unicode,
+            const size_t unicode_size
         ) {
-            DWORD error = 0;
             do {
 
                 if ((nullptr == unicode) || (0 == unicode_size)) {
-                    error = ERROR_INVALID_PARAMETER;
                     break;
                 }
                 ansi.clear();
@@ -33,7 +31,6 @@ namespace _internal {
                     nullptr, nullptr
                 );
                 if (0 == required_cch) {
-                    error = ::GetLastError();
                     break;
                 }
                 ansi.resize(required_cch);
@@ -44,11 +41,10 @@ namespace _internal {
                     const_cast<char*>(ansi.c_str()), static_cast<int>(ansi.size()),
                     nullptr, nullptr
                 )) {
-                    error = ::GetLastError();
                     break;
                 }
             } while (false);
-            return error;
+            return;
         }
         
         struct NoArg {};
@@ -266,18 +262,41 @@ namespace fz {
         }
 
     private:
-        static _internal::Realog::Logger s_Logger;
+        inline static _internal::Realog::Logger s_Logger;
     };
-
-    _internal::Realog::Logger Logger::s_Logger;
 }
 
-#define FZLOG_TRACE(...)                { fz::Logger::Trace(__VA_ARGS__); }
-#define FZLOG_DEBUG(...)                { fz::Logger::Debug(__VA_ARGS__); }
-#define FZLOG_INFO(...)                 { fz::Logger::Info(__VA_ARGS__); }
-#define FZLOG_WARN(...)                 { fz::Logger::Warn(__VA_ARGS__); }
-#define FZLOG_ERROR(...)                { fz::Logger::Error(__VA_ARGS__); }
-#define FZLOG_CRITICAL(...)             { fz::Logger::Critical(__VA_ARGS__); }
-#define FZLOG_ASSERT(flag, ...)         { if(!(flag)) { fz::Logger::Error(__VA_ARGS__); DebugBreak();} }
+/**
+ * @def FZLOG_DEBUG_MODE_ENABLED
+ *
+ * @brief 디버그 모드에서도 로깅 시스템을 활성화합니다.
+ *
+ * Example usage:
+ * @code
+ *      #define FZLOG_DEBUG_MODE_ENABLED
+ *      FZLOG_TRACE("Test FZLog");
+ * @endcode
+ *
+ * @note 
+ * - 만약 디버그 모드일 때 로그 시스템을 비활성화하고자 하는 경우에는 해당 매크로를 삭제해주세요.
+ * - FZLOG_DEBUG_MODE_ENABLED는 현재 포함하는 FZLog.hpp의 상단에 위치해야 합니다. 
+ */
+#if defined(_DEBUG) || defined(FZLOG_DEBUG_MODE_ENABLED)
+    #define FZLOG_TRACE(...)                { fz::Logger::Trace(__VA_ARGS__); }
+    #define FZLOG_DEBUG(...)                { fz::Logger::Debug(__VA_ARGS__); }
+    #define FZLOG_INFO(...)                 { fz::Logger::Info(__VA_ARGS__); }
+    #define FZLOG_WARN(...)                 { fz::Logger::Warn(__VA_ARGS__); }
+    #define FZLOG_ERROR(...)                { fz::Logger::Error(__VA_ARGS__); }
+    #define FZLOG_CRITICAL(...)             { fz::Logger::Critical(__VA_ARGS__); }
+    #define FZLOG_ASSERT(flag, ...)         { if(!(flag)) { fz::Logger::Error(__VA_ARGS__); DebugBreak();} }
+#else
+    #define FZLOG_TRACE(...)       
+    #define FZLOG_DEBUG(...)       
+    #define FZLOG_INFO(...)        
+    #define FZLOG_WARN(...)        
+    #define FZLOG_ERROR(...)       
+    #define FZLOG_CRITICAL(...)    
+    #define FZLOG_ASSERT(flag, ...)
+#endif
 
 #endif /* defined(__FZ_VEGA_HEADER_H_) */

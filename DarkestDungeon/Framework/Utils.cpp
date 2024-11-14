@@ -30,6 +30,11 @@ float Utils::RandomValue()
     return RandomRange(0.f, 1.f);
 }
 
+bool Utils::RollTheDice(float probability)
+{
+    return   RandomRange(0.f, 1.f) > probability;
+}
+
 sf::Vector2f Utils::RandomOnUnitCircle()
 {
     float angle = RandomRange(0.f, 2.f * PI);
@@ -86,6 +91,18 @@ float Utils::Clamp(float value, float min, float max)
 float Utils::Clamp01(float value)
 {
     return Clamp(value, 0.f, 1.f);
+}
+
+int Utils::Truncate(float value)
+{
+    int integer = value;
+    float decimal = value - integer;
+    if (decimal < 0.5f) {
+        return integer;
+    }
+    else {
+        return ++integer;
+    }
 }
 
 float Utils::Lerp(float min, float max, float t, bool clamp)
