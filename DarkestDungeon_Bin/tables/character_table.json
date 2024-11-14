@@ -15,10 +15,10 @@
         "maxDamage" : 12,
         "protect" : 20,
 
-        "skill1":"crusader_ability_one",
-        "skill2":"crusader_ability_two",
-        "skill3":"crusader_ability_three",
-        "skill4":"crusader_ability_four" 
+        "skill1": ["crusader_ability_one","1"],
+        "skill2":["crusader_ability_two","2"],
+        "skill3":["crusader_ability_three","3"],
+        "skill4":["crusader_ability_four","4"]
         
    },
 
@@ -36,10 +36,10 @@
         "minDamage" : 8,
         "maxDamage" : 10,
         "protect" : 4,
-        "skill1":"crusader_ability_one",
-        "skill2":"crusader_ability_two",
-        "skill3":"crusader_ability_three",
-        "skill4":"crusader_ability_four" 
+        "skill1": ["crusader_ability_one","1"],
+        "skill2":["crusader_ability_two","2"],
+        "skill3":["crusader_ability_three","3"],
+        "skill4":["crusader_ability_four","4"]
    },
 
    "Character3":
@@ -56,10 +56,10 @@
         "minDamage" : 8,
         "maxDamage" : 10,
         "protect" : 4,
-        "skill1":"crusader_ability_one",
-        "skill2":"crusader_ability_two",
-        "skill3":"crusader_ability_three",
-        "skill4":"crusader_ability_four" 
+        "skill1": ["crusader_ability_one","1"],
+        "skill2":["crusader_ability_two","2"],
+        "skill3":["crusader_ability_three","3"],
+        "skill4":["crusader_ability_four","4"]
    },
 
    "Character4":
@@ -76,10 +76,10 @@
         "minDamage" : 8,
         "maxDamage" : 10,
         "protect" : 4,
-        "skill1":"crusader_ability_one",
-        "skill2":"crusader_ability_two",
-        "skill3":"crusader_ability_three",
-        "skill4":"crusader_ability_four" 
+        "skill1": ["crusader_ability_one","1"],
+        "skill2":["crusader_ability_two","2"],
+        "skill3":["crusader_ability_three","3"],
+        "skill4":["crusader_ability_four","4"]
    }
 
 }

@@ -17,6 +17,7 @@ private:
 
 	short currentPos;
 
+
 	CharacterInfo info;
 
 	bool selected;

@@ -101,10 +101,10 @@ void SceneDev1::SetCharacterInfo()
 void SceneDev1::LoadCharacterResource()
 {
 	for (auto& it : characters) {
-		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill1);
-		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill2);
-		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill3);
-		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill4);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill1[0]);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill2[0]);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill3[0]);
+		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill4[0]);
 		RES_TABLE_MGR.LoadCharacterAnimation(it->GetCharacterInfo().type);
 	}
 

@@ -11,8 +11,9 @@ class Character : public GameObject
 protected:
 	sf::Sprite body;
 	Animator animator;
-	
+		
 	Skill* skill;
+	int skillNum[4];
 	Slot* skillSlot;
 
 
@@ -41,6 +42,8 @@ public:
 
 	void Reset(const CharacterInfo& info);
 	void SetSlot(const CharacterInfo& info);
+	void AddSkill(int num);
 
 	void UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num);
+	
 };

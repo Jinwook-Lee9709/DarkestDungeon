@@ -63,10 +63,10 @@ struct CharacterInfo
 	float minDamage;
 	float maxDamage;
 	float protect;
-	std::string skill1;
-	std::string skill2;
-	std::string skill3;
-	std::string skill4;
+	std::vector<std::string> skill1;
+	std::vector<std::string> skill2;
+	std::vector<std::string> skill3;
+	std::vector<std::string> skill4;
 
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(CharacterInfo
 		, name, type, hp, maxHp, stress, speed, dodge,

@@ -120,21 +120,50 @@ void Character::SetSlot(const CharacterInfo& info)
 	switch (info.type) {
 		case CharacterType::Crusader: 
 		{
-			skill = dynamic_cast<Skill*>(new SkillCrusader());
+			skill = new SkillCrusader();
 		}
 		default:
 		{
 
 		}
 	}
-	std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill1 = std::bind(&Skill::skill1, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-	std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill2 = std::bind(&Skill::skill2, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-	std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill3 = std::bind(&Skill::skill3, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-	std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill4 = std::bind(&Skill::skill4, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-	skillSlot->InsertSkill(skill1, skill->skillrange1);
-	skillSlot->InsertSkill(skill2, skill->skillrange2);
-	skillSlot->InsertSkill(skill3, skill->skillrange3);
-	skillSlot->InsertSkill(skill4, skill->skillrange4);
+	json j = info;
+	for (int i = 0; i < 4; i++) {
+		AddSkill(std::stoi(j["skill" + std::to_string(i+1)][1].get<std::string>()));
+	}
+
+
+
+}
+
+void Character::AddSkill(int num)
+{
+	switch (num){
+	case 1:
+	{
+		std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill1 = std::bind(&Skill::skill1, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		skillSlot->InsertSkill(skill1, skill->skillrange1);
+		break;
+	}
+	case 2:
+	{
+		std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill2 = std::bind(&Skill::skill2, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		skillSlot->InsertSkill(skill2, skill->skillrange2);
+		break;
+	}
+	case 3: 
+	{
+		std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill3 = std::bind(&Skill::skill3, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		skillSlot->InsertSkill(skill3, skill->skillrange3);
+		break;
+	}
+	case 4:
+	{
+		std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill4 = std::bind(&Skill::skill4, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		skillSlot->InsertSkill(skill4, skill->skillrange4);
+		break;
+	}
+	}
 }
 
 void Character::UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num )
