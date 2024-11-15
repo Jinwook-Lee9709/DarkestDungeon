@@ -25,13 +25,29 @@ void ResourceTableManager::init()
 
 bool ResourceTableManager::LoadCharacterAnimation(const CharacterType& character)
 {
-	auto animations = ANIMATION[std::to_string((int)character)];
+	auto animations = ANIMATION["Character"][std::to_string((int)character)];
 	for (auto& animation : animations) {
 		RES_MGR(AnimationClip).Load(animation["ID"]);
 		RES_MGR(sf::Texture).Load(animation["TEX_ID"]);
 		if (resourceTable.find(animation["ID"]) == resourceTable.end()) {
 			resourceTable.insert({ (std::string)animation["ID"]
 			,(std::string)animation["TEX_ID"] });
+		}
+	}
+	return false;
+}
+
+bool ResourceTableManager::LoadMonsterAnimation()
+{
+	auto monsters = ANIMATION["Monster"][Variables::SelectedDungeon];
+	for (auto& animations : monsters) {
+		for (auto& animation : animations) {
+			RES_MGR(AnimationClip).Load(animation["ID"]);
+			RES_MGR(sf::Texture).Load(animation["TEX_ID"]);
+			if (resourceTable.find(animation["ID"]) == resourceTable.end()) {
+				resourceTable.insert({ (std::string)animation["ID"]
+				,(std::string)animation["TEX_ID"] });
+			}
 		}
 	}
 	return false;
@@ -171,7 +187,7 @@ AnimationClip& ResourceTableManager::GetAnim(const std::string& AnimId)
 AnimationClip& ResourceTableManager::GetAnim(const std::string& type, const int& AnimCode)
 {
 	std::string strAnimCode = "SKILL" + std::to_string(AnimCode);
-	std::string AnimId = ANIMATION[type][strAnimCode]["ID"].get<std::string>();
+	std::string AnimId = ANIMATION["Character"][type][strAnimCode]["ID"].get<std::string>();
 
 	auto it = resourceTable.find(AnimId);
 	if (it == resourceTable.end()) {

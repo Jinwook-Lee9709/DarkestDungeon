@@ -1,8 +1,12 @@
-ID,TEX_KEY,"FPS",LoopType(0: Single 1:Loop),ROW,COUNT,WIDTH,HEIGHT
-crusader_idle,crusader_idle_sheet,"30",1,6,33,512,512
-crusader_combat,crusader_combat_sheet,"30",1,6,31,512,512
-crusader_walk,crusader_walk_sheet,"30",1,6,33,512,512
-crusader_skill_one,crusader_smite_sheet,"30",0,6,42,512,512
-crusader_skill_two,crusader_stun_sheet,"30",0,6,42,512,512
-crusader_skill_three,crusader_heal_sheet,"30",0,6,42,512,768
-crusader_skill_four,crusader_scroll_sheet,"30",0,6,42,512,512
+ID,"FPS",LoopType(0: Single 1:Loop),ROW,COUNT,WIDTH,HEIGHT
+crusader_idle,"30",1,6,33,512,512
+crusader_combat,"30",1,6,31,512,512
+crusader_walk,"30",1,6,33,512,512
+crusader_skill_one,"30",0,6,42,512,512
+crusader_skill_two,"30",0,6,42,512,512
+crusader_skill_three,"30",0,6,42,512,768
+crusader_skill_four,"30",0,6,42,512,512
+Monster,,,,,,
+skeleton_militia_combat,"30",1,6,29,512,512
+skeleton_militia_skill_one,"30",0,5,25,512,512
+skeleton_militia_skill_two,"30",0,5,25,512,512

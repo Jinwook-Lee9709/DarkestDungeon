@@ -64,26 +64,26 @@
     <ClCompile Include="UiDungeon.cpp">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Crusader.cpp">
-      <Filter>Scenes\Dev1\Character\Crusader</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationClip.cpp">
       <Filter>Framework\4.Anim</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Framework\4.Anim</Filter>
     </ClCompile>
-    <ClCompile Include="src\CharacterContainer.cpp">
-      <Filter>Scenes\Dev1\General</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Scenes\Dev1\Character\Base</Filter>
-    </ClCompile>
     <ClCompile Include="Slot.cpp">
-      <Filter>Scenes\Dev1\Character\Skill</Filter>
+      <Filter>Scenes\Dev1\Entity\Skill</Filter>
     </ClCompile>
     <ClCompile Include="MonsterContainer.cpp">
-      <Filter>Scenes\Dev1\Battle\Monster</Filter>
+      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharacterContainer.cpp">
+      <Filter>Scenes\Dev1\Entity\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Scenes\Dev1\Entity\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,35 +159,38 @@
     <ClInclude Include="UiDungeon.h">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Crusader.h">
-      <Filter>Scenes\Dev1\Character\Crusader</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationClip.h">
       <Filter>Framework\4.Anim</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
       <Filter>Framework\4.Anim</Filter>
     </ClInclude>
-    <ClInclude Include="src\CharacterContainer.h">
-      <Filter>Scenes\Dev1\General</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Scenes\Dev1\Character\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\FZLog.hpp">
       <Filter>Framework\8.Log</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
-      <Filter>Scenes\Dev1\Character\Skill</Filter>
+      <Filter>Scenes\Dev1\Entity\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Slot.h">
-      <Filter>Scenes\Dev1\Character\Skill</Filter>
+      <Filter>Scenes\Dev1\Entity\Skill</Filter>
     </ClInclude>
     <ClInclude Include="SkillCrusader.h">
-      <Filter>Scenes\Dev1\Character\Skill\SkillCrusader</Filter>
+      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
     </ClInclude>
     <ClInclude Include="MonsterContainer.h">
-      <Filter>Scenes\Dev1\Battle\Monster</Filter>
+      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CharacterContainer.h">
+      <Filter>Scenes\Dev1\Entity\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Scenes\Dev1\Entity\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillSkeletonMilitia.h">
+      <Filter>Scenes\Dev1\Entity\Skill\SkillMonster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -260,26 +263,26 @@
     <Filter Include="Scenes\Dev1\General">
       <UniqueIdentifier>{4472138b-18b1-411c-96fc-174b15228645}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Character">
-      <UniqueIdentifier>{60e19c18-b8e8-4da8-883c-9c91d9d58689}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Character\Crusader">
-      <UniqueIdentifier>{cadcf017-1db3-4bd4-bff7-798e4bb10174}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Character\Base">
-      <UniqueIdentifier>{816f5375-e50f-4095-910c-4f8db4d932a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\8.Log">
       <UniqueIdentifier>{2691c827-c077-4dc9-92fe-3d42d2a6e434}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Character\Skill">
+    <Filter Include="Scenes\Dev1\Entity">
+      <UniqueIdentifier>{60e19c18-b8e8-4da8-883c-9c91d9d58689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Entity\Skill">
       <UniqueIdentifier>{9e4726b2-bd5f-4cbd-9356-bb5005928d2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Character\Skill\SkillCrusader">
+    <Filter Include="Scenes\Dev1\Entity\Character">
+      <UniqueIdentifier>{6265df02-a2bb-4e8b-a5fb-9361dcc743e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Entity\Monster">
+      <UniqueIdentifier>{8a84d8fc-5023-49bb-b097-a6c4a5113823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Entity\Skill\SkillCharacter">
       <UniqueIdentifier>{439c5317-7fee-4cf3-9f2a-98245a0b9665}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Battle\Monster">
-      <UniqueIdentifier>{8a84d8fc-5023-49bb-b097-a6c4a5113823}</UniqueIdentifier>
+    <Filter Include="Scenes\Dev1\Entity\Skill\SkillMonster">
+      <UniqueIdentifier>{493f61e8-a2c9-433b-b9d5-343c384dfb66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

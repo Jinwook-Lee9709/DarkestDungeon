@@ -1,86 +1,64 @@
 {
-    "0":
-    {
-        "IDLE":
+    "Character":{
+        "0":
         {
-            "ID": "crusader_idle",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_idle_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
-        },
-        "COMBAT":
-        {
-            "ID": "crusader_combat",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_combat_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
-        },
-        "WALK":
-        {
-            "ID": "crusader_walk",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_walk_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
-        },
-        "SKILL1":
-        {
-            "ID": "crusader_skill_one",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
-        },
-        "SKILL2":
-        {
-            "ID": "crusader_skill_two",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
-        },
-        "SKILL3":
-        {
-            "ID": "crusader_skill_three",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_heal_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 768
-        },
-        "SKILL4":
-        {
-            "ID": "crusader_skill_four",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
+            "IDLE":
+            {
+                "ID": "crusader_idle",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_idle_sheet.png"
+            },
+            "COMBAT":
+            {
+                "ID": "crusader_combat",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_combat_sheet.png"
+            },
+            "WALK":
+            {
+                "ID": "crusader_walk",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_walk_sheet.png"
+            },
+            "SKILL1":
+            {
+                "ID": "crusader_skill_one",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png"
+            },
+            "SKILL2":
+            {
+                "ID": "crusader_skill_two",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png"
+            },
+            "SKILL3":
+            {
+                "ID": "crusader_skill_three",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_heal_sheet.png"
+            },
+            "SKILL4":
+            {
+                "ID": "crusader_skill_four",
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png"
+            }
+            
         }
-        
+    },
+    "Monster":{
+        "Ruin":{
+            "0":{
+                "Combat": 
+                {
+                    "ID": "skeleton_militia_combat",
+                    "TEX_ID": "resource/Monster/skeleton_militia/Sheet/skeleton_militia_combat_sheet.png"
+                },
+                "SKILL1": 
+                {
+                    "ID": "skeleton_militia_skill_one",
+                    "TEX_ID": "resource/Monster/skeleton_militia/Sheet/skeleton_militia_attack_sheet.png"
+                },
+                "SKILL2":{
+                    "ID": "skeleton_militia_skill_two",
+                    "TEX_ID": "resource/Monster/skeleton_militia/Sheet/skeleton_militia_attack_sheet.png"
+                }
+            }
+        }
+      
     }
-
-
-
 }

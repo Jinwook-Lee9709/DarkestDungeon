@@ -1,8 +1,11 @@
 #pragma once
+#include "Monster.h"
+
+class Monster;
 
 struct MonsterInfo
 {
-	CharacterType type;
+	MonsterType type;
 	int hp;
 	int maxHp;
 	int speed;
@@ -12,19 +15,30 @@ struct MonsterInfo
 	float minDamage;
 	float maxDamage;
 	float protect;
-	std::string skill1;
-	std::string skill2;
+	int skillCount;
+	std::vector<std::string> skill1;
+	std::vector<std::string> skill2;
+	std::vector<std::string> skill3;
+	std::vector<std::string> skill4;
 
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(MonsterInfo
-		, name, type, hp, maxHp, speed, dodge,
-		accuracy, critical, minDamage, maxDamage, protect, skill1, skill2);
+		, type, hp, maxHp, speed, dodge,
+		accuracy, critical, minDamage, maxDamage, protect, skillCount, skill1, skill2, skill3, skill4);
 };
 
 class MonsterContainer : public GameObject
 {
 protected:
+	Monster monster;
+
+	sf::RectangleShape hpBar;
+
+	int currentPos;
+
 	bool isAlive;
 	MonsterInfo info;
+
+	sf::Vector2f originalMonsterScale = { 0.8f, 0.8f };
 public:
 	MonsterContainer(const std::string& name = "");
 	~MonsterContainer() = default;
@@ -41,9 +55,17 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+	
+	void ChangePos(short pos) { this->currentPos = pos; }
 
+    void SetStatus(const json& info);
 
+	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
+
+	int GetPos() { return currentPos; }
 	MonsterInfo& GetMonsterInfo() { return info; }
+
+
 
 	void OnHit(int damage, float acc);
 	void OnDebuffed(DebufType type, float acc);

@@ -1,17 +1,11 @@
 #pragma once
 #include "GameObject.h"
-class Monster :
-    public GameObject
-{
-};
-
-#pragma once
-#include "GameObject.h"
 
 class Skill;
 class Slot;
 class CharacterContainer;
 class MonsterContainer;
+struct MonsterInfo;
 
 class Monster : public GameObject
 {
@@ -21,8 +15,9 @@ protected:
 
 	Skill* skill;
 	Slot* skillSlot;
+	int skillCount;
 
-	CharacterType type;
+	MonsterType type;
 public:
 	Monster(const std::string& name = "");
 	~Monster() = default;
@@ -40,14 +35,13 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	virtual void SetToIdle();
 	virtual void SetToCombat();
-	virtual void SetToWalk();
 	virtual void OnHit(int damage);
 
 
-	void Reset(const CharacterInfo& info);
-	void SetSlot(const CharacterInfo& info);
+	void Reset(const MonsterInfo& info);
+
+	void SetSlot(const MonsterInfo& info);
 	void AddSkill(int num);
 
 	void UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num);

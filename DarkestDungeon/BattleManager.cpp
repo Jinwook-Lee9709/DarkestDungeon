@@ -14,6 +14,11 @@ BattleManager::BattleManager(SceneDev1* scene)
 
 void BattleManager::Init()
 {
+    std::ifstream file("tables/monster_table.json", std::ios::in);
+    if (!file) {
+        std::cerr << "Failed to Read File";
+    }
+    monsterTable = json::parse(file);
 }
 
 void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
@@ -22,6 +27,7 @@ void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
     this->characters = characters;
     this->monsters = monsters;
     this->ui = ui;
+    SetMonsterInfo();
 }
 
 
@@ -59,6 +65,17 @@ void BattleManager::Update(float dt)
 
     default:
         break;
+    }
+}
+
+void BattleManager::SetMonsterInfo()
+{
+
+    for (int i = 0; i < 4; i++) {
+        (*monsters)[i]->SetPosition(currenScene->GetMonsterPos()[i]);
+        (*monsters)[i]->ChangePos(i + 4);
+        json info = monsterTable["0"]["Monster" + std::to_string(i + 1)];
+        (*monsters)[i]->SetStatus(info);
     }
 }
 

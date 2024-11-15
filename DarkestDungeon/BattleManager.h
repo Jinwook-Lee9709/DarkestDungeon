@@ -28,12 +28,14 @@ private:
 	Status beforeStatus;
 	Status currentStatus;
 
+	json monsterTable;
 
 	std::vector<CharacterContainer*>* characters;
 	std::vector<MonsterContainer*>* monsters;
 
 	short currentCharacter;
 	short currentMonster;
+
 
 	std::queue<int> orderQueue;
 
@@ -57,6 +59,8 @@ public:
 		std::vector<MonsterContainer*>* monsters, UiDungeon* ui);
 	void Update(float dt);
 	
+	void SetMonsterInfo();
+
 	void UpdateJudgeTurn(float dt);
 	void UpdateCharacterTurn(float dt);
 	void UpdateSkillSelected(float dt);

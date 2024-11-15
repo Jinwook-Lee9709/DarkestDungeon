@@ -24,9 +24,9 @@ protected:
 	std::vector<MonsterContainer*> monsters;
 
 	//Entity Pos;
-	sf::Vector2f characterContainerPos[4];
-	sf::Vector2f enemyContainerPos1[4];
-	sf::Vector2f enemyContainerPos2[3];
+	std::vector<sf::Vector2f> characterContainerPos;
+	std::vector<sf::Vector2f> monsterContainerPos1;
+	std::vector<sf::Vector2f> monsterContainerPos2;
 
 	SpriteGo* background;
 
@@ -48,9 +48,12 @@ public:
 	void InitContaierPos(sf::Vector2f windowSize);
 	void SetCharacterInfo();
 	void LoadCharacterResource();
-
+	void LoadMonsterResource();
 	//Getter
 	UiDungeon* GetUi() { return uiDungeon; }
 	std::vector<CharacterContainer*>& GetCharacters() { return characters; }
 	std::vector<MonsterContainer*>& GetMonsters() { return monsters; }
+	std::vector<sf::Vector2f>& GetCharacterPos() { return characterContainerPos; }
+	std::vector<sf::Vector2f>& GetMonsterPos() { return monsterContainerPos1; }
+	
 };

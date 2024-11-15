@@ -10,7 +10,7 @@ Monster::Monster(const std::string& name)
 {
 }
 
-void Monster::Monster(const sf::Vector2f& pos)
+void Monster::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
 	body.setPosition(position);
@@ -56,8 +56,7 @@ void Monster::Release()
 
 void Monster::Reset()
 {
-	animator.Play("crusader_idle");
-
+	animator.Play("skeleton_militia_combat");
 }
 
 void Monster::Update(float dt)
@@ -71,15 +70,7 @@ void Monster::Draw(sf::RenderWindow& window)
 	window.draw(body);
 }
 
-void Monster::SetToIdle()
-{
-}
-
 void Monster::SetToCombat()
-{
-}
-
-void Monster::SetToWalk()
 {
 }
 
@@ -87,16 +78,17 @@ void Monster::OnHit(int damage)
 {
 }
 
-void Monster::Reset(const CharacterInfo& info)
+void Monster::Reset(const MonsterInfo& info)
 {
 	type = info.type;
+	skillCount = info.skillCount;
 	SetSlot(info);
 }
 
-void Monster::SetSlot(const CharacterInfo& info)
+void Monster::SetSlot(const MonsterInfo& info)
 {
 	switch (info.type) {
-	case CharacterType::Crusader:
+	case MonsterType::Skeleton_militia:
 	{
 		skill = new SkillCrusader();
 	}
@@ -106,7 +98,7 @@ void Monster::SetSlot(const CharacterInfo& info)
 	}
 	}
 	json j = info;
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < skillCount; i++) {
 		AddSkill(std::stoi(j["skill" + std::to_string(i + 1)][1].get<std::string>()));
 	}
 

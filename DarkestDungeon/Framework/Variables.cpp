@@ -3,3 +3,4 @@
 
 bool Variables::isDrawHitBox = true;
 int Variables::selectedCharacter[4] = {1,2,3,5};
+std::string Variables::SelectedDungeon = "Ruin";

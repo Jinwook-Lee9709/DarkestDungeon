@@ -43,6 +43,7 @@ void SceneDev1::Init()
 	uiView.setCenter(windowSize.x * 0.5f, windowSize.y * 0.5f);
 
 	battleManager = new BattleManager(this);
+	battleManager->Init();
 	InitContaierPos(windowSize);
 
 
@@ -55,8 +56,10 @@ void SceneDev1::Init()
 void SceneDev1::Enter()
 {
 	RES_TABLE_MGR.LoadScene("Dev1");
+	RES_TABLE_MGR.LoadScene("Ruin");
 	SetCharacterInfo();
 	LoadCharacterResource();
+	LoadMonsterResource();
 	battleManager->Reset(&characters, &monsters, uiDungeon);
 	currentStatus = Status::Battle;
 	Scene::Enter();
@@ -90,8 +93,13 @@ void SceneDev1::InitContaierPos(sf::Vector2f windowSize)
 	float height = windowSize.y * 0.62f;
 	float positionBuf = windowSize.x * 0.5f - block * 1.5f;
 	for (int i = 0; i < 4; i++) {
-		characterContainerPos[i] = sf::Vector2f({ positionBuf, height });
+		characterContainerPos.push_back(sf::Vector2f({ positionBuf, height }));
 		positionBuf -= block;
+	}
+	positionBuf = windowSize.x * 0.5f + block * 1.5f;;
+	for (int i = 0; i < 4; i++) {
+		monsterContainerPos1.push_back(sf::Vector2f({ positionBuf, height }));
+		positionBuf += block;
 	}
 
 }
@@ -124,6 +132,13 @@ void SceneDev1::LoadCharacterResource()
 	}
 
 }
+
+void SceneDev1::LoadMonsterResource()
+{
+	RES_TABLE_MGR.LoadMonsterAnimation();
+}
+
+
 
 
 

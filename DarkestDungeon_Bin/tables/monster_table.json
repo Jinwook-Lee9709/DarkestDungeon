@@ -1,85 +1,85 @@
 
 {
-   "Character1":
-   {
-        "name": "Arthur",
-        "type": 0,
-        "hp" : 20,
-        "maxHp" : 33,
-        "stress" : 5,
-        "speed" : 1,
-        "dodge" : 0,
-        "accuracy" : 0,
-        "critical" : 3.0,
-        "minDamage" : 6,
-        "maxDamage" : 12,
-        "protect" : 20,
+     "0":{
+          "Monster1":
+          {
+               "type": 0,
+               "hp" : 10,
+               "maxHp" : 10,
+               "speed" : 2,
+               "dodge" : 10,
+               "accuracy" : 0,
+               "critical" : 3.0,
+               "minDamage" : 6,
+               "maxDamage" : 12,
+               "protect" : 15,
+               "skillCount" : 2,  
+               "skill1":["Skeleton_militia_skill1","1"],
+               "skill2":["Skeleton_militia_skill2","2"],
+               "skill3":["NONE","-1"],
+               "skill4":["NONE","-1"]
+               
+          },
+          "Monster2":
+          {
+               "type": 0,
+               "hp" : 10,
+               "maxHp" : 10,
+               "speed" : 2,
+               "dodge" : 10,
+               "accuracy" : 0,
+               "critical" : 3.0,
+               "minDamage" : 6,
+               "maxDamage" : 12,
+               "protect" : 15,
+               "skillCount" : 2,  
+               "skill1":["Skeleton_militia_skill1","1"],
+               "skill2":["Skeleton_militia_skill2","2"],
+               "skill3":["NONE","-1"],
+               "skill4":["NONE","-1"]
+               
+          },
+          "Monster3":
+          {
+               "type": 0,
+               "hp" : 10,
+               "maxHp" : 10,
+               "speed" : 2,
+               "dodge" : 10,
+               "accuracy" : 0,
+               "critical" : 3.0,
+               "minDamage" : 6,
+               "maxDamage" : 12,
+               "protect" : 15,
+               "skillCount" : 2,  
+               "skill1":["Skeleton_militia_skill1","1"],
+               "skill2":["Skeleton_militia_skill2","2"],
+               "skill3":["NONE","-1"],
+               "skill4":["NONE","-1"]
+               
+          },
+          "Monster4":
+          {
+               "type": 0,
+               "hp" : 10,
+               "maxHp" : 10,
+               "speed" : 2,
+               "dodge" : 10,
+               "accuracy" : 0,
+               "critical" : 3.0,
+               "minDamage" : 6,
+               "maxDamage" : 12,
+               "protect" : 15,
+               "skillCount" : 2,  
+               "skill1":["Skeleton_militia_skill1","1"],
+               "skill2":["Skeleton_militia_skill2","2"],
+               "skill3":["NONE","-1"],
+               "skill4":["NONE","-1"]
+               
+          }
 
-        "skill1": ["crusader_ability_one","1"],
-        "skill2":["crusader_ability_four","4"],
-        "skill3":["crusader_ability_three","3"],
-        "skill4":["crusader_ability_two","2"]
-        
-   },
+     }
 
-   "Character2":
-   {
-        "name": "Hawkeye",
-        "type": 0,
-        "hp" : 25,
-        "maxHp" : 25,
-        "stress" : 34,
-        "speed" : 6,
-        "dodge" : 0,
-        "accuracy" : 0,
-        "critical" : 15.0,
-        "minDamage" : 8,
-        "maxDamage" : 10,
-        "protect" : 4,
-        "skill1": ["crusader_ability_two","2"],
-        "skill2":["crusader_ability_one","1"],
-        "skill3":["crusader_ability_three","3"],
-        "skill4":["crusader_ability_four","4"]
-   },
 
-   "Character3":
-   {
-        "name": "Drake",
-        "type": 0,
-        "hp" : 25,
-        "maxHp" : 25,
-        "stress" : 34,
-        "speed" : 52,
-        "dodge" : 0,
-        "accuracy" : 0,
-        "critical" : 15.0,
-        "minDamage" : 8,
-        "maxDamage" : 10,
-        "protect" : 4,
-        "skill1": ["crusader_ability_four","4"],
-        "skill2":["crusader_ability_two","2"],
-        "skill3":["crusader_ability_three","3"],
-        "skill4":["crusader_ability_one","1"]
-   },
-
-   "Character4":
-   {
-        "name": "Rock",
-        "type": 0,
-        "hp" : 25,
-        "maxHp" : 25,
-        "stress" : 34,
-        "speed" : 12,
-        "dodge" : 0,
-        "accuracy" : 0,
-        "critical" : 15.0,
-        "minDamage" : 8,
-        "maxDamage" : 10,
-        "protect" : 4,
-        "skill1": ["crusader_ability_two","2"],
-        "skill2":["crusader_ability_three","3"],
-        "skill3":["crusader_ability_one","1"],
-        "skill4":["crusader_ability_four","4"]
-   }
-
+  
 }
