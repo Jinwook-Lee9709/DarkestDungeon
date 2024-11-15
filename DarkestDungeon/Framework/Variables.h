@@ -6,3 +6,4 @@ public:
 	static bool isDrawHitBox;
 	static int selectedCharacter[4];
 };
+

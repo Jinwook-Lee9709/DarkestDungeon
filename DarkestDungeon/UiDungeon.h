@@ -23,6 +23,7 @@ private:
 	std::vector<TextGo*> fixedText;
 
 	SpriteGo* skill[7];
+	std::bitset<6> skillActive;
 	std::string SkillTexId[4][4];
 
 	std::unordered_map<PlayerTextIndex, TextGo*> playerText;
@@ -52,12 +53,12 @@ public:
 		const sf::Vector2f pos, const int& order,
 		const bool& flipX = false, const bool& flipY = false);
 
-
-
-
 	void InitFixedUi(const sf::Vector2f& windowSize);
 	void InitSkillUi(const sf::Vector2f& windowSize);
 	void InitPlayerTextUi(const sf::Vector2f& windowSize);
+
+	void ChangeSkill(const CharacterInfo& info);
+	void ChangeSkillActive();
 
 	void CheckSkillClick();
 };

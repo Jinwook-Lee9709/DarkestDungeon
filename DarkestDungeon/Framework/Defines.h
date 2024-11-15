@@ -47,6 +47,10 @@ enum class CharacterType
 {
 	Crusader,
 };
+enum class MonsterType
+{
+	Skeleton_militia,
+};
 
 
 struct CharacterInfo

@@ -34,9 +34,9 @@
             "WIDTH": 512,
             "HEIGHT": 512
         },
-        "SMITE":
+        "SKILL1":
         {
-            "ID": "crusader_smite",
+            "ID": "crusader_skill_one",
             "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_smite_sheet.png",
             "FPS": 30,
             "LOOPTYPE": 1,
@@ -45,20 +45,9 @@
             "WIDTH": 512,
             "HEIGHT": 512
         },
-        "SCROLL":
+        "SKILL2":
         {
-            "ID": "crusader_scroll",
-            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
-            "FPS": 30,
-            "LOOPTYPE": 1,
-            "ROW": 6,
-            "COUNT": 33,
-            "WIDTH": 512,
-            "HEIGHT": 512
-        },
-        "STUN":
-        {
-            "ID": "crusader_stun",
+            "ID": "crusader_skill_two",
             "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_sheet.png",
             "FPS": 30,
             "LOOPTYPE": 1,
@@ -67,10 +56,21 @@
             "WIDTH": 512,
             "HEIGHT": 512
         },
-        "HEAL":
+        "SKILL3":
         {
-            "ID": "crusader_heal",
+            "ID": "crusader_skill_three",
             "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_heal_sheet.png",
+            "FPS": 30,
+            "LOOPTYPE": 1,
+            "ROW": 6,
+            "COUNT": 33,
+            "WIDTH": 512,
+            "HEIGHT": 768
+        },
+        "SKILL4":
+        {
+            "ID": "crusader_skill_four",
+            "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_scroll_sheet.png",
             "FPS": 30,
             "LOOPTYPE": 1,
             "ROW": 6,

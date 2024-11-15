@@ -4,6 +4,7 @@
 SpriteGo::SpriteGo(const std::string& texId, const std::string& name)
 	:GameObject(name), textureId(texId)
 {
+	
 }
 
 void SpriteGo::SetOrigin(Origins preset)
@@ -38,6 +39,7 @@ void SpriteGo::Reset()
 {
 	sprite.setTexture(GET_TEX(textureId));
 	SetOrigin(originPreset);
+	hitbox.UpdateTr(sprite, sprite.getGlobalBounds());
 }
 
 void SpriteGo::SetPosition(const sf::Vector2f& pos)
@@ -56,6 +58,7 @@ void SpriteGo::Draw(sf::RenderWindow& window)
 {
 	GameObject::Draw(window);
 	window.draw(sprite);
+	hitbox.Draw(window);
 }
 
 sf::FloatRect SpriteGo::GetLocalBounds() const
@@ -66,6 +69,11 @@ sf::FloatRect SpriteGo::GetLocalBounds() const
 sf::FloatRect SpriteGo::GetGlobalBounds() const
 {
 	return sprite.getGlobalBounds();
+}
+
+void SpriteGo::SetFillColor(const sf::Color& color)
+{
+	sprite.setColor(color);
 }
 
 void SpriteGo::ChangeTexture(const std::string& texId)

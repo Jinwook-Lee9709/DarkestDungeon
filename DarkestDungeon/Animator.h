@@ -21,7 +21,9 @@ public:
 	
 	void Update(float dt);
 
+	
 	void Play(const std::string& clipId);
+	void Play(const std::string& type, const int& num);
 	void Play(AnimationClip* clip);
 
 	void Stop();

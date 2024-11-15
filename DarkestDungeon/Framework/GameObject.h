@@ -64,6 +64,10 @@ public:
 	{
 		return hitbox;
 	}
+	bool IsClicked()
+	{
+		return hitbox.isClicked();
+	}
 
 	virtual void Init();
 	virtual void Release();

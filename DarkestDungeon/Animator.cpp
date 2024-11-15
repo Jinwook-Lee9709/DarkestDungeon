@@ -33,6 +33,11 @@ void Animator::Play(const std::string& clipId)
 	Play(&GET_ANIM(clipId));
 }
 
+void Animator::Play(const std::string& type, const int& num)
+{
+	Play(&RES_TABLE_MGR.GetAnim(type, num));
+}
+
 void Animator::Play(AnimationClip* clip)
 {
 	isPlaying = true;
@@ -42,6 +47,7 @@ void Animator::Play(AnimationClip* clip)
 
 	frameDuration = 1.f / clip->fps;
 	accumTime = 0.f;
+
 	SetFrame(currentClip->frames[currentFrame]);
 }
 

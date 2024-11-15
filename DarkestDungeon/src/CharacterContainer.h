@@ -15,7 +15,7 @@ private:
 	sf::RectangleShape hpBar;
 	sf::RectangleShape stressBar[10];
 
-	short currentPos;
+	int currentPos;
 
 
 	CharacterInfo info;
@@ -45,13 +45,15 @@ public:
 
 	void SetInitialStatus(const json& info);
 
-	void UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num);
+	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
 
+	//Getter
+	int GetPos() { return currentPos; }
 	CharacterInfo& GetCharacterInfo() { return info; }
+
 
 	void OnHit(int damage, float acc);
 	void OnDebuffed(DebufType type, float acc);
-
 	void OnHeal(int amount);
 
 	bool IsAlive() { return isAlive; }

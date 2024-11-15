@@ -8,6 +8,7 @@
 #include <string>
 #include <algorithm>
 #include <memory>
+#include <bitset>
 
 #include <nlohmann/json.hpp>
 #include <rapidcsv.h>

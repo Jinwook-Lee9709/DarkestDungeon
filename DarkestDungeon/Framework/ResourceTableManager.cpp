@@ -168,6 +168,18 @@ AnimationClip& ResourceTableManager::GetAnim(const std::string& AnimId)
 	return 	RES_MGR(AnimationClip).Get(it->first);
 }
 
+AnimationClip& ResourceTableManager::GetAnim(const std::string& type, const int& AnimCode)
+{
+	std::string strAnimCode = "SKILL" + std::to_string(AnimCode);
+	std::string AnimId = ANIMATION[type][strAnimCode]["ID"].get<std::string>();
+
+	auto it = resourceTable.find(AnimId);
+	if (it == resourceTable.end()) {
+		std::cout << "No Value matched with Id: " << AnimId << std::endl;
+	}
+	return 	RES_MGR(AnimationClip).Get(it->first);
+}
+
 std::string& ResourceTableManager::GetPath(const std::string& key)
 {
 	auto it = resourceTable.find(key);

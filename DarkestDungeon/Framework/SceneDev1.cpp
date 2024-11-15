@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "SceneDev1.h"
 #include "SpriteGo.h"
+#include "BattleManager.h"
+#include "ExploreManager.h"
 #include "CharacterContainer.h"
 #include "MonsterContainer.h"
 #include "UiDungeon.h"
@@ -15,6 +17,7 @@ SceneDev1::SceneDev1()
 void SceneDev1::Init()
 {	
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
+	//Create Containers
 	for (int i = 0; i < 4; i++) {
 		auto obj = AddGo(new CharacterContainer("container" + std::to_string(i)));
 		obj->sortingLayer = SortingLayers::Foreground;
@@ -25,18 +28,23 @@ void SceneDev1::Init()
 		obj2->sortingLayer = SortingLayers::Foreground;
 		monsters.push_back(obj2);
 	}
-	uiDungeon = AddGo(new UiDungeon());
+
 	background = AddGo(new SpriteGo("room_empty"));
 	background->SetOrigin(Origins::TC);
 	background->SetPosition({ FRAMEWORK.GetWindowSizeF().x * 0.5f, 0.f });
 	background->sortingLayer = SortingLayers::Background;
 
+	uiDungeon = AddGo(new UiDungeon());
+
+	//Set View 
 	worldView.setSize(windowSize);
 	worldView.setCenter(windowSize.x * 0.5f, windowSize.y * 0.5f);
-
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize.x * 0.5f, windowSize.y * 0.5f);
+
+	battleManager = new BattleManager(this);
 	InitContaierPos(windowSize);
+
 
 
 
@@ -49,6 +57,8 @@ void SceneDev1::Enter()
 	RES_TABLE_MGR.LoadScene("Dev1");
 	SetCharacterInfo();
 	LoadCharacterResource();
+	battleManager->Reset(&characters, &monsters, uiDungeon);
+	currentStatus = Status::Battle;
 	Scene::Enter();
 }
 
@@ -60,10 +70,14 @@ void SceneDev1::Exit()
 
 void SceneDev1::Update(float dt)
 {
-	Scene::Update(dt);
-	if (InputManager::GetKeyDown(sf::Keyboard::Num1)) {
-		characters[0]->UseSkill(characters, monsters, 1, 0, 2);
+	switch(currentStatus) {
+	case Status::Battle:
+		battleManager->Update(dt);
+		break;
+	case Status::Explore:
+		break;
 	}
+	Scene::Update(dt);
 }
 
 void SceneDev1::Draw(sf::RenderWindow& window)
@@ -92,6 +106,7 @@ void SceneDev1::SetCharacterInfo()
 	file.close();
 	for (int i = 0; i < 4; i++) {
 		characters[i]->SetPosition(characterContainerPos[i]);
+		characters[i]->ChangePos(i);
 		json info = TABLE["Character" + std::to_string(i+1)];
 
 		characters[i]->SetInitialStatus(info);

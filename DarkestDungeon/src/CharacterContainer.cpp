@@ -135,7 +135,7 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 
 void CharacterContainer::SetInitialStatus(const json& info)
 {
-
+	isAlive = true;
 	this->info = info;
 	/*this->info.name = info["name"];
 	this->info.type = info["type"];
@@ -156,13 +156,17 @@ void CharacterContainer::SetInitialStatus(const json& info)
 	
 }
 
-void CharacterContainer::UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num)
+void CharacterContainer::UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num)
 {
 	character.UseSkill(characters, monsters, user, target, num);
+	
 }
 
 void CharacterContainer::OnHeal(int amount)
 {
 	info.hp += amount;
+	if (info.hp > info.maxHp) {
+		info.hp = info.maxHp;
+	}
 
 }

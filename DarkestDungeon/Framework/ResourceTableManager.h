@@ -27,6 +27,7 @@ public:
 	sf::Font& GetFont(const std::string& fontKey);
 	sf::SoundBuffer& GetSound(const std::string& soundKey);
 	AnimationClip& GetAnim(const std::string& AnimId);
+	AnimationClip& GetAnim(const std::string& type, const int& AnimCode);
 
 	std::string& GetPath(const std::string& key);
 

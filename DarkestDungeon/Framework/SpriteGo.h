@@ -25,6 +25,7 @@ public:
 	sf::FloatRect GetLocalBounds() const override;
 	sf::FloatRect GetGlobalBounds() const override;
 
+	void SetFillColor(const sf::Color& color);
 	void ChangeTexture(const std::string& texId);
 
 	

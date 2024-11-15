@@ -2,7 +2,6 @@
 
 struct MonsterInfo
 {
-	std::string name;
 	CharacterType type;
 	int hp;
 	int maxHp;

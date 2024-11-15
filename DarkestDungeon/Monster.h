@@ -1,24 +1,31 @@
 #pragma once
 #include "GameObject.h"
+class Monster :
+    public GameObject
+{
+};
+
+#pragma once
+#include "GameObject.h"
 
 class Skill;
 class Slot;
 class CharacterContainer;
 class MonsterContainer;
 
-class Character : public GameObject
+class Monster : public GameObject
 {
 protected:
 	sf::Sprite body;
 	Animator animator;
-		
+
 	Skill* skill;
 	Slot* skillSlot;
 
 	CharacterType type;
 public:
-	Character(const std::string& name = "");
-	~Character() = default;
+	Monster(const std::string& name = "");
+	~Monster() = default;
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	void SetRotation(float angle) override;
@@ -44,5 +51,5 @@ public:
 	void AddSkill(int num);
 
 	void UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num);
-	
+
 };

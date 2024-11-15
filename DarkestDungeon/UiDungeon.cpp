@@ -116,6 +116,8 @@ void UiDungeon::SetSpriteInfo(SpriteGo* obj,const Origins& origin, const sf::Vec
 	obj->FlipX(flipX);
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = order;
+
+	
 }
 
 void UiDungeon::InitFixedUi(const sf::Vector2f& windowSize)
@@ -166,6 +168,9 @@ void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)
 	SetSpriteInfo(obj, Origins::MC, { windowSize.x * 0.2885f, windowSize.y * 0.732f }, 6);
 	skill[6] = obj;
 	obj->SetActive(false);
+
+	skillActive.set();
+	skillActive.reset(1);
 
 }
 
@@ -252,6 +257,27 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 
 }
 
+void UiDungeon::ChangeSkill(const CharacterInfo& info)
+{
+	skill[0]->ChangeTexture(info.skill1[0]);
+	skill[1]->ChangeTexture(info.skill2[0]);
+	skill[2]->ChangeTexture(info.skill3[0]);
+	skill[3]->ChangeTexture(info.skill4[0]);
+	ChangeSkillActive();
+}
+
+void UiDungeon::ChangeSkillActive()
+{
+	for (int i = 0; i < 6; i++) {
+		if (skillActive[i]) {
+			skill[i]->SetFillColor(sf::Color::White);
+		}
+		else {
+			skill[i]->SetFillColor(sf::Color(100, 100, 100, 255));
+		}
+	}
+}
+
 
 
 void UiDungeon::CheckSkillClick()
@@ -259,11 +285,13 @@ void UiDungeon::CheckSkillClick()
 	if (InputManager::GetMouseButtonDown(sf::Mouse::Left))
 	{
 		for (int i = 0; i < 5; i++) {
-			sf::FloatRect bounds = skill[i]->GetGlobalBounds();
-			sf::Vector2f pos = (sf::Vector2f)InputManager::GetMousePosition();
-			if (bounds.contains(pos)) {
-				skill[6]->SetPosition(skill[i]->GetPosition());
-				skill[6]->SetActive(true);
+			if (skillActive[i]) {
+				sf::FloatRect bounds = skill[i]->GetGlobalBounds();
+				sf::Vector2f pos = (sf::Vector2f)InputManager::GetMousePosition();
+				if (bounds.contains(pos)) {
+					skill[6]->SetPosition(skill[i]->GetPosition());
+					skill[6]->SetActive(true);
+				}
 			}
 		}
 	}

@@ -8,6 +8,24 @@ HitBox::HitBox()
 	rect.setOutlineThickness(1.f);
 }
 
+bool HitBox::CheckContains(sf::Vector2f coord)
+{
+	rect.getGlobalBounds().contains(coord);
+	return false;
+}
+
+bool HitBox::isClicked()
+{
+	if (InputManager::GetMouseButton(sf::Mouse::Left)) {
+		sf::Vector2f pos = (sf::Vector2f)InputManager::GetMousePosition();
+		if (rect.getGlobalBounds().contains(pos)) {
+			return true;
+		}
+
+	}
+	return false;
+}
+
 void HitBox::UpdateTr(const sf::Transformable& tr, const sf::FloatRect& localBounds)
 {
 	rect.setOutlineColor(sf::Color::Green);
