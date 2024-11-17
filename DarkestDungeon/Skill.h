@@ -29,4 +29,13 @@ struct Skill {
 	) {}
 	std::vector<short> skillrange4;
 	std::string description4;
+
+	virtual int FindMonster(std::vector<MonsterContainer*> monsters, int pos) {
+		for (int i = 0; i < 4; i++) {
+			if (monsters[i]->GetPos() == pos) {
+				return i;
+			}
+		}
+		return -1;
+	}
 };

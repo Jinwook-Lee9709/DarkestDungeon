@@ -170,7 +170,7 @@ void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)
 	obj->SetActive(false);
 
 	skillActive.set();
-	skillActive.reset(1);
+
 
 }
 
@@ -263,10 +263,26 @@ void UiDungeon::ChangeSkill(const CharacterInfo& info)
 	skill[1]->ChangeTexture(info.skill2[0]);
 	skill[2]->ChangeTexture(info.skill3[0]);
 	skill[3]->ChangeTexture(info.skill4[0]);
-	ChangeSkillActive();
+	UpdateSkillUi();
 }
 
-void UiDungeon::ChangeSkillActive()
+void UiDungeon::ChangeSkillActive(const std::vector<bool>& list)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (list[i])
+		{
+			skillActive.set(i);
+		}
+		else {
+			skillActive.reset(i);
+		}
+
+	}
+	UpdateSkillUi();
+}
+
+void UiDungeon::UpdateSkillUi()
 {
 	for (int i = 0; i < 6; i++) {
 		if (skillActive[i]) {
@@ -276,11 +292,12 @@ void UiDungeon::ChangeSkillActive()
 			skill[i]->SetFillColor(sf::Color(100, 100, 100, 255));
 		}
 	}
+
 }
 
 
 
-void UiDungeon::CheckSkillClick()
+int UiDungeon::CheckSkillClick()
 {
 	if (InputManager::GetMouseButtonDown(sf::Mouse::Left))
 	{
@@ -291,8 +308,10 @@ void UiDungeon::CheckSkillClick()
 				if (bounds.contains(pos)) {
 					skill[6]->SetPosition(skill[i]->GetPosition());
 					skill[6]->SetActive(true);
+					return i + 1;
 				}
 			}
 		}
 	}
+	return 0;
 }

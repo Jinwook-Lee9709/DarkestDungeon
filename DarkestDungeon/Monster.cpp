@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Character.h"
 #include "SkillCrusader.h"
+#include "SkillSkeletonMilitia.h"
 #include "Skill.h"
 #include "Slot.h"
 
@@ -24,8 +25,17 @@ void Monster::SetRotation(float angle)
 
 void Monster::SetScale(const sf::Vector2f& s)
 {
-	scale = s;
+
+	if (animator.IsFlip())
+	{
+		scale = { -s.x, s.y };
+	}
+	else {
+		scale = { s.x, s.y };
+	}
+
 	body.setScale(scale);
+
 }
 
 void Monster::SetOrigin(Origins preset)
@@ -56,7 +66,7 @@ void Monster::Release()
 
 void Monster::Reset()
 {
-	animator.Play("skeleton_militia_combat");
+	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)type),"Combat"), true);
 }
 
 void Monster::Update(float dt)
@@ -72,6 +82,7 @@ void Monster::Draw(sf::RenderWindow& window)
 
 void Monster::SetToCombat()
 {
+	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)type), "Combat"), true);
 }
 
 void Monster::OnHit(int damage)
@@ -90,7 +101,7 @@ void Monster::SetSlot(const MonsterInfo& info)
 	switch (info.type) {
 	case MonsterType::Skeleton_militia:
 	{
-		skill = new SkillCrusader();
+		skill = new SkillSkeletonMilitia();
 	}
 	default:
 	{
@@ -142,25 +153,39 @@ void Monster::UseSkill(std::vector<CharacterContainer*> characters, std::vector<
 	int skillNum;
 	switch (num) {
 	case 1: {
-		skillNum = std::stoi(characters[user]->GetCharacterInfo().skill1[1]);
-		animator.Play(std::to_string((int)type), skillNum);
+		skillNum = std::stoi(monsters[user]->GetMonsterInfo().skill1[1]);
 		break;
 	}
 	case 2: {
-		skillNum = std::stoi(characters[user]->GetCharacterInfo().skill2[1]);
-		animator.Play(std::to_string((int)type), skillNum);
+		skillNum = std::stoi(monsters[user]->GetMonsterInfo().skill2[1]);
 		break;
 	}
 	case 3: {
-		skillNum = std::stoi(characters[user]->GetCharacterInfo().skill3[1]);
-		animator.Play(std::to_string((int)type), skillNum);
+		skillNum = std::stoi(monsters[user]->GetMonsterInfo().skill3[1]);
 		break;
 	}
 	case 4: {
-		skillNum = std::stoi(characters[user]->GetCharacterInfo().skill4[1]);
-		animator.Play(std::to_string((int)type), skillNum);
+		skillNum = std::stoi(monsters[user]->GetMonsterInfo().skill4[1]);
 		break;
 	}
 	}
+	animator.Play(&RES_TABLE_MGR.GetMonsterSkillAnim(std::to_string((int)type), skillNum), true);
 	SetOrigin(Origins::BC);
+}
+
+std::vector<int> Monster::CheckAvailableSkill(int pos)
+{
+	std::vector<int>buf;
+	for (int i = 0; i < skillCount; i++) {
+		if (skillSlot->GetRange(i)[pos + 1] == 1 )
+		{
+			buf.push_back(i);
+		};
+	}
+	return buf;
+}
+
+std::vector<short>& Monster::GetSkillRange(int skillnum)
+{
+	return skillSlot->GetRange(skillnum);
 }

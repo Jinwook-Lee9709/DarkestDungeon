@@ -46,4 +46,8 @@ public:
 
 	void UseSkill(std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target, int num);
 
+
+	//Getter
+	std::vector<int> CheckAvailableSkill(int pos);
+	std::vector<short>& GetSkillRange(int skillnum);
 };

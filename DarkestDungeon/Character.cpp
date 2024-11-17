@@ -171,3 +171,21 @@ void Character::UseSkill(std::vector<CharacterContainer*> characters, std::vecto
 	}
 	SetOrigin(Origins::BC);
 }
+
+
+std::vector<int> Character::CheckAvailableSkill(int pos)
+{
+	std::vector<int>buf;
+	for (int i = 0; i < 4; i++) {
+		if (skillSlot->GetRange(i)[4 - pos] == 1)
+		{
+			buf.push_back(i);
+		};
+	}
+	return buf;
+}
+
+std::vector<short>& Character::GetSkillRange(int skillnum)
+{
+	return skillSlot->GetRange(skillnum);
+}

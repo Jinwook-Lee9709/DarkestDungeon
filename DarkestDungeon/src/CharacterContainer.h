@@ -50,6 +50,8 @@ public:
 	//Getter
 	int GetPos() { return currentPos; }
 	CharacterInfo& GetCharacterInfo() { return info; }
+	std::vector<int> CheckAvailableSkill();
+	std::vector<short>& GetSkillRange(int skillnum);
 
 
 	void OnHit(int damage, float acc);

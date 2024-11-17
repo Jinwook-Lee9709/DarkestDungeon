@@ -25,20 +25,28 @@ void Animator::Update(float dt)
 			break;
 		}
 	}
+	//sf::Vector2f scale = sprite->getScale();
+	//if (this->flip) {
+
+	//	sprite->setScale({ -abs(scale.x), scale.y });
+	//}
+	//else {
+	//	sprite->setScale({ scale.x, scale.y });
+	//}
 	SetRect(currentClip->frames[currentFrame]);
 }
 
-void Animator::Play(const std::string& clipId)
+void Animator::Play(const std::string& clipId, bool flip)
 {
-	Play(&GET_ANIM(clipId));
+	Play(&GET_ANIM(clipId), flip);
 }
 
-void Animator::Play(const std::string& type, const int& num)
+void Animator::Play(const std::string& type, const int& num, bool flip)
 {
-	Play(&RES_TABLE_MGR.GetAnim(type, num));
+	Play(&RES_TABLE_MGR.GetCharacterSkillAnim(type, num),flip);
 }
 
-void Animator::Play(AnimationClip* clip)
+void Animator::Play(AnimationClip* clip, bool flip)
 {
 	isPlaying = true;
 	currentClip = clip;
@@ -49,6 +57,17 @@ void Animator::Play(AnimationClip* clip)
 	accumTime = 0.f;
 
 	SetFrame(currentClip->frames[currentFrame]);
+	sf::Vector2f scale = sprite->getScale();
+	this->flip = flip;
+	if (this->flip) {
+
+		sprite->setScale({ -abs(scale.x), scale.y });
+	}
+	else {
+		sprite->setScale({ abs(scale.x), scale.y });
+	}
+
+
 }
 
 void Animator::Stop()

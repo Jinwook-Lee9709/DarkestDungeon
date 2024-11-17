@@ -10,6 +10,7 @@ void MonsterContainer::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
 	monster.SetPosition(position);
+	hitbox.rect.setPosition(position);
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
@@ -46,6 +47,8 @@ void MonsterContainer::SetOrigin(const sf::Vector2f& newOrigin)
 void MonsterContainer::Init()
 {
 	monster.Init();
+	hitbox.rect.setSize({ 100,290 });
+	Utils::SetOrigin(hitbox.rect, Origins::BC);
 	hpBar.setSize({ 90.f,10.f });
 	hpBar.setFillColor(sf::Color(128, 0, 0, 255));
 }
@@ -74,8 +77,12 @@ void MonsterContainer::Update(float dt)
 
 void MonsterContainer::Draw(sf::RenderWindow& window)
 {
-	monster.Draw(window);
-	window.draw(hpBar);
+	if (isAlive) {
+		monster.Draw(window);
+		window.draw(hpBar);
+	}
+
+	hitbox.Draw(window);
 }
 
 void MonsterContainer::SetStatus(const json& info)
@@ -88,9 +95,26 @@ void MonsterContainer::UseSkill(std::vector<CharacterContainer*>& characters, st
 	monster.UseSkill(characters, monsters, user, target, num);
 
 }
+std::vector<int> MonsterContainer::CheckAvailableSkill()
+{
+	return monster.CheckAvailableSkill(currentPos);
+}
+std::vector<short>& MonsterContainer::GetSkillRange(int skillnum)
+{
+	return monster.GetSkillRange(skillnum);
+}
+
 void MonsterContainer::OnHit(int damage, float acc)
 {
-	info.hp -= damage;
+	if (Utils::RollTheDice(acc - info.dodge / 100))
+	{
+		info.hp -= Utils::Clamp(damage - info.protect, 0, 1000);
+	}
+	Utils::Clamp(info.hp, 0, info.maxHp);
+	if (info.hp < 0)
+	{
+		isAlive = false;
+	}
 }
 
 void MonsterContainer::OnDebuffed(DebufType type, float acc)

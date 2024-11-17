@@ -28,7 +28,11 @@ public:
 	sf::Font& GetFont(const std::string& fontKey);
 	sf::SoundBuffer& GetSound(const std::string& soundKey);
 	AnimationClip& GetAnim(const std::string& AnimId);
-	AnimationClip& GetAnim(const std::string& type, const int& AnimCode);
+	AnimationClip& GetCharacterSkillAnim(const std::string& type, const int& AnimCode);
+	AnimationClip& GetCharacterAnim(const std::string& type, const std::string& AnimCode);
+
+	AnimationClip& GetMonsterSkillAnim(const std::string& type, const int& AnimCode);
+	AnimationClip& GetMonsterAnim(const std::string& type, const std::string& AnimCode);
 
 	std::string& GetPath(const std::string& key);
 

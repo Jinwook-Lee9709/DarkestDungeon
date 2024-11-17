@@ -58,7 +58,9 @@ public:
 	void InitPlayerTextUi(const sf::Vector2f& windowSize);
 
 	void ChangeSkill(const CharacterInfo& info);
-	void ChangeSkillActive();
+	void ChangeSkillActive(const std::vector<bool>& list);
+	void UpdateSkillUi();
 
-	void CheckSkillClick();
+
+	int CheckSkillClick();
 };

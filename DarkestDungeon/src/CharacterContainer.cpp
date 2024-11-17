@@ -14,6 +14,7 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
 	character.SetPosition(position);
+	hitbox.rect.setPosition(position);
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
@@ -61,6 +62,8 @@ void CharacterContainer::Init()
 	character.Init();
 	hpBar.setSize({ 90.f,10.f });
 	hpBar.setFillColor(sf::Color(128, 0, 0, 255));
+	hitbox.rect.setSize({ 100,290 });
+	Utils::SetOrigin(hitbox.rect, Origins::BC);
 	for (int i = 0; i < 10; i++) {
 		stressBar[i].setSize({ 4.f, 5.f });
 		stressBar[i].setOutlineThickness(2.f);
@@ -130,6 +133,7 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 	for (int i = 0; i < 10; i++) {
 		window.draw(stressBar[i]);
 	}
+	hitbox.Draw(window);
 
 }
 
@@ -160,6 +164,28 @@ void CharacterContainer::UseSkill(std::vector<CharacterContainer*>& characters, 
 {
 	character.UseSkill(characters, monsters, user, target, num);
 	
+}
+
+std::vector<int> CharacterContainer::CheckAvailableSkill()
+{
+	return character.CheckAvailableSkill(currentPos);
+}
+
+std::vector<short>& CharacterContainer::GetSkillRange(int skillnum)
+{
+	return character.GetSkillRange(skillnum);
+}
+
+void CharacterContainer::OnHit(int damage, float acc)
+{
+	if (Utils::RollTheDice(acc - (float)info.dodge / 100))
+	{
+		info.hp -= damage - info.protect;
+	}
+}
+
+void CharacterContainer::OnDebuffed(DebufType type, float acc)
+{
 }
 
 void CharacterContainer::OnHeal(int amount)

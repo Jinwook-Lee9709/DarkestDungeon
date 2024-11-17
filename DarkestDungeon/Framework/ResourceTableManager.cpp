@@ -184,7 +184,7 @@ AnimationClip& ResourceTableManager::GetAnim(const std::string& AnimId)
 	return 	RES_MGR(AnimationClip).Get(it->first);
 }
 
-AnimationClip& ResourceTableManager::GetAnim(const std::string& type, const int& AnimCode)
+AnimationClip& ResourceTableManager::GetCharacterSkillAnim(const std::string& type, const int& AnimCode)
 {
 	std::string strAnimCode = "SKILL" + std::to_string(AnimCode);
 	std::string AnimId = ANIMATION["Character"][type][strAnimCode]["ID"].get<std::string>();
@@ -195,6 +195,44 @@ AnimationClip& ResourceTableManager::GetAnim(const std::string& type, const int&
 	}
 	return 	RES_MGR(AnimationClip).Get(it->first);
 }
+
+AnimationClip& ResourceTableManager::GetCharacterAnim(const std::string& type, const std::string& AnimCode)
+{
+	std::string AnimId = ANIMATION["Character"][type][AnimCode]["ID"].get<std::string>();
+	auto it = resourceTable.find(AnimId);
+	if (it == resourceTable.end()) {
+		std::cout << "No Value matched with Id: " << AnimId << std::endl;
+	}
+	return 	RES_MGR(AnimationClip).Get(it->first);
+}
+
+
+AnimationClip& ResourceTableManager::GetMonsterSkillAnim(const std::string& type, const int& AnimCode)
+{
+	std::string strAnimCode = "SKILL" + std::to_string(AnimCode);
+	std::string AnimId = ANIMATION["Monster"][Variables::SelectedDungeon][type][strAnimCode]["ID"].get<std::string>();
+
+	auto it = resourceTable.find(AnimId);
+	if (it == resourceTable.end()) {
+		std::cout << "No Value matched with Id: " << AnimId << std::endl;
+	}
+	return 	RES_MGR(AnimationClip).Get(it->first);
+}
+
+AnimationClip& ResourceTableManager::GetMonsterAnim(const std::string& type, const std::string& AnimCode)
+{
+	std::string AnimId = ANIMATION["Monster"][Variables::SelectedDungeon][type][AnimCode]["ID"].get<std::string>();
+
+	auto it = resourceTable.find(AnimId);
+	if (it == resourceTable.end()) {
+		std::cout << "No Value matched with Id: " << AnimId << std::endl;
+	}
+	return 	RES_MGR(AnimationClip).Get(it->first);
+}
+
+
+
+
 
 std::string& ResourceTableManager::GetPath(const std::string& key)
 {

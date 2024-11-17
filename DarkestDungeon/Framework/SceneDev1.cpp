@@ -60,7 +60,7 @@ void SceneDev1::Enter()
 	SetCharacterInfo();
 	LoadCharacterResource();
 	LoadMonsterResource();
-	battleManager->Reset(&characters, &monsters, uiDungeon);
+	battleManager->Reset(&characters, &monsters, uiDungeon, &characterOrder);
 	currentStatus = Status::Battle;
 	Scene::Enter();
 }
@@ -94,6 +94,7 @@ void SceneDev1::InitContaierPos(sf::Vector2f windowSize)
 	float positionBuf = windowSize.x * 0.5f - block * 1.5f;
 	for (int i = 0; i < 4; i++) {
 		characterContainerPos.push_back(sf::Vector2f({ positionBuf, height }));
+		characterOrder.push_back(i);
 		positionBuf -= block;
 	}
 	positionBuf = windowSize.x * 0.5f + block * 1.5f;;

@@ -12,8 +12,8 @@ struct SkillCrusader : public Skill
 		1, 1, 0, 0 };
 		skillrange3 = { 0,
 		0, 0, 1, 1,
-		1, 1, 0, 0 };
-		skillrange1 = { 3,
+		1, 1, 1, 1 };
+		skillrange4 = { 3,
 		0, 0, 1, 1,
 		1, 1, 0, 0 };
 	}
@@ -65,16 +65,24 @@ struct SkillCrusader : public Skill
 		int maxDamage = characters[user]->GetCharacterInfo().minDamage;
 		int accuracy = characters[user]->GetCharacterInfo().accuracy;
 		int critical = characters[user]->GetCharacterInfo().critical;
+		int currentTarget = target;
 		for (int i = 0; i < 2; i++) {
-			if (monsters[target]->IsAlive()) {
+			if (monsters[currentTarget]->IsAlive()) {
 				int damage = Utils::RandomRange(minDamage, maxDamage);
 				float critDice = Utils::RandomValue();
 				if (Utils::RollTheDice(critical + 5 / 100)) {
 					damage = Utils::Truncate(damage * 1.5f);
 					accuracy = 300;
 				}
-				monsters[target]->OnHit(Utils::Truncate(damage * 0.6f), accuracy + 90);
+				monsters[currentTarget]->OnHit(Utils::Truncate(damage * 0.6f), accuracy + 90);
 			}
+			if (monsters[currentTarget]->GetPos() == 4) {
+				currentTarget = FindMonster(monsters, 5);
+			}
+			else {
+				currentTarget = FindMonster(monsters, 4);
+			}
+			
 		}
 		std::cout << "scroll!" << std::endl;
 	}

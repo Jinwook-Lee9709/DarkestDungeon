@@ -23,6 +23,8 @@ protected:
 	std::vector<CharacterContainer*> characters;
 	std::vector<MonsterContainer*> monsters;
 
+	std::vector<int> characterOrder;
+
 	//Entity Pos;
 	std::vector<sf::Vector2f> characterContainerPos;
 	std::vector<sf::Vector2f> monsterContainerPos1;

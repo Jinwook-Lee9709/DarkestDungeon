@@ -25,7 +25,7 @@ struct SkillSkeletonMilitia : public Skill
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
 		}
-		monsters[target]->OnHit(damage, accuracy + 82.5);
+		characters[target]->OnHit(damage, accuracy + 82.5);
 		std::cout << "smite!" << std::endl;
 	}
 	void skill2(
@@ -41,8 +41,8 @@ struct SkillSkeletonMilitia : public Skill
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
 		}
-		monsters[target]->OnHit(damage * 0.5f, accuracy + 90);
-		monsters[target]->OnDebuffed(DebufType::Stun, accuracy + 100);
+		characters[target]->OnHit(damage * 0.5f, accuracy + 90);
+		characters[target]->OnDebuffed(DebufType::Stun, accuracy + 100);
 		std::cout << "stun!" << std::endl;
 	}
 

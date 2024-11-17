@@ -8,6 +8,8 @@ protected:
 	AnimationClip* currentClip;
 
 	bool isPlaying;
+	bool flip;
+
 	int currentFrame = 0;
 	int totalFrame = 0;
 
@@ -22,14 +24,16 @@ public:
 	void Update(float dt);
 
 	
-	void Play(const std::string& clipId);
-	void Play(const std::string& type, const int& num);
-	void Play(AnimationClip* clip);
+	void Play(const std::string& clipId,bool flip = false);
+	void Play(const std::string& type, const int& num, bool flip = false);
+	void Play(AnimationClip* clip, bool flip = false);
 
 	void Stop();
 
 	void SetFrame(const AnimationFrame& frame);
 	void SetRect(const AnimationFrame& frame);
+
+	bool IsFlip() { return flip; }
 
 	const std::string& GetCurrentClipId() const
 	{

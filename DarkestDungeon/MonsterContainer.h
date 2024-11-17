@@ -62,10 +62,11 @@ public:
 
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
 
+	//Getter
 	int GetPos() { return currentPos; }
 	MonsterInfo& GetMonsterInfo() { return info; }
-
-
+	std::vector<int> CheckAvailableSkill();
+	std::vector<short>& GetSkillRange(int skillnum);
 
 	void OnHit(int damage, float acc);
 	void OnDebuffed(DebufType type, float acc);

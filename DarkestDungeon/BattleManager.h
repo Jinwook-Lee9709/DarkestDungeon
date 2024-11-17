@@ -13,6 +13,7 @@ class BattleManager
 public:
 	enum class Status
 	{
+		None,
 		JudgeTurn,
 		CharacterTurn,
 		SkillSelected,
@@ -33,8 +34,13 @@ private:
 	std::vector<CharacterContainer*>* characters;
 	std::vector<MonsterContainer*>* monsters;
 
+	std::vector<int>* chracterOrder;
+	std::vector<int> monsterOrder;
+
 	short currentCharacter;
 	short currentMonster;
+
+	int selectedSkill;
 
 
 	std::queue<int> orderQueue;
@@ -56,7 +62,7 @@ public:
 
 	void Init();
 	void Reset(std::vector<CharacterContainer*>* characters,
-		std::vector<MonsterContainer*>* monsters, UiDungeon* ui);
+		std::vector<MonsterContainer*>* monsters, UiDungeon* ui, std::vector<int>* chracterOrder);
 	void Update(float dt);
 	
 	void SetMonsterInfo();

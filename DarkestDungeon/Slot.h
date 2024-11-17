@@ -20,9 +20,9 @@ public:
 		this->ranges.push_back(ranges);
 	}
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& enemys, short user, short target, int i) {
-		skills[i](characters, enemys, user, target);
+		skills[i-1](characters, enemys, user, target);
 	}
-	std::vector<short> GetTarget(int i) {
-		std::vector<short> range = ranges[i];
+	std::vector<short>& GetRange(int i) {
+		return ranges[i];
 	}
 };
