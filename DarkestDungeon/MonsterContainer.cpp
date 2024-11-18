@@ -11,6 +11,7 @@ void MonsterContainer::SetPosition(const sf::Vector2f& pos)
 	position = pos;
 	monster.SetPosition(position);
 	hitbox.rect.setPosition(position);
+	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
@@ -78,6 +79,18 @@ void MonsterContainer::Reset()
 
 void MonsterContainer::Update(float dt)
 {
+	if (moving) {
+		position = Utils::Lerp(position, dest, 10 * dt, true);
+		if (Utils::Magnitude(dest - position) < 0.05f)
+		{
+			SetPosition(dest);
+			moving = false;
+		}
+		else
+		{
+			SetPosition(position);
+		}
+	}
 	monster.Update(dt);
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 }
@@ -112,6 +125,12 @@ void MonsterContainer::ActiavteTargetUi(TargetUi type)
 }
 
 
+void MonsterContainer::MoveToCoord(sf::Vector2f coord)
+{
+	moving = true;
+	dest = coord;
+}
+
 void MonsterContainer::SetStatus(const json& info)
 {
 	isAlive = true;
@@ -121,6 +140,10 @@ void MonsterContainer::UseSkill(std::vector<CharacterContainer*>& characters, st
 {
 	monster.UseSkill(characters, monsters, user, target, num);
 
+}
+void MonsterContainer::SetToIdle()
+{
+	monster.SetToIdle();
 }
 std::vector<int> MonsterContainer::CheckAvailableSkill()
 {

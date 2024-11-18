@@ -85,6 +85,18 @@
     <ClCompile Include="Character.cpp">
       <Filter>Scenes\Dev1\Entity\Character</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\StringTable.cpp">
+      <Filter>Framework\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\DataTable.cpp">
+      <Filter>Framework\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\DataTableMgr.cpp">
+      <Filter>Framework\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="NameFrame.cpp">
+      <Filter>Scenes\Dev1\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Framework.h">
@@ -192,6 +204,18 @@
     <ClInclude Include="SkillSkeletonMilitia.h">
       <Filter>Scenes\Dev1\Entity\Skill\SkillMonster</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\StringTable.h">
+      <Filter>Framework\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\DataTable.h">
+      <Filter>Framework\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\DataTableMgr.h">
+      <Filter>Framework\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="NameFrame.h">
+      <Filter>Scenes\Dev1\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -283,6 +307,9 @@
     </Filter>
     <Filter Include="Scenes\Dev1\Entity\Skill\SkillMonster">
       <UniqueIdentifier>{493f61e8-a2c9-433b-b9d5-343c384dfb66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Table">
+      <UniqueIdentifier>{2e1ab009-7646-4d98-94c7-b0f72e54b121}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

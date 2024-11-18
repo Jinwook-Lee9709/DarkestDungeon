@@ -2,7 +2,7 @@
 #include "ResourceTableManager.h"
 #include "AnimationClip.h"
 
-void ResourceTableManager::init()
+void ResourceTableManager::Init()
 {
 	RES_MGR(sf::Texture);
 	RES_MGR(sf::Font);

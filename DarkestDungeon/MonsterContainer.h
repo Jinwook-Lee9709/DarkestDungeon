@@ -35,11 +35,15 @@ protected:
 	SpriteGo target;
 
 	int currentPos;
+
+	MonsterInfo info;
 	//float Timer;
 	//float duration;
 
 	bool isAlive;
-	MonsterInfo info;
+	bool moving;
+
+	sf::Vector2f dest;
 
 	sf::Vector2f originalMonsterScale = { 0.8f, 0.8f };
 public:
@@ -63,11 +67,12 @@ public:
 	void DeactiavteTargetUi() { target.SetActive(false); };
 
 	void ChangePos(short pos) { this->currentPos = pos; }
+	void MoveToCoord(sf::Vector2f coord);
 
     void SetStatus(const json& info);
 
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
-
+	void SetToIdle();
 	//Getter
 	int GetPos() const { return currentPos; }
 	MonsterInfo& GetMonsterInfo() { return info; }

@@ -72,18 +72,25 @@ void Character::Draw(sf::RenderWindow& window)
 
 void Character::SetToIdle()
 {
+	animator.Play(&RES_TABLE_MGR.GetCharacterAnim(std::to_string((int)(type)), "IDLE"));
+	SetOrigin(Origins::BC);
 }
 
 void Character::SetToCombat()
 {
+	animator.Play(&RES_TABLE_MGR.GetCharacterAnim(std::to_string((int)(type)), "COMBAT"));
+	SetOrigin(Origins::BC);
 }
 
 void Character::SetToWalk()
 {
+	animator.Play(&RES_TABLE_MGR.GetCharacterAnim(std::to_string((int)(type)), "WALK"));
+	SetOrigin(Origins::BC);
 }
 
 void Character::OnHit(int damage)
 {
+
 }
 
 void Character::Reset(const CharacterInfo& info)

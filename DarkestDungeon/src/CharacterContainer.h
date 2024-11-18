@@ -52,7 +52,12 @@ public:
 
 	void SetInitialStatus(const json& info);
 
+	void SetToIdle();
+	void SetToCombat();
+	void SetToWalk();
+
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
+
 
 	//Getter
 	int GetPos() { return currentPos; }

@@ -80,7 +80,7 @@ void Monster::Draw(sf::RenderWindow& window)
 	window.draw(body);
 }
 
-void Monster::SetToCombat()
+void Monster::SetToIdle()
 {
 	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)type), "Combat"), true);
 }
@@ -177,7 +177,7 @@ std::vector<int> Monster::CheckAvailableSkill(int pos)
 {
 	std::vector<int>buf;
 	for (int i = 0; i < skillCount; i++) {
-		if (skillSlot->GetRange(i)[pos + 1] == 1 )
+		if (skillSlot->GetRange(i)[pos - 3] == 1 )
 		{
 			buf.push_back(i);
 		};

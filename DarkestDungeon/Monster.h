@@ -35,7 +35,7 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	virtual void SetToCombat();
+	virtual void SetToIdle();
 	virtual void OnHit(int damage);
 
 

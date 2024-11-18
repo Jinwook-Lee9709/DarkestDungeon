@@ -21,6 +21,7 @@ public:
 		CharacterAnimate,
 		MonsterTurn,
 		MonsterAnimate,
+		FillEmptyPos,
 	};
 
 private:
@@ -41,13 +42,17 @@ private:
 	short currentMonster;
 
 	int selectedSkill;
+	std::vector<short> monsterTargetInfo;
 
 	float timer;
-	float duration;
+	float duration = 2.f;
 
+	bool monsterSkillSelected;
+	bool animationPlaying = false;
 
 	std::queue<int> orderQueue;
 
+	
 
 	struct Compare {
 		bool operator()(const std::pair<int, int>& a, const std::pair<int, int>& b) const {
@@ -77,9 +82,11 @@ public:
 	void UpdateCharacterAnimate(float dt);
 	void UpdateMonsterTurn(float dt);
 	void UpdateMonsterAnimate(float dt);
+	void UpdateFillEmptyPos(float dt);
 
 	void ResetTargetUi();
 	void ChangeTargetUi();
 
+	void ChangeMonsterPos(int first, int second);
 };
 

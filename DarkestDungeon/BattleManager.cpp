@@ -61,11 +61,12 @@ void BattleManager::Update(float dt)
     case Status::MonsterTurn:
         UpdateMonsterTurn(dt);
         break;
-
     case Status::MonsterAnimate:
         UpdateMonsterAnimate(dt);
         break;
-
+    case Status::FillEmptyPos:
+        UpdateFillEmptyPos(dt);
+        break;
     default:
         break;
     }
@@ -85,6 +86,7 @@ void BattleManager::SetMonsterInfo()
 
 void BattleManager::UpdateJudgeTurn(float dt)
 {
+    beforeStatus = Status::None;
     if (orderQueue.empty()) {
         std::priority_queue<std::pair< int, int >, std::vector<std::pair<int, int>>,Compare> sortingQueue;
         int index[8] = { -1 };//index for check Order by Pos
@@ -119,7 +121,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
     if (orderQueue.front() < 4 )
     {
         currentCharacter = orderQueue.front();
-        ui->ChangeSkill((*characters)[currentCharacter]->GetCharacterInfo());
+        ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
         orderQueue.pop();
         beforeStatus = Status::JudgeTurn;
         currentStatus = Status::CharacterTurn;
@@ -169,16 +171,15 @@ void BattleManager::UpdateCharacterTurn(float dt)
             for (int i = 0; i < 4; i++) {
                 vec.push_back(availabe[i]);
             }
-            ui->ChangeSkillActive(vec);
+            ui->ChangeSkillButtonActive(vec);
             beforeStatus = Status::None;
         }
         else {
             std::vector<bool> vec(4, false);
-            ui->ChangeSkillActive(vec);
+            ui->ChangeSkillButtonActive(vec);
             beforeStatus = Status::None;
         }
-       
-
+        (*characters)[currentCharacter]->ActiavteTargetUi(TargetUi::SELECT);
     }
     if (ui->CheckSkillClick() != 0) {
         selectedSkill = ui->CheckSkillClick();
@@ -192,6 +193,11 @@ void BattleManager::UpdateCharacterTurn(float dt)
         (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, 0, 2);
         currentStatus = Status::JudgeTurn;
     }
+
+    if (InputManager::GetKeyDown(sf::Keyboard::Num2))
+    {
+        ChangeMonsterPos(1, 2);
+    }
 }
 
 void BattleManager::UpdateSkillSelected(float dt)
@@ -199,6 +205,7 @@ void BattleManager::UpdateSkillSelected(float dt)
     if (beforeStatus == Status::CharacterTurn || beforeStatus == Status::SkillSelected) {
         ResetTargetUi();
         ChangeTargetUi();
+        (*characters)[currentCharacter]->ActiavteTargetUi(TargetUi::SELECT);
         beforeStatus = Status::None;
     }
     if (ui->CheckSkillClick() != 0) {
@@ -218,8 +225,9 @@ void BattleManager::UpdateSkillSelected(float dt)
                     {
                         (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, monsterOrder[i - 5], selectedSkill);
                         ResetTargetUi();
-                        ui->DeactivateSelectBox();
-                        currentStatus = Status::JudgeTurn;
+                        ui->DeactivateSelectBox();                
+                        beforeStatus = Status::SkillSelected;
+                        currentStatus = Status::CharacterAnimate;
                         return;
                     }
                 }
@@ -232,7 +240,8 @@ void BattleManager::UpdateSkillSelected(float dt)
                         (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, (*chracterOrder)[i], selectedSkill);
                         ResetTargetUi();
                         ui->DeactivateSelectBox();
-                        currentStatus = Status::JudgeTurn;
+                        beforeStatus = Status::SkillSelected;
+                        currentStatus = Status::CharacterAnimate;
                         return;
                     }
                 }
@@ -248,7 +257,8 @@ void BattleManager::UpdateSkillSelected(float dt)
                     currentScene->ChangeCharacterPos(currentCharacter, i);
                     ResetTargetUi();
                     ui->DeactivateSelectBox();
-                    currentStatus = Status::JudgeTurn;
+                    beforeStatus = Status::SkillSelected;
+                    currentStatus = Status::CharacterAnimate;
                     return;
                 }
             }
@@ -263,46 +273,140 @@ void BattleManager::UpdateSkillSelected(float dt)
 
 void BattleManager::UpdateItemSelected(float dt)
 {
+    
 }
 
 void BattleManager::UpdateCharacterAnimate(float dt)
 {
+    if (beforeStatus == Status::SkillSelected)
+    {
+        timer = 0;
+        beforeStatus = Status::None;
+        ui->DeactivateAllSkillButton();
+    }
+    timer += dt;
+    if (timer > duration) {
+        timer = 0;
+        (*characters)[currentCharacter]->SetToIdle();
+        beforeStatus == Status::CharacterAnimate;
+        currentStatus = Status::FillEmptyPos;
+
+    }
 }
 
 void BattleManager::UpdateMonsterTurn(float dt)
 {
-    std::vector<int> skills = (*monsters)[currentMonster]->CheckAvailableSkill();
-    if (!skills.empty()) {
-        std::map<int, std::vector<int>> targetMap;
-        for (auto skill : skills)
+    if (!monsterSkillSelected)
+    {
+        std::vector<int> skills = (*monsters)[currentMonster]->CheckAvailableSkill();
+        if (!skills.empty()) 
         {
-            std::vector<int> targetList;
-            std::vector<short> range = (*monsters)[currentMonster]->GetSkillRange(skill);
-            for (int i = 5; i < 9; i++)
+            std::map<int, std::vector<int>> targetMap;
+            for (auto skill : skills)
             {
+                std::vector<int> targetList;
+                std::vector<short> range = (*monsters)[currentMonster]->GetSkillRange(skill);
+                for (int i = 0; i < 4; i++)
+                {
 
-                if (range[i] == 1 && (*characters)[(*chracterOrder)[i - 5]]->IsAlive()) {
-                    targetList.push_back(i - 5);
+                    if (range[8 - i] == 1 && (*characters)[(*chracterOrder)[i]]->IsAlive()) 
+                    {
+                        targetList.push_back(i);
+                    }
                 }
+                targetMap.insert({ skill, targetList });
             }
-            targetMap.insert({ skill, targetList });
-        }
-        if (!targetMap.empty()) {
-            int selectedSkill = Utils::RandomRange(0, targetMap.size() - 1);
-            auto targetInfo = targetMap.begin();
-            for (int i = 0; i < selectedSkill; i++) { targetInfo++; }
-            int target = Utils::RandomRange(0, targetInfo->second.size());
-            
-            (*monsters)[currentMonster]->UseSkill(*characters, *monsters, monsterOrder[target], (*chracterOrder)[target], targetInfo->first + 1);
-            
+            if (!targetMap.empty()) 
+            {
+                int selectedSkill = Utils::RandomRange(0, targetMap.size() - 1);
+                auto targetInfo = targetMap.begin();
+                for (int i = 0; i < selectedSkill; i++) { targetInfo++; }
+                int target = Utils::RandomRange(0, targetInfo->second.size());
+
+                monsterTargetInfo.clear();
+                monsterTargetInfo.push_back(monsterOrder[currentMonster]);
+                monsterTargetInfo.push_back((*chracterOrder)[target]);
+                monsterTargetInfo.push_back(targetInfo->first + 1);
+                std::cout << targetInfo->first << std::endl;
+                monsterSkillSelected = true;
+                /*(*monsters)[currentMonster]->UseSkill(*characters, *monsters, monsterOrder[currentMonster], (*chracterOrder)[target], targetInfo->first + 1);*/
+            }
         }
     }
-    currentStatus = Status::JudgeTurn;
+    else 
+    {
+        if (!animationPlaying)
+        {
+            json j = (*monsters)[currentMonster]->GetMonsterInfo();
+            std::string str = "skill" + std::to_string(monsterTargetInfo[2]);
+            std::vector<std::string> str2 = j[str];
+            std::string skillName = STRING_TABLE->Get(str2[0]);
+            if ((*monsters)[currentMonster]->GetSkillRange(monsterTargetInfo[2] - 1)[0] == 1) {
+                (*characters)[monsterTargetInfo[1]]->ActiavteTargetUi(TargetUi::ENEMY);
+            }
+            else {
+
+            }
+            ui->PlaySkillNameFrame(skillName);
+            animationPlaying = true;
+        }
+        else {
+            timer += dt;
+            if (timer > duration)
+            {
+                timer = 0;
+                monsterSkillSelected = false;
+                animationPlaying = false;
+                ui->DeactivateSkillNameFrame();
+                beforeStatus = Status::MonsterTurn;
+                currentStatus = Status::MonsterAnimate;
+
+            }
+        }
+        
+    }
+   
+
 
 }
 
+
 void BattleManager::UpdateMonsterAnimate(float dt)
 {
+    if (beforeStatus == Status::MonsterTurn)
+    {
+        ResetTargetUi();
+        (*monsters)[currentMonster]->UseSkill(*characters, *monsters,
+            monsterTargetInfo[0], monsterTargetInfo[1], monsterTargetInfo[2]);
+        beforeStatus = Status::None;
+    }
+    timer += dt;
+    if (timer > duration)
+    {
+        timer = 0;
+        (*monsters)[currentMonster]->SetToIdle();
+        currentStatus = Status::FillEmptyPos;
+    }
+   
+}
+
+void BattleManager::UpdateFillEmptyPos(float dt)
+{
+    for (int i = 0; i < 3; i++) 
+    {
+        if (!(*characters)[(*chracterOrder)[i]]->IsAlive() && (*characters)[(*chracterOrder)[i+1]]->IsAlive())
+        {
+            currentScene->ChangeCharacterPos(i, i + 1);
+        }
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        if (!(*monsters)[monsterOrder[i]]->IsAlive() && (*monsters)[monsterOrder[i + 1]]->IsAlive())
+        {
+            ChangeMonsterPos(monsterOrder[i], monsterOrder[i + 1]);
+        }
+    }
+    currentStatus = Status::JudgeTurn;
 }
 
 void BattleManager::ResetTargetUi()
@@ -350,6 +454,21 @@ void BattleManager::ChangeTargetUi()
         }
     }
   
+}
+
+void BattleManager::ChangeMonsterPos(int first, int second)
+{
+    auto monsterPos = currentScene->GetMonsterPos();
+    int firstPos = (*monsters)[first]->GetPos();
+    int secondPos = (*monsters)[second]->GetPos();
+    sf::Vector2f firstCoord = monsterPos[firstPos-4];
+    sf::Vector2f secondCoord = monsterPos[secondPos-4];
+    (*monsters)[first]->ChangePos(secondPos);
+    (*monsters)[second]->ChangePos(firstPos);
+    (*monsters)[first]->MoveToCoord(secondCoord);
+    (*monsters)[second]->MoveToCoord(firstCoord);
+    monsterOrder[firstPos-4] = second;
+    monsterOrder[secondPos-4] = first;
 }
 
 

@@ -23,6 +23,9 @@
 #include "Singleton.h"
 #include "ObjectPool.h"
 #include "HitBox.h"
+#include "DataTable.h"
+#include "StringTable.h"
+#include "DataTableMgr.h"
 #include "Framework.h"
 #include "InputManager.h"
 #include "Animator.h"
@@ -32,5 +35,6 @@
 #include "GameObject.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
+
 
 

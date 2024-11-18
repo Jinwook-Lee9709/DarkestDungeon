@@ -1,6 +1,8 @@
 #pragma once
+#include "NameFrame.h"
 class SpriteGo;
 class TextGo;
+
 
 enum class PlayerTextIndex {
 	ACCURACY,
@@ -22,14 +24,20 @@ private:
 	std::vector<SpriteGo*> fixedUi;
 	std::vector<TextGo*> fixedText;
 
-	SpriteGo* skill[7];
-	std::bitset<6> skillActive;
+	SpriteGo* skillButton[7];
+	std::bitset<6> isSkillActive;
 	std::string SkillTexId[4][4];
+
+	NameFrame skillNameFrame;
 
 	std::unordered_map<PlayerTextIndex, TextGo*> playerText;
 
 	SpriteGo* inventory;
 
+	float timer;
+	float duration = 0.001f;
+	bool isFramePlaying = false;
+	int opacity;
 
 	sf::Vector2f windowSize;
 public:
@@ -57,11 +65,16 @@ public:
 	void InitSkillUi(const sf::Vector2f& windowSize);
 	void InitPlayerTextUi(const sf::Vector2f& windowSize);
 
-	void ChangeSkill(const CharacterInfo& info);
-	void ChangeSkillActive(const std::vector<bool>& list);
+	void PlaySkillNameFrame(const std::string& str);
+	void UpdateSkillNameFrame(float dt);
+
+	void ChangeSkillButtonTexture(const CharacterInfo& info);
+	void ChangeSkillButtonActive(const std::vector<bool>& list);
+	void DeactivateAllSkillButton();
 	void UpdateSkillUi();
 
 	int CheckSkillClick();
 
 	void DeactivateSelectBox();
+	void DeactivateSkillNameFrame();
 };

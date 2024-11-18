@@ -5,7 +5,8 @@
 void Framework::Init(int width, int height, const std::string& name)
 {
 	window.create(sf::VideoMode(width, height), name, sf::Style::Fullscreen);
-    RES_TABLE_MGR.init();
+    RES_TABLE_MGR.Init();
+    DATATABLE_MGR.Init();
     SCENE_MGR.Init();
     InputManager::Init();
     Utils::Init();
@@ -55,4 +56,5 @@ void Framework::Do()
 void Framework::Release()
 {
     SCENE_MGR.Release();
+    DATATABLE_MGR.Release();
 }

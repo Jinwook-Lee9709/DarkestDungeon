@@ -41,6 +41,7 @@
                 "overlay_target_e" : "resource/Overlays/target_e.png",
                 "overlay_target_h" : "resource/Overlays/target_h.png",
 
+                "name_frame" : "resource/Overlays/name_frame.png",
 
                 "side_decor" : "resource/Panels/side_decor.png"
             },

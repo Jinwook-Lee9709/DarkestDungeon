@@ -17,7 +17,7 @@ private:
 	std::unordered_map <std::string, std::string> resourceTable;
 	std::string err = "";
 public:
-	void init();
+	void Init();
 	bool LoadCharacterAnimation(const CharacterType& character);
 	bool LoadMonsterAnimation();
 	bool LoadSkillIcon(const std::string& skillName);

@@ -171,6 +171,21 @@ void CharacterContainer::SetInitialStatus(const json& info)
 	this->info = info;
 }
 
+void CharacterContainer::SetToIdle()
+{
+	character.SetToIdle();
+}
+
+void CharacterContainer::SetToCombat()
+{
+	character.SetToCombat();
+}
+
+void CharacterContainer::SetToWalk()
+{
+	character.SetToWalk();
+}
+
 void CharacterContainer::UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num)
 {
 	character.UseSkill(characters, monsters, user, target, num);
@@ -191,7 +206,7 @@ void CharacterContainer::OnHit(int damage, float acc)
 {
 	if (Utils::RollTheDice(acc - (float)info.dodge / 100))
 	{
-		info.hp -= damage - info.protect;
+		info.hp -= Utils::Clamp(damage - info.protect, 0, damage);
 	}
 }
 
