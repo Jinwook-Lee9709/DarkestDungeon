@@ -19,6 +19,7 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
+	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness() * 2) / 10 + hpBar.getSize().x / 10;
@@ -77,11 +78,18 @@ void CharacterContainer::Reset()
 	character.Reset();
 	character.Reset(info);
 	character.SetScale(originalCharacterScale);
+
+	target.ChangeTexture("overlay_target_e");
+	target.SetScale({ 0.86f, 0.88f });
+	target.SetOrigin(Origins::BC);
+	target.SetActive(false);
+
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
+	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness()*2) / 10 + hpBar.getSize().x / 10;
@@ -95,34 +103,19 @@ void CharacterContainer::Reset()
 
 void CharacterContainer::Update(float dt)
 {
-	character.Update(dt);
-	//if(InputManager::GetKeyDown(sf::Keyboard::A))
-	//{
-	//	animator.Play("crusader_idle");
-	//	SetOrigin(Origins::BC);
-	//}
-	//if (InputManager::GetKeyDown(sf::Keyboard::Num1))
-	//{
-	//	animator.Play("crusader_smite");
-	//	SetOrigin(Origins::BC);
-	//}
-	//if (InputManager::GetKeyDown(sf::Keyboard::Num2))
-	//{
-	//	animator.Play("crusader_stun");
-	//	SetOrigin(Origins::BC);
-	//}
-	//if (InputManager::GetKeyDown(sf::Keyboard::Num3))
-	//{
-	//	animator.Play("crusader_heal");
-	//	SetOrigin(Origins::BC);
-	//}
-	//if (InputManager::GetKeyDown(sf::Keyboard::Num4))
-	//{
-	//	animator.Play("crusader_scroll");
-	//	SetOrigin(Origins::BC);
-	//}
+	if (moving) {
+		position = Utils::Lerp(position, dest, 10 * dt, true);
+		if (Utils::Magnitude(dest - position) < 0.05f)
+		{
+			SetPosition(dest);
+			moving = false;
+		}else
+		{
+			SetPosition(position);
+		}
+	}
 
-	//animator.Update(dt);
+	character.Update(dt);
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 }
 
@@ -133,31 +126,49 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 	for (int i = 0; i < 10; i++) {
 		window.draw(stressBar[i]);
 	}
+	target.Draw(window);
 	hitbox.Draw(window);
 
+}
+
+void CharacterContainer::ActiavteTargetUi(TargetUi type)
+{
+	switch (type)
+	{
+		case TargetUi::SELECT:
+		{
+			target.ChangeTexture("overlay_selected");
+			break;
+		}
+		case TargetUi::ENEMY:
+		{
+			target.ChangeTexture("overlay_target_e");
+			break;
+		}
+		case TargetUi::HEAL:
+		{
+			target.ChangeTexture("overlay_target_h");
+			break;
+		}
+		case TargetUi::CHANGEPOS:
+		{
+			target.ChangeTexture("overlay_move");
+			break;
+		}
+	}
+	target.SetActive(true);
+}
+
+void CharacterContainer::MoveToCoord(sf::Vector2f coord)
+{
+	moving = true;
+	dest = coord;
 }
 
 void CharacterContainer::SetInitialStatus(const json& info)
 {
 	isAlive = true;
 	this->info = info;
-	/*this->info.name = info["name"];
-	this->info.type = info["type"];
-	this->info.hp = info["hp"];
-	this->info.maxHp = info["maxHp"];
-	this->info.stress = info["stress"];
-	this->info.speed = info["speed"];
-	this->info.dodge = info["dodge"];
-	this->info.accuracy = info["accuracy"];
-	this->info.critical = info["critical"];
-	this->info.minDamage = info["minDamage"];
-	this->info.maxDamage = info["maxDamage"];
-	this->info.prot = info["protect"];
-	this->info.skill1 = info["skill1"];
-	this->info.skill2 = info["skill2"];
-	this->info.skill3 = info["skill3"];
-	this->info.skill4 = info["skill4"];*/
-	
 }
 
 void CharacterContainer::UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num)

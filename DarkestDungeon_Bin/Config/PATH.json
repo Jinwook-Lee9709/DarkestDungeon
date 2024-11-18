@@ -36,6 +36,12 @@
                 "ability_pass" : "resource/Panels/icons_ability/ability_pass.png",
                 "selected_ability" : "resource/Panels/icons_ability/selected_ability.png",
 
+                "overlay_move" : "resource/Overlays/move.png",
+                "overlay_selected" : "resource/Overlays/selected.png",
+                "overlay_target_e" : "resource/Overlays/target_e.png",
+                "overlay_target_h" : "resource/Overlays/target_h.png",
+
+
                 "side_decor" : "resource/Panels/side_decor.png"
             },
             "Font" :{

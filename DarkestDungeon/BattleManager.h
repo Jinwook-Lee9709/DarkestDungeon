@@ -24,7 +24,7 @@ public:
 	};
 
 private:
-	SceneDev1* currenScene;
+	SceneDev1* currentScene;
 	UiDungeon* ui;
 	Status beforeStatus;
 	Status currentStatus;
@@ -41,6 +41,9 @@ private:
 	short currentMonster;
 
 	int selectedSkill;
+
+	float timer;
+	float duration;
 
 
 	std::queue<int> orderQueue;
@@ -75,6 +78,8 @@ public:
 	void UpdateMonsterTurn(float dt);
 	void UpdateMonsterAnimate(float dt);
 
+	void ResetTargetUi();
+	void ChangeTargetUi();
 
 };
 

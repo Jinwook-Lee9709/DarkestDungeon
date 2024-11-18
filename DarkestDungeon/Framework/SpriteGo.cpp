@@ -57,7 +57,10 @@ void SpriteGo::SetScale(const sf::Vector2f& scale)
 void SpriteGo::Draw(sf::RenderWindow& window)
 {
 	GameObject::Draw(window);
-	window.draw(sprite);
+	if (active)
+	{
+		window.draw(sprite);
+	}
 	hitbox.Draw(window);
 }
 

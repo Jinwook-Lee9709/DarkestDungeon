@@ -7,7 +7,7 @@
 
 
 BattleManager::BattleManager(SceneDev1* scene)
-	:currenScene(scene)
+	:currentScene(scene)
 {
 
 }
@@ -75,7 +75,7 @@ void BattleManager::SetMonsterInfo()
 {
     monsterOrder.clear();
     for (int i = 0; i < 4; i++) {
-        (*monsters)[i]->SetPosition(currenScene->GetMonsterPos()[i]);
+        (*monsters)[i]->SetPosition(currentScene->GetMonsterPos()[i]);
         (*monsters)[i]->ChangePos(i + 4);
         monsterOrder.push_back(i);
         json info = monsterTable["0"]["Monster" + std::to_string(i + 1)];
@@ -156,7 +156,7 @@ void BattleManager::UpdateCharacterTurn(float dt)
                     if (range[0] == 1 || range[0] == 3)
                     {
                       
-                        if (range[i] == 1 && (*monsters)[(monsterOrder)[i-1]]->IsAlive())
+                        if (range[i+4] == 1 && (*monsters)[(monsterOrder)[i-1]]->IsAlive())
                         {
                             availabe[skill] = true;
                         }
@@ -170,7 +170,7 @@ void BattleManager::UpdateCharacterTurn(float dt)
                 vec.push_back(availabe[i]);
             }
             ui->ChangeSkillActive(vec);
-
+            beforeStatus = Status::None;
         }
         else {
             std::vector<bool> vec(4, false);
@@ -196,43 +196,68 @@ void BattleManager::UpdateCharacterTurn(float dt)
 
 void BattleManager::UpdateSkillSelected(float dt)
 {
-    if (beforeStatus == Status::CharacterTurn) {
+    if (beforeStatus == Status::CharacterTurn || beforeStatus == Status::SkillSelected) {
+        ResetTargetUi();
+        ChangeTargetUi();
         beforeStatus = Status::None;
     }
     if (ui->CheckSkillClick() != 0) {
         selectedSkill = ui->CheckSkillClick();
+        beforeStatus = Status::SkillSelected;
         return;
     };
-    std::cout << selectedSkill;
     if (InputManager::GetMouseButtonDown(sf::Mouse::Left))
     {
+        if(selectedSkill < 5 && selectedSkill > 0)
+        {
+            std::vector<short> range = (*characters)[currentCharacter]->GetSkillRange(selectedSkill - 1);
+            if (range[0] == 1 || range[0] == 3) {
+                for (int i = 5; i < 9; i++)
+                {
+                    if ((*monsters)[monsterOrder[i - 5]]->IsClicked() && range[i] == 1)
+                    {
+                        (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, monsterOrder[i - 5], selectedSkill);
+                        ResetTargetUi();
+                        ui->DeactivateSelectBox();
+                        currentStatus = Status::JudgeTurn;
+                        return;
+                    }
+                }
+            }
+            if (range[0] == 0 || range[0] == 2) {
+                for (int i = 0; i < 4; i++)
+                {
+                    if ((*characters)[(*chracterOrder)[i]]->IsClicked() && range[i + 5] == 1)
+                    {
+                        (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, (*chracterOrder)[i], selectedSkill);
+                        ResetTargetUi();
+                        ui->DeactivateSelectBox();
+                        currentStatus = Status::JudgeTurn;
+                        return;
+                    }
+                }
+            }
+        }
+        else if (selectedSkill == 5) 
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                CharacterContainer* character = (*characters)[i];
+                if (character->IsClicked() && character->IsAlive() && i != currentCharacter)
+                {
+                    currentScene->ChangeCharacterPos(currentCharacter, i);
+                    ResetTargetUi();
+                    ui->DeactivateSelectBox();
+                    currentStatus = Status::JudgeTurn;
+                    return;
+                }
+            }
+        }
 
-       std::vector<short> range = (*characters)[currentCharacter]->GetSkillRange(selectedSkill-1);
-       if (range[0] == 1 || range[0] == 3) {
-           for (int i = 5; i < 9; i++) 
-           {
-               if ((*monsters)[monsterOrder[i - 5]]->IsClicked() && range[i] == 1)
-               {
-                   (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, monsterOrder[i - 5], selectedSkill);
-                   currentStatus = Status::JudgeTurn;
-                   return;
-               }
-           }
-       }
-       if (range[0] == 0 || range[0] == 2) {
-           for (int i = 0; i < 4; i++)
-           {
-               if ((*characters)[(*chracterOrder)[i]]->IsClicked() && range[i + 5] == 1)
-               {
-                   (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter,(*chracterOrder)[i], selectedSkill);
-                   currentStatus = Status::JudgeTurn;
-                   return;
-               }
-           }
-       }
+       ResetTargetUi();
+       ui->DeactivateSelectBox();
        beforeStatus = Status::SkillSelected;
        currentStatus = Status::CharacterTurn;
-
     }
 }
 
@@ -278,6 +303,53 @@ void BattleManager::UpdateMonsterTurn(float dt)
 
 void BattleManager::UpdateMonsterAnimate(float dt)
 {
+}
+
+void BattleManager::ResetTargetUi()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        (*characters)[i]->DeactiavteTargetUi();
+        (*monsters)[i]->DeactiavteTargetUi();
+    }
+}
+
+void BattleManager::ChangeTargetUi()
+{
+    if (selectedSkill < 5) {
+        std::vector<short> range = (*characters)[currentCharacter]->GetSkillRange(selectedSkill - 1);
+        if (range[0] == 1 || range[0] == 3) {
+            for (int i = 0; i < 4; i++)
+            {
+                if ((*monsters)[monsterOrder[i]]->IsAlive() && range[i + 5] == 1)
+                {
+                    (*monsters)[monsterOrder[i]]->ActiavteTargetUi(TargetUi::ENEMY);
+                }
+            }
+        }
+        if (range[0] == 0 || range[0] == 2) {
+            for (int i = 0; i < 4; i++)
+            {
+                if ((*characters)[(*chracterOrder)[i]]->IsAlive() && range[i + 5] == 1)
+                {
+                    (*characters)[(*chracterOrder)[i]]->ActiavteTargetUi(TargetUi::HEAL);
+                }
+            }
+        }
+    }
+    else if (selectedSkill == 5)
+    {
+       
+        for (int i = 0; i < 4; i++)
+        {
+            std::cout << currentCharacter;
+            if ((*characters)[i]->IsAlive() && i != currentCharacter)
+            {
+                (*characters)[i]->ActiavteTargetUi(TargetUi::CHANGEPOS);
+            }
+        }
+    }
+  
 }
 
 

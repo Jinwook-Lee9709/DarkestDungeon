@@ -139,6 +139,20 @@ void SceneDev1::LoadMonsterResource()
 	RES_TABLE_MGR.LoadMonsterAnimation();
 }
 
+void SceneDev1::ChangeCharacterPos(int first, int second)
+{
+	int firstPos = characters[first]->GetPos();
+	int secondPos = characters[second]->GetPos();
+	sf::Vector2f firstCoord = characterContainerPos[firstPos];
+	sf::Vector2f secondCoord = characterContainerPos[secondPos];
+	characters[first]->ChangePos(secondPos);
+	characters[second]->ChangePos(firstPos);
+	characters[first]->MoveToCoord(secondCoord);
+	characters[second]->MoveToCoord(firstCoord);
+	characterOrder[firstPos] = second;
+	characterOrder[secondPos] = first;
+}
+
 
 
 

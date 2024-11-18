@@ -14,7 +14,7 @@ struct SkillCrusader : public Skill
 		0, 0, 1, 1,
 		1, 1, 1, 1 };
 		skillrange4 = { 3,
-		0, 0, 1, 1,
+		1, 1, 0, 0,
 		1, 1, 0, 0 };
 	}
 	void skill1(

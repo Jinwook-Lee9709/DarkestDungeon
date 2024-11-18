@@ -14,14 +14,17 @@ private:
 	sf::Sprite spriteSelect;
 	sf::RectangleShape hpBar;
 	sf::RectangleShape stressBar[10];
+	SpriteGo target;
 
 	int currentPos;
-
 
 	CharacterInfo info;
 
 	bool selected;
 	bool isAlive;
+	bool moving;
+
+	sf::Vector2f dest;
 
 	sf::Vector2f originalCharacterScale = { 0.8f, 0.8f };
 public:
@@ -41,7 +44,11 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
 
+	void ActiavteTargetUi(TargetUi type);
+	void DeactiavteTargetUi() { target.SetActive(false); };
+
 	void ChangePos(short pos) { this->currentPos = pos; }
+	void MoveToCoord(sf::Vector2f coord);
 
 	void SetInitialStatus(const json& info);
 
@@ -59,6 +66,8 @@ public:
 	void OnHeal(int amount);
 
 	bool IsAlive() { return isAlive; }
+
+
 };
 
 	

@@ -32,8 +32,11 @@ protected:
 	Monster monster;
 
 	sf::RectangleShape hpBar;
+	SpriteGo target;
 
 	int currentPos;
+	//float Timer;
+	//float duration;
 
 	bool isAlive;
 	MonsterInfo info;
@@ -56,6 +59,9 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 	
+	void ActiavteTargetUi(TargetUi type);
+	void DeactiavteTargetUi() { target.SetActive(false); };
+
 	void ChangePos(short pos) { this->currentPos = pos; }
 
     void SetStatus(const json& info);
@@ -63,7 +69,7 @@ public:
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
 
 	//Getter
-	int GetPos() { return currentPos; }
+	int GetPos() const { return currentPos; }
 	MonsterInfo& GetMonsterInfo() { return info; }
 	std::vector<int> CheckAvailableSkill();
 	std::vector<short>& GetSkillRange(int skillnum);
@@ -71,4 +77,6 @@ public:
 	void OnHit(int damage, float acc);
 	void OnDebuffed(DebufType type, float acc);
 	bool IsAlive() { return isAlive; }
+
+
 };

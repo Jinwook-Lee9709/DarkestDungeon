@@ -58,4 +58,5 @@ public:
 	std::vector<sf::Vector2f>& GetCharacterPos() { return characterContainerPos; }
 	std::vector<sf::Vector2f>& GetMonsterPos() { return monsterContainerPos1; }
 	
+	void ChangeCharacterPos(int first, int second);
 };

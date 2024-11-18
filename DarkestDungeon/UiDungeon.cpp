@@ -315,3 +315,8 @@ int UiDungeon::CheckSkillClick()
 	}
 	return 0;
 }
+
+void UiDungeon::DeactivateSelectBox()
+{
+	skill[6]->SetActive(false);
+}

@@ -61,6 +61,7 @@ public:
 	void ChangeSkillActive(const std::vector<bool>& list);
 	void UpdateSkillUi();
 
-
 	int CheckSkillClick();
+
+	void DeactivateSelectBox();
 };

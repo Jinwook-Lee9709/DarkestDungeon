@@ -76,3 +76,11 @@ struct CharacterInfo
 		, name, type, hp, maxHp, stress, speed, dodge,
 		accuracy, critical, minDamage, maxDamage, protect, skill1, skill2, skill3, skill4);
 };
+
+enum class TargetUi
+{
+	SELECT,
+	ENEMY,
+	HEAL,
+	CHANGEPOS
+};

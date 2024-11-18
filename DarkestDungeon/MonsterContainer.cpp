@@ -62,11 +62,18 @@ void MonsterContainer::Reset()
 	monster.Reset();
 	monster.Reset(info);
 	monster.SetScale(originalMonsterScale);
+
+	target.ChangeTexture("overlay_target_e");
+	target.SetScale({ 0.88f, 0.88f });
+	target.SetOrigin(Origins::BC);
+	target.SetActive(false);
+
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
+	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 }
 
 void MonsterContainer::Update(float dt)
@@ -83,7 +90,27 @@ void MonsterContainer::Draw(sf::RenderWindow& window)
 	}
 
 	hitbox.Draw(window);
+	target.Draw(window);
 }
+
+void MonsterContainer::ActiavteTargetUi(TargetUi type)
+{
+	switch (type)
+	{
+		case TargetUi::SELECT:
+		{
+			target.ChangeTexture("overlay_selected");
+			break;
+		}
+		case TargetUi::ENEMY:
+		{
+			target.ChangeTexture("overlay_target_e");
+			break;
+		}
+	}
+	target.SetActive(true);
+}
+
 
 void MonsterContainer::SetStatus(const json& info)
 {
@@ -120,3 +147,4 @@ void MonsterContainer::OnHit(int damage, float acc)
 void MonsterContainer::OnDebuffed(DebufType type, float acc)
 {
 }
+
