@@ -16,6 +16,11 @@ struct MonsterInfo
 	float maxDamage;
 	float protect;
 	int skillCount;
+	float resistStun;
+	float resistBlight;
+	float resistBleed;
+	float resistDebuff;
+	float resistMove;
 	std::vector<std::string> skill1;
 	std::vector<std::string> skill2;
 	std::vector<std::string> skill3;
@@ -23,7 +28,9 @@ struct MonsterInfo
 
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(MonsterInfo
 		, type, hp, maxHp, speed, dodge,
-		accuracy, critical, minDamage, maxDamage, protect, skillCount, skill1, skill2, skill3, skill4);
+		accuracy, critical, minDamage, maxDamage, protect, skillCount,
+		resistStun, resistBlight, resistBleed, resistDebuff, resistMove,
+		skill1, skill2, skill3, skill4);
 };
 
 class MonsterContainer : public GameObject

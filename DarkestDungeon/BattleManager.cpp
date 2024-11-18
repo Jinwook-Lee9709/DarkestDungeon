@@ -392,20 +392,28 @@ void BattleManager::UpdateMonsterAnimate(float dt)
 
 void BattleManager::UpdateFillEmptyPos(float dt)
 {
-    for (int i = 0; i < 3; i++) 
-    {
-        if (!(*characters)[(*chracterOrder)[i]]->IsAlive() && (*characters)[(*chracterOrder)[i+1]]->IsAlive())
+    bool flag = false;
+    do {
+        flag = false;
+        for (int i = 0; i < 3; i++)
         {
-            currentScene->ChangeCharacterPos(i, i + 1);
+            if (!(*characters)[(*chracterOrder)[i]]->IsAlive() && (*characters)[(*chracterOrder)[i + 1]]->IsAlive())
+            {
+                currentScene->ChangeCharacterPos(i, i + 1);
+                flag = true;
+            }
         }
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        if (!(*monsters)[monsterOrder[i]]->IsAlive() && (*monsters)[monsterOrder[i + 1]]->IsAlive())
+
+        for (int i = 0; i < 3; i++)
         {
-            ChangeMonsterPos(monsterOrder[i], monsterOrder[i + 1]);
+            if (!(*monsters)[monsterOrder[i]]->IsAlive() && (*monsters)[monsterOrder[i + 1]]->IsAlive())
+            {
+                ChangeMonsterPos(monsterOrder[i], monsterOrder[i + 1]);
+                flag = true;
+            }
         }
-    }
+    } while (flag);
+
     currentStatus = Status::JudgeTurn;
 }
 

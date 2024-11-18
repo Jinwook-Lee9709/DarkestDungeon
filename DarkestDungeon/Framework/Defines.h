@@ -39,8 +39,11 @@ enum class Sides
 enum class DebufType
 {
 	Stun,
+	Blight,
 	Bleeding,
-	Poison
+	Debuff,
+	Move,
+	Count
 };
 
 enum class CharacterType
@@ -67,14 +70,21 @@ struct CharacterInfo
 	float minDamage;
 	float maxDamage;
 	float protect;
+	float resistStun;
+	float resistBlight;
+	float resistBleed;
+	float resistDebuff;
+	float resistMove;
 	std::vector<std::string> skill1;
 	std::vector<std::string> skill2;
 	std::vector<std::string> skill3;
 	std::vector<std::string> skill4;
 
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(CharacterInfo
-		, name, type, hp, maxHp, stress, speed, dodge,
-		accuracy, critical, minDamage, maxDamage, protect, skill1, skill2, skill3, skill4);
+		,name, type, hp, maxHp, stress, speed, dodge,
+		accuracy, critical, minDamage, maxDamage, protect,
+		resistStun, resistBlight, resistBleed, resistDebuff, resistMove,
+		skill1, skill2, skill3, skill4);
 };
 
 enum class TargetUi

@@ -2,7 +2,7 @@
 {
    "Character1":
    {
-        "name": "Arthur",
+        "name": "Reynauld",
         "type": 0,
         "hp" : 20,
         "maxHp" : 33,
@@ -14,7 +14,11 @@
         "minDamage" : 6,
         "maxDamage" : 12,
         "protect" : 20,
-
+        "resistStun" : 40,
+        "resistBlight" : 30,
+        "resistBleed" : 30,
+        "resistDebuff" : 30,
+        "resistMove" : 40,
         "skill1": ["crusader_ability_one","1"],
         "skill2":["crusader_ability_four","4"],
         "skill3":["crusader_ability_three","3"],
@@ -24,7 +28,7 @@
 
    "Character2":
    {
-        "name": "Hawkeye",
+        "name": "Dismas",
         "type": 0,
         "hp" : 25,
         "maxHp" : 25,
@@ -36,6 +40,11 @@
         "minDamage" : 8,
         "maxDamage" : 10,
         "protect" : 4,
+        "resistStun" : 30,
+        "resistBlight" : 30,
+        "resistBleed" : 30,
+        "resistDebuff" : 30,
+        "resistMove" : 30,
         "skill1": ["crusader_ability_two","2"],
         "skill2":["crusader_ability_one","1"],
         "skill3":["crusader_ability_three","3"],
@@ -56,6 +65,11 @@
         "minDamage" : 8,
         "maxDamage" : 10,
         "protect" : 4,
+        "resistStun" : 20,
+        "resistBlight" : 60,
+        "resistBleed" : 20,
+        "resistDebuff" : 50,
+        "resistMove" : 20,
         "skill1": ["crusader_ability_four","4"],
         "skill2":["crusader_ability_two","2"],
         "skill3":["crusader_ability_three","3"],
@@ -76,6 +90,11 @@
         "minDamage" : 8,
         "maxDamage" : 10,
         "protect" : 4,
+        "resistStun" : 30,
+        "resistBlight" : 30,
+        "resistBleed" : 40,
+        "resistDebuff" : 30,
+        "resistMove" : 30,
         "skill1": ["crusader_ability_two","2"],
         "skill2":["crusader_ability_three","3"],
         "skill3":["crusader_ability_one","1"],
