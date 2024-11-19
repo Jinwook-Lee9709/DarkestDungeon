@@ -1,14 +1,16 @@
 #pragma once
 #include "GameObject.h"
 #include "Character.h"
+#include "DebuffText.h"
+#include "DamageText.h"
 
 class MonsterContainer;
+class DebuffText;
 
 class CharacterContainer :
 	public GameObject
 {
 private:
-
 	Character character;
 
 	sf::Sprite spriteSelect;
@@ -19,13 +21,16 @@ private:
 	int currentPos;
 
 	CharacterInfo info;
+	DebuffText debuffText;
+	DamageText damageText;
 
 	bool selected;
 	bool isAlive;
 	bool moving;
 
-	sf::Vector2f dest;
+	std::unordered_map<DebuffType, std::pair<short, int>> debuffStack;
 
+	sf::Vector2f dest;
 	sf::Vector2f originalCharacterScale = { 0.8f, 0.8f };
 public:
 	CharacterContainer(const std::string& name = "");
@@ -64,13 +69,22 @@ public:
 	CharacterInfo& GetCharacterInfo() { return info; }
 	std::vector<int> CheckAvailableSkill();
 	std::vector<short>& GetSkillRange(int skillnum);
+	
 
-
+	//For Combat
 	void OnHit(int damage, float acc);
-	void OnDebuffed(DebufType type, float acc);
+	void OnDamage(int damage);
+	void OnDebuffed(DebuffType type, float acc, int damage= 0, int stack = 1);
 	void OnHeal(int amount);
 
+	//About Debuff
+	int CheckDebuffCount();
+	void PlayDebuffText(DebuffType type);
+	void ApplyDebuff();
+	bool isStuned();
+	
 	bool IsAlive() { return isAlive; }
+	
 
 
 };

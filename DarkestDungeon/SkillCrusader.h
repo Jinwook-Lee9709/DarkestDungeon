@@ -45,7 +45,7 @@ struct SkillCrusader : public Skill
 			accuracy = 300;
 		}
 		monsters[target]->OnHit(damage * 0.5f, accuracy + 90);
-		monsters[target]->OnDebuffed(DebufType::Stun, accuracy + 100);
+		monsters[target]->OnDebuffed(DebuffType::Stun, accuracy + 100, 0, 1);
 		std::cout << "stun!" << std::endl;
 	}
 	void skill3(

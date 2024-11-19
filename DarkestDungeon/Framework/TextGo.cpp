@@ -24,6 +24,18 @@ void TextGo::SetFontSize(int size)
 	text.setCharacterSize(size);
 }
 
+void TextGo::ChangeFont(const std::string& str)
+{
+	font = str;
+	Reset();
+}
+
+void TextGo::SetOutline(int tickness, sf::Color color)
+{
+	text.setOutlineThickness(tickness);
+	text.setOutlineColor(color);
+}
+
 void TextGo::SetColor(sf::Color color)
 {
 	text.setFillColor(color);
@@ -57,6 +69,12 @@ void TextGo::SetPosition(const sf::Vector2f& pos)
 void TextGo::SetString(const std::string str)
 {
 	text.setString(str);
+}
+
+
+void TextGo::SetStringByTable(const std::string str)
+{
+	text.setString(STRING_TABLE->Get(str));
 }
 
 void TextGo::SetCharacterSize(int size)

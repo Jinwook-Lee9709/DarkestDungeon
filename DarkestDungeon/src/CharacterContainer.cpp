@@ -21,6 +21,9 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
 	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 
+	damageText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
+	debuffText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 1, hpBar.getSize().x * 3));
+
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness() * 2) / 10 + hpBar.getSize().x / 10;
 	for (int i = 0; i < 10; i++) {
@@ -71,6 +74,12 @@ void CharacterContainer::Init()
 		stressBar[i].setFillColor(sf::Color(20, 20, 20, 255));
 		stressBar[i].setOutlineColor(sf::Color(50, 50, 50, 255));
 	}
+	for (int i = 0; i < (int)DebuffType::Count; i++)
+	{
+		std::pair<short, int> pair = { 0, 0 };
+		debuffStack.insert({ (DebuffType)i, pair });
+	}
+
 }
 
 void CharacterContainer::Reset()
@@ -83,6 +92,18 @@ void CharacterContainer::Reset()
 	target.SetScale({ 0.86f, 0.88f });
 	target.SetOrigin(Origins::BC);
 	target.SetActive(false);
+
+	debuffText.Reset();
+	debuffText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 1, hpBar.getSize().x * 3));
+	debuffText.SetScale({1.f, 1.f});
+	debuffText.SetOrigin(Origins::MC);
+	debuffText.SetActive(false);
+
+	damageText.Reset();
+	damageText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
+	damageText.SetScale({ 1.f, 1.f });
+	damageText.SetOrigin(Origins::MC);
+	damageText.SetActive(false);
 
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
@@ -116,6 +137,8 @@ void CharacterContainer::Update(float dt)
 	}
 
 	character.Update(dt);
+	debuffText.Update(dt);
+	damageText.Update(dt);
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 }
 
@@ -128,6 +151,11 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 	}
 	target.Draw(window);
 	hitbox.Draw(window);
+	if (debuffText.IsActive())
+		debuffText.Draw(window);
+	
+	if (damageText.IsActive())
+		damageText.Draw(window);
 
 }
 
@@ -202,16 +230,74 @@ std::vector<short>& CharacterContainer::GetSkillRange(int skillnum)
 	return character.GetSkillRange(skillnum);
 }
 
+std::unordered_map<DebuffType, std::pair<short, int>>& CharacterContainer::GetDebuffList()
+{
+	return debuffStack;
+}
+
 void CharacterContainer::OnHit(int damage, float acc)
 {
 	if (Utils::RollTheDice(acc - (float)info.dodge / 100))
 	{
-		info.hp -= Utils::Clamp(damage - info.protect, 0, damage);
+		int damageBuf = Utils::Clamp(damage - info.protect, 0, damage);
+		info.hp -= damageBuf;
+		damageText.AddAnimation(damageBuf);
 	}
 }
 
-void CharacterContainer::OnDebuffed(DebufType type, float acc)
+void CharacterContainer::OnDamage(int damage)
 {
+	int damageBuf = Utils::Clamp(damage, 0, damage);
+	info.hp -= damageBuf;
+	damageText.AddAnimation(damage);
+}
+
+void CharacterContainer::OnDebuffed(DebuffType type, float acc, int damage, int stack)
+{
+	switch (type)
+	{
+		case DebuffType::Stun:
+		{
+			if (Utils::RollTheDice(acc - info.resistStun))
+			{
+				debuffStack[DebuffType::Stun] = { stack, damage };
+			}
+			break;
+		}
+		case DebuffType::Blight:
+		{
+			if (Utils::RollTheDice(acc - info.resistBlight))
+			{
+				debuffStack[DebuffType::Blight] = { stack, damage };
+			}
+			break;
+		}
+		case DebuffType::Bleed:
+		{
+			if (Utils::RollTheDice(acc - info.resistBleed))
+			{
+				debuffStack[DebuffType::Bleed] = { stack, damage };
+			}
+			break;
+		}
+		case DebuffType::Debuff:
+		{
+			if (Utils::RollTheDice(acc - info.resistDebuff))
+			{
+				debuffStack[DebuffType::Blight] = { stack, damage };
+			}
+			break;
+		}
+		case DebuffType::Move:
+		{
+			if (Utils::RollTheDice(acc - info.resistMove))
+			{
+				
+			}
+			break;
+		}
+
+	}
 }
 
 void CharacterContainer::OnHeal(int amount)
@@ -221,4 +307,75 @@ void CharacterContainer::OnHeal(int amount)
 		info.hp = info.maxHp;
 	}
 
+}
+
+int CharacterContainer::CheckDebuffCount()
+{
+	int cnt = 0;
+	for (auto& debuff : debuffStack)
+	{
+		if (debuff.second.first > 0)
+		{
+			cnt++;
+		}
+	}
+	return cnt;
+}
+
+void CharacterContainer::PlayDebuffText(DebuffType type)
+{
+	debuffText.AddAnimation(type);
+}
+
+void CharacterContainer::ApplyDebuff()
+{
+	for (auto& debuff : debuffStack)
+	{
+		switch (debuff.first)
+		{
+			case DebuffType::Stun:
+			{
+				break;
+			}
+			case DebuffType::Blight:
+			{
+				if (debuff.second.first > 0)
+				{
+					OnDamage(debuff.second.second);
+					--debuff.second.first;
+				}
+				break;
+			}
+			case DebuffType::Bleed:
+			{
+				if (debuff.second.first > 0)
+				{
+					OnDamage(debuff.second.second);
+					--debuff.second.first;
+				}
+
+				break;
+			}
+			case DebuffType::Debuff:
+			{
+				if (debuff.second.first > 0)
+				{
+					--debuff.second.first;
+				}
+				break;
+			}
+		}
+	}
+}
+
+bool CharacterContainer::isStuned()
+{
+	if (debuffStack[DebuffType::Stun].first == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

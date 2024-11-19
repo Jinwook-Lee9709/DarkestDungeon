@@ -36,12 +36,37 @@ void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
 
 void BattleManager::Update(float dt)
 {
+    if (InputManager::GetKeyDown(sf::Keyboard::Num1))
+    {
+        (*characters)[1]->PlayDebuffText(DebuffType::Stun);
+    }
+
+    if (InputManager::GetKeyDown(sf::Keyboard::Num2))
+    {
+        (*characters)[1]->PlayDebuffText(DebuffType::Bleed);
+    }
+    if (InputManager::GetKeyDown(sf::Keyboard::Num3))
+    {
+
+        (*characters)[1]->PlayDebuffText(DebuffType::Blight);
+    }
+
+    if (InputManager::GetKeyDown(sf::Keyboard::Num4))
+    {
+
+        (*characters)[1]->PlayDebuffText(DebuffType::Debuff);
+    }
+
+
+
     switch (currentStatus)
     {
     case Status::JudgeTurn:
         UpdateJudgeTurn(dt);
         break;
-
+    case Status::ApplyDebuff:
+        UpdateApplyDebuff(dt);
+        break;
     case Status::CharacterTurn:
         UpdateCharacterTurn(dt);
         break;
@@ -125,6 +150,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
         orderQueue.pop();
         beforeStatus = Status::JudgeTurn;
         currentStatus = Status::CharacterTurn;
+        isCharacterTurn = true;
     }
     else
     {
@@ -132,8 +158,29 @@ void BattleManager::UpdateJudgeTurn(float dt)
         orderQueue.pop();
         beforeStatus = Status::JudgeTurn;
         currentStatus = Status::MonsterTurn;
+        isCharacterTurn = false;
     }
   
+}
+
+void BattleManager::UpdateApplyDebuff(float dt)
+{
+    if (beforeStatus == Status::JudgeTurn)
+    {
+        if (isCharacterTurn)
+        {
+            int count;
+            if (count = (*characters)[currentCharacter]->CheckDebuffCount() > 0)
+            {
+                timer = 0;
+                duration = 0.8f * count;
+                (*characters)[currentCharacter]->ApplyDebuff();
+            }
+
+        }
+    }
+
+    
 }
 
 void BattleManager::UpdateCharacterTurn(float dt)
@@ -188,16 +235,16 @@ void BattleManager::UpdateCharacterTurn(float dt)
     };
 
 
-    if (InputManager::GetKeyDown(sf::Keyboard::Num1))
-    {
-        (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, 0, 2);
-        currentStatus = Status::JudgeTurn;
-    }
+    //if (InputManager::GetKeyDown(sf::Keyboard::Num1))
+    //{
+    //    (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, 0, 2);
+    //    currentStatus = Status::JudgeTurn;
+    //}
 
-    if (InputManager::GetKeyDown(sf::Keyboard::Num2))
-    {
-        ChangeMonsterPos(1, 2);
-    }
+    //if (InputManager::GetKeyDown(sf::Keyboard::Num2))
+    //{
+    //    ChangeMonsterPos(1, 2);
+    //}
 }
 
 void BattleManager::UpdateSkillSelected(float dt)

@@ -36,7 +36,6 @@ public:
 	virtual void SetToIdle();
 	virtual void SetToCombat();
 	virtual void SetToWalk();
-	virtual void OnHit(int damage);
 
 
 	void Reset(const CharacterInfo& info);

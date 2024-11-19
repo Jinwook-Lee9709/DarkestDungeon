@@ -14,6 +14,8 @@ public:
 
 	virtual void SetText(const std::string& str);
 	virtual void SetFontSize(int size);
+	virtual void ChangeFont(const std::string& str);
+	virtual void SetOutline(int tickness, sf::Color color);
 	virtual void SetColor(sf::Color color);
 
 	virtual void SetOrigin(Origins preset);
@@ -22,8 +24,10 @@ public:
 	void Reset() override;
 	void SetPosition(const sf::Vector2f& pos)override;
 	void SetString(const std::string str);
+	void SetStringByTable(const std::string str);
 	void SetCharacterSize(int size);
 	void Draw(sf::RenderWindow& window)override;
+
 
 
 };

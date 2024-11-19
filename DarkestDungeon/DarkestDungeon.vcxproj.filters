@@ -97,6 +97,12 @@
     <ClCompile Include="NameFrame.cpp">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClCompile>
+    <ClCompile Include="DebuffText.cpp">
+      <Filter>Scenes\Dev1\Entity\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageText.cpp">
+      <Filter>Scenes\Dev1\Entity\Text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Framework.h">
@@ -216,6 +222,12 @@
     <ClInclude Include="NameFrame.h">
       <Filter>Scenes\Dev1\UI</Filter>
     </ClInclude>
+    <ClInclude Include="DebuffText.h">
+      <Filter>Scenes\Dev1\Entity\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageText.h">
+      <Filter>Scenes\Dev1\Entity\Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -310,6 +322,9 @@
     </Filter>
     <Filter Include="Framework\Table">
       <UniqueIdentifier>{2e1ab009-7646-4d98-94c7-b0f72e54b121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Entity\Text">
+      <UniqueIdentifier>{82b4c509-708c-4f22-a9ad-d3b7d59d4827}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

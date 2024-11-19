@@ -14,6 +14,9 @@ void MonsterContainer::SetPosition(const sf::Vector2f& pos)
 	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 	SetOrigin(Origins::BC);
 
+	damageText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
+	debuffText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 1, hpBar.getSize().x * 3));
+
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
 }
@@ -69,6 +72,19 @@ void MonsterContainer::Reset()
 	target.SetOrigin(Origins::BC);
 	target.SetActive(false);
 
+	debuffText.Reset();
+	debuffText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 1, hpBar.getSize().x * 3));
+	debuffText.SetScale({ 1.f, 1.f });
+	debuffText.SetOrigin(Origins::MC);
+	debuffText.SetActive(false);
+
+	damageText.Reset();
+	damageText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
+	damageText.SetScale({ 1.f, 1.f });
+	damageText.SetOrigin(Origins::MC);
+	damageText.SetActive(false);
+
+
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
 
@@ -92,6 +108,8 @@ void MonsterContainer::Update(float dt)
 		}
 	}
 	monster.Update(dt);
+	debuffText.Update(dt);
+	damageText.Update(dt);
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 }
 
@@ -101,6 +119,11 @@ void MonsterContainer::Draw(sf::RenderWindow& window)
 		monster.Draw(window);
 		window.draw(hpBar);
 	}
+	if (debuffText.IsActive())
+		debuffText.Draw(window);
+
+	if (damageText.IsActive())
+		damageText.Draw(window);
 
 	hitbox.Draw(window);
 	target.Draw(window);
@@ -158,7 +181,9 @@ void MonsterContainer::OnHit(int damage, float acc)
 {
 	if (Utils::RollTheDice(acc - info.dodge / 100))
 	{
-		info.hp -= Utils::Clamp(damage - info.protect, 0, 1000);
+		int damageBuf = Utils::Clamp(damage - info.protect, 0, 1000);
+		info.hp -= damageBuf;
+		damageText.AddAnimation(damageBuf);
 	}
 	Utils::Clamp(info.hp, 0, info.maxHp);
 	if (info.hp < 0)
@@ -167,7 +192,62 @@ void MonsterContainer::OnHit(int damage, float acc)
 	}
 }
 
-void MonsterContainer::OnDebuffed(DebufType type, float acc)
+void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int stack)
 {
+	switch (type)
+	{
+	case DebuffType::Stun:
+	{
+		if (Utils::RollTheDice(acc - info.resistStun))
+		{
+			debuffStack[DebuffType::Stun] = { stack, damage };
+		}
+		break;
+	}
+	case DebuffType::Blight:
+	{
+		if (Utils::RollTheDice(acc - info.resistBlight))
+		{
+			debuffStack[DebuffType::Blight] = { stack, damage };
+		}
+		break;
+	}
+	case DebuffType::Bleed:
+	{
+		if (Utils::RollTheDice(acc - info.resistBleed))
+		{
+			debuffStack[DebuffType::Bleed] = { stack, damage };
+		}
+		break;
+	}
+	case DebuffType::Debuff:
+	{
+		if (Utils::RollTheDice(acc - info.resistDebuff))
+		{
+			debuffStack[DebuffType::Blight] = { stack, damage };
+		}
+		break;
+	}
+	case DebuffType::Move:
+	{
+		if (Utils::RollTheDice(acc - info.resistMove))
+		{
+
+		}
+		break;
+	}
+
+	}
 }
 
+bool MonsterContainer::CheckDebuff()
+{
+	for (auto& debuff : debuffStack)
+	{
+		if (debuff.second.first > 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}

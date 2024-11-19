@@ -41,13 +41,17 @@
                 "overlay_target_e" : "resource/Overlays/target_e.png",
                 "overlay_target_h" : "resource/Overlays/target_h.png",
 
+                "poptext_bleed" : "resource/Overlays/poptext_bleed.png",
+                "poptext_debuff" : "resource/Overlays/poptext_debuff.png",
+                "poptext_poison" : "resource/Overlays/poptext_poison.png",
+
                 "name_frame" : "resource/Overlays/name_frame.png",
 
                 "side_decor" : "resource/Panels/side_decor.png"
             },
             "Font" :{
                 "KOMIKAP_":      "fonts/KOMIKAP_.ttf",
-                "LeeB":      "fonts/LeeB.ttf",
+                "Bokor":      "fonts/Bokor.ttf",
                 "LeeL":      "fonts/LeeL.ttf"
             },
             "Sound:" :{

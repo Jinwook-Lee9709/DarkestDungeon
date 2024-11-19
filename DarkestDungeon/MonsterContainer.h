@@ -1,5 +1,7 @@
 #pragma once
 #include "Monster.h"
+#include "DebuffText.h"
+#include "DamageText.h"
 
 class Monster;
 
@@ -46,12 +48,15 @@ protected:
 	MonsterInfo info;
 	//float Timer;
 	//float duration;
+	DebuffText debuffText;
+	DamageText damageText;
 
 	bool isAlive;
 	bool moving;
 
-	sf::Vector2f dest;
+	std::unordered_map<DebuffType, std::pair<short, int>> debuffStack;
 
+	sf::Vector2f dest;
 	sf::Vector2f originalMonsterScale = { 0.8f, 0.8f };
 public:
 	MonsterContainer(const std::string& name = "");
@@ -87,7 +92,9 @@ public:
 	std::vector<short>& GetSkillRange(int skillnum);
 
 	void OnHit(int damage, float acc);
-	void OnDebuffed(DebufType type, float acc);
+	void OnDebuffed(DebuffType type, float acc, int damage = 0, int stack = 1);
+
+	bool CheckDebuff();
 	bool IsAlive() { return isAlive; }
 
 

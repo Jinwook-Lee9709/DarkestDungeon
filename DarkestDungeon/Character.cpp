@@ -88,11 +88,6 @@ void Character::SetToWalk()
 	SetOrigin(Origins::BC);
 }
 
-void Character::OnHit(int damage)
-{
-
-}
-
 void Character::Reset(const CharacterInfo& info)
 {
 	type = info.type;

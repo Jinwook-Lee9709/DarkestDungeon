@@ -37,7 +37,7 @@ void SpriteGo::FlipY(bool flag)
 
 void SpriteGo::Reset()
 {
-	sprite.setTexture(GET_TEX(textureId));
+	sprite.setTexture(GET_TEX(textureId), true);
 	SetOrigin(originPreset);
 	hitbox.UpdateTr(sprite, sprite.getGlobalBounds());
 }

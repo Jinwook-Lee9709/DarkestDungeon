@@ -36,7 +36,6 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 
 	virtual void SetToIdle();
-	virtual void OnHit(int damage);
 
 
 	void Reset(const MonsterInfo& info);

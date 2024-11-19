@@ -42,7 +42,7 @@ struct SkillSkeletonMilitia : public Skill
 			accuracy = 300;
 		}
 		characters[target]->OnHit(damage * 0.5f, accuracy + 90);
-		characters[target]->OnDebuffed(DebufType::Stun, accuracy + 100);
+		characters[target]->OnDebuffed(DebuffType::Stun, accuracy + 100);
 		std::cout << "stun!" << std::endl;
 	}
 

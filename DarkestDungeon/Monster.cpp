@@ -85,9 +85,6 @@ void Monster::SetToIdle()
 	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)type), "Combat"), true);
 }
 
-void Monster::OnHit(int damage)
-{
-}
 
 void Monster::Reset(const MonsterInfo& info)
 {

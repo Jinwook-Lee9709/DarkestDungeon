@@ -184,7 +184,7 @@ void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)
 void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 {
 	TextGo* obj;
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::Red);
 	obj->SetPosition({ windowSize.x * 0.21f, windowSize.y * 0.81f });
 	obj->SetString("50 / 50");
@@ -194,7 +194,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 
 	playerText.insert({ PlayerTextIndex::HP, obj });
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.21f, windowSize.y * 0.837f });
 	obj->SetString("3 / 200");
@@ -204,7 +204,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::STRESS, obj });
 
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.865f });
 	obj->SetString("ACC");
@@ -214,7 +214,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::ACCURACY, obj });
 
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.885f });
 	obj->SetString("CRIT");
@@ -223,7 +223,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::CRITICAL, obj });
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.905f });
 	obj->SetString("DMG");
@@ -232,7 +232,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::DAMAGE, obj });
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.925f });
 	obj->SetString("DODGE");
@@ -242,7 +242,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::DODGE, obj });
 
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.945f });
 	obj->SetString("PROT");
@@ -252,7 +252,7 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::PROTECT, obj });
 
-	obj = new TextGo("LeeB");
+	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
 	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.965f });
 	obj->SetString("SPD");

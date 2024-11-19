@@ -36,11 +36,11 @@ enum class Sides
 	None
 };
 
-enum class DebufType
+enum class DebuffType
 {
 	Stun,
 	Blight,
-	Bleeding,
+	Bleed,
 	Debuff,
 	Move,
 	Count

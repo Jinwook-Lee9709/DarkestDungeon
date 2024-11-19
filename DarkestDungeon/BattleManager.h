@@ -15,6 +15,7 @@ public:
 	{
 		None,
 		JudgeTurn,
+		ApplyDebuff,
 		CharacterTurn,
 		SkillSelected,
 		ItemSelected,
@@ -38,6 +39,7 @@ private:
 	std::vector<int>* chracterOrder;
 	std::vector<int> monsterOrder;
 
+	bool isCharacterTurn;
 	short currentCharacter;
 	short currentMonster;
 
@@ -76,6 +78,7 @@ public:
 	void SetMonsterInfo();
 
 	void UpdateJudgeTurn(float dt);
+	void UpdateApplyDebuff(float dt);
 	void UpdateCharacterTurn(float dt);
 	void UpdateSkillSelected(float dt);
 	void UpdateItemSelected(float dt);
