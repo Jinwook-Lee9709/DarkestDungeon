@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "DebuffText.h"
 #include "DamageText.h"
+#include "Effector.h"
 
 class Monster;
 
@@ -39,6 +40,7 @@ class MonsterContainer : public GameObject
 {
 protected:
 	Monster monster;
+	Effector stunEffect;
 
 	sf::RectangleShape hpBar;
 	SpriteGo target;
@@ -90,11 +92,20 @@ public:
 	MonsterInfo& GetMonsterInfo() { return info; }
 	std::vector<int> CheckAvailableSkill();
 	std::vector<short>& GetSkillRange(int skillnum);
-
+	
+	//For Combat
 	void OnHit(int damage, float acc);
+	void OnDamage(int damage);
 	void OnDebuffed(DebuffType type, float acc, int damage = 0, int stack = 1);
 
-	bool CheckDebuff();
+	bool CheckDebuffCount();
+	void PlayDebuffText(DebuffType type);
+	void ApplyDebuff();
+	void EndStun();
+	bool IsStuned();
+
+
+
 	bool IsAlive() { return isAlive; }
 
 

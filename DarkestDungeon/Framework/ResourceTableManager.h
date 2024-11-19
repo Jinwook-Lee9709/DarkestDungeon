@@ -20,6 +20,7 @@ public:
 	void Init();
 	bool LoadCharacterAnimation(const CharacterType& character);
 	bool LoadMonsterAnimation();
+	bool LoadEffectAnimation();
 	bool LoadSkillIcon(const std::string& skillName);
 	bool LoadScene(const std::string& scene);
 	bool UnLoadScene(const std::string& scene);

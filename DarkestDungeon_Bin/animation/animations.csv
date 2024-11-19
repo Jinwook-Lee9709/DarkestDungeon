@@ -10,3 +10,6 @@ Monster,,,,,,
 skeleton_militia_combat,"30",1,6,29,512,512
 skeleton_militia_skill_one,"30",0,5,25,512,512
 skeleton_militia_skill_two,"30",0,5,25,512,512
+Effect,,,,,,
+stunned,"30",0,8,55,256,256
+stunned_loop,"30",1,6,31,256,256

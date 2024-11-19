@@ -94,14 +94,20 @@
     <ClCompile Include="Framework\DataTableMgr.cpp">
       <Filter>Framework\Table</Filter>
     </ClCompile>
-    <ClCompile Include="NameFrame.cpp">
-      <Filter>Scenes\Dev1\UI</Filter>
-    </ClCompile>
     <ClCompile Include="DebuffText.cpp">
       <Filter>Scenes\Dev1\Entity\Text</Filter>
     </ClCompile>
     <ClCompile Include="DamageText.cpp">
       <Filter>Scenes\Dev1\Entity\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Effector.cpp">
+      <Filter>Scenes\Dev1\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterInfoPanel.cpp">
+      <Filter>Scenes\Dev1\UI\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="NameFrame.cpp">
+      <Filter>Scenes\Dev1\UI\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,14 +225,20 @@
     <ClInclude Include="Framework\DataTableMgr.h">
       <Filter>Framework\Table</Filter>
     </ClInclude>
-    <ClInclude Include="NameFrame.h">
-      <Filter>Scenes\Dev1\UI</Filter>
-    </ClInclude>
     <ClInclude Include="DebuffText.h">
       <Filter>Scenes\Dev1\Entity\Text</Filter>
     </ClInclude>
     <ClInclude Include="DamageText.h">
       <Filter>Scenes\Dev1\Entity\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Effector.h">
+      <Filter>Scenes\Dev1\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterInfoPanel.h">
+      <Filter>Scenes\Dev1\UI\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="NameFrame.h">
+      <Filter>Scenes\Dev1\UI\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +337,12 @@
     </Filter>
     <Filter Include="Scenes\Dev1\Entity\Text">
       <UniqueIdentifier>{82b4c509-708c-4f22-a9ad-d3b7d59d4827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Effect">
+      <UniqueIdentifier>{395ad000-f1ca-4359-aaa4-917419ee9851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\UI\Component">
+      <UniqueIdentifier>{ccc721e4-9d3c-4ef6-bb8c-38b74c5630f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

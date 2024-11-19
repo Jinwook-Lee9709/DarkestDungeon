@@ -51,6 +51,7 @@ private:
 
 	bool monsterSkillSelected;
 	bool animationPlaying = false;
+	bool isStuned = false;
 
 	std::queue<int> orderQueue;
 

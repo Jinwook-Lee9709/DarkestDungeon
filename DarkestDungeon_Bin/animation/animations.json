@@ -60,5 +60,15 @@
             }
         }
       
+    },
+    "Effect":{
+        "STUN":{
+            "ID": "stunned",
+            "TEX_ID": "resource/FX/halo/stunned.png"
+        },
+        "STUNLOOP":{
+            "ID": "stunned_loop",
+            "TEX_ID": "resource/FX/halo/stunned_loop.png"
+        }
     }
 }

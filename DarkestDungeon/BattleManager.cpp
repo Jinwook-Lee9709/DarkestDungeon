@@ -36,26 +36,7 @@ void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
 
 void BattleManager::Update(float dt)
 {
-    if (InputManager::GetKeyDown(sf::Keyboard::Num1))
-    {
-        (*characters)[1]->PlayDebuffText(DebuffType::Stun);
-    }
 
-    if (InputManager::GetKeyDown(sf::Keyboard::Num2))
-    {
-        (*characters)[1]->PlayDebuffText(DebuffType::Bleed);
-    }
-    if (InputManager::GetKeyDown(sf::Keyboard::Num3))
-    {
-
-        (*characters)[1]->PlayDebuffText(DebuffType::Blight);
-    }
-
-    if (InputManager::GetKeyDown(sf::Keyboard::Num4))
-    {
-
-        (*characters)[1]->PlayDebuffText(DebuffType::Debuff);
-    }
 
 
 
@@ -149,7 +130,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
         ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
         orderQueue.pop();
         beforeStatus = Status::JudgeTurn;
-        currentStatus = Status::CharacterTurn;
+        currentStatus = Status::ApplyDebuff;
         isCharacterTurn = true;
     }
     else
@@ -157,7 +138,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
         currentMonster = orderQueue.front()-4;
         orderQueue.pop();
         beforeStatus = Status::JudgeTurn;
-        currentStatus = Status::MonsterTurn;
+        currentStatus = Status::ApplyDebuff;
         isCharacterTurn = false;
     }
   
@@ -167,25 +148,74 @@ void BattleManager::UpdateApplyDebuff(float dt)
 {
     if (beforeStatus == Status::JudgeTurn)
     {
+        isStuned = false;
+        timer = 0;
+        duration = 0;
         if (isCharacterTurn)
         {
             int count;
             if (count = (*characters)[currentCharacter]->CheckDebuffCount() > 0)
             {
-                timer = 0;
-                duration = 0.8f * count;
+               
+                duration = 1.f * count;
                 (*characters)[currentCharacter]->ApplyDebuff();
+                if ((*characters)[currentCharacter]->IsStuned()) {
+                    (*characters)[currentCharacter]->EndStun();
+                    isStuned = true;
+                }
+                else {
+                    isStuned = false;
+                }
             }
 
         }
+        else 
+        {
+            int count;
+            if (count = (*monsters)[currentMonster]->CheckDebuffCount() > 0)
+            {
+                timer = 0;
+                duration = 1.f * count;
+                (*monsters)[currentMonster]->ApplyDebuff();
+                if ((*monsters)[currentMonster]->IsStuned()) {
+                    (*monsters)[currentMonster]->EndStun();
+                    isStuned = true;
+                }
+                else {
+                    isStuned = false;
+                }
+            }
+        }
+        beforeStatus = Status::None;
     }
 
+    timer += dt;
+    if (timer > duration)
+    {
+        if (isStuned)
+        {
+            beforeStatus = Status::ApplyDebuff;
+            currentStatus = Status::JudgeTurn;
+        }
+        else
+        {
+            if (isCharacterTurn) {
+                beforeStatus = Status::ApplyDebuff;
+                currentStatus = Status::CharacterTurn;
+            }
+            else {
+                beforeStatus = Status::ApplyDebuff;
+                currentStatus = Status::MonsterTurn;
+            }
+           
+        }
+    }
     
 }
 
 void BattleManager::UpdateCharacterTurn(float dt)
 {
-    if (beforeStatus == Status::JudgeTurn){
+    if (beforeStatus == Status::ApplyDebuff){
         std::vector<int> skills = (*characters)[currentCharacter]->CheckAvailableSkill();
         if (!skills.empty()) {
             bool availabe[4] = { false };
@@ -395,6 +425,8 @@ void BattleManager::UpdateMonsterTurn(float dt)
 
             }
             ui->PlaySkillNameFrame(skillName);
+            timer = 0;
+            duration = 2.f;
             animationPlaying = true;
         }
         else {
@@ -426,6 +458,8 @@ void BattleManager::UpdateMonsterAnimate(float dt)
         (*monsters)[currentMonster]->UseSkill(*characters, *monsters,
             monsterTargetInfo[0], monsterTargetInfo[1], monsterTargetInfo[2]);
         beforeStatus = Status::None;
+        timer = 0;
+        duration = 2.f;
     }
     timer += dt;
     if (timer > duration)

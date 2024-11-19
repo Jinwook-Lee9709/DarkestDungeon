@@ -38,6 +38,10 @@ void Framework::Do()
         InputManager::Update(deltaTime);
 
         //Update
+        if (InputManager::GetKeyDown(sf::Keyboard::H))
+        {
+            Variables::isDrawHitBox = !Variables::isDrawHitBox;
+        }
         SCENE_MGR.Update(deltaTime);
         SCENE_MGR.LateUpdate(deltaTime);
         //Draw

@@ -51,6 +51,8 @@ public:
 	void SetCharacterInfo();
 	void LoadCharacterResource();
 	void LoadMonsterResource();
+	void LoadEffectResource();
+
 	//Getter
 	UiDungeon* GetUi() { return uiDungeon; }
 	std::vector<CharacterContainer*>& GetCharacters() { return characters; }

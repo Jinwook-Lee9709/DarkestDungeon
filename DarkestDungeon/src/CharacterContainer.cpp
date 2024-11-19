@@ -23,7 +23,7 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 
 	damageText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
 	debuffText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 1, hpBar.getSize().x * 3));
-
+	stunEffect.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.7f));
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness() * 2) / 10 + hpBar.getSize().x / 10;
 	for (int i = 0; i < 10; i++) {
@@ -79,6 +79,7 @@ void CharacterContainer::Init()
 		std::pair<short, int> pair = { 0, 0 };
 		debuffStack.insert({ (DebuffType)i, pair });
 	}
+	
 
 }
 
@@ -104,6 +105,11 @@ void CharacterContainer::Reset()
 	damageText.SetScale({ 1.f, 1.f });
 	damageText.SetOrigin(Origins::MC);
 	damageText.SetActive(false);
+
+	stunEffect.Reset();
+	stunEffect.SetPosition(position- sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.7f));
+	stunEffect.SetOrigin(Origins::MC);
+	debuffText.SetActive(false);
 
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
@@ -139,6 +145,7 @@ void CharacterContainer::Update(float dt)
 	character.Update(dt);
 	debuffText.Update(dt);
 	damageText.Update(dt);
+	stunEffect.Update(dt);
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 }
 
@@ -156,7 +163,8 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 	
 	if (damageText.IsActive())
 		damageText.Draw(window);
-
+	if (stunEffect.IsActive())
+		stunEffect.Draw(window);
 }
 
 void CharacterContainer::ActiavteTargetUi(TargetUi type)
@@ -230,10 +238,6 @@ std::vector<short>& CharacterContainer::GetSkillRange(int skillnum)
 	return character.GetSkillRange(skillnum);
 }
 
-std::unordered_map<DebuffType, std::pair<short, int>>& CharacterContainer::GetDebuffList()
-{
-	return debuffStack;
-}
 
 void CharacterContainer::OnHit(int damage, float acc)
 {
@@ -261,6 +265,11 @@ void CharacterContainer::OnDebuffed(DebuffType type, float acc, int damage, int 
 			if (Utils::RollTheDice(acc - info.resistStun))
 			{
 				debuffStack[DebuffType::Stun] = { stack, damage };
+				debuffText.AddAnimation(DebuffType::Stun);
+				stunEffect.SetDuration(1.f);
+				stunEffect.AddAnimation("stunned");
+				stunEffect.AddAnimation("stunned_loop");
+				
 			}
 			break;
 		}
@@ -368,7 +377,17 @@ void CharacterContainer::ApplyDebuff()
 	}
 }
 
-bool CharacterContainer::isStuned()
+void CharacterContainer::EndStun()
+{
+	--debuffStack[DebuffType::Stun].first;
+	debuffText.PlayAnimation(DebuffType::Stun);
+	stunEffect.SetActive(false);
+}
+
+
+
+
+bool CharacterContainer::IsStuned()
 {
 	if (debuffStack[DebuffType::Stun].first == 1)
 	{

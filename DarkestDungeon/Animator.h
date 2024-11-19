@@ -34,6 +34,7 @@ public:
 	void SetRect(const AnimationFrame& frame);
 
 	bool IsFlip() { return flip; }
+	bool IsLoop() { return currentClip->loopType == AnimationLoopTypes::Loop; }
 
 	const std::string& GetCurrentClipId() const
 	{

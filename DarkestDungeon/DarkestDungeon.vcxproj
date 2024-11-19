@@ -25,6 +25,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="DamageText.cpp" />
     <ClCompile Include="DebuffText.cpp" />
+    <ClCompile Include="Effector.cpp" />
     <ClCompile Include="ExploreManager.cpp" />
     <ClCompile Include="Framework\DataTable.cpp" />
     <ClCompile Include="Framework\DataTableMgr.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="Framework\Variables.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterContainer.cpp" />
+    <ClCompile Include="MonsterInfoPanel.cpp" />
     <ClCompile Include="NameFrame.cpp" />
     <ClCompile Include="Slot.cpp" />
     <ClCompile Include="src\CharacterContainer.cpp" />
@@ -63,6 +65,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="DamageText.h" />
     <ClInclude Include="DebuffText.h" />
+    <ClInclude Include="Effector.h" />
     <ClInclude Include="ExploreManager.h" />
     <ClInclude Include="Framework\DataTable.h" />
     <ClInclude Include="Framework\DataTableMgr.h" />
@@ -72,6 +75,7 @@
     <ClInclude Include="Framework\Variables.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterContainer.h" />
+    <ClInclude Include="MonsterInfoPanel.h" />
     <ClInclude Include="NameFrame.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillCrusader.h" />

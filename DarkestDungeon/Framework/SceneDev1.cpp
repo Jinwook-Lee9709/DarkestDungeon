@@ -60,6 +60,7 @@ void SceneDev1::Enter()
 	SetCharacterInfo();
 	LoadCharacterResource();
 	LoadMonsterResource();
+	LoadEffectResource();
 	battleManager->Reset(&characters, &monsters, uiDungeon, &characterOrder);
 	currentStatus = Status::Battle;
 	Scene::Enter();
@@ -137,6 +138,11 @@ void SceneDev1::LoadCharacterResource()
 void SceneDev1::LoadMonsterResource()
 {
 	RES_TABLE_MGR.LoadMonsterAnimation();
+}
+
+void SceneDev1::LoadEffectResource()
+{
+	RES_TABLE_MGR.LoadEffectAnimation();
 }
 
 void SceneDev1::ChangeCharacterPos(int first, int second)

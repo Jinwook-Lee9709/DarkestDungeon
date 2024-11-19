@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "DebuffText.h"
 #include "DamageText.h"
+#include "Effector.h";
 
 class MonsterContainer;
 class DebuffText;
@@ -12,6 +13,7 @@ class CharacterContainer :
 {
 private:
 	Character character;
+	Effector stunEffect;
 
 	sf::Sprite spriteSelect;
 	sf::RectangleShape hpBar;
@@ -81,7 +83,8 @@ public:
 	int CheckDebuffCount();
 	void PlayDebuffText(DebuffType type);
 	void ApplyDebuff();
-	bool isStuned();
+	void EndStun();
+	bool IsStuned();
 	
 	bool IsAlive() { return isAlive; }
 	

@@ -95,6 +95,14 @@ void UiDungeon::Update(float dt)
 	if (isFramePlaying) {
 		UpdateSkillNameFrame(dt);
 	}
+	if (InputManager::GetKeyDown(sf::Keyboard::Num1))
+	{
+		fixedUi[5]->SetActive(true);
+	}
+	if (InputManager::GetKeyDown(sf::Keyboard::Num2))
+	{
+		fixedUi[5]->SetActive(false);
+	}
 
 }
 
@@ -145,9 +153,16 @@ void UiDungeon::InitFixedUi(const sf::Vector2f& windowSize)
 	SetSpriteInfo(obj, Origins::BC, { windowSize.x * 0.31f, windowSize.y }, 5);
 	fixedUi.push_back(obj);
 
-	obj = new SpriteGo("panel_monster");
+	obj = new SpriteGo("panel_inventory");
 	SetSpriteInfo(obj, Origins::BL, { windowSize.x * 0.493f,  windowSize.y }, 5);
 	fixedUi.push_back(obj);
+
+	obj = new SpriteGo("panel_monster");
+	SetSpriteInfo(obj, Origins::BL, { windowSize.x * 0.486f,  windowSize.y }, 5);
+	obj->SetActive(false);
+	fixedUi.push_back(obj);
+
+	
 }
 
 void UiDungeon::InitSkillUi(const sf::Vector2f& windowSize)

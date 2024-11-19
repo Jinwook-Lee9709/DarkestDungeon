@@ -53,6 +53,21 @@ bool ResourceTableManager::LoadMonsterAnimation()
 	return false;
 }
 
+bool ResourceTableManager::LoadEffectAnimation()
+{
+	auto effects = ANIMATION["Effect"];
+	for (auto& animation : effects) {
+		RES_MGR(AnimationClip).Load(animation["ID"]);
+		RES_MGR(sf::Texture).Load(animation["TEX_ID"]);
+		if (resourceTable.find(animation["ID"]) == resourceTable.end()) {
+			resourceTable.insert({ (std::string)animation["ID"]
+			,(std::string)animation["TEX_ID"] });
+			
+		}
+	}
+	return false;
+}
+
 bool ResourceTableManager::LoadSkillIcon(const std::string& skillName)
 {
 	std::string path = PATH["Skill_icon"][skillName];
