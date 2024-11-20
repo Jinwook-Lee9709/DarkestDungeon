@@ -91,4 +91,5 @@ void NameFrame::ChangeText(const std::string& str)
 void NameFrame::SetOpacity(int opacity)
 {
 	plate.setColor(sf::Color(255, 255, 255, opacity));
+	text.setFillColor(sf::Color(247, 230, 0, opacity));
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UiDungeon.h"
+#include "MonsterInfoPanel.h"
 
 UiDungeon::UiDungeon(const std::string& name)
 	: GameObject(name)
@@ -42,6 +43,8 @@ void UiDungeon::Init()
 	InitSkillUi(windowSize);
 	InitPlayerTextUi(windowSize);
 
+	monsterInfoPanel = new MonsterInfoPanel("panel");
+
 	inventory = new SpriteGo("Resource/Panels/panel_inventory.png");
 	SetSpriteInfo(inventory, Origins::BL, { windowSize.x * 0.5f,  windowSize.y * 0.999f }, 0);
 
@@ -67,6 +70,10 @@ void UiDungeon::Release()
 		it.second->Release();
 		delete(it.second);
 	}
+
+	monsterInfoPanel->Release();
+	delete(monsterInfoPanel);
+
 	playerText.clear();
 	instanceChk = false;
 }
@@ -85,6 +92,8 @@ void UiDungeon::Reset()
 	for (auto it : playerText) {
 		it.second->Reset();
 	}
+	monsterInfoPanel->Reset();
+	monsterInfoPanel->SetActive(false);
 	skillNameFrame.Reset();
 	skillNameFrame.SetActive(false);
 }
@@ -95,14 +104,7 @@ void UiDungeon::Update(float dt)
 	if (isFramePlaying) {
 		UpdateSkillNameFrame(dt);
 	}
-	if (InputManager::GetKeyDown(sf::Keyboard::Num1))
-	{
-		fixedUi[5]->SetActive(true);
-	}
-	if (InputManager::GetKeyDown(sf::Keyboard::Num2))
-	{
-		fixedUi[5]->SetActive(false);
-	}
+
 
 }
 
@@ -123,6 +125,7 @@ void UiDungeon::Draw(sf::RenderWindow& window)
 			}
 		}
 		skillNameFrame.Draw(window);
+		monsterInfoPanel->Draw(window);
 	}
 }
 
@@ -157,10 +160,6 @@ void UiDungeon::InitFixedUi(const sf::Vector2f& windowSize)
 	SetSpriteInfo(obj, Origins::BL, { windowSize.x * 0.493f,  windowSize.y }, 5);
 	fixedUi.push_back(obj);
 
-	obj = new SpriteGo("panel_monster");
-	SetSpriteInfo(obj, Origins::BL, { windowSize.x * 0.486f,  windowSize.y }, 5);
-	obj->SetActive(false);
-	fixedUi.push_back(obj);
 
 	
 }
@@ -379,4 +378,20 @@ void UiDungeon::DeactivateSelectBox()
 void UiDungeon::DeactivateSkillNameFrame()
 {
 	skillNameFrame.SetActive(false);
+}
+
+void UiDungeon::ShowMonsterInfoPanel(const MonsterInfo& info)
+{
+	monsterInfoPanel->UpdateInfo(info);
+	monsterInfoPanel->SetActive(true);
+}
+
+void UiDungeon::HideMonsterInfoPanel()
+{
+	monsterInfoPanel->SetActive(false);
+}
+
+bool UiDungeon::IsInfoPanelActive()
+{
+	return monsterInfoPanel->IsActive();
 }

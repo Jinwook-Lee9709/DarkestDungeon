@@ -4,6 +4,7 @@
           "Monster1":
           {
                "type": 0,
+               "name": "SKELETON MILITIA",
                "hp" : 10,
                "maxHp" : 10,
                "speed" : 2,
@@ -28,6 +29,7 @@
           "Monster2":
           {
                "type": 0,
+               "name": "SKELETON MILITIA",
                "hp" : 10,
                "maxHp" : 10,
                "speed" : 4,
@@ -52,6 +54,7 @@
           "Monster3":
           {
                "type": 0,
+               "name": "SKELETON MILITIA",
                "hp" : 10,
                "maxHp" : 10,
                "speed" : 6,
@@ -76,6 +79,7 @@
           "Monster4":
           {
                "type": 0,
+               "name": "SKELETON MILITIA",
                "hp" : 10,
                "maxHp" : 10,
                "speed" : 8,

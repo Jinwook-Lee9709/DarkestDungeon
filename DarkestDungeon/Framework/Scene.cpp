@@ -64,6 +64,7 @@ void Scene::OnPreDraw()
 void Scene::Draw(sf::RenderWindow& window)
 {
 	std::priority_queue<GameObject*, std::vector<GameObject*>, DrawOrderComparer> drawQueue;
+	std::priority_queue<GameObject*, std::vector<GameObject*>, DrawOrderComparer> drawPopupQueue;
 	std::priority_queue<GameObject*, std::vector<GameObject*>, DrawOrderComparer> drawUiQueue;
 	for (auto obj : gameObjects)
 	{
@@ -72,6 +73,10 @@ void Scene::Draw(sf::RenderWindow& window)
 		if (obj->sortingLayer >= SortingLayers::UI)
 		{
 			drawUiQueue.push(obj);
+		}
+		else if (obj->sortingLayer == SortingLayers::Popup)
+		{
+			drawPopupQueue.push(obj);
 		}else
 		{
 			drawQueue.push(obj);
@@ -85,6 +90,13 @@ void Scene::Draw(sf::RenderWindow& window)
 		GameObject* obj = (drawQueue.top());
 		obj->Draw(window);
 		drawQueue.pop();
+	}
+	window.setView(popupView);
+	while (!drawPopupQueue.empty())
+	{
+		GameObject* obj = (drawPopupQueue.top());
+		obj->Draw(window);
+		drawPopupQueue.pop();
 	}
 	window.setView(uiView);
 	while (!drawUiQueue.empty())
@@ -181,6 +193,16 @@ sf::Vector2f Scene::ScreenToUi(sf::Vector2i screenPos)
 sf::Vector2i Scene::UiToScreen(sf::Vector2f worldPos)
 {
 	return FRAMEWORK.GetWindow().mapCoordsToPixel(worldPos, uiView);
+}
+
+sf::Vector2f Scene::ScreenToPop(sf::Vector2i screenPos)
+{
+	return FRAMEWORK.GetWindow().mapPixelToCoords(screenPos, popupView);
+}
+
+sf::Vector2i Scene::PopToScreen(sf::Vector2f worldPos)
+{
+	return FRAMEWORK.GetWindow().mapCoordsToPixel(worldPos, popupView);
 }
 
 //template <typename T>

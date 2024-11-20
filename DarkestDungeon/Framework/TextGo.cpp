@@ -69,12 +69,14 @@ void TextGo::SetPosition(const sf::Vector2f& pos)
 void TextGo::SetString(const std::string str)
 {
 	text.setString(str);
+	SetOrigin(originPreset);
 }
 
 
 void TextGo::SetStringByTable(const std::string str)
 {
 	text.setString(STRING_TABLE->Get(str));
+	SetOrigin(originPreset);
 }
 
 void TextGo::SetCharacterSize(int size)

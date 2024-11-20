@@ -131,7 +131,7 @@ void CharacterContainer::Reset()
 void CharacterContainer::Update(float dt)
 {
 	if (moving) {
-		position = Utils::Lerp(position, dest, 10 * dt, true);
+		position = Utils::Lerp(position, dest, speed * dt, true);
 		if (Utils::Magnitude(dest - position) < 0.05f)
 		{
 			SetPosition(dest);
@@ -197,6 +197,14 @@ void CharacterContainer::ActiavteTargetUi(TargetUi type)
 
 void CharacterContainer::MoveToCoord(sf::Vector2f coord)
 {
+	speed = 10;
+	moving = true;
+	dest = coord;
+}
+
+void CharacterContainer::MoveToCoordDouble(sf::Vector2f coord)
+{
+	speed = 20;
 	moving = true;
 	dest = coord;
 }

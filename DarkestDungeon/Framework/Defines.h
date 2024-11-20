@@ -5,8 +5,8 @@ using json = nlohmann::json;
 enum class SortingLayers
 {
 	Background,
-	Test,
 	Foreground,
+	Popup,
 	Default,
 	UI,
 

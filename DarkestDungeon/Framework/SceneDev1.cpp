@@ -39,8 +39,11 @@ void SceneDev1::Init()
 	//Set View 
 	worldView.setSize(windowSize);
 	worldView.setCenter(windowSize.x * 0.5f, windowSize.y * 0.5f);
+	popupView.setSize(windowSize);
+	popupView.setCenter(windowSize.x * 0.5f, windowSize.y * 0.5f);
 	uiView.setSize(windowSize);
 	uiView.setCenter(windowSize.x * 0.5f, windowSize.y * 0.5f);
+
 
 	battleManager = new BattleManager(this);
 	battleManager->Init();
@@ -143,6 +146,15 @@ void SceneDev1::LoadMonsterResource()
 void SceneDev1::LoadEffectResource()
 {
 	RES_TABLE_MGR.LoadEffectAnimation();
+}
+
+std::vector<sf::View*> SceneDev1::GetViews()
+{
+	std::vector<sf::View*> views;
+	views.push_back(&worldView);
+	views.push_back(&popupView);
+	views.push_back(&uiView);
+	return views;
 }
 
 void SceneDev1::ChangeCharacterPos(int first, int second)

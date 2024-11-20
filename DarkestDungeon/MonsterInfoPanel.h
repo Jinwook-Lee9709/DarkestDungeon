@@ -1,9 +1,42 @@
 #pragma once
 
+
+enum class textId
+{
+	MonsterName,
+	HpText,
+	HpValue,
+	ProtectText,
+	ProtectValue,
+	DodgeText,
+	DodgeValue,
+	SpeedText,
+	SpeedValue,
+	Resistance,
+	ResStunText,
+	ResStunValue,
+	ResBlightText,
+	ResBlightValue,
+	ResBleedText,
+	ResBleedValue,
+	ResDebuffText,
+	ResDebuffValue,
+	ResMoveText,
+	ResMoveValue,
+	Skill
+
+
+};
+
+struct MonsterInfo;
+
 class MonsterInfoPanel : public GameObject
 {
+
 protected:
-	SpriteGo panel;
+	SpriteGo* panel;
+	std::vector<TextGo*> texts;
+	std::vector<SpriteGo*> resIcons;
 
 
 
@@ -18,9 +51,15 @@ public:
 	void SetOrigin(Origins preset) override;
 	void SetOrigin(const sf::Vector2f& newOrigin) override;
 
-	void Init() override;
 	void Release() override;
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
+
+	void UpdateInfo(const MonsterInfo& info);
+	void SetGoInfo(GameObject* obj, const Origins& origin,
+		const sf::Vector2f pos, const int& order,
+		const bool& flipX = false, const bool& flipY = false);
+
+	void SetOpacity(int opacity);
 };

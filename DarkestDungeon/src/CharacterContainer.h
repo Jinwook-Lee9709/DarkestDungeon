@@ -21,6 +21,7 @@ private:
 	SpriteGo target;
 
 	int currentPos;
+	int speed;
 
 	CharacterInfo info;
 	DebuffText debuffText;
@@ -56,6 +57,7 @@ public:
 
 	void ChangePos(short pos) { this->currentPos = pos; }
 	void MoveToCoord(sf::Vector2f coord);
+	void MoveToCoordDouble(sf::Vector2f coord);
 
 	void SetInitialStatus(const json& info);
 

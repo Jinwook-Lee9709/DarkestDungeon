@@ -106,7 +106,7 @@ void MonsterContainer::Reset()
 void MonsterContainer::Update(float dt)
 {
 	if (moving) {
-		position = Utils::Lerp(position, dest, 10 * dt, true);
+		position = Utils::Lerp(position, dest, speed * dt, true);
 		if (Utils::Magnitude(dest - position) < 0.05f)
 		{
 			SetPosition(dest);
@@ -129,17 +129,19 @@ void MonsterContainer::Draw(sf::RenderWindow& window)
 	if (isAlive) {
 		monster.Draw(window);
 		window.draw(hpBar);
+
+		if (debuffText.IsActive())
+			debuffText.Draw(window);
+
+		if (damageText.IsActive())
+			damageText.Draw(window);
+		if (stunEffect.IsActive())
+			stunEffect.Draw(window);
+
+
+		target.Draw(window);
 	}
-	if (debuffText.IsActive())
-		debuffText.Draw(window);
-
-	if (damageText.IsActive())
-		damageText.Draw(window);
-	if (stunEffect.IsActive())
-		stunEffect.Draw(window);
-
 	hitbox.Draw(window);
-	target.Draw(window);
 }
 
 void MonsterContainer::ActiavteTargetUi(TargetUi type)
@@ -163,6 +165,14 @@ void MonsterContainer::ActiavteTargetUi(TargetUi type)
 
 void MonsterContainer::MoveToCoord(sf::Vector2f coord)
 {
+	speed = 10;
+	moving = true;
+	dest = coord;
+}
+
+void MonsterContainer::MoveToCoordDouble(sf::Vector2f coord)
+{
+	speed = 20;
 	moving = true;
 	dest = coord;
 }

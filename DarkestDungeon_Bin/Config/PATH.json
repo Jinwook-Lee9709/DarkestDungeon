@@ -44,17 +44,25 @@
                 "poptext_bleed" : "resource/Overlays/poptext_bleed.png",
                 "poptext_debuff" : "resource/Overlays/poptext_debuff.png",
                 "poptext_poison" : "resource/Overlays/poptext_poison.png",
+                
+                "tray_stun" : "resource/Overlays/tray_stun.png",
+                "tray_poison" : "resource/Overlays/tray_poison.png",
+                "tray_bleed" : "resource/Overlays/tray_bleed.png",
+                "tray_debuff" : "resource/Overlays/tray_debuff.png",
+                "tray_move" : "resource/Overlays/tray_move.png",
 
                 "name_frame" : "resource/Overlays/name_frame.png",
 
                 "side_decor" : "resource/Panels/side_decor.png"
+
+            
             },
             "Font" :{
                 "KOMIKAP_":      "fonts/KOMIKAP_.ttf",
                 "Bokor":      "fonts/Bokor.ttf",
                 "LeeL":      "fonts/LeeL.ttf"
             },
-            "Sound:" :{
+            "Sound" :{
                 "chop":          "sound/chop.wav",
                 "death":         "sound/death.wav",
                 "out_of_time":    "sound/out_of_time.wav"

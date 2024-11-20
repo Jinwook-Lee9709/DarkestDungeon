@@ -7,6 +7,7 @@ void ResourceTableManager::Init()
 	RES_MGR(sf::Texture);
 	RES_MGR(sf::Font);
 	RES_MGR(sf::SoundBuffer);
+	RES_MGR(sf::Shader);
 	RES_MGR(AnimationClip);
 	std::ifstream file1("Config/PATH.json", std::ios::in);
 	if (!file1) {
@@ -160,6 +161,7 @@ bool ResourceTableManager::UnLoadScene(const std::string& scene)
 		}
 		it++;
 	}
+	
 	return true;
 }
 
@@ -189,6 +191,8 @@ sf::SoundBuffer& ResourceTableManager::GetSound(const std::string& soundKey)
 	}
 	return 	RES_MGR(sf::SoundBuffer).Get(it->second);
 }
+
+
 
 AnimationClip& ResourceTableManager::GetAnim(const std::string& AnimId)
 {

@@ -44,4 +44,5 @@ public:
 #define GET_TEX(X) (RES_TABLE_MGR.GetTex(X))
 #define GET_FONT(X) (RES_TABLE_MGR.GetFont(X))
 #define GET_SOUND(X) (RES_TABLE_MGR.GetSound(X))
+#define GET_SHADER(X) (RES_TABLE_MGR.GetShader(X))
 #define GET_ANIM(X) (RES_TABLE_MGR.GetAnim(X))

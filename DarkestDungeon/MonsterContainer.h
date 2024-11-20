@@ -9,6 +9,7 @@ class Monster;
 struct MonsterInfo
 {
 	MonsterType type;
+	std::string name;
 	int hp;
 	int maxHp;
 	int speed;
@@ -30,7 +31,7 @@ struct MonsterInfo
 	std::vector<std::string> skill4;
 
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(MonsterInfo
-		, type, hp, maxHp, speed, dodge,
+		, type, name, hp, maxHp, speed, dodge,
 		accuracy, critical, minDamage, maxDamage, protect, skillCount,
 		resistStun, resistBlight, resistBleed, resistDebuff, resistMove,
 		skill1, skill2, skill3, skill4);
@@ -46,6 +47,7 @@ protected:
 	SpriteGo target;
 
 	int currentPos;
+	int speed;
 
 	MonsterInfo info;
 	//float Timer;
@@ -82,7 +84,7 @@ public:
 
 	void ChangePos(short pos) { this->currentPos = pos; }
 	void MoveToCoord(sf::Vector2f coord);
-
+	void MoveToCoordDouble(sf::Vector2f coord);
     void SetStatus(const json& info);
 
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);

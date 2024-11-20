@@ -2,7 +2,8 @@
 #include "NameFrame.h"
 class SpriteGo;
 class TextGo;
-
+class MonsterInfoPanel;
+struct MonsterInfo;
 
 enum class PlayerTextIndex {
 	ACCURACY,
@@ -29,6 +30,7 @@ private:
 	std::string SkillTexId[4][4];
 
 	NameFrame skillNameFrame;
+	MonsterInfoPanel* monsterInfoPanel;
 
 	std::unordered_map<PlayerTextIndex, TextGo*> playerText;
 
@@ -37,6 +39,7 @@ private:
 	float timer;
 	float duration = 0.001f;
 	bool isFramePlaying = false;
+	bool isPanelActive = false;
 	int opacity;
 
 	sf::Vector2f windowSize;
@@ -77,4 +80,8 @@ public:
 
 	void DeactivateSelectBox();
 	void DeactivateSkillNameFrame();
+
+	void ShowMonsterInfoPanel(const MonsterInfo& info);
+	void HideMonsterInfoPanel();
+	bool IsInfoPanelActive();
 };

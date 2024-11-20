@@ -7,3 +7,14 @@ bleed,Bleed
 debuff,Debuffed
 move,Moved
 dodge,Dodge
+hpText,HP:
+protectText,PROT
+dodgeText,DODGE
+speedText,SPEED
+resistanceText,RESISTANCE
+stunText,STUN
+blightText,BLIGHT
+bleedText,BLEED
+debuffText,DEBUFF
+moveText,MOVE
+skillText,SKILL

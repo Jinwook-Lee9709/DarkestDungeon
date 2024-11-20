@@ -28,7 +28,6 @@ public:
 	void SetFillColor(const sf::Color& color);
 	void ChangeTexture(const std::string& texId);
 
-	
 	virtual sf::Vector2f GetSize();
 };
 

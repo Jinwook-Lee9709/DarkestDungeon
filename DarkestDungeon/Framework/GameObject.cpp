@@ -31,6 +31,22 @@ void GameObject::SetOrigin(Origins preset)
 	origin = { 0.f, 0.f };
 }
 
+bool GameObject::IsClicked(sf::Vector2f pos)
+{
+	if (InputManager::GetMouseButton(sf::Mouse::Left))
+	{
+		return hitbox.rect.getGlobalBounds().contains(pos);
+	}
+	else {
+		return false;
+	}
+}
+
+bool GameObject::IsHover(sf::Vector2f pos)
+{
+	return hitbox.rect.getGlobalBounds().contains(pos);
+}
+
 void GameObject::Init()
 {
 }

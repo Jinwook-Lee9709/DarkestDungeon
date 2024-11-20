@@ -4,7 +4,7 @@
 SpriteGo::SpriteGo(const std::string& texId, const std::string& name)
 	:GameObject(name), textureId(texId)
 {
-	
+
 }
 
 void SpriteGo::SetOrigin(Origins preset)
@@ -56,7 +56,6 @@ void SpriteGo::SetScale(const sf::Vector2f& scale)
 
 void SpriteGo::Draw(sf::RenderWindow& window)
 {
-	GameObject::Draw(window);
 	if (active)
 	{
 		window.draw(sprite);

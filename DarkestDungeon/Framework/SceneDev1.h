@@ -59,7 +59,10 @@ public:
 	std::vector<MonsterContainer*>& GetMonsters() { return monsters; }
 	std::vector<sf::Vector2f>& GetCharacterPos() { return characterContainerPos; }
 	std::vector<sf::Vector2f>& GetMonsterPos() { return monsterContainerPos1; }
+	std::vector<sf::View*> GetViews();
 	
-
 	void ChangeCharacterPos(int first, int second);
+
+
+
 };

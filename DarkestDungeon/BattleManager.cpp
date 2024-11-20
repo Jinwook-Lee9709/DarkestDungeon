@@ -9,7 +9,7 @@
 BattleManager::BattleManager(SceneDev1* scene)
 	:currentScene(scene)
 {
-
+    views = currentScene->GetViews();
 }
 
 void BattleManager::Init()
@@ -19,6 +19,28 @@ void BattleManager::Init()
         std::cerr << "Failed to Read File";
     }
     monsterTable = json::parse(file);
+    //calculate coord for attack animation
+    sf::Vector2f size = FRAMEWORK.GetWindowSizeF();
+    sf::Vector2f zoomedsize = 0.8f * FRAMEWORK.GetWindowSizeF();
+    sf::Vector2f block1 = { zoomedsize.x / 5 , size.y * 0.62f };
+    sf::Vector2f block2 = { zoomedsize.x / 10 , size.y * 0.62f };
+    for (int i = 0; i < 4; i++)
+    {
+        sf::Vector2f coord = { size.x * 9 / 10 - (i+1) * block1.x, block1.y };
+        zoomedChracterPos.push_back(coord);
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        sf::Vector2f coord = { size.x / 2 - (i + 1) * block2.x, block2.y };
+        zoomedContainerPos.push_back(coord);
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        sf::Vector2f coord = { size.x / 2 + (i + 1) * block2.x, block2.y };
+        zoomedContainerPos.push_back(coord);
+    }
+   
+
 }
 
 void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
@@ -29,14 +51,13 @@ void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
     this->characters = characters;
     this->monsters = monsters;
     this->ui = ui;
-    this->chracterOrder = chracterOrder;
+    this->characterOrder = chracterOrder;
     SetMonsterInfo();
 }
 
 
 void BattleManager::Update(float dt)
 {
-
 
 
 
@@ -51,19 +72,15 @@ void BattleManager::Update(float dt)
     case Status::CharacterTurn:
         UpdateCharacterTurn(dt);
         break;
-
     case Status::SkillSelected:
         UpdateSkillSelected(dt);
         break;
-
     case Status::ItemSelected:
         UpdateItemSelected(dt);
         break;
-
     case Status::CharacterAnimate:
         UpdateCharacterAnimate(dt);
         break;
-
     case Status::MonsterTurn:
         UpdateMonsterTurn(dt);
         break;
@@ -127,19 +144,35 @@ void BattleManager::UpdateJudgeTurn(float dt)
     if (orderQueue.front() < 4 )
     {
         currentCharacter = orderQueue.front();
-        ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
-        orderQueue.pop();
-        beforeStatus = Status::JudgeTurn;
-        currentStatus = Status::ApplyDebuff;
-        isCharacterTurn = true;
+        if ((*characters)[currentCharacter]->IsAlive())
+        {
+            ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
+            orderQueue.pop();
+            beforeStatus = Status::JudgeTurn;
+            currentStatus = Status::ApplyDebuff;
+            isCharacterTurn = true;
+        }
+        else
+        {
+            orderQueue.pop();
+        }
+      
     }
     else
     {
         currentMonster = orderQueue.front()-4;
-        orderQueue.pop();
-        beforeStatus = Status::JudgeTurn;
-        currentStatus = Status::ApplyDebuff;
-        isCharacterTurn = false;
+        if ((*monsters)[currentMonster]->IsAlive())
+        {
+            orderQueue.pop();
+            beforeStatus = Status::JudgeTurn;
+            currentStatus = Status::ApplyDebuff;
+            isCharacterTurn = false;
+        }
+        else
+        {
+            orderQueue.pop();
+        }
+
     }
   
 }
@@ -215,6 +248,7 @@ void BattleManager::UpdateApplyDebuff(float dt)
 
 void BattleManager::UpdateCharacterTurn(float dt)
 {
+    UpdateMonsterPanel();
     if (beforeStatus == Status::ApplyDebuff){
         std::vector<int> skills = (*characters)[currentCharacter]->CheckAvailableSkill();
         if (!skills.empty()) {
@@ -227,7 +261,7 @@ void BattleManager::UpdateCharacterTurn(float dt)
                 {
                     if (range[0] == 0) 
                     {
-                        if (range[i] == 1 && (*characters)[(*chracterOrder)[i-1]]->IsAlive())
+                        if (range[i] == 1 && (*characters)[(*characterOrder)[i-1]]->IsAlive())
                         {
                             availabe[skill] = true;
                         }
@@ -279,6 +313,7 @@ void BattleManager::UpdateCharacterTurn(float dt)
 
 void BattleManager::UpdateSkillSelected(float dt)
 {
+    UpdateMonsterPanel();
     if (beforeStatus == Status::CharacterTurn || beforeStatus == Status::SkillSelected) {
         ResetTargetUi();
         ChangeTargetUi();
@@ -298,11 +333,14 @@ void BattleManager::UpdateSkillSelected(float dt)
             if (range[0] == 1 || range[0] == 3) {
                 for (int i = 5; i < 9; i++)
                 {
-                    if ((*monsters)[monsterOrder[i - 5]]->IsClicked() && range[i] == 1)
+                    if ((*monsters)[monsterOrder[i - 5]]->IsClicked(currentScene->ScreenToWorld(InputManager::GetMousePosition())) 
+                        && range[i] == 1)
                     {
                         (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, monsterOrder[i - 5], selectedSkill);
+                        characterTargetInfo = monsterOrder[i - 5];
                         ResetTargetUi();
-                        ui->DeactivateSelectBox();                
+                        ui->DeactivateSelectBox();       
+                        ui->HideMonsterInfoPanel();
                         beforeStatus = Status::SkillSelected;
                         currentStatus = Status::CharacterAnimate;
                         return;
@@ -312,11 +350,13 @@ void BattleManager::UpdateSkillSelected(float dt)
             if (range[0] == 0 || range[0] == 2) {
                 for (int i = 0; i < 4; i++)
                 {
-                    if ((*characters)[(*chracterOrder)[i]]->IsClicked() && range[i + 5] == 1)
+                    if ((*characters)[(*characterOrder)[i]]->IsClicked(currentScene->ScreenToWorld(InputManager::GetMousePosition())) && range[i + 5] == 1)
                     {
-                        (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, (*chracterOrder)[i], selectedSkill);
+                        (*characters)[currentCharacter]->UseSkill(*characters, *monsters, currentCharacter, (*characterOrder)[i], selectedSkill);
+                        characterTargetInfo = (*characterOrder)[i];
                         ResetTargetUi();
                         ui->DeactivateSelectBox();
+                        ui->HideMonsterInfoPanel();
                         beforeStatus = Status::SkillSelected;
                         currentStatus = Status::CharacterAnimate;
                         return;
@@ -329,11 +369,12 @@ void BattleManager::UpdateSkillSelected(float dt)
             for (int i = 0; i < 4; i++)
             {
                 CharacterContainer* character = (*characters)[i];
-                if (character->IsClicked() && character->IsAlive() && i != currentCharacter)
+                if (character->IsClicked(currentScene->ScreenToWorld(InputManager::GetMousePosition())) && character->IsAlive() && i != currentCharacter)
                 {
                     currentScene->ChangeCharacterPos(currentCharacter, i);
                     ResetTargetUi();
                     ui->DeactivateSelectBox();
+                    ui->HideMonsterInfoPanel();
                     beforeStatus = Status::SkillSelected;
                     currentStatus = Status::CharacterAnimate;
                     return;
@@ -358,15 +399,41 @@ void BattleManager::UpdateCharacterAnimate(float dt)
     if (beforeStatus == Status::SkillSelected)
     {
         timer = 0;
+        duration = 2.f;
         beforeStatus = Status::None;
         ui->DeactivateAllSkillButton();
+        if (selectedSkill != 5)
+        {
+            AnimateView(true);
+        }
+
     }
+ /*   sf::Vector2f center = views[1]->getCenter();*/
+    if (timer < 0.2f)
+    {
+        float sub = 2 * dt;
+        elapsedZoom += 2 * dt;
+        if (elapsedZoom > 0.4f)
+        {
+            sub -= elapsedZoom - 0.4f;
+        }
+        views[1]->zoom(1 - sub);
+        zoomSnapshot.push_back(1 - sub);
+        sf::Vector2f randomCoord = Utils::RandomOnUnitCircle();
+        sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
+        views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
+    }
+    views[1]->move({ -30 * dt,0.f });
     timer += dt;
     if (timer > duration) {
         timer = 0;
         (*characters)[currentCharacter]->SetToIdle();
         beforeStatus == Status::CharacterAnimate;
         currentStatus = Status::FillEmptyPos;
+        if (selectedSkill != 5)
+        {
+            ResetView();
+        }
 
     }
 }
@@ -386,7 +453,7 @@ void BattleManager::UpdateMonsterTurn(float dt)
                 for (int i = 0; i < 4; i++)
                 {
 
-                    if (range[8 - i] == 1 && (*characters)[(*chracterOrder)[i]]->IsAlive()) 
+                    if (range[8 - i] == 1 && (*characters)[(*characterOrder)[i]]->IsAlive()) 
                     {
                         targetList.push_back(i);
                     }
@@ -402,7 +469,7 @@ void BattleManager::UpdateMonsterTurn(float dt)
 
                 monsterTargetInfo.clear();
                 monsterTargetInfo.push_back(monsterOrder[currentMonster]);
-                monsterTargetInfo.push_back((*chracterOrder)[target]);
+                monsterTargetInfo.push_back((*characterOrder)[target]);
                 monsterTargetInfo.push_back(targetInfo->first + 1);
                 std::cout << targetInfo->first << std::endl;
                 monsterSkillSelected = true;
@@ -460,13 +527,31 @@ void BattleManager::UpdateMonsterAnimate(float dt)
         beforeStatus = Status::None;
         timer = 0;
         duration = 2.f;
+        AnimateView(false);
     }
+    if (timer < 0.2f)
+    {
+        float sub = 2 * dt;
+        elapsedZoom += 2 * dt;
+        if (elapsedZoom > 0.4f)
+        {
+            sub -= elapsedZoom - 0.4f;
+        }
+        views[1]->zoom(1 - sub);
+        zoomSnapshot.push_back(1 - sub);
+
+        sf::Vector2f randomCoord = Utils::RandomOnUnitCircle();
+        sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
+        views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
+    }
+    views[1]->move({ 30 * dt,0.f });
     timer += dt;
     if (timer > duration)
     {
         timer = 0;
         (*monsters)[currentMonster]->SetToIdle();
         currentStatus = Status::FillEmptyPos;
+        ResetView();
     }
    
 }
@@ -478,7 +563,7 @@ void BattleManager::UpdateFillEmptyPos(float dt)
         flag = false;
         for (int i = 0; i < 3; i++)
         {
-            if (!(*characters)[(*chracterOrder)[i]]->IsAlive() && (*characters)[(*chracterOrder)[i + 1]]->IsAlive())
+            if (!(*characters)[(*characterOrder)[i]]->IsAlive() && (*characters)[(*characterOrder)[i + 1]]->IsAlive())
             {
                 currentScene->ChangeCharacterPos(i, i + 1);
                 flag = true;
@@ -496,6 +581,29 @@ void BattleManager::UpdateFillEmptyPos(float dt)
     } while (flag);
 
     currentStatus = Status::JudgeTurn;
+}
+
+void BattleManager::UpdateMonsterPanel()
+{
+    bool flag = false;
+    int i = 0;
+    for (auto*& monster : (*monsters))
+    {
+        if (flag = monster->IsHover(currentScene->ScreenToWorld(InputManager::GetMousePosition()))
+            && monster->IsActive())
+        {
+            break;
+        }
+        i++;
+    }
+    if (ui->IsInfoPanelActive() && !flag)
+    {
+        ui->HideMonsterInfoPanel();
+    }
+    else if (!ui->IsInfoPanelActive() && flag && (*monsters)[i]->IsAlive())
+    {
+        ui->ShowMonsterInfoPanel((*monsters)[i]->GetMonsterInfo());
+    }
 }
 
 void BattleManager::ResetTargetUi()
@@ -523,16 +631,16 @@ void BattleManager::ChangeTargetUi()
         if (range[0] == 0 || range[0] == 2) {
             for (int i = 0; i < 4; i++)
             {
-                if ((*characters)[(*chracterOrder)[i]]->IsAlive() && range[i + 5] == 1)
+                if ((*characters)[(*characterOrder)[i]]->IsAlive() && range[i + 5] == 1)
                 {
-                    (*characters)[(*chracterOrder)[i]]->ActiavteTargetUi(TargetUi::HEAL);
+                    (*characters)[(*characterOrder)[i]]->ActiavteTargetUi(TargetUi::HEAL);
                 }
             }
         }
     }
     else if (selectedSkill == 5)
     {
-       
+
         for (int i = 0; i < 4; i++)
         {
             std::cout << currentCharacter;
@@ -542,7 +650,7 @@ void BattleManager::ChangeTargetUi()
             }
         }
     }
-  
+
 }
 
 void BattleManager::ChangeMonsterPos(int first, int second)
@@ -550,14 +658,124 @@ void BattleManager::ChangeMonsterPos(int first, int second)
     auto monsterPos = currentScene->GetMonsterPos();
     int firstPos = (*monsters)[first]->GetPos();
     int secondPos = (*monsters)[second]->GetPos();
-    sf::Vector2f firstCoord = monsterPos[firstPos-4];
-    sf::Vector2f secondCoord = monsterPos[secondPos-4];
+    sf::Vector2f firstCoord = monsterPos[firstPos - 4];
+    sf::Vector2f secondCoord = monsterPos[secondPos - 4];
     (*monsters)[first]->ChangePos(secondPos);
     (*monsters)[second]->ChangePos(firstPos);
     (*monsters)[first]->MoveToCoord(secondCoord);
     (*monsters)[second]->MoveToCoord(firstCoord);
-    monsterOrder[firstPos-4] = second;
-    monsterOrder[secondPos-4] = first;
+    monsterOrder[firstPos - 4] = second;
+    monsterOrder[secondPos - 4] = first;
+}
+
+void BattleManager::AnimateView(bool isCharacter)
+{
+    if (isCharacter)
+    {
+        std::vector<short> range = (*characters)[currentCharacter]->GetSkillRange(selectedSkill - 1);
+        if (range[0] == 0) {
+            if ((*characters)[currentCharacter]->GetPos() > (*characters)[characterTargetInfo]->GetPos())
+            {
+                (*characters)[characterTargetInfo]->MoveToCoordDouble(zoomedChracterPos[1]);
+                (*characters)[characterTargetInfo]->sortingLayer = SortingLayers::Popup;
+                (*characters)[currentCharacter]->MoveToCoordDouble(zoomedChracterPos[2]);
+                (*characters)[currentCharacter]->sortingLayer = SortingLayers::Popup;
+            }
+            else
+            {
+                (*characters)[characterTargetInfo]->MoveToCoordDouble(zoomedChracterPos[2]);
+                (*characters)[characterTargetInfo]->sortingLayer = SortingLayers::Popup;
+                (*characters)[currentCharacter]->MoveToCoordDouble(zoomedChracterPos[1]);
+                (*characters)[currentCharacter]->sortingLayer = SortingLayers::Popup;
+            }
+        }
+        if (range[0] == 1) {
+            (*characters)[currentCharacter]->MoveToCoordDouble(zoomedContainerPos[0]);
+            (*characters)[currentCharacter]->sortingLayer = SortingLayers::Popup;
+            (*monsters)[characterTargetInfo]->MoveToCoordDouble(zoomedContainerPos[4]);
+            (*monsters)[characterTargetInfo]->sortingLayer = SortingLayers::Popup;
+        }
+        if (range[0] == 2) {
+            int j = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (range[5 + i] == 1 && (*characters)[(*characterOrder)[i]]->IsAlive())
+                {
+                    (*characters)[(*characterOrder)[i]]->MoveToCoordDouble(zoomedContainerPos[j]);
+                    (*characters)[(*characterOrder)[i]]->sortingLayer = SortingLayers::Popup;
+                    j++;
+                }
+            }
+        }
+        if (range[0] == 3) {
+            (*characters)[currentCharacter]->MoveToCoordDouble(zoomedContainerPos[0]);
+            (*characters)[currentCharacter]->sortingLayer = SortingLayers::Popup;
+            int j = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (range[5 + i] == 1 && (*monsters)[(monsterOrder[i])]->IsAlive())
+                {
+                    (*monsters)[monsterOrder[i]]->MoveToCoordDouble(zoomedContainerPos[j + 4]);
+                    (*monsters)[monsterOrder[i]]->sortingLayer = SortingLayers::Popup;
+                    j++;
+                }
+            }
+        }
+
+        views[1]->setRotation(2.f);
+    }
+    else
+    {
+        std::vector<short> range = (*monsters)[currentMonster]->GetSkillRange(monsterTargetInfo[2]-1);
+        if (range[0] == 1) {
+            (*monsters)[currentMonster]->MoveToCoordDouble(zoomedContainerPos[4]);
+            (*monsters)[currentMonster]->sortingLayer = SortingLayers::Popup;
+            (*characters)[monsterTargetInfo[1]]->MoveToCoordDouble(zoomedContainerPos[0]);
+            (*characters)[monsterTargetInfo[1]]->sortingLayer = SortingLayers::Popup;
+        }
+        if (range[0] == 3) {
+            (*monsters)[currentMonster]->MoveToCoordDouble(zoomedContainerPos[4]);
+            (*monsters)[currentMonster]->sortingLayer = SortingLayers::Popup;
+            int j = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (range[5 + i] == 1 && (*monsters)[(monsterOrder[i])]->IsAlive())
+                {
+                    (*characters)[(*characterOrder)[i]]->MoveToCoordDouble(zoomedContainerPos[j]);
+                    (*characters)[(*characterOrder)[i]]->sortingLayer = SortingLayers::Popup;
+                    j++;
+                }
+            }
+        }
+        views[1]->setRotation(-2.f);
+    }
+    elapsedZoom = 0;
+    views[1]->setCenter(views[0]->getCenter());
+
+
+}
+
+void BattleManager::ResetView()
+{
+    int i = 0;
+    for (auto& character : (*characters))
+    {
+        character->MoveToCoord(currentScene->GetCharacterPos()[(*characterOrder)[i]]);
+        character->sortingLayer = SortingLayers::Foreground;
+        i++;
+    }
+    i = 0;
+    for (auto& monster : (*monsters))
+    {
+        monster->MoveToCoord(currentScene->GetMonsterPos()[monsterOrder[i]]);
+        monster->sortingLayer = SortingLayers::Foreground;
+        i++;
+    }
+    for (auto& it : zoomSnapshot)
+    {
+        views[1]->zoom(1 / it);
+    }
+    zoomSnapshot.clear();
 }
 
 

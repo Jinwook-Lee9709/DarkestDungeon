@@ -64,10 +64,8 @@ public:
 	{
 		return hitbox;
 	}
-	bool IsClicked()
-	{
-		return hitbox.isClicked();
-	}
+	bool IsClicked(sf::Vector2f pos);
+	bool IsHover(sf::Vector2f pos);
 
 	virtual void Init();
 	virtual void Release();

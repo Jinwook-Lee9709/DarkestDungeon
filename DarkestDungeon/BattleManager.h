@@ -27,6 +27,7 @@ public:
 
 private:
 	SceneDev1* currentScene;
+	std::vector<sf::View*> views;
 	UiDungeon* ui;
 	Status beforeStatus;
 	Status currentStatus;
@@ -36,7 +37,10 @@ private:
 	std::vector<CharacterContainer*>* characters;
 	std::vector<MonsterContainer*>* monsters;
 
-	std::vector<int>* chracterOrder;
+	std::vector<sf::Vector2f> zoomedChracterPos;
+	std::vector<sf::Vector2f> zoomedContainerPos;
+
+	std::vector<int>* characterOrder;
 	std::vector<int> monsterOrder;
 
 	bool isCharacterTurn;
@@ -44,16 +48,21 @@ private:
 	short currentMonster;
 
 	int selectedSkill;
+	short characterTargetInfo;
 	std::vector<short> monsterTargetInfo;
 
 	float timer;
 	float duration = 2.f;
+	float elapsedZoom = 0.f;
+	std::vector<float> zoomSnapshot;
 
 	bool monsterSkillSelected;
 	bool animationPlaying = false;
 	bool isStuned = false;
 
+
 	std::queue<int> orderQueue;
+
 
 	
 
@@ -88,9 +97,14 @@ public:
 	void UpdateMonsterAnimate(float dt);
 	void UpdateFillEmptyPos(float dt);
 
+	void UpdateMonsterPanel();
+
 	void ResetTargetUi();
 	void ChangeTargetUi();
 
 	void ChangeMonsterPos(int first, int second);
+
+	void AnimateView(bool isCharacter);
+	void ResetView();
 };
 
