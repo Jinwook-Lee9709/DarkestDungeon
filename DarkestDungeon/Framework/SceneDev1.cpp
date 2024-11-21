@@ -6,6 +6,7 @@
 #include "CharacterContainer.h"
 #include "MonsterContainer.h"
 #include "UiDungeon.h"
+#include "ShadowRect.h"
 #include <fstream>
 
 
@@ -28,6 +29,7 @@ void SceneDev1::Init()
 		obj2->sortingLayer = SortingLayers::Foreground;
 		monsters.push_back(obj2);
 	}
+	AddGo(new ShadowRect("shadow"));
 
 	background = AddGo(new SpriteGo("room_empty"));
 	background->SetOrigin(Origins::TC);
@@ -72,7 +74,6 @@ void SceneDev1::Enter()
 void SceneDev1::Exit()
 {
 	RES_TABLE_MGR.UnLoadScene("Dev1");
-
 }
 
 void SceneDev1::Update(float dt)

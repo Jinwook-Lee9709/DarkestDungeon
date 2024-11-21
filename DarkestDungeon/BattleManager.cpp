@@ -4,6 +4,7 @@
 #include "CharacterContainer.h"
 #include "MonsterContainer.h"
 #include "UiDungeon.h"
+#include "ShadowRect.h"
 
 
 BattleManager::BattleManager(SceneDev1* scene)
@@ -53,14 +54,12 @@ void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
     this->ui = ui;
     this->characterOrder = chracterOrder;
     SetMonsterInfo();
+    shadow = dynamic_cast<ShadowRect*>(currentScene->FindGo("shadow"));
 }
 
 
 void BattleManager::Update(float dt)
 {
-
-
-
     switch (currentStatus)
     {
     case Status::JudgeTurn:
@@ -95,6 +94,7 @@ void BattleManager::Update(float dt)
     }
 }
 
+
 void BattleManager::SetMonsterInfo()
 {
     monsterOrder.clear();
@@ -110,6 +110,9 @@ void BattleManager::SetMonsterInfo()
 void BattleManager::UpdateJudgeTurn(float dt)
 {
     beforeStatus = Status::None;
+    ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
+    ui->ChangeCharacterInfoText((*characters)[currentCharacter]->GetCharacterInfo());
+    ui->DeactivateAllSkillButton();
     if (orderQueue.empty()) {
         std::priority_queue<std::pair< int, int >, std::vector<std::pair<int, int>>,Compare> sortingQueue;
         int index[8] = { -1 };//index for check Order by Pos
@@ -147,6 +150,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
         if ((*characters)[currentCharacter]->IsAlive())
         {
             ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
+            ui->ChangeCharacterInfoText((*characters)[currentCharacter]->GetCharacterInfo());
             orderQueue.pop();
             beforeStatus = Status::JudgeTurn;
             currentStatus = Status::ApplyDebuff;
@@ -403,6 +407,7 @@ void BattleManager::UpdateItemSelected(float dt)
 
 void BattleManager::UpdateCharacterAnimate(float dt)
 {
+
     if (beforeStatus == Status::SkillSelected)
     {
         timer = 0;
@@ -413,7 +418,6 @@ void BattleManager::UpdateCharacterAnimate(float dt)
         {
             AnimateView(true);
         }
-
     }
     if (selectedSkill != 5)
     {
@@ -426,14 +430,37 @@ void BattleManager::UpdateCharacterAnimate(float dt)
                 sub -= elapsedZoom - 0.4f;
             }
             views[1]->zoom(1 - sub);
-            zoomSnapshot.push_back(1 - sub);
+            zoomSnapshot.push(1 - sub);
             sf::Vector2f randomCoord = Utils::RandomOnUnitCircle();
             sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
             views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
         }
-        views[1]->move({ -30 * dt,0.f });
+            views[1]->move({ -30 * dt,0.f });
     }
     timer += dt;
+    if (timer > 1.8f && !moveCamera)
+    {
+        for (auto& character : (*characters))
+        {
+            character->MoveToCoord(currentScene->GetCharacterPos()[character->GetPos()]);
+            character->sortingLayer = SortingLayers::Foreground;
+        }
+        for (auto& monster : (*monsters))
+        {
+            monster->MoveToCoord(currentScene->GetMonsterPos()[monster->GetPos() - 4]);
+            monster->sortingLayer = SortingLayers::Foreground;
+        }
+        shadow->SetToInvisible();
+        moveCamera = true;
+    }
+    if (timer > 1.8f)
+    {
+        if (!zoomSnapshot.empty())
+        {
+            views[1]->zoom(1 / zoomSnapshot.front());
+            zoomSnapshot.pop();
+        }
+    }
     if (timer > duration) {
         timer = 0;
         (*characters)[currentCharacter]->SetToIdle();
@@ -447,7 +474,6 @@ void BattleManager::UpdateCharacterAnimate(float dt)
         {
             ResetView();
         }
-
     }
 }
 
@@ -531,6 +557,7 @@ void BattleManager::UpdateMonsterTurn(float dt)
 
 void BattleManager::UpdateMonsterAnimate(float dt)
 {
+
     if (beforeStatus == Status::MonsterTurn)
     {
         ResetTargetUi();
@@ -550,13 +577,36 @@ void BattleManager::UpdateMonsterAnimate(float dt)
             sub -= elapsedZoom - 0.4f;
         }
         views[1]->zoom(1 - sub);
-        zoomSnapshot.push_back(1 - sub);
+        zoomSnapshot.push(1 - sub);
 
         sf::Vector2f randomCoord = Utils::RandomOnUnitCircle();
         sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
         views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
     }
     views[1]->move({ 30 * dt, 0.f });
+    if (timer > 1.8f && !moveCamera)
+    {
+        for (auto& character : (*characters))
+        {
+            character->MoveToCoord(currentScene->GetCharacterPos()[character->GetPos()]);
+            character->sortingLayer = SortingLayers::Foreground;
+        }
+        for (auto& monster : (*monsters))
+        {
+            monster->MoveToCoord(currentScene->GetMonsterPos()[monster->GetPos() - 4]);
+            monster->sortingLayer = SortingLayers::Foreground;
+        }
+        shadow->SetToInvisible();
+        moveCamera = true;
+    }
+    if (timer > 1.8f)
+    {
+        if (!zoomSnapshot.empty())
+        {
+            views[1]->zoom(1 / zoomSnapshot.front());
+            zoomSnapshot.pop();
+        }
+    }
     timer += dt;
     if (timer > duration)
     {
@@ -767,27 +817,21 @@ void BattleManager::AnimateView(bool isCharacter)
     }
     elapsedZoom = 0;
     views[1]->setCenter(views[0]->getCenter());
-
-
+    moveCamera = false;
+    shadow->SetToVisible();
 }
 
 void BattleManager::ResetView()
 {
-    for (auto& character : (*characters))
+ 
+    while (!zoomSnapshot.empty())
     {
-        character->MoveToCoord(currentScene->GetCharacterPos()[character->GetPos()]);
-        character->sortingLayer = SortingLayers::Foreground;
+        views[1]->zoom(1/zoomSnapshot.front());
+        zoomSnapshot.pop();
     }
-    for (auto& monster : (*monsters))
-    {
-        monster->MoveToCoord(currentScene->GetMonsterPos()[monster->GetPos()-4]);
-        monster->sortingLayer = SortingLayers::Foreground;
-    }
-    for (auto& it : zoomSnapshot)
-    {
-        views[1]->zoom(1 / it);
-    }
-    zoomSnapshot.clear();
+
+
+
 }
 
 

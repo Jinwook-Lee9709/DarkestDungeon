@@ -109,6 +109,9 @@
     <ClCompile Include="NameFrame.cpp">
       <Filter>Scenes\Dev1\UI\Component</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowRect.cpp">
+      <Filter>Scenes\Dev1\Battle\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Framework.h">
@@ -249,6 +252,9 @@
     <ClInclude Include="SkillVestal.h">
       <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowRect.h">
+      <Filter>Scenes\Dev1\Battle\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -352,6 +358,9 @@
     </Filter>
     <Filter Include="Scenes\Dev1\UI\Component">
       <UniqueIdentifier>{ccc721e4-9d3c-4ef6-bb8c-38b74c5630f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Battle\Component">
+      <UniqueIdentifier>{7a4b642d-462e-4d8c-ae73-a44eae902115}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

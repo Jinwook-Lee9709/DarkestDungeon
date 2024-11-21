@@ -30,7 +30,6 @@ void SceneManager::Release()
 void SceneManager::ChangeScene(SceneIds id)
 {
 	nextScene = id;
-
 }
 
 

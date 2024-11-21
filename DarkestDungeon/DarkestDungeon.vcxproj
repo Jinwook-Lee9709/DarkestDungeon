@@ -36,6 +36,7 @@
     <ClCompile Include="MonsterContainer.cpp" />
     <ClCompile Include="MonsterInfoPanel.cpp" />
     <ClCompile Include="NameFrame.cpp" />
+    <ClCompile Include="ShadowRect.cpp" />
     <ClCompile Include="Slot.cpp" />
     <ClCompile Include="src\CharacterContainer.cpp" />
     <ClCompile Include="src\Ball.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="MonsterContainer.h" />
     <ClInclude Include="MonsterInfoPanel.h" />
     <ClInclude Include="NameFrame.h" />
+    <ClInclude Include="ShadowRect.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillCrusader.h" />
     <ClInclude Include="SkillHighwayman.h" />

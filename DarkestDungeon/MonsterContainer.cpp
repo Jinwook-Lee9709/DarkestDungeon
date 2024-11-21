@@ -235,7 +235,7 @@ void MonsterContainer::SetToDeath()
 {
 	isDying = true;
 	DeathEffector.SetDuration(1.4f);
-	DeathEffector.AddAnimation("death");
+	DeathEffector.AddAnimation("vestal_heal_target");
 	monster.SetToDeath();
 }
 std::vector<int> MonsterContainer::CheckAvailableSkill()
@@ -306,6 +306,7 @@ void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int st
 		if (Utils::RollTheDice(acc - info.resistBlight))
 		{
 			debuffStack[DebuffType::Blight] = { stack, damage };
+			debuffText.AddAnimation(DebuffType::Blight);
 		}
 		break;
 	}
@@ -314,6 +315,7 @@ void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int st
 		if (Utils::RollTheDice(acc - info.resistBleed))
 		{
 			debuffStack[DebuffType::Bleed] = { stack, damage };
+			debuffText.AddAnimation(DebuffType::Bleed);
 		}
 		break;
 	}
@@ -321,7 +323,8 @@ void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int st
 	{
 		if (Utils::RollTheDice(acc - info.resistDebuff))
 		{
-			debuffStack[DebuffType::Blight] = { stack, damage };
+			debuffStack[DebuffType::Debuff] = { stack, damage };
+			debuffText.AddAnimation(DebuffType::Debuff);
 		}
 		break;
 	}

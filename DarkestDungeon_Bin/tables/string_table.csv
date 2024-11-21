@@ -18,3 +18,9 @@ bleedText,BLEED
 debuffText,DEBUFF
 moveText,MOVE
 skillText,SKILL
+uiAccuracyText,ACC
+uiCriticalText,CRIT
+uiDamageText,DMG
+uiDodgeText,DODGE
+uiProtectText,PROT
+uiSpeedText,SPD

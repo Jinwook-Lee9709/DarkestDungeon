@@ -23,7 +23,7 @@ private:
 	bool instanceChk = false;
 
 	std::vector<SpriteGo*> fixedUi;
-	std::vector<TextGo*> fixedText;
+
 
 	SpriteGo* skillButton[7];
 	std::bitset<6> isSkillActive;
@@ -32,6 +32,7 @@ private:
 	NameFrame skillNameFrame;
 	MonsterInfoPanel* monsterInfoPanel;
 
+	std::unordered_map<PlayerTextIndex, TextGo*> fixedText;
 	std::unordered_map<PlayerTextIndex, TextGo*> playerText;
 
 	SpriteGo* inventory;
@@ -71,6 +72,7 @@ public:
 	void PlaySkillNameFrame(const std::string& str);
 	void UpdateSkillNameFrame(float dt);
 
+	void ChangeCharacterInfoText(const CharacterInfo& info);
 	void ChangeSkillButtonTexture(const CharacterInfo& info);
 	void ChangeSkillButtonActive(const std::vector<bool>& list);
 	void DeactivateAllSkillButton();

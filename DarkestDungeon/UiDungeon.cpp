@@ -65,11 +65,15 @@ void UiDungeon::Release()
 		delete(it);
 		it = nullptr;
 	}
-	
 	for (auto it : playerText) {
 		it.second->Release();
 		delete(it.second);
 	}
+	for (auto it : fixedText) {
+		it.second->Release();
+		delete(it.second);
+	}
+
 
 	monsterInfoPanel->Release();
 	delete(monsterInfoPanel);
@@ -90,6 +94,9 @@ void UiDungeon::Reset()
 		it->Reset();
 	}
 	for (auto it : playerText) {
+		it.second->Reset();
+	}
+	for (auto it : fixedText) {
 		it.second->Reset();
 	}
 	monsterInfoPanel->Reset();
@@ -120,6 +127,11 @@ void UiDungeon::Draw(sf::RenderWindow& window)
 			}
 		}
 		for (auto ui : playerText) {
+			if (ui.second->IsActive()) {
+				ui.second->Draw(window);
+			}
+		}
+		for (auto ui : fixedText) {
 			if (ui.second->IsActive()) {
 				ui.second->Draw(window);
 			}
@@ -220,18 +232,17 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
-	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.865f });
-	obj->SetString("ACC");
+	obj->SetPosition({ windowSize.x * 0.18f, windowSize.y * 0.865f });
+	obj->SetString("0");
 	obj->SetCharacterSize(18);
 	obj->SetOrigin(Origins::ML);
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::ACCURACY, obj });
-
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
-	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.885f });
-	obj->SetString("CRIT");
+	obj->SetPosition({ windowSize.x * 0.18f, windowSize.y * 0.885f });
+	obj->SetString("0");
 	obj->SetCharacterSize(18);
 	obj->SetOrigin(Origins::ML);
 	obj->sortingLayer = SortingLayers::UI;
@@ -239,8 +250,8 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	playerText.insert({ PlayerTextIndex::CRITICAL, obj });
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
-	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.905f });
-	obj->SetString("DMG");
+	obj->SetPosition({ windowSize.x * 0.18f, windowSize.y * 0.905f });
+	obj->SetString("0");
 	obj->SetCharacterSize(18);
 	obj->SetOrigin(Origins::ML);
 	obj->sortingLayer = SortingLayers::UI;
@@ -248,33 +259,87 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	playerText.insert({ PlayerTextIndex::DAMAGE, obj });
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
-	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.925f });
-	obj->SetString("DODGE");
+	obj->SetPosition({ windowSize.x * 0.18f, windowSize.y * 0.925f });
+	obj->SetString("0");
 	obj->SetCharacterSize(18);
 	obj->SetOrigin(Origins::ML);
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::DODGE, obj });
-
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
-	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.945f });
-	obj->SetString("PROT");
+	obj->SetPosition({ windowSize.x * 0.18f, windowSize.y * 0.945f });
+	obj->SetString("0");
 	obj->SetCharacterSize(18);
 	obj->SetOrigin(Origins::ML);
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::PROTECT, obj });
-
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
-	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.965f });
-	obj->SetString("SPD");
+	obj->SetPosition({ windowSize.x * 0.18f, windowSize.y * 0.965f });
+	obj->SetString("0");
 	obj->SetCharacterSize(18);
 	obj->SetOrigin(Origins::ML);
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::SPEED, obj });
+
+
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.865f });
+	obj->SetStringByTable("uiAccuracyText");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	fixedText.insert({ PlayerTextIndex::ACCURACY, obj });
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.885f });
+	obj->SetStringByTable("uiCriticalText");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	fixedText.insert({ PlayerTextIndex::CRITICAL, obj });
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.905f });
+	obj->SetStringByTable("uiDamageText");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	fixedText.insert({ PlayerTextIndex::DAMAGE, obj });
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.925f });
+	obj->SetStringByTable("uiDodgeText");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	fixedText.insert({ PlayerTextIndex::DODGE, obj });
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.945f });
+	obj->SetStringByTable("uiProtectText");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	fixedText.insert({ PlayerTextIndex::PROTECT, obj });
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::White);
+	obj->SetPosition({ windowSize.x * 0.15f, windowSize.y * 0.965f });
+	obj->SetStringByTable("uiSpeedText");
+	obj->SetCharacterSize(18);
+	obj->SetOrigin(Origins::ML);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	fixedText.insert({ PlayerTextIndex::SPEED, obj });
 
 }
 
@@ -299,6 +364,19 @@ void UiDungeon::UpdateSkillNameFrame(float dt)
 	if (opacity == 255) {
 		isFramePlaying = false;
 	}
+}
+
+void UiDungeon::ChangeCharacterInfoText(const CharacterInfo& info)
+{
+	playerText[PlayerTextIndex::HP]->SetString(std::to_string(info.hp) + "/" + std::to_string(info.maxHp));
+	playerText[PlayerTextIndex::STRESS]->SetString(std::to_string(info.stress));
+	playerText[PlayerTextIndex::DAMAGE]->SetString(std::to_string((int)info.minDamage) + "/" + std::to_string((int)info.maxDamage));
+	playerText[PlayerTextIndex::CRITICAL]->SetString(std::to_string((int)info.critical));
+	playerText[PlayerTextIndex::DODGE]->SetString(std::to_string(info.dodge));
+	playerText[PlayerTextIndex::PROTECT]->SetString(std::to_string((int)info.protect));
+	playerText[PlayerTextIndex::SPEED]->SetString(std::to_string(info.speed));
+
+
 }
 
 void UiDungeon::ChangeSkillButtonTexture(const CharacterInfo& info)

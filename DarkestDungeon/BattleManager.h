@@ -5,7 +5,7 @@ class SceneDev1;
 class CharacterContainer;
 class MonsterContainer;
 class UiDungeon;
-
+class ShadowRect;
 
 
 class BattleManager
@@ -34,6 +34,8 @@ private:
 
 	json monsterTable;
 
+	ShadowRect* shadow;
+
 	std::vector<CharacterContainer*>* characters;
 	std::vector<MonsterContainer*>* monsters;
 
@@ -54,17 +56,16 @@ private:
 	float timer;
 	float duration = 2.f;
 	float elapsedZoom = 0.f;
-	std::vector<float> zoomSnapshot;
+	std::queue<float> zoomSnapshot;
 
 	bool monsterSkillSelected;
 	bool animationPlaying = false;
 	bool isStuned = false;
+	bool moveCamera = false;
 
 
 	std::queue<int> orderQueue;
 
-
-	
 
 	struct Compare {
 		bool operator()(const std::pair<int, int>& a, const std::pair<int, int>& b) const {
@@ -84,7 +85,8 @@ public:
 	void Reset(std::vector<CharacterContainer*>* characters,
 		std::vector<MonsterContainer*>* monsters, UiDungeon* ui, std::vector<int>* chracterOrder);
 	void Update(float dt);
-	
+
+
 	void SetMonsterInfo();
 
 	void UpdateJudgeTurn(float dt);
