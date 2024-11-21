@@ -49,6 +49,9 @@ enum class DebuffType
 enum class CharacterType
 {
 	Crusader,
+	HighwayMan,
+	PlagueDoctor,
+	Vestal
 };
 enum class MonsterType
 {

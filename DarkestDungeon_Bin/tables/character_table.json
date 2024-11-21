@@ -20,16 +20,16 @@
         "resistDebuff" : 30,
         "resistMove" : 40,
         "skill1": ["crusader_ability_one","1"],
-        "skill2":["crusader_ability_four","4"],
+        "skill2":["crusader_ability_two","2"],
         "skill3":["crusader_ability_three","3"],
-        "skill4":["crusader_ability_two","2"]
+        "skill4":["crusader_ability_four","4"]
         
    },
 
    "Character2":
    {
         "name": "Dismas",
-        "type": 0,
+        "type": 1,
         "hp" : 25,
         "maxHp" : 25,
         "stress" : 34,
@@ -45,16 +45,16 @@
         "resistBleed" : 30,
         "resistDebuff" : 30,
         "resistMove" : 30,
-        "skill1": ["crusader_ability_two","2"],
-        "skill2":["crusader_ability_one","1"],
-        "skill3":["crusader_ability_three","3"],
-        "skill4":["crusader_ability_four","4"]
+        "skill1": ["highwayman_ability_one","1"],
+        "skill2":["highwayman_ability_two","2"],
+        "skill3":["highwayman_ability_three","3"],
+        "skill4":["highwayman_ability_four","4"]
    },
 
    "Character3":
    {
-        "name": "Drake",
-        "type": 0,
+        "name": "Paracelsus",
+        "type": 2,
         "hp" : 25,
         "maxHp" : 25,
         "stress" : 34,
@@ -70,16 +70,16 @@
         "resistBleed" : 20,
         "resistDebuff" : 50,
         "resistMove" : 20,
-        "skill1": ["crusader_ability_four","4"],
-        "skill2":["crusader_ability_two","2"],
-        "skill3":["crusader_ability_three","3"],
-        "skill4":["crusader_ability_one","1"]
+        "skill1": ["plague_doctor_ability_one","1"],
+        "skill2":["plague_doctor_ability_two","2"],
+        "skill3":["plague_doctor_ability_three","3"],
+        "skill4":["plague_doctor_ability_four","4"]
    },
 
    "Character4":
    {
-        "name": "Rock",
-        "type": 0,
+        "name": "Junia",
+        "type": 3,
         "hp" : 25,
         "maxHp" : 25,
         "stress" : 34,
@@ -95,10 +95,10 @@
         "resistBleed" : 40,
         "resistDebuff" : 30,
         "resistMove" : 30,
-        "skill1": ["crusader_ability_two","2"],
-        "skill2":["crusader_ability_three","3"],
-        "skill3":["crusader_ability_one","1"],
-        "skill4":["crusader_ability_four","4"]
+        "skill1": ["vestal_ability_one","1"],
+        "skill2":["vestal_ability_two","2"],
+        "skill3":["vestal_ability_three","3"],
+        "skill4":["vestal_ability_four","4"]
    }
 
 }

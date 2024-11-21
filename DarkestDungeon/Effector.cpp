@@ -74,7 +74,11 @@ void Effector::Update(float dt)
 
 void Effector::Draw(sf::RenderWindow& window)
 {
-	window.draw(sprite);
+	if (isPlaying)
+	{
+		window.draw(sprite);
+	}
+	
 }
 
 void Effector::SetDuration(float duration)

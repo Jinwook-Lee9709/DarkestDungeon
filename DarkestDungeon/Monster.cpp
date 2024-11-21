@@ -83,6 +83,19 @@ void Monster::Draw(sf::RenderWindow& window)
 void Monster::SetToIdle()
 {
 	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)type), "Combat"), true);
+	SetOrigin(Origins::BC);
+}
+
+void Monster::SetToDefend()
+{
+	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)type), "DEFEND"), true);
+	SetOrigin(Origins::BC);
+}
+
+void Monster::SetToDeath()
+{
+	animator.Play(&RES_TABLE_MGR.GetMonsterAnim(std::to_string((int)(type)), "DEATH"), true);
+	SetOrigin(Origins::BC);
 }
 
 

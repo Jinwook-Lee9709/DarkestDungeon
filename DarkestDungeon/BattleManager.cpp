@@ -266,6 +266,13 @@ void BattleManager::UpdateCharacterTurn(float dt)
                             availabe[skill] = true;
                         }
                     }
+                    if (range[0] == 2)
+                    {
+                        if (range[i] == 1 && (*characters)[(*characterOrder)[i - 1]]->IsAlive())
+                        {
+                            availabe[skill] = true;
+                        }
+                    }
                     if (range[0] == 1 || range[0] == 3)
                     {
                       
@@ -430,6 +437,10 @@ void BattleManager::UpdateCharacterAnimate(float dt)
     if (timer > duration) {
         timer = 0;
         (*characters)[currentCharacter]->SetToIdle();
+        for (auto& monster : (*monsters))
+        {
+            monster->SetToIdle();
+        }
         beforeStatus == Status::CharacterAnimate;
         currentStatus = Status::FillEmptyPos;
         if (selectedSkill != 5)
@@ -551,6 +562,10 @@ void BattleManager::UpdateMonsterAnimate(float dt)
     {
         timer = 0;
         (*monsters)[currentMonster]->SetToIdle();
+        for (auto& character : (*characters))
+        {
+            character->SetToIdle();
+        }
         currentStatus = Status::FillEmptyPos;
         ResetView();
     }
@@ -702,7 +717,7 @@ void BattleManager::AnimateView(bool isCharacter)
             {
                 if (range[5 + i] == 1 && (*characters)[(*characterOrder)[i]]->IsAlive())
                 {
-                    (*characters)[(*characterOrder)[i]]->MoveToCoordDouble(zoomedContainerPos[j]);
+                    (*characters)[(*characterOrder)[i]]->MoveToCoordDouble(zoomedChracterPos[j]);
                     (*characters)[(*characterOrder)[i]]->sortingLayer = SortingLayers::Popup;
                     j++;
                 }
@@ -758,19 +773,15 @@ void BattleManager::AnimateView(bool isCharacter)
 
 void BattleManager::ResetView()
 {
-    int i = 0;
     for (auto& character : (*characters))
     {
-        character->MoveToCoord(currentScene->GetCharacterPos()[(*characterOrder)[i]]);
+        character->MoveToCoord(currentScene->GetCharacterPos()[character->GetPos()]);
         character->sortingLayer = SortingLayers::Foreground;
-        i++;
     }
-    i = 0;
     for (auto& monster : (*monsters))
     {
-        monster->MoveToCoord(currentScene->GetMonsterPos()[monsterOrder[i]]);
+        monster->MoveToCoord(currentScene->GetMonsterPos()[monster->GetPos()-4]);
         monster->sortingLayer = SortingLayers::Foreground;
-        i++;
     }
     for (auto& it : zoomSnapshot)
     {

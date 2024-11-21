@@ -17,6 +17,9 @@ void MonsterContainer::SetPosition(const sf::Vector2f& pos)
 	damageText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
 	debuffText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 1, hpBar.getSize().x * 3));
 	stunEffect.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.7f));
+	BottomEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	DeathEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	MiddleEffector.SetPosition(position);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
@@ -95,6 +98,17 @@ void MonsterContainer::Reset()
 	stunEffect.SetOrigin(Origins::MC);
 	debuffText.SetActive(false);
 
+	BottomEffector.Reset();
+	BottomEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	BottomEffector.SetOrigin(Origins::MC);
+	MiddleEffector.Reset();
+	MiddleEffector.SetPosition(position);
+	MiddleEffector.SetOrigin(Origins::BC);
+	DeathEffector.Reset();
+	DeathEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	DeathEffector.SetOrigin(Origins::MC);
+
+
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
 
@@ -117,11 +131,27 @@ void MonsterContainer::Update(float dt)
 			SetPosition(position);
 		}
 	}
-	monster.Update(dt);
-	debuffText.Update(dt);
-	damageText.Update(dt);
-	stunEffect.Update(dt);
-	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
+	if (isDying) {
+		deathTimer += dt;
+
+		if (deathTimer > deathDuration)
+		{
+			isAlive = false;
+			isDying = false;
+		}
+	}
+	if (isAlive)
+	{
+		monster.Update(dt);
+		debuffText.Update(dt);
+		damageText.Update(dt);
+		stunEffect.Update(dt);
+		BottomEffector.Update(dt);
+		MiddleEffector.Update(dt);
+		DeathEffector.Update(dt);
+		hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
+	}
+	
 }
 
 void MonsterContainer::Draw(sf::RenderWindow& window)
@@ -132,12 +162,18 @@ void MonsterContainer::Draw(sf::RenderWindow& window)
 
 		if (debuffText.IsActive())
 			debuffText.Draw(window);
+		BottomEffector.Draw(window);
+		MiddleEffector.Draw(window);
 
 		if (damageText.IsActive())
 			damageText.Draw(window);
 		if (stunEffect.IsActive())
 			stunEffect.Draw(window);
-
+		if (isDying)
+		{
+			DeathEffector.Draw(window);
+		}
+		
 
 		target.Draw(window);
 	}
@@ -191,6 +227,17 @@ void MonsterContainer::SetToIdle()
 {
 	monster.SetToIdle();
 }
+void MonsterContainer::SetToDefend()
+{
+	monster.SetToDefend();
+}
+void MonsterContainer::SetToDeath()
+{
+	isDying = true;
+	DeathEffector.SetDuration(1.4f);
+	DeathEffector.AddAnimation("death");
+	monster.SetToDeath();
+}
 std::vector<int> MonsterContainer::CheckAvailableSkill()
 {
 	return monster.CheckAvailableSkill(currentPos);
@@ -200,19 +247,30 @@ std::vector<short>& MonsterContainer::GetSkillRange(int skillnum)
 	return monster.GetSkillRange(skillnum);
 }
 
-void MonsterContainer::OnHit(int damage, float acc)
-{
+bool MonsterContainer::OnHit(int damage, float acc)
+{	
+	SetToDefend();
+	if (damage == 0)
+	{
+		return Utils::RollTheDice(acc - info.dodge / 100);
+	}
+
 	if (Utils::RollTheDice(acc - info.dodge / 100))
 	{
-		int damageBuf = Utils::Clamp(damage - info.protect, 0, 1000);
+		int damageBuf = Utils::Clamp(damage - info.protect, 1, 1000);
 		info.hp -= damageBuf;
 		damageText.AddAnimation(damageBuf);
+		if (info.hp < 0)
+		{
+			info.hp = 0;
+			SetToDeath();
+		}
+		return true;
 	}
-	Utils::Clamp(info.hp, 0, info.maxHp);
-	if (info.hp < 0)
-	{
-		isAlive = false;
+	else {
+		return false;
 	}
+
 }
 
 void MonsterContainer::OnDamage(int damage)
@@ -220,6 +278,11 @@ void MonsterContainer::OnDamage(int damage)
 	int damageBuf = Utils::Clamp(damage, 0, damage);
 	info.hp -= damageBuf;
 	damageText.AddAnimation(damage);
+	Utils::Clamp(info.hp, 0, info.maxHp);
+	if (info.hp < 0)
+	{
+		SetToDeath();
+	}
 }
 
 void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int stack)
@@ -272,6 +335,18 @@ void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int st
 	}
 
 	}
+}
+
+void MonsterContainer::PlayBottomEffect(const std::string& animId, float duration)
+{
+	BottomEffector.SetDuration(duration);
+	BottomEffector.AddAnimation(animId);
+}
+
+void MonsterContainer::PlayMiddleEffect(const std::string& animId, float duration)
+{
+	MiddleEffector.SetDuration(duration);
+	MiddleEffector.AddAnimation(animId);
 }
 
 bool MonsterContainer::CheckDebuffCount()

@@ -93,6 +93,7 @@ void DamageText::PlayAnimation(int type)
 
 void DamageText::SetText(int type)
 {
+
 	switch (type)
 	{
 		case 0:
@@ -104,9 +105,19 @@ void DamageText::SetText(int type)
 		}
 		default :
 		{
-			text.SetString(std::to_string(type));
-			text.SetColor(sf::Color(197, 7, 0, 255));
-			text.SetOutline(2, sf::Color(sf::Color::Black));
+			if (type > 0) 
+			{
+				text.SetString(std::to_string(type));
+				text.SetColor(sf::Color(197, 7, 0, 255));
+				text.SetOutline(2, sf::Color(sf::Color::Black));
+			}
+			else
+			{
+				text.SetString(std::to_string(abs(type)));
+				text.SetColor(sf::Color::Green);
+				text.SetOutline(2, sf::Color(sf::Color::Black));
+			}
+			
 		}
 
 	}

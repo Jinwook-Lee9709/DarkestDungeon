@@ -79,7 +79,19 @@
         "crusader_ability_one" : "resource/Heroes/Crusader/Icon/crusader.ability.one.png",
         "crusader_ability_two" : "resource/Heroes/Crusader/Icon/crusader.ability.two.png",
         "crusader_ability_three" : "resource/Heroes/Crusader/Icon/crusader.ability.three.png",
-        "crusader_ability_four" : "resource/Heroes/Crusader/Icon/crusader.ability.four.png"
+        "crusader_ability_four" : "resource/Heroes/Crusader/Icon/crusader.ability.four.png",
+        "highwayman_ability_one": "resource/Heroes/HighwayMan/Icon/highwayman.ability.one.png",
+        "highwayman_ability_two": "resource/Heroes/HighwayMan/Icon/highwayman.ability.two.png",
+        "highwayman_ability_three": "resource/Heroes/HighwayMan/Icon/highwayman.ability.three.png",
+        "highwayman_ability_four": "resource/Heroes/HighwayMan/Icon/highwayman.ability.four.png",
+        "plague_doctor_ability_one": "resource/Heroes/PlagueDoctor/Icon/plague_doctor.ability.one.png",
+        "plague_doctor_ability_two": "resource/Heroes/PlagueDoctor/Icon/plague_doctor.ability.two.png",
+        "plague_doctor_ability_three": "resource/Heroes/PlagueDoctor/Icon/plague_doctor.ability.three.png",
+        "plague_doctor_ability_four": "resource/Heroes/PlagueDoctor/Icon/plague_doctor.ability.four.png",
+        "vestal_ability_one": "resource/Heroes/Vestal/Icon/vestal.ability.one.png",
+        "vestal_ability_two": "resource/Heroes/Vestal/Icon/vestal.ability.two.png",
+        "vestal_ability_three": "resource/Heroes/Vestal/Icon/vestal.ability.three.png",
+        "vestal_ability_four": "resource/Heroes/Vestal/Icon/vestal.ability.four.png"
     }
 
     

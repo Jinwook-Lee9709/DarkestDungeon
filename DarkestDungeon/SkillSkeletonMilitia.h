@@ -3,7 +3,7 @@
 
 struct SkillSkeletonMilitia : public Skill
 {
-	SkillSkeletonMilitia() {
+	SkillSkeletonMilitia() :Skill() {
 		skillrange1 = { 1,
 		1, 1, 1, 0,
 		0, 1, 1, 1 };
@@ -26,7 +26,7 @@ struct SkillSkeletonMilitia : public Skill
 			accuracy = 300;
 		}
 		characters[target]->OnHit(damage, accuracy + 82.5);
-		std::cout << "smite!" << std::endl;
+		characters[target]->PlayMiddleEffect("blood");
 	}
 	void skill2(
 		std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target
@@ -41,9 +41,12 @@ struct SkillSkeletonMilitia : public Skill
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
 		}
-		characters[target]->OnHit(damage * 0.5f, accuracy + 90);
-		characters[target]->OnDebuffed(DebuffType::Stun, accuracy + 100);
-		std::cout << "stun!" << std::endl;
+		if (characters[target]->OnHit(damage * 0.5f, accuracy + 90))
+		{
+			characters[target]->OnDebuffed(DebuffType::Stun, accuracy + 100);
+			characters[target]->PlayMiddleEffect("blood");
+		}
+		
 	}
 
 };

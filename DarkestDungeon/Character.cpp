@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Character.h"
 #include "SkillCrusader.h"
+#include "SkillHighwayman.h"
+#include "SkillPlagueDoctor.h"
+#include "SkillVestal.h"
 #include "Skill.h"
 #include "Slot.h"
 
@@ -51,12 +54,13 @@ void Character::Init()
 
 void Character::Release()
 {
+	delete(skill);
 }
 
 void Character::Reset()
 {
-	animator.Play("crusader_idle");
-
+	animator.Play(&RES_TABLE_MGR.GetCharacterAnim(std::to_string((int)(type)), "IDLE"));
+	SetOrigin(Origins::BC);
 }
 
 void Character::Update(float dt)
@@ -88,6 +92,18 @@ void Character::SetToWalk()
 	SetOrigin(Origins::BC);
 }
 
+void Character::SetToDefend()
+{
+	animator.Play(&RES_TABLE_MGR.GetCharacterAnim(std::to_string((int)(type)), "DEFEND"));
+	SetOrigin(Origins::BC);
+}
+
+void Character::SetToDeath()
+{
+	animator.Play(&RES_TABLE_MGR.GetCharacterAnim(std::to_string((int)(type)), "DEATH"));
+	SetOrigin(Origins::BC);
+}
+
 void Character::Reset(const CharacterInfo& info)
 {
 	type = info.type;
@@ -100,10 +116,26 @@ void Character::SetSlot(const CharacterInfo& info)
 		case CharacterType::Crusader: 
 		{
 			skill = new SkillCrusader();
+			break;
+		}
+		case CharacterType::HighwayMan:
+		{
+			skill = new SkillHighwayman();
+			break;
+		}
+		case CharacterType::PlagueDoctor:
+		{
+			skill = new SkillPlagueDoctor();
+			break;
+		}
+		case CharacterType::Vestal:
+		{
+			skill = new SkillVestal();
+			break;
 		}
 		default:
 		{
-
+	
 		}
 	}
 	json j = info;

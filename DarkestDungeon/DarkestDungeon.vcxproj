@@ -79,7 +79,10 @@
     <ClInclude Include="NameFrame.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillCrusader.h" />
+    <ClInclude Include="SkillHighwayman.h" />
+    <ClInclude Include="SkillPlagueDoctor.h" />
     <ClInclude Include="SkillSkeletonMilitia.h" />
+    <ClInclude Include="SkillVestal.h" />
     <ClInclude Include="Slot.h" />
     <ClInclude Include="src\CharacterContainer.h" />
     <ClInclude Include="src\Ball.h" />

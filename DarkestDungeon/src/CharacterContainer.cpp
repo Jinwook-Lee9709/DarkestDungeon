@@ -24,6 +24,10 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 	damageText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
 	debuffText.SetPosition(position - sf::Vector2f(-hpBar.getSize().y * 1, hpBar.getSize().x * 3));
 	stunEffect.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.7f));
+
+	MiddleEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	DeathEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	BottomEffector.SetPosition(position);
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness() * 2) / 10 + hpBar.getSize().x / 10;
 	for (int i = 0; i < 10; i++) {
@@ -85,8 +89,8 @@ void CharacterContainer::Init()
 
 void CharacterContainer::Reset()
 {
-	character.Reset();
 	character.Reset(info);
+	character.Reset();
 	character.SetScale(originalCharacterScale);
 
 	target.ChangeTexture("overlay_target_e");
@@ -107,9 +111,19 @@ void CharacterContainer::Reset()
 	damageText.SetActive(false);
 
 	stunEffect.Reset();
-	stunEffect.SetPosition(position- sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.7f));
+	stunEffect.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.7f));
 	stunEffect.SetOrigin(Origins::MC);
 	debuffText.SetActive(false);
+
+	MiddleEffector.Reset();
+	MiddleEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	MiddleEffector.SetOrigin(Origins::MC);
+	BottomEffector.Reset();
+	BottomEffector.SetPosition(position);
+	BottomEffector.SetOrigin(Origins::BC);
+	DeathEffector.Reset();
+	DeathEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
+	DeathEffector.SetOrigin(Origins::MC);
 
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
@@ -141,12 +155,27 @@ void CharacterContainer::Update(float dt)
 			SetPosition(position);
 		}
 	}
+	if (isDying) {
+		deathTimer += dt;
 
-	character.Update(dt);
-	debuffText.Update(dt);
-	damageText.Update(dt);
-	stunEffect.Update(dt);
-	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
+		if (deathTimer > deathDuration)
+		{
+			isAlive = false;
+			isDying = false;
+		}
+	}
+	if (isAlive)
+	{
+		character.Update(dt);
+		debuffText.Update(dt);
+		damageText.Update(dt);
+		stunEffect.Update(dt);
+		BottomEffector.Update(dt);
+		MiddleEffector.Update(dt);
+		DeathEffector.Update(dt);
+		hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
+	}
+	
 }
 
 void CharacterContainer::Draw(sf::RenderWindow& window)
@@ -160,7 +189,10 @@ void CharacterContainer::Draw(sf::RenderWindow& window)
 	hitbox.Draw(window);
 	if (debuffText.IsActive())
 		debuffText.Draw(window);
-	
+	BottomEffector.Draw(window);
+	MiddleEffector.Draw(window);
+	DeathEffector.Draw(window);
+
 	if (damageText.IsActive())
 		damageText.Draw(window);
 	if (stunEffect.IsActive())
@@ -230,6 +262,18 @@ void CharacterContainer::SetToWalk()
 	character.SetToWalk();
 }
 
+void CharacterContainer::SetToDefend()
+{
+	character.SetToDefend();
+}
+
+void CharacterContainer::SetToDeath()
+{
+	isDying = true;
+	DeathEffector.AddAnimation("death");
+	character.SetToDeath();
+}
+
 void CharacterContainer::UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num)
 {
 	character.UseSkill(characters, monsters, user, target, num);
@@ -247,13 +291,24 @@ std::vector<short>& CharacterContainer::GetSkillRange(int skillnum)
 }
 
 
-void CharacterContainer::OnHit(int damage, float acc)
+bool CharacterContainer::OnHit(int damage, float acc)
 {
+	SetToDefend();
 	if (Utils::RollTheDice(acc - (float)info.dodge / 100))
 	{
-		int damageBuf = Utils::Clamp(damage - info.protect, 0, damage);
+		int damageBuf = Utils::Clamp(damage - info.protect, 1, damage);
 		info.hp -= damageBuf;
 		damageText.AddAnimation(damageBuf);
+		Utils::Clamp(info.hp, 0, info.maxHp);
+		if (info.hp < 0)
+		{
+			SetToDeath();
+		}
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -262,6 +317,12 @@ void CharacterContainer::OnDamage(int damage)
 	int damageBuf = Utils::Clamp(damage, 0, damage);
 	info.hp -= damageBuf;
 	damageText.AddAnimation(damage);
+	if (info.hp < 0)
+	{
+		info.hp = 0;
+		SetToDeath();
+	}
+
 }
 
 void CharacterContainer::OnDebuffed(DebuffType type, float acc, int damage, int stack)
@@ -323,7 +384,20 @@ void CharacterContainer::OnHeal(int amount)
 	if (info.hp > info.maxHp) {
 		info.hp = info.maxHp;
 	}
+	damageText.PlayAnimation(-amount);
+}
 
+void CharacterContainer::PlayBottomEffect(const std::string& animId, float duration)
+{
+	BottomEffector.SetDuration(duration);
+	BottomEffector.AddAnimation(animId);
+
+}
+
+void CharacterContainer::PlayMiddleEffect(const std::string& animId, float duration)
+{
+	MiddleEffector.SetDuration(duration);
+	MiddleEffector.AddAnimation(animId);
 }
 
 int CharacterContainer::CheckDebuffCount()
@@ -383,6 +457,38 @@ void CharacterContainer::ApplyDebuff()
 			}
 		}
 	}
+}
+
+void CharacterContainer::CureDebuff(DebuffType type)
+{
+	if (debuffStack[type].first != 0) {
+		debuffStack[type].first--;
+		switch (type)
+		{
+		case DebuffType::Stun:
+		{
+			debuffText.PlayAnimation(DebuffType::Stun);
+			break;
+		}
+		case DebuffType::Blight:
+		{
+			debuffText.PlayAnimation(DebuffType::Blight);
+			break;
+		}
+		case DebuffType::Bleed:
+		{
+			debuffText.PlayAnimation(DebuffType::Bleed);
+			break;
+		}
+		case DebuffType::Debuff:
+		{
+			debuffText.PlayAnimation(DebuffType::Debuff);
+			break;
+		}
+		}
+	}
+		
+	
 }
 
 void CharacterContainer::EndStun()

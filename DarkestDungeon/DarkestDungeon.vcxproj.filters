@@ -240,6 +240,15 @@
     <ClInclude Include="NameFrame.h">
       <Filter>Scenes\Dev1\UI\Component</Filter>
     </ClInclude>
+    <ClInclude Include="SkillHighwayman.h">
+      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillPlagueDoctor.h">
+      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillVestal.h">
+      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">

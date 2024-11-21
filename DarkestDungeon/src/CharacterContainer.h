@@ -20,6 +20,10 @@ private:
 	sf::RectangleShape stressBar[10];
 	SpriteGo target;
 
+	Effector BottomEffector;
+	Effector MiddleEffector;
+	Effector DeathEffector;
+
 	int currentPos;
 	int speed;
 
@@ -30,6 +34,9 @@ private:
 	bool selected;
 	bool isAlive;
 	bool moving;
+	bool isDying;
+	float deathTimer;
+	float deathDuration = 1.4f;
 
 	std::unordered_map<DebuffType, std::pair<short, int>> debuffStack;
 
@@ -64,6 +71,8 @@ public:
 	void SetToIdle();
 	void SetToCombat();
 	void SetToWalk();
+	void SetToDefend();
+	void SetToDeath();
 
 	void UseSkill(std::vector<CharacterContainer*>& characters, std::vector<MonsterContainer*>& monsters, short user, short target, int num);
 
@@ -76,15 +85,19 @@ public:
 	
 
 	//For Combat
-	void OnHit(int damage, float acc);
+	bool OnHit(int damage, float acc);
 	void OnDamage(int damage);
 	void OnDebuffed(DebuffType type, float acc, int damage= 0, int stack = 1);
 	void OnHeal(int amount);
+
+	void PlayBottomEffect(const std::string& animId, float duration = 2.f);
+	void PlayMiddleEffect(const std::string& animId, float duration = 2.f);
 
 	//About Debuff
 	int CheckDebuffCount();
 	void PlayDebuffText(DebuffType type);
 	void ApplyDebuff();
+	void CureDebuff(DebuffType type);
 	void EndStun();
 	bool IsStuned();
 	

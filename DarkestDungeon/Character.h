@@ -33,10 +33,11 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	virtual void SetToIdle();
-	virtual void SetToCombat();
-	virtual void SetToWalk();
-
+	void SetToIdle();
+	void SetToCombat();
+	void SetToWalk();
+	void SetToDefend();
+	void SetToDeath();
 
 	void Reset(const CharacterInfo& info);
 	void SetSlot(const CharacterInfo& info);
