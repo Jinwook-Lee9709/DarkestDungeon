@@ -408,22 +408,24 @@ void BattleManager::UpdateCharacterAnimate(float dt)
         }
 
     }
- /*   sf::Vector2f center = views[1]->getCenter();*/
-    if (timer < 0.2f)
+    if (selectedSkill != 5)
     {
-        float sub = 2 * dt;
-        elapsedZoom += 2 * dt;
-        if (elapsedZoom > 0.4f)
+        if (timer < 0.2f)
         {
-            sub -= elapsedZoom - 0.4f;
+            float sub = 2 * dt;
+            elapsedZoom += 2 * dt;
+            if (elapsedZoom > 0.4f)
+            {
+                sub -= elapsedZoom - 0.4f;
+            }
+            views[1]->zoom(1 - sub);
+            zoomSnapshot.push_back(1 - sub);
+            sf::Vector2f randomCoord = Utils::RandomOnUnitCircle();
+            sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
+            views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
         }
-        views[1]->zoom(1 - sub);
-        zoomSnapshot.push_back(1 - sub);
-        sf::Vector2f randomCoord = Utils::RandomOnUnitCircle();
-        sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
-        views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
+        views[1]->move({ -30 * dt,0.f });
     }
-    views[1]->move({ -30 * dt,0.f });
     timer += dt;
     if (timer > duration) {
         timer = 0;
@@ -471,7 +473,6 @@ void BattleManager::UpdateMonsterTurn(float dt)
                 monsterTargetInfo.push_back(monsterOrder[currentMonster]);
                 monsterTargetInfo.push_back((*characterOrder)[target]);
                 monsterTargetInfo.push_back(targetInfo->first + 1);
-                std::cout << targetInfo->first << std::endl;
                 monsterSkillSelected = true;
                 /*(*monsters)[currentMonster]->UseSkill(*characters, *monsters, monsterOrder[currentMonster], (*chracterOrder)[target], targetInfo->first + 1);*/
             }
@@ -544,7 +545,7 @@ void BattleManager::UpdateMonsterAnimate(float dt)
         sf::Vector2f multiplyCoord = { randomCoord.x * 10 , randomCoord.y * 10 };
         views[1]->setCenter(views[2]->getCenter() + multiplyCoord);
     }
-    views[1]->move({ 30 * dt,0.f });
+    views[1]->move({ 30 * dt, 0.f });
     timer += dt;
     if (timer > duration)
     {

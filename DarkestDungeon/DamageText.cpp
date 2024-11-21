@@ -59,7 +59,7 @@ void DamageText::Update(float dt)
 	if (isPlay) {
 		timer += dt;
 		posForAnim += sf::Vector2f(0, -120 * dt);
-		text.SetPosition(posForAnim);
+		text.SetPosition(position + posForAnim);
 		if (timer > duration)
 		{
 			isPlay = false;
@@ -87,7 +87,7 @@ void DamageText::PlayAnimation(int type)
 	timer = 0;
 	isPlay = true;
 	this->active = true;
-	posForAnim = position;
+	posForAnim = { 0.f, 0.f };
 	SetText(type);
 }
 

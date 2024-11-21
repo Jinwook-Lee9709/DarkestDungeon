@@ -64,8 +64,8 @@ void DebuffText::Update(float dt)
 	if (isPlay) {
 		timer += dt;
 		posForAnim += sf::Vector2f(0, -120 * dt);
-		text.SetPosition(posForAnim);
-		icon.SetPosition(posForAnim -
+		text.SetPosition(position + posForAnim);
+		icon.SetPosition(position + posForAnim -
 			sf::Vector2f(text.GetGlobalBounds().width * 0.5f +
 				icon.GetGlobalBounds().width + 10.f, -10.f));
 		if (timer > duration)
@@ -96,7 +96,7 @@ void DebuffText::PlayAnimation(DebuffType type)
 	timer = 0;
 	isPlay = true;
 	this->active = true;
-	posForAnim = position;
+	posForAnim = { 0.f, 0.f };
 	SetText(type);
 }
 
