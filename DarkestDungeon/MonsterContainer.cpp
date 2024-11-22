@@ -235,7 +235,7 @@ void MonsterContainer::SetToDeath()
 {
 	isDying = true;
 	DeathEffector.SetDuration(1.4f);
-	DeathEffector.AddAnimation("vestal_heal_target");
+	DeathEffector.AddAnimation("blood");
 	monster.SetToDeath();
 }
 std::vector<int> MonsterContainer::CheckAvailableSkill()

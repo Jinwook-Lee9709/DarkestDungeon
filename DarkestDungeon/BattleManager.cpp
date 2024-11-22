@@ -153,7 +153,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
 {
     beforeStatus = Status::None;
     ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
-    ui->ChangeCharacterInfoText((*characters)[currentCharacter]->GetCharacterInfo());
+    ui->ChangeCharacterInfo((*characters)[currentCharacter]->GetCharacterInfo());
     ui->DeactivateAllSkillButton();
     if (orderQueue.empty()) {
         std::priority_queue<std::pair< int, int >, std::vector<std::pair<int, int>>,Compare> sortingQueue;
@@ -192,7 +192,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
         if ((*characters)[currentCharacter]->IsAlive())
         {
             ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
-            ui->ChangeCharacterInfoText((*characters)[currentCharacter]->GetCharacterInfo());
+            ui->ChangeCharacterInfo((*characters)[currentCharacter]->GetCharacterInfo());
             orderQueue.pop();
             beforeStatus = Status::JudgeTurn;
             currentStatus = Status::ApplyDebuff;
@@ -236,7 +236,7 @@ void BattleManager::UpdateApplyDebuff(float dt)
             if (count = (*characters)[currentCharacter]->CheckDebuffCount() > 0)
             {
                
-                duration = 1.f * count;
+                duration = 1.3f * count;
                 (*characters)[currentCharacter]->ApplyDebuff();
                 if ((*characters)[currentCharacter]->IsStuned()) {
                     (*characters)[currentCharacter]->EndStun();
@@ -254,7 +254,7 @@ void BattleManager::UpdateApplyDebuff(float dt)
             if (count = (*monsters)[currentMonster]->CheckDebuffCount() > 0)
             {
                 timer = 0;
-                duration = 1.f * count;
+                duration = 1.3f * count;
                 (*monsters)[currentMonster]->ApplyDebuff();
                 if ((*monsters)[currentMonster]->IsStuned()) {
                     (*monsters)[currentMonster]->EndStun();
@@ -270,11 +270,21 @@ void BattleManager::UpdateApplyDebuff(float dt)
 
     timer += dt;
     if (timer > duration)
-    {
+    {   
+        if (isCharacterTurn && !((*characters)[currentCharacter]->IsAlive()))
+        {
+            beforeStatus = Status::ApplyDebuff;
+            currentStatus = Status::FillEmptyPos;
+        }
+        if (!isCharacterTurn && !((*monsters)[currentMonster]->IsAlive()))
+        {
+            beforeStatus = Status::ApplyDebuff;
+            currentStatus = Status::FillEmptyPos;
+        }
         if (isStuned)
         {
             beforeStatus = Status::ApplyDebuff;
-            currentStatus = Status::JudgeTurn;
+            currentStatus = Status::FillEmptyPos;
         }
         else
         {
@@ -687,7 +697,7 @@ void BattleManager::UpdateFillEmptyPos(float dt)
             }
         }
     } while (flag);
-
+    beforeStatus = Status::FillEmptyPos;
     currentStatus = Status::JudgeTurn;
 }
 

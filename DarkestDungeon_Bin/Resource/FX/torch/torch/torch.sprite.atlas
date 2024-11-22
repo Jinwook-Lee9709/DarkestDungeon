@@ -1,0 +1,69 @@
+
+torch.sprite.png
+size: 1303,210
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bar_glow
+  rotate: false
+  xy: 2, 124
+  size: 930, 84
+  orig: 930, 84
+  offset: 0, 0
+  index: -1
+inner_glow
+  rotate: true
+  xy: 934, 3
+  size: 205, 197
+  orig: 205, 197
+  offset: 0, 0
+  index: -1
+outer_glow
+  rotate: true
+  xy: 1133, 43
+  size: 165, 168
+  orig: 165, 168
+  offset: 0, 0
+  index: -1
+spark01
+  rotate: false
+  xy: 1174, 20
+  size: 17, 21
+  orig: 17, 21
+  offset: 0, 0
+  index: -1
+spark02
+  rotate: true
+  xy: 1175, 2
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: -1
+spark03
+  rotate: false
+  xy: 1193, 22
+  size: 16, 19
+  orig: 16, 19
+  offset: 0, 0
+  index: -1
+spark04
+  rotate: false
+  xy: 1133, 15
+  size: 17, 26
+  orig: 17, 26
+  offset: 0, 0
+  index: -1
+spark05
+  rotate: true
+  xy: 1152, 19
+  size: 22, 20
+  orig: 22, 20
+  offset: 0, 0
+  index: -1
+spark06
+  rotate: true
+  xy: 1152, 3
+  size: 14, 21
+  orig: 14, 21
+  offset: 0, 0
+  index: -1

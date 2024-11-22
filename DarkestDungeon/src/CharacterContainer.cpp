@@ -270,7 +270,7 @@ void CharacterContainer::SetToDefend()
 void CharacterContainer::SetToDeath()
 {
 	isDying = true;
-	DeathEffector.AddAnimation("death");
+	DeathEffector.AddAnimation("blood");
 	character.SetToDeath();
 }
 

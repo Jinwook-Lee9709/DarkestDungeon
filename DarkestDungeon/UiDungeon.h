@@ -14,6 +14,8 @@ enum class PlayerTextIndex {
 	SPEED,
 	HP,
 	STRESS,
+	NAME,
+	CLASS,
 	COUNT
 };
 
@@ -35,6 +37,7 @@ private:
 	std::unordered_map<PlayerTextIndex, TextGo*> fixedText;
 	std::unordered_map<PlayerTextIndex, TextGo*> playerText;
 
+	SpriteGo* portrait;
 	SpriteGo* inventory;
 
 	float timer;
@@ -72,7 +75,7 @@ public:
 	void PlaySkillNameFrame(const std::string& str);
 	void UpdateSkillNameFrame(float dt);
 
-	void ChangeCharacterInfoText(const CharacterInfo& info);
+	void ChangeCharacterInfo(const CharacterInfo& info);
 	void ChangeSkillButtonTexture(const CharacterInfo& info);
 	void ChangeSkillButtonActive(const std::vector<bool>& list);
 	void DeactivateAllSkillButton();

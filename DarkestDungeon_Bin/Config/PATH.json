@@ -36,6 +36,8 @@
                 "ability_pass" : "resource/Panels/icons_ability/ability_pass.png",
                 "selected_ability" : "resource/Panels/icons_ability/selected_ability.png",
 
+                "Overlay1" : "resource/Overlays/Overlay1.png",
+
                 "overlay_move" : "resource/Overlays/move.png",
                 "overlay_selected" : "resource/Overlays/selected.png",
                 "overlay_target_e" : "resource/Overlays/target_e.png",
@@ -97,7 +99,13 @@
         "vestal_ability_two": "resource/Heroes/Vestal/Icon/vestal.ability.two.png",
         "vestal_ability_three": "resource/Heroes/Vestal/Icon/vestal.ability.three.png",
         "vestal_ability_four": "resource/Heroes/Vestal/Icon/vestal.ability.four.png"
+    },
+    "Character_Portrait":
+    {
+        "portrait0": "resource/Heroes/Crusader/Icon/crusader_portrait_roster.png",
+        "portrait1": "resource/Heroes/HighwayMan/Icon/highwayman_portrait_roster.png",
+        "portrait2": "resource/Heroes/PlagueDoctor/Icon/plague_doctor_portrait_roster.png",
+        "portrait3": "resource/Heroes/Vestal/Icon/vestal_portrait_roster.png"
     }
-
     
 }

@@ -55,7 +55,7 @@
             "STUN":
             {
                 "ID": "crusader_stun_target",
-                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_heal_target_sheet.png"
+                "TEX_ID": "resource/Heroes/Crusader/Sheet/crusader_stun_target_sheet.png"
             }
         },
         "1":

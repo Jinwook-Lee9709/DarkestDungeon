@@ -1,0 +1,125 @@
+
+torch_load.sprite.png
+size: 506,274
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fire_high01
+  rotate: false
+  xy: 423, 165
+  size: 80, 107
+  orig: 80, 107
+  offset: 0, 0
+  index: -1
+fire_high02
+  rotate: true
+  xy: 337, 78
+  size: 85, 113
+  orig: 85, 113
+  offset: 0, 0
+  index: -1
+fire_high03
+  rotate: true
+  xy: 209, 76
+  size: 87, 126
+  orig: 87, 126
+  offset: 0, 0
+  index: -1
+fire_low01
+  rotate: false
+  xy: 437, 9
+  size: 60, 67
+  orig: 60, 67
+  offset: 0, 0
+  index: -1
+fire_low02
+  rotate: true
+  xy: 209, 15
+  size: 59, 79
+  orig: 59, 79
+  offset: 0, 0
+  index: -1
+fire_low03
+  rotate: true
+  xy: 452, 105
+  size: 58, 52
+  orig: 58, 52
+  offset: 0, 0
+  index: -1
+fire_medium01
+  rotate: true
+  xy: 101, 4
+  size: 69, 97
+  orig: 69, 97
+  offset: 0, 0
+  index: -1
+fire_medium02
+  rotate: true
+  xy: 2, 2
+  size: 71, 97
+  orig: 71, 97
+  offset: 0, 0
+  index: -1
+fire_medium03
+  rotate: true
+  xy: 337, 8
+  size: 68, 98
+  orig: 68, 98
+  offset: 0, 0
+  index: -1
+inner_glow
+  rotate: false
+  xy: 2, 75
+  size: 205, 197
+  orig: 205, 197
+  offset: 0, 0
+  index: -1
+spark01
+  rotate: true
+  xy: 314, 57
+  size: 17, 21
+  orig: 17, 21
+  offset: 0, 0
+  index: -1
+spark02
+  rotate: true
+  xy: 480, 87
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: -1
+spark03
+  rotate: false
+  xy: 290, 33
+  size: 16, 19
+  orig: 16, 19
+  offset: 0, 0
+  index: -1
+spark04
+  rotate: true
+  xy: 452, 86
+  size: 17, 26
+  orig: 17, 26
+  offset: 0, 0
+  index: -1
+spark05
+  rotate: false
+  xy: 290, 54
+  size: 22, 20
+  orig: 22, 20
+  offset: 0, 0
+  index: -1
+spark06
+  rotate: true
+  xy: 314, 41
+  size: 14, 21
+  orig: 14, 21
+  offset: 0, 0
+  index: -1
+torch
+  rotate: true
+  xy: 209, 165
+  size: 107, 212
+  orig: 107, 212
+  offset: 0, 0
+  index: -1

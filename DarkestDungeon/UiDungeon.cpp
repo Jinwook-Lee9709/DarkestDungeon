@@ -44,7 +44,6 @@ void UiDungeon::Init()
 	InitPlayerTextUi(windowSize);
 
 	monsterInfoPanel = new MonsterInfoPanel("panel");
-
 	inventory = new SpriteGo("Resource/Panels/panel_inventory.png");
 	SetSpriteInfo(inventory, Origins::BL, { windowSize.x * 0.5f,  windowSize.y * 0.999f }, 0);
 
@@ -73,11 +72,10 @@ void UiDungeon::Release()
 		it.second->Release();
 		delete(it.second);
 	}
-
-
 	monsterInfoPanel->Release();
 	delete(monsterInfoPanel);
 
+	delete(portrait);
 	playerText.clear();
 	instanceChk = false;
 }
@@ -99,6 +97,7 @@ void UiDungeon::Reset()
 	for (auto it : fixedText) {
 		it.second->Reset();
 	}
+	portrait->Reset();
 	monsterInfoPanel->Reset();
 	monsterInfoPanel->SetActive(false);
 	skillNameFrame.Reset();
@@ -136,6 +135,7 @@ void UiDungeon::Draw(sf::RenderWindow& window)
 				ui.second->Draw(window);
 			}
 		}
+		portrait->Draw(window);
 		skillNameFrame.Draw(window);
 		monsterInfoPanel->Draw(window);
 	}
@@ -173,6 +173,9 @@ void UiDungeon::InitFixedUi(const sf::Vector2f& windowSize)
 	fixedUi.push_back(obj);
 
 
+	portrait = new SpriteGo("portrait0");
+	portrait->SetOrigin(Origins::MC);
+	SetSpriteInfo(portrait, Origins::MC, { windowSize.x * 0.162f,  windowSize.y * 0.733f }, 6);
 	
 }
 
@@ -284,7 +287,24 @@ void UiDungeon::InitPlayerTextUi(const sf::Vector2f& windowSize)
 	obj->sortingLayer = SortingLayers::UI;
 	obj->sortingOrder = 6;
 	playerText.insert({ PlayerTextIndex::SPEED, obj });
-
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color::Yellow);
+	obj->SetPosition({ windowSize.x * 0.26f,  windowSize.y * 0.71f });
+	obj->SetString("CharacterName");
+	obj->SetCharacterSize(25);
+	obj->SetOrigin(Origins::MR);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::NAME, obj });
+	obj = new TextGo("Bokor");
+	obj->SetColor(sf::Color(150, 150, 150, 255));
+	obj->SetPosition({ windowSize.x * 0.26f,  windowSize.y * 0.74f });
+	obj->SetString("CharacterClass");
+	obj->SetCharacterSize(20);
+	obj->SetOrigin(Origins::MR);
+	obj->sortingLayer = SortingLayers::UI;
+	obj->sortingOrder = 6;
+	playerText.insert({ PlayerTextIndex::CLASS, obj });
 
 	obj = new TextGo("Bokor");
 	obj->SetColor(sf::Color::White);
@@ -366,7 +386,7 @@ void UiDungeon::UpdateSkillNameFrame(float dt)
 	}
 }
 
-void UiDungeon::ChangeCharacterInfoText(const CharacterInfo& info)
+void UiDungeon::ChangeCharacterInfo(const CharacterInfo& info)
 {
 	playerText[PlayerTextIndex::HP]->SetString(std::to_string(info.hp) + "/" + std::to_string(info.maxHp));
 	playerText[PlayerTextIndex::STRESS]->SetString(std::to_string(info.stress));
@@ -375,7 +395,9 @@ void UiDungeon::ChangeCharacterInfoText(const CharacterInfo& info)
 	playerText[PlayerTextIndex::DODGE]->SetString(std::to_string(info.dodge));
 	playerText[PlayerTextIndex::PROTECT]->SetString(std::to_string((int)info.protect));
 	playerText[PlayerTextIndex::SPEED]->SetString(std::to_string(info.speed));
-
+	playerText[PlayerTextIndex::NAME]->SetString(info.name);
+	playerText[PlayerTextIndex::CLASS]->SetStringByTable("className" + std::to_string((int)info.type));
+	portrait->ChangeTexture("portrait" + std::to_string((int)info.type));
 
 }
 

@@ -79,6 +79,16 @@ bool ResourceTableManager::LoadSkillIcon(const std::string& skillName)
 	return false;
 }
 
+bool ResourceTableManager::LoadPortrait(const std::string& portraitName)
+{
+	std::string path = PATH["Character_Portrait"][portraitName];
+	if (!RES_MGR(sf::Texture).Load(path)) {
+		std::cout << "LoadFail:" << path << std::endl;
+	}
+	resourceTable.insert({ portraitName, path });
+	return false;
+}
+
 bool ResourceTableManager::LoadScene(const std::string& scene)
 {
 	auto it = PATH["scene"][scene]["Texture"].begin();

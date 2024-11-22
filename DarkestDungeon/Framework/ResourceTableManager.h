@@ -22,6 +22,7 @@ public:
 	bool LoadMonsterAnimation();
 	bool LoadEffectAnimation();
 	bool LoadSkillIcon(const std::string& skillName);
+	bool LoadPortrait(const std::string& portraitName);
 	bool LoadScene(const std::string& scene);
 	bool UnLoadScene(const std::string& scene);
 

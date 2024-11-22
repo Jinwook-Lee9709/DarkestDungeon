@@ -1,0 +1,153 @@
+
+torch_flame.sprite.png
+size: 940,680
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fire_high_red01
+  rotate: false
+  xy: 783, 164
+  size: 80, 107
+  orig: 80, 107
+  offset: 0, 0
+  index: -1
+fire_high_red02
+  rotate: true
+  xy: 668, 196
+  size: 85, 113
+  orig: 85, 113
+  offset: 0, 0
+  index: -1
+fire_high_red03
+  rotate: true
+  xy: 668, 283
+  size: 87, 126
+  orig: 87, 126
+  offset: 0, 0
+  index: -1
+fire_low_orange01
+  rotate: false
+  xy: 875, 491
+  size: 60, 67
+  orig: 60, 67
+  offset: 0, 0
+  index: -1
+fire_low_orange02
+  rotate: true
+  xy: 768, 103
+  size: 59, 79
+  orig: 59, 79
+  offset: 0, 0
+  index: -1
+fire_low_orange03
+  rotate: true
+  xy: 882, 620
+  size: 58, 52
+  orig: 58, 52
+  offset: 0, 0
+  index: -1
+fire_low_red01
+  rotate: false
+  xy: 875, 422
+  size: 60, 67
+  orig: 60, 67
+  offset: 0, 0
+  index: -1
+fire_low_red02
+  rotate: true
+  xy: 849, 94
+  size: 59, 79
+  orig: 59, 79
+  offset: 0, 0
+  index: -1
+fire_low_red03
+  rotate: true
+  xy: 882, 560
+  size: 58, 52
+  orig: 58, 52
+  offset: 0, 0
+  index: -1
+fire_low_yellow01
+  rotate: false
+  xy: 875, 353
+  size: 60, 67
+  orig: 60, 67
+  offset: 0, 0
+  index: -1
+fire_low_yellow02
+  rotate: false
+  xy: 839, 13
+  size: 59, 79
+  orig: 59, 79
+  offset: 0, 0
+  index: -1
+fire_low_yellow03
+  rotate: false
+  xy: 668, 2
+  size: 58, 52
+  orig: 58, 52
+  offset: 0, 0
+  index: -1
+fire_medium_orange01
+  rotate: false
+  xy: 869, 254
+  size: 69, 97
+  orig: 69, 97
+  offset: 0, 0
+  index: -1
+fire_medium_orange02
+  rotate: false
+  xy: 796, 273
+  size: 71, 97
+  orig: 71, 97
+  offset: 0, 0
+  index: -1
+fire_medium_orange03
+  rotate: true
+  xy: 668, 126
+  size: 68, 98
+  orig: 68, 98
+  offset: 0, 0
+  index: -1
+fire_medium_red01
+  rotate: false
+  xy: 768, 4
+  size: 69, 97
+  orig: 69, 97
+  offset: 0, 0
+  index: -1
+fire_medium_red02
+  rotate: false
+  xy: 865, 155
+  size: 71, 97
+  orig: 71, 97
+  offset: 0, 0
+  index: -1
+fire_medium_red03
+  rotate: true
+  xy: 668, 56
+  size: 68, 98
+  orig: 68, 98
+  offset: 0, 0
+  index: -1
+inner_glow
+  rotate: false
+  xy: 668, 372
+  size: 205, 197
+  orig: 205, 197
+  offset: 0, 0
+  index: -1
+smoke
+  rotate: false
+  xy: 2, 8
+  size: 664, 670
+  orig: 664, 670
+  offset: 0, 0
+  index: -1
+torch
+  rotate: true
+  xy: 668, 571
+  size: 107, 212
+  orig: 107, 212
+  offset: 0, 0
+  index: -1

@@ -24,3 +24,7 @@ uiDamageText,DMG
 uiDodgeText,DODGE
 uiProtectText,PROT
 uiSpeedText,SPD
+className0,Crusader
+className1,HighwayMan
+className2,PlagueDoctor
+className3,Vestal

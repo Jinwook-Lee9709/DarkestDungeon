@@ -63,7 +63,7 @@ protected:
 	bool moving;
 	bool isDying;
 	float deathTimer;
-	float deathDuration = 1.4f;
+	float deathDuration = 1.2f;
 
 
 	std::unordered_map<DebuffType, std::pair<short, int>> debuffStack;

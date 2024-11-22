@@ -178,7 +178,7 @@ void ExploreManager::SetCorridorInfo()
 
 	shadow = dynamic_cast<ShadowRect*>(currentScene->FindGo("shadow"));
 	shadow->SetMaxOpacity(255);
-	ui->ChangeCharacterInfoText((*characters)[0]->GetCharacterInfo());
+	ui->ChangeCharacterInfo((*characters)[0]->GetCharacterInfo());
 	ui->ChangeSkillButtonTexture((*characters)[0]->GetCharacterInfo());
 	ui->DeactivateAllSkillButton();
 }
@@ -187,6 +187,7 @@ void ExploreManager::SetCorridorBackground()
 {
 	TileMap* tilemap = dynamic_cast<TileMap*>(currentScene->FindGo("corridorWall"));
 	background = dynamic_cast<SpriteGo*>(currentScene->FindGo("corridorBackground"));
+	background->SetPosition(views[0]->getCenter());
 	tilemap->Reset();
 
 }
