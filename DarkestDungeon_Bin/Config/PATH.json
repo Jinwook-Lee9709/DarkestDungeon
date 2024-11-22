@@ -70,7 +70,12 @@
         },
         "Ruin": {
             "Texture": {
-                "room_empty" : "resource/Dungeons/crypts.room_wall.empty.png"
+                "room_empty" : "resource/Dungeons/crypts.room_wall.empty.png",
+                "dungeon_tilemap" : "resource/Dungeons/dungeon_tilemap.png",
+                "dungeon_background" : "resource/Dungeons/crypts.corridor_bg.png",
+                "door_open": "resource/Dungeons/door_open.png" ,
+                "door_close": "resource/Dungeons/door_close.png",
+                "door_close_hover" : "resource/Dungeons/door_close_hover.png"
             }
             
         }  

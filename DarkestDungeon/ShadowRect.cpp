@@ -71,6 +71,9 @@ void ShadowRect::Update(float dt)
 			currentOpacity = Utils::Clamp(currentOpacity + 500 * dt, 0, maxOpacity);
 			rect.setFillColor(sf::Color(0, 0, 0, currentOpacity));
 		}
+		else {
+			isChanging = false;
+		}
 	}
 	else
 	{
@@ -78,6 +81,11 @@ void ShadowRect::Update(float dt)
 		{
 			currentOpacity = Utils::Clamp(currentOpacity - 500 * dt, 0, maxOpacity);
 			rect.setFillColor(sf::Color(0, 0, 0, currentOpacity));
+
+		}
+		else
+		{
+			isChanging = false;
 		}
 	}
 }

@@ -279,7 +279,7 @@ void MonsterContainer::OnDamage(int damage)
 	info.hp -= damageBuf;
 	damageText.AddAnimation(damage);
 	Utils::Clamp(info.hp, 0, info.maxHp);
-	if (info.hp < 0)
+	if (info.hp <= 0)
 	{
 		SetToDeath();
 	}

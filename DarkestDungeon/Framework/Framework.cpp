@@ -10,6 +10,7 @@ void Framework::Init(int width, int height, const std::string& name)
     SCENE_MGR.Init();
     InputManager::Init();
     Utils::Init();
+    window.setVerticalSyncEnabled(true);
 
 }
 

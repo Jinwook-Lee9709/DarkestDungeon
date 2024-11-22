@@ -16,7 +16,7 @@ SceneDev1::SceneDev1()
 }
 
 void SceneDev1::Init()
-{	
+{
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSizeF();
 	//Create Containers
 	for (int i = 0; i < 4; i++) {
@@ -31,12 +31,22 @@ void SceneDev1::Init()
 	}
 	AddGo(new ShadowRect("shadow"));
 
-	background = AddGo(new SpriteGo("room_empty"));
-	background->SetOrigin(Origins::TC);
-	background->SetPosition({ FRAMEWORK.GetWindowSizeF().x * 0.5f, 0.f });
-	background->sortingLayer = SortingLayers::Background;
+	corridorWall = AddGo(new TileMap("corridorWall"));
+	corridorBackground = AddGo(new SpriteGo("dungeon_background", "corridorBackground"));
+	corridorBackground->SetOrigin(Origins::MC);
+	corridorBackground->SetPosition({ FRAMEWORK.GetWindowSizeF().x * 0.5f, 400.f });
+	corridorBackground->SetScale({3.f, 3.f});
+	corridorBackground->sortingLayer = SortingLayers::Background;
+	corridorBackground->sortingOrder = -2;
+	roomBackground = AddGo(new SpriteGo("room_empty", "roomBackground"));
+	roomBackground->SetOrigin(Origins::TC);
+	roomBackground->SetPosition({ FRAMEWORK.GetWindowSizeF().x * 0.5f, 0.f });
+	roomBackground->sortingLayer = SortingLayers::Background;
+	roomBackground->SetActive(false);
+
 
 	uiDungeon = AddGo(new UiDungeon());
+	uiDungeon->sortingLayer = SortingLayers::UI;
 
 	//Set View 
 	worldView.setSize(windowSize);
@@ -49,7 +59,11 @@ void SceneDev1::Init()
 
 	battleManager = new BattleManager(this);
 	battleManager->Init();
+
+	exploreManager = new ExploreManager(this);
+	exploreManager->Init();
 	InitContaierPos(windowSize);
+
 
 
 
@@ -66,8 +80,10 @@ void SceneDev1::Enter()
 	LoadCharacterResource();
 	LoadMonsterResource();
 	LoadEffectResource();
+	exploreManager->Reset(&characters, uiDungeon, &characterOrder);
 	battleManager->Reset(&characters, &monsters, uiDungeon, &characterOrder);
-	currentStatus = Status::Battle;
+	beforeStatus = Status::Start;
+	currentStatus = Status::Explore;
 	Scene::Enter();
 }
 
@@ -78,11 +94,21 @@ void SceneDev1::Exit()
 
 void SceneDev1::Update(float dt)
 {
+	if (beforeStatus == Status::Start)
+	{
+		beforeStatus = Status::None;
+		for (auto& monster : monsters)
+		{
+			monster->SetActive(false);
+		}
+		exploreManager->StartExploreMode();
+	}
 	switch(currentStatus) {
 	case Status::Battle:
 		battleManager->Update(dt);
 		break;
 	case Status::Explore:
+		exploreManager->Update(dt);
 		break;
 	}
 	Scene::Update(dt);
@@ -102,12 +128,13 @@ void SceneDev1::InitContaierPos(sf::Vector2f windowSize)
 		characterOrder.push_back(i);
 		positionBuf -= block;
 	}
+	FixedCharacterContainerPos = characterContainerPos;
 	positionBuf = windowSize.x * 0.5f + block * 1.5f;;
 	for (int i = 0; i < 4; i++) {
 		monsterContainerPos1.push_back(sf::Vector2f({ positionBuf, height }));
 		positionBuf += block;
 	}
-
+	FixedMonsterContainerPos1 = monsterContainerPos1;
 }
 
 void SceneDev1::SetCharacterInfo()
@@ -170,6 +197,18 @@ void SceneDev1::ChangeCharacterPos(int first, int second)
 	characters[second]->MoveToCoord(firstCoord);
 	characterOrder[firstPos] = second;
 	characterOrder[secondPos] = first;
+}
+
+void SceneDev1::ResetContainerPos()
+{
+	characterContainerPos = FixedCharacterContainerPos;
+	monsterContainerPos1 = FixedMonsterContainerPos1;
+}
+
+void SceneDev1::EnterRoom()
+{
+	currentStatus = Status::Battle;
+	battleManager->StartBattleMode();
 }
 
 

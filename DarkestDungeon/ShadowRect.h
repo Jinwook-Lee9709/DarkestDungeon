@@ -7,6 +7,7 @@ protected:
 	float currentOpacity = 0;
 	float maxOpacity = 150;
 	bool isVisible;
+	bool isChanging;
 public:
 	ShadowRect(const std::string& name = "");
 	~ShadowRect() = default;
@@ -24,6 +25,10 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
-	void SetToVisible() { isVisible = true; }
-	void SetToInvisible() { isVisible = false; }
+	bool IsChanging() { return isChanging; }
+
+	void SetToVisible() { isVisible = true; isChanging = true; }
+	void SetToInvisible() { isVisible = false; isChanging = true;}
+	void SetMaxOpacity(float opacity) { maxOpacity = opacity; }
+	
 };

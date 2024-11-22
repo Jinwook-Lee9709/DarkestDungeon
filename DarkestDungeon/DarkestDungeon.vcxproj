@@ -31,6 +31,7 @@
     <ClCompile Include="Framework\DataTableMgr.cpp" />
     <ClCompile Include="Framework\HitBox.cpp" />
     <ClCompile Include="Framework\StringTable.cpp" />
+    <ClCompile Include="Framework\TileMap.cpp" />
     <ClCompile Include="Framework\Variables.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterContainer.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="Framework\FZLog.hpp" />
     <ClInclude Include="Framework\HitBox.h" />
     <ClInclude Include="Framework\StringTable.h" />
+    <ClInclude Include="Framework\TileMap.h" />
     <ClInclude Include="Framework\Variables.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterContainer.h" />

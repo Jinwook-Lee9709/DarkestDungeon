@@ -13,6 +13,32 @@ BattleManager::BattleManager(SceneDev1* scene)
     views = currentScene->GetViews();
 }
 
+void BattleManager::StartBattleMode()
+{
+    currentStatus = Status::Start;
+    shadow->SetToInvisible();
+    shadow->SetPosition(FRAMEWORK.GetWindowSizeF() * 0.5f);
+    shadow->SetMaxOpacity(150);
+    views[0]->setCenter(FRAMEWORK.GetWindowSizeF() * 0.5f);
+    currentScene->FindGo("corridorWall")->SetActive(false);
+    currentScene->FindGo("corridorBackground")->SetActive(false);
+    currentScene->FindGo("roomBackground")->SetActive(true);
+    currentScene->FindGo("door1")->SetActive(false);
+    currentScene->FindGo("door2")->SetActive(false);
+
+    currentScene->ResetContainerPos();
+    const auto& chracterPos = currentScene->GetCharacterPos();
+    const auto& monsterPos = currentScene->GetMonsterPos();
+    for (auto& character : (*characters))
+    {
+        character->SetPosition(chracterPos[character->GetPos()]);
+    }
+    for (auto& monster : (*monsters))
+    {
+        monster->SetPosition(monsterPos[monster->GetPos()-4]);
+    }
+}
+
 void BattleManager::Init()
 {
     std::ifstream file("tables/monster_table.json", std::ios::in);
@@ -60,8 +86,12 @@ void BattleManager::Reset(std::vector<CharacterContainer*>* characters,
 
 void BattleManager::Update(float dt)
 {
+
     switch (currentStatus)
     {
+    case Status::Start:
+        UpdateStart(dt);
+        break;
     case Status::JudgeTurn:
         UpdateJudgeTurn(dt);
         break;
@@ -104,6 +134,18 @@ void BattleManager::SetMonsterInfo()
         monsterOrder.push_back(i);
         json info = monsterTable["0"]["Monster" + std::to_string(i + 1)];
         (*monsters)[i]->SetStatus(info);
+    }
+}
+
+void BattleManager::UpdateStart(float dt)
+{
+    if (!shadow->IsChanging())
+    {
+        currentStatus = Status::JudgeTurn;
+        for (auto& monster : (*monsters))
+        {
+            monster->SetActive(true);
+        }
     }
 }
 

@@ -50,10 +50,10 @@
       <Filter>Framework\2.Manager\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="BattleManager.cpp">
-      <Filter>Scenes\Dev1\Battle</Filter>
+      <Filter>Scenes\Dev1\1.Battle</Filter>
     </ClCompile>
     <ClCompile Include="ExploreManager.cpp">
-      <Filter>Scenes\Dev1\Explore</Filter>
+      <Filter>Scenes\Dev1\2.Explore</Filter>
     </ClCompile>
     <ClCompile Include="Framework\HitBox.cpp">
       <Filter>Framework\5.GameObject</Filter>
@@ -71,19 +71,19 @@
       <Filter>Framework\4.Anim</Filter>
     </ClCompile>
     <ClCompile Include="Slot.cpp">
-      <Filter>Scenes\Dev1\Entity\Skill</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill</Filter>
     </ClCompile>
     <ClCompile Include="MonsterContainer.cpp">
-      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Monster</Filter>
     </ClCompile>
     <ClCompile Include="src\CharacterContainer.cpp">
-      <Filter>Scenes\Dev1\Entity\Character</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Character</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>Scenes\Dev1\Entity\Character</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Character</Filter>
     </ClCompile>
     <ClCompile Include="Framework\StringTable.cpp">
       <Filter>Framework\Table</Filter>
@@ -95,13 +95,13 @@
       <Filter>Framework\Table</Filter>
     </ClCompile>
     <ClCompile Include="DebuffText.cpp">
-      <Filter>Scenes\Dev1\Entity\Text</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Text</Filter>
     </ClCompile>
     <ClCompile Include="DamageText.cpp">
-      <Filter>Scenes\Dev1\Entity\Text</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Text</Filter>
     </ClCompile>
     <ClCompile Include="Effector.cpp">
-      <Filter>Scenes\Dev1\Effect</Filter>
+      <Filter>Scenes\Dev1\4.Effect</Filter>
     </ClCompile>
     <ClCompile Include="MonsterInfoPanel.cpp">
       <Filter>Scenes\Dev1\UI\Component</Filter>
@@ -110,7 +110,10 @@
       <Filter>Scenes\Dev1\UI\Component</Filter>
     </ClCompile>
     <ClCompile Include="ShadowRect.cpp">
-      <Filter>Scenes\Dev1\Battle\Component</Filter>
+      <Filter>Scenes\Dev1\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\TileMap.cpp">
+      <Filter>Framework\9.TileMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,10 +175,10 @@
       <Filter>Framework\2.Manager\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="BattleManager.h">
-      <Filter>Scenes\Dev1\Battle</Filter>
+      <Filter>Scenes\Dev1\1.Battle</Filter>
     </ClInclude>
     <ClInclude Include="ExploreManager.h">
-      <Filter>Scenes\Dev1\Explore</Filter>
+      <Filter>Scenes\Dev1\2.Explore</Filter>
     </ClInclude>
     <ClInclude Include="Framework\HitBox.h">
       <Filter>Framework\5.GameObject</Filter>
@@ -196,28 +199,28 @@
       <Filter>Framework\8.Log</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
-      <Filter>Scenes\Dev1\Entity\Skill</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Slot.h">
-      <Filter>Scenes\Dev1\Entity\Skill</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill</Filter>
     </ClInclude>
     <ClInclude Include="SkillCrusader.h">
-      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill\SkillCharacter</Filter>
     </ClInclude>
     <ClInclude Include="MonsterContainer.h">
-      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Scenes\Dev1\Entity\Monster</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Monster</Filter>
     </ClInclude>
     <ClInclude Include="src\CharacterContainer.h">
-      <Filter>Scenes\Dev1\Entity\Character</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Character</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Scenes\Dev1\Entity\Character</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Character</Filter>
     </ClInclude>
     <ClInclude Include="SkillSkeletonMilitia.h">
-      <Filter>Scenes\Dev1\Entity\Skill\SkillMonster</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill\SkillMonster</Filter>
     </ClInclude>
     <ClInclude Include="Framework\StringTable.h">
       <Filter>Framework\Table</Filter>
@@ -229,13 +232,13 @@
       <Filter>Framework\Table</Filter>
     </ClInclude>
     <ClInclude Include="DebuffText.h">
-      <Filter>Scenes\Dev1\Entity\Text</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Text</Filter>
     </ClInclude>
     <ClInclude Include="DamageText.h">
-      <Filter>Scenes\Dev1\Entity\Text</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Text</Filter>
     </ClInclude>
     <ClInclude Include="Effector.h">
-      <Filter>Scenes\Dev1\Effect</Filter>
+      <Filter>Scenes\Dev1\4.Effect</Filter>
     </ClInclude>
     <ClInclude Include="MonsterInfoPanel.h">
       <Filter>Scenes\Dev1\UI\Component</Filter>
@@ -244,16 +247,19 @@
       <Filter>Scenes\Dev1\UI\Component</Filter>
     </ClInclude>
     <ClInclude Include="SkillHighwayman.h">
-      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill\SkillCharacter</Filter>
     </ClInclude>
     <ClInclude Include="SkillPlagueDoctor.h">
-      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill\SkillCharacter</Filter>
     </ClInclude>
     <ClInclude Include="SkillVestal.h">
-      <Filter>Scenes\Dev1\Entity\Skill\SkillCharacter</Filter>
+      <Filter>Scenes\Dev1\3.Entity\Skill\SkillCharacter</Filter>
     </ClInclude>
     <ClInclude Include="ShadowRect.h">
-      <Filter>Scenes\Dev1\Battle\Component</Filter>
+      <Filter>Scenes\Dev1\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\TileMap.h">
+      <Filter>Framework\9.TileMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,52 +320,52 @@
     <Filter Include="Framework\2.Manager\ResourceManager">
       <UniqueIdentifier>{c4a62eaf-1297-4b16-a9d3-f5f5f26acb36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Battle">
-      <UniqueIdentifier>{10566202-c489-4b2d-bf6c-b018e50c0615}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Explore">
-      <UniqueIdentifier>{05263364-ee39-41a5-843d-46654f49b5d2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\Dev1\UI">
       <UniqueIdentifier>{3784f399-981e-40a9-b664-e630868a7267}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\General">
-      <UniqueIdentifier>{4472138b-18b1-411c-96fc-174b15228645}</UniqueIdentifier>
     </Filter>
     <Filter Include="Framework\8.Log">
       <UniqueIdentifier>{2691c827-c077-4dc9-92fe-3d42d2a6e434}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Entity">
-      <UniqueIdentifier>{60e19c18-b8e8-4da8-883c-9c91d9d58689}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Entity\Skill">
-      <UniqueIdentifier>{9e4726b2-bd5f-4cbd-9356-bb5005928d2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Entity\Character">
-      <UniqueIdentifier>{6265df02-a2bb-4e8b-a5fb-9361dcc743e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Entity\Monster">
-      <UniqueIdentifier>{8a84d8fc-5023-49bb-b097-a6c4a5113823}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Entity\Skill\SkillCharacter">
-      <UniqueIdentifier>{439c5317-7fee-4cf3-9f2a-98245a0b9665}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Entity\Skill\SkillMonster">
-      <UniqueIdentifier>{493f61e8-a2c9-433b-b9d5-343c384dfb66}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Table">
       <UniqueIdentifier>{2e1ab009-7646-4d98-94c7-b0f72e54b121}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Entity\Text">
-      <UniqueIdentifier>{82b4c509-708c-4f22-a9ad-d3b7d59d4827}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Dev1\Effect">
-      <UniqueIdentifier>{395ad000-f1ca-4359-aaa4-917419ee9851}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes\Dev1\UI\Component">
       <UniqueIdentifier>{ccc721e4-9d3c-4ef6-bb8c-38b74c5630f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Dev1\Battle\Component">
+    <Filter Include="Framework\9.TileMap">
+      <UniqueIdentifier>{fe8b2177-a964-4079-86cb-f6a0e0af4d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\2.Explore">
+      <UniqueIdentifier>{05263364-ee39-41a5-843d-46654f49b5d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\1.Battle">
+      <UniqueIdentifier>{10566202-c489-4b2d-bf6c-b018e50c0615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\4.Effect">
+      <UniqueIdentifier>{395ad000-f1ca-4359-aaa4-917419ee9851}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity">
+      <UniqueIdentifier>{60e19c18-b8e8-4da8-883c-9c91d9d58689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Skill">
+      <UniqueIdentifier>{9e4726b2-bd5f-4cbd-9356-bb5005928d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Skill\SkillCharacter">
+      <UniqueIdentifier>{439c5317-7fee-4cf3-9f2a-98245a0b9665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Skill\SkillMonster">
+      <UniqueIdentifier>{493f61e8-a2c9-433b-b9d5-343c384dfb66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Character">
+      <UniqueIdentifier>{6265df02-a2bb-4e8b-a5fb-9361dcc743e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Monster">
+      <UniqueIdentifier>{8a84d8fc-5023-49bb-b097-a6c4a5113823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Text">
+      <UniqueIdentifier>{82b4c509-708c-4f22-a9ad-d3b7d59d4827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\Component">
       <UniqueIdentifier>{7a4b642d-462e-4d8c-ae73-a44eae902115}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

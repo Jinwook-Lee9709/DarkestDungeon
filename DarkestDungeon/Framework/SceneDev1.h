@@ -2,11 +2,12 @@
 #include "Scene.h"
 
 class BattleManager;
-class ExplorerManager;
+class ExploreManager;
 class CharacterContainer;
 class MonsterContainer;
 class SpriteGo;
 class UiDungeon;
+class TileMap;
 
 
 class SceneDev1 : public Scene
@@ -14,11 +15,14 @@ class SceneDev1 : public Scene
 public:
 	enum class Status
 	{
+		None,
+		Start,
 		Battle,
 		Explore
 	};
 protected:
 	BattleManager* battleManager;
+	ExploreManager* exploreManager;
 
 	std::vector<CharacterContainer*> characters;
 	std::vector<MonsterContainer*> monsters;
@@ -30,8 +34,16 @@ protected:
 	std::vector<sf::Vector2f> monsterContainerPos1;
 	std::vector<sf::Vector2f> monsterContainerPos2;
 
-	SpriteGo* background;
+	std::vector<sf::Vector2f> FixedCharacterContainerPos;
+	std::vector<sf::Vector2f> FixedMonsterContainerPos1;
+	std::vector<sf::Vector2f> FixedMonsterContainerPos2;
 
+	TileMap* corridorWall;
+	SpriteGo* corridorBackground;
+	SpriteGo* roomBackground;
+	SpriteGo* Background;
+
+	Status beforeStatus;
 	Status currentStatus;
 
 	UiDungeon* uiDungeon;
@@ -62,7 +74,9 @@ public:
 	std::vector<sf::View*> GetViews();
 	
 	void ChangeCharacterPos(int first, int second);
-
+	void ResetContainerPos();
+	
+	void EnterRoom();
 
 
 };

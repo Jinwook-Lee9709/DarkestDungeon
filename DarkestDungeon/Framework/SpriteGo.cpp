@@ -80,8 +80,12 @@ void SpriteGo::SetFillColor(const sf::Color& color)
 
 void SpriteGo::ChangeTexture(const std::string& texId)
 {
-	this->textureId = texId;
-	Reset();
+	if (textureId != texId)
+	{
+		this->textureId = texId;
+		Reset();
+	}
+
 }
 
 sf::Vector2f SpriteGo::GetSize()

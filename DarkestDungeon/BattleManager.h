@@ -14,6 +14,7 @@ public:
 	enum class Status
 	{
 		None,
+		Start,
 		JudgeTurn,
 		ApplyDebuff,
 		CharacterTurn,
@@ -80,6 +81,7 @@ public:
 	BattleManager(SceneDev1* scene);
 	~BattleManager() = default;
 
+	void StartBattleMode();
 
 	void Init();
 	void Reset(std::vector<CharacterContainer*>* characters,
@@ -89,6 +91,7 @@ public:
 
 	void SetMonsterInfo();
 
+	void UpdateStart(float dt);
 	void UpdateJudgeTurn(float dt);
 	void UpdateApplyDebuff(float dt);
 	void UpdateCharacterTurn(float dt);

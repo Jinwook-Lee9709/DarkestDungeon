@@ -98,7 +98,7 @@ void InputManager::Update(float dt)
 		float dir = raw;
 		if (dir == 0.f && axisInfo.value != 0.f)
 		{
-			dir = axisInfo.value > 0 ? -1.f : 1.f;
+			dir = axisInfo.value > 0 ? -3.f : 3.f;
 		}
 		axisInfo.value += dir * axisInfo.sensi * dt;
 		axisInfo.value = Utils::Clamp(axisInfo.value, -1.f, 1.f);

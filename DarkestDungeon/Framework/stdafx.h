@@ -35,6 +35,7 @@
 #include "GameObject.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
+#include "TileMap.h"
 
 
 

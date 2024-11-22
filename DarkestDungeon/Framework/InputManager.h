@@ -10,7 +10,7 @@ struct AxisInfo {
 	Axis axis;
 	std::list<int> positive;
 	std::list<int> negative;
-	float sensi;
+	float sensi = 1.5f;
 	float value;
 
 	void SetKey(bool positive, int code)
