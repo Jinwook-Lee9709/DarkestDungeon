@@ -3,6 +3,7 @@
 #include "DebuffText.h"
 #include "DamageText.h"
 #include "Effector.h"
+#include "DebuffIcon.h"
 
 class Monster;
 
@@ -44,6 +45,8 @@ protected:
 	Effector stunEffect;
 
 	sf::RectangleShape hpBar;
+	sf::RectangleShape hpBarBackground;
+	DebuffIcon debuffIcon;
 	SpriteGo target;
 
 	Effector BottomEffector;

@@ -11,7 +11,7 @@ void DebuffText::SetPosition(const sf::Vector2f& pos)
 	position = pos;
 	text.SetPosition(position);
 	icon.SetPosition(position -
-		sf::Vector2f(text.GetGlobalBounds().width * 0.5f + 20.f, 0.f));
+		sf::Vector2f(text.GetGlobalBounds().width * 0.5f, 0.f));
 }
 
 void DebuffText::SetScale(const sf::Vector2f& s)
@@ -66,8 +66,7 @@ void DebuffText::Update(float dt)
 		posForAnim += sf::Vector2f(0, -120 * dt);
 		text.SetPosition(position + posForAnim);
 		icon.SetPosition(position + posForAnim -
-			sf::Vector2f(text.GetGlobalBounds().width * 0.5f +
-				icon.GetGlobalBounds().width + 10.f, -10.f));
+			sf::Vector2f(text.GetGlobalBounds().width * 0.5f + 10.f, -10.f));
 		if (timer > duration)
 		{
 			isPlay = false;

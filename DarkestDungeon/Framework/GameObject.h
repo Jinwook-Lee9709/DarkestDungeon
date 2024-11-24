@@ -65,6 +65,7 @@ public:
 		return hitbox;
 	}
 	bool IsClicked(sf::Vector2f pos);
+	bool IsRightClicked(sf::Vector2f pos);
 	bool IsHover(sf::Vector2f pos);
 
 	virtual void Init();

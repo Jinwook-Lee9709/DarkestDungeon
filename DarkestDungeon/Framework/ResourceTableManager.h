@@ -19,10 +19,12 @@ private:
 public:
 	void Init();
 	bool LoadCharacterAnimation(const CharacterType& character);
+	bool LoadCharacterSound(const CharacterType& character);
 	bool LoadMonsterAnimation();
 	bool LoadEffectAnimation();
 	bool LoadSkillIcon(const std::string& skillName);
 	bool LoadPortrait(const std::string& portraitName);
+
 	bool LoadScene(const std::string& scene);
 	bool UnLoadScene(const std::string& scene);
 
@@ -32,7 +34,6 @@ public:
 	AnimationClip& GetAnim(const std::string& AnimId);
 	AnimationClip& GetCharacterSkillAnim(const std::string& type, const int& AnimCode);
 	AnimationClip& GetCharacterAnim(const std::string& type, const std::string& AnimCode);
-
 	AnimationClip& GetMonsterSkillAnim(const std::string& type, const int& AnimCode);
 	AnimationClip& GetMonsterAnim(const std::string& type, const std::string& AnimCode);
 

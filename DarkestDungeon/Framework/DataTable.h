@@ -5,7 +5,7 @@ public:
 	enum class Types
 	{
 		String, 
-		Item,
+		SkillString,
 	};
 	static const int TotalTypes = 1;
 

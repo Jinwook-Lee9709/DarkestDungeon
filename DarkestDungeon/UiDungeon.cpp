@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "UiDungeon.h"
 #include "MonsterInfoPanel.h"
+#include "Torch.h"
 
 UiDungeon::UiDungeon(const std::string& name)
 	: GameObject(name)
@@ -43,11 +44,15 @@ void UiDungeon::Init()
 	InitSkillUi(windowSize);
 	InitPlayerTextUi(windowSize);
 
+	torch = new Torch();
+
 	monsterInfoPanel = new MonsterInfoPanel("panel");
 	inventory = new SpriteGo("Resource/Panels/panel_inventory.png");
 	SetSpriteInfo(inventory, Origins::BL, { windowSize.x * 0.5f,  windowSize.y * 0.999f }, 0);
 
 	skillNameFrame.SetPosition({ 0.7f * FRAMEWORK.GetWindowSizeF().x, 0.2f * FRAMEWORK.GetWindowSizeF().y });
+	victoryTextFrame.SetPosition({ FRAMEWORK.GetWindowSizeF().x * 0.5f ,FRAMEWORK.GetWindowSizeF().y * 0.3f });
+	
 
 	instanceChk = true;
 }
@@ -73,8 +78,8 @@ void UiDungeon::Release()
 		delete(it.second);
 	}
 	monsterInfoPanel->Release();
+	delete(torch);
 	delete(monsterInfoPanel);
-
 	delete(portrait);
 	playerText.clear();
 	instanceChk = false;
@@ -97,26 +102,56 @@ void UiDungeon::Reset()
 	for (auto it : fixedText) {
 		it.second->Reset();
 	}
+	torch->Reset();
 	portrait->Reset();
 	monsterInfoPanel->Reset();
 	monsterInfoPanel->SetActive(false);
 	skillNameFrame.Reset();
 	skillNameFrame.SetActive(false);
+	victoryTextFrame.Reset();
+	victoryTextFrame.SetActive(false);
+	toolTip.Reset();
 }
 
 void UiDungeon::Update(float dt)
 {
 	CheckSkillClick();
-	if (isFramePlaying) {
+	if (isFramePlaying)
+	{
 		UpdateSkillNameFrame(dt);
 	}
+	if (isVictoryPlaying)
+	{
+		UpdateVictoryTextFrame(dt);
 
+	}
+
+	bool flag = false;
+	for (int i = 0; i < 4; i++)
+	{
+		if (skillButton[i]->IsHover((sf::Vector2f)InputManager::GetMousePosition()))
+		{
+		toolTip.SetPosition(skillButton[i]->GetPosition() + sf::Vector2f(0.f, skillButton[i]->GetLocalBounds().height * 0.5f));
+		toolTip.Set(characterInfo, currentCharacter, i);
+		flag = true;
+		}
+	}
+	if (flag)
+	{
+		toolTip.SetActive(true);
+	}
+	else
+	{
+		toolTip.SetActive(false);
+	}
+	torch->Update(dt);
 
 }
 
 void UiDungeon::Draw(sf::RenderWindow& window)
 {
 	if (active) {
+		torch->Draw(window);
 		for (auto ui : fixedUi) {
 			ui->Draw(window);
 		}
@@ -137,7 +172,10 @@ void UiDungeon::Draw(sf::RenderWindow& window)
 		}
 		portrait->Draw(window);
 		skillNameFrame.Draw(window);
+		victoryTextFrame.Draw(window);
 		monsterInfoPanel->Draw(window);
+
+		toolTip.Draw(window);
 	}
 }
 
@@ -372,6 +410,17 @@ void UiDungeon::PlaySkillNameFrame(const std::string& str)
 	isFramePlaying = true;
 }
 
+void UiDungeon::PlayVictoryTextFrame(const std::string& str)
+{
+
+	victoryTextFrame.ChangeText(str);
+	victoryTextFrame.SetOpacity(0);
+	victoryTextFrame.SetActive(true);
+	opacity = 0;       
+	timer = 0;
+	isVictoryPlaying = true;
+}
+
 void UiDungeon::UpdateSkillNameFrame(float dt)
 {
 	timer += dt;
@@ -386,7 +435,18 @@ void UiDungeon::UpdateSkillNameFrame(float dt)
 	}
 }
 
-void UiDungeon::ChangeCharacterInfo(const CharacterInfo& info)
+void UiDungeon::UpdateVictoryTextFrame(float dt)
+{
+	timer += dt;
+	if (timer > duration && opacity <255)
+	{
+		timer = 0;
+		opacity++;
+		victoryTextFrame.SetOpacity(opacity);
+	}
+}
+
+void UiDungeon::ChangeCharacterInfo(const CharacterInfo& info, const short& characterNum)
 {
 	playerText[PlayerTextIndex::HP]->SetString(std::to_string(info.hp) + "/" + std::to_string(info.maxHp));
 	playerText[PlayerTextIndex::STRESS]->SetString(std::to_string(info.stress));
@@ -399,6 +459,8 @@ void UiDungeon::ChangeCharacterInfo(const CharacterInfo& info)
 	playerText[PlayerTextIndex::CLASS]->SetStringByTable("className" + std::to_string((int)info.type));
 	portrait->ChangeTexture("portrait" + std::to_string((int)info.type));
 
+	characterInfo = info;
+	currentCharacter = characterNum;
 }
 
 void UiDungeon::ChangeSkillButtonTexture(const CharacterInfo& info)

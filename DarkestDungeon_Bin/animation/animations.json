@@ -291,6 +291,28 @@
         "DEATH":{
             "ID": "death",
             "TEX_ID": "resource/FX/death_sheet.png"
+        },
+        "TORCH0":{
+            "ID": "torch0",
+            "TEX_ID": "resource/Overlays/torch0_sheet.png"
+        },
+        "TORCH1":{
+            "ID": "torch1",
+            "TEX_ID": "resource/Overlays/torch1_sheet.png"
+        },
+        "TORCH2":{
+            "ID": "torch2",
+            "TEX_ID": "resource/Overlays/torch2_sheet.png"
+        },
+        "TORCH3":{
+            "ID": "torch3",
+            "TEX_ID": "resource/Overlays/torch3_sheet.png"
+        },
+        "TORCH4":{
+            "ID": "torch4",
+            "TEX_ID": "resource/Overlays/torch4_sheet.png"
         }
+
+
     }
 }

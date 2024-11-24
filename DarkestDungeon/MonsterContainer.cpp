@@ -23,6 +23,9 @@ void MonsterContainer::SetPosition(const sf::Vector2f& pos)
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
+	hpBarBackground.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
+
+	debuffIcon.SetPosition(hpBar.getPosition() - sf::Vector2f(0.f, 25.f));
 }
 
 void MonsterContainer::SetRotation(float angle)
@@ -59,6 +62,8 @@ void MonsterContainer::Init()
 	Utils::SetOrigin(hitbox.rect, Origins::BC);
 	hpBar.setSize({ 90.f,10.f });
 	hpBar.setFillColor(sf::Color(128, 0, 0, 255));
+	hpBarBackground.setSize({ 90.f,10.f });
+	hpBarBackground.setFillColor(sf::Color(10, 10, 10, 255));
 	for (int i = 0; i < (int)DebuffType::Count; i++)
 	{
 		std::pair<short, int> pair = { 0, 0 };
@@ -114,7 +119,11 @@ void MonsterContainer::Reset()
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
+	hpBarBackground.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
 	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
+
+	debuffIcon.Reset();
+	debuffIcon.SetPosition(hpBar.getPosition() + sf::Vector2f(0.f, 25.f));
 }
 
 void MonsterContainer::Update(float dt)
@@ -136,11 +145,11 @@ void MonsterContainer::Update(float dt)
 
 		if (deathTimer > deathDuration)
 		{
-			isAlive = false;
+			active = false;
 			isDying = false;
 		}
 	}
-	if (isAlive)
+	if (active)
 	{
 		monster.Update(dt);
 		debuffText.Update(dt);
@@ -156,14 +165,17 @@ void MonsterContainer::Update(float dt)
 
 void MonsterContainer::Draw(sf::RenderWindow& window)
 {
-	if (isAlive) {
+	if (active) {
 		monster.Draw(window);
+		window.draw(hpBarBackground);
 		window.draw(hpBar);
 
 		if (debuffText.IsActive())
 			debuffText.Draw(window);
 		BottomEffector.Draw(window);
 		MiddleEffector.Draw(window);
+
+		debuffIcon.Draw(window);
 
 		if (damageText.IsActive())
 			damageText.Draw(window);
@@ -234,6 +246,7 @@ void MonsterContainer::SetToDefend()
 void MonsterContainer::SetToDeath()
 {
 	isDying = true;
+	isAlive = false;
 	DeathEffector.SetDuration(1.4f);
 	DeathEffector.AddAnimation("blood");
 	monster.SetToDeath();
@@ -260,14 +273,20 @@ bool MonsterContainer::OnHit(int damage, float acc)
 		int damageBuf = Utils::Clamp(damage - info.protect, 1, 1000);
 		info.hp -= damageBuf;
 		damageText.AddAnimation(damageBuf);
-		if (info.hp < 0)
+		if (info.hp <= 0)
 		{
 			info.hp = 0;
 			SetToDeath();
+			SOUND_MGR.PlaySfx("skel_death");
+		}
+		else
+		{
+			SOUND_MGR.PlaySfx("skel_hurt");
 		}
 		return true;
-	}
+	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 	else {
+		damageText.AddAnimation(0);
 		return false;
 	}
 
@@ -281,6 +300,7 @@ void MonsterContainer::OnDamage(int damage)
 	Utils::Clamp(info.hp, 0, info.maxHp);
 	if (info.hp <= 0)
 	{
+		info.hp = 0;
 		SetToDeath();
 	}
 }
@@ -291,31 +311,36 @@ void MonsterContainer::OnDebuffed(DebuffType type, float acc, int damage, int st
 	{
 	case DebuffType::Stun:
 	{
-		if (Utils::RollTheDice(acc - info.resistStun))
+		if (Utils::RollTheDice((acc - info.resistStun) / 100.f))
 		{
 			debuffStack[DebuffType::Stun] = { stack, damage };
 			debuffText.AddAnimation(DebuffType::Stun);
 			stunEffect.SetDuration(1.f);
 			stunEffect.AddAnimation("stunned");
 			stunEffect.AddAnimation("stunned_loop");
+			SOUND_MGR.PlaySfx("stun_on");
+			debuffIcon.Insert(DebuffType::Stun);
 		}
 		break;
 	}
 	case DebuffType::Blight:
 	{
-		if (Utils::RollTheDice(acc - info.resistBlight))
+		if (Utils::RollTheDice((acc - info.resistBlight) / 100.f))
 		{
 			debuffStack[DebuffType::Blight] = { stack, damage };
 			debuffText.AddAnimation(DebuffType::Blight);
+			SOUND_MGR.PlaySfx("poison");
+			debuffIcon.Insert(DebuffType::Blight);
 		}
 		break;
 	}
 	case DebuffType::Bleed:
 	{
-		if (Utils::RollTheDice(acc - info.resistBleed))
+		if (Utils::RollTheDice((acc - info.resistBleed)) / 100.f)
 		{
 			debuffStack[DebuffType::Bleed] = { stack, damage };
 			debuffText.AddAnimation(DebuffType::Bleed);
+			debuffIcon.Insert(DebuffType::Bleed);
 		}
 		break;
 	}
@@ -383,8 +408,13 @@ void MonsterContainer::ApplyDebuff()
 		{
 			if (debuff.second.first > 0)
 			{
+				SOUND_MGR.PlaySfx("poison");
 				OnDamage(debuff.second.second);
 				--debuff.second.first;
+				if (debuff.second.first == 0)
+				{
+					debuffIcon.Delete(DebuffType::Blight);
+				}
 			}
 			break;
 		}
@@ -392,8 +422,13 @@ void MonsterContainer::ApplyDebuff()
 		{
 			if (debuff.second.first > 0)
 			{
+				SOUND_MGR.PlaySfx("bleed");
 				OnDamage(debuff.second.second);
 				--debuff.second.first;
+				if (debuff.second.first == 0)
+				{
+					debuffIcon.Delete(DebuffType::Bleed);
+				}
 			}
 
 			break;
@@ -414,7 +449,9 @@ void MonsterContainer::EndStun()
 {
 	--debuffStack[DebuffType::Stun].first;
 	debuffText.PlayAnimation(DebuffType::Stun);
+	debuffIcon.Delete(DebuffType::Stun);
 	stunEffect.SetActive(false);
+	SOUND_MGR.PlaySfx("stun_off");
 }
 
 bool MonsterContainer::IsStuned()

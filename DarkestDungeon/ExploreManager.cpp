@@ -39,6 +39,7 @@ void ExploreManager::Update(float dt)
 {
 	if (beforeStatus == Status::Start)
 	{
+		SOUND_MGR.PlayBgm("Explore_Loop", true);
 		SetCorridorInfo();
 		beforeStatus = Status::None;
 	}
@@ -60,6 +61,7 @@ void ExploreManager::Update(float dt)
 void ExploreManager::UpdateIdle(float dt)
 {
 	float speed;
+	sfxTimer += dt;
 	if ((speed = InputManager::GetAxis(Axis::horizontal)) != 0)
 	{
 		if (!isMoving)
@@ -69,6 +71,12 @@ void ExploreManager::UpdateIdle(float dt)
 			{
 				character->SetToWalk();
 			}
+		}
+		if (sfxTimer > sfxDuration)
+		{
+			int num = Utils::RandomRange(1, 3);
+			SOUND_MGR.PlaySfx("foot_dirt_"+std::to_string(num));
+			sfxTimer = 0;
 		}
 		float moveAmount = 500 * dt * speed;
 		sf::Vector2f currentViewCenter = views[0]->getCenter();
@@ -96,10 +104,11 @@ void ExploreManager::UpdateIdle(float dt)
 		{
 			pos += sf::Vector2f(moveAmount, 0.f);
 		}
+		sf::Vector2f newPos = { (*characterContainerPos)[0].x + cameraDistance, currentViewCenter.y };
 		float currentDistance = (views[0]->getCenter().x - (*characterContainerPos)[0].x);
-		if (cameraThreshold.first < currentDistance && currentDistance < cameraThreshold.second)
+		if( (cameraThreshold.first < currentDistance && currentDistance < cameraThreshold.second)
+			|| (cameraCenterBounds.first < newPos.x && newPos.x < cameraCenterBounds.second))
 		{
-			sf::Vector2f newPos = { (*characterContainerPos)[0].x + cameraDistance, currentViewCenter.y };
 			newPos.x = Utils::Clamp(newPos.x, cameraCenterBounds.first, cameraCenterBounds.second);
 			views[0]->setCenter(newPos);
 
@@ -135,6 +144,8 @@ void ExploreManager::UpdateIdle(float dt)
 		{
 			character->SetToIdle();
 		}
+		SOUND_MGR.StopBgm();
+		SOUND_MGR.PlaySfx("door_open");
 		currentStatus = Status::EnterRoom;
 	}
 
@@ -178,7 +189,7 @@ void ExploreManager::SetCorridorInfo()
 
 	shadow = dynamic_cast<ShadowRect*>(currentScene->FindGo("shadow"));
 	shadow->SetMaxOpacity(255);
-	ui->ChangeCharacterInfo((*characters)[0]->GetCharacterInfo());
+	ui->ChangeCharacterInfo((*characters)[0]->GetCharacterInfo(), 0);
 	ui->ChangeSkillButtonTexture((*characters)[0]->GetCharacterInfo());
 	ui->DeactivateAllSkillButton();
 }

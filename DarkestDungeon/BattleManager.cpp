@@ -119,6 +119,8 @@ void BattleManager::Update(float dt)
     case Status::FillEmptyPos:
         UpdateFillEmptyPos(dt);
         break;
+    case Status::Victory:
+        break;
     default:
         break;
     }
@@ -141,6 +143,7 @@ void BattleManager::UpdateStart(float dt)
 {
     if (!shadow->IsChanging())
     {
+        SOUND_MGR.PlayBgm("Combat_Loop", true);
         currentStatus = Status::JudgeTurn;
         for (auto& monster : (*monsters))
         {
@@ -153,7 +156,7 @@ void BattleManager::UpdateJudgeTurn(float dt)
 {
     beforeStatus = Status::None;
     ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
-    ui->ChangeCharacterInfo((*characters)[currentCharacter]->GetCharacterInfo());
+    ui->ChangeCharacterInfo((*characters)[currentCharacter]->GetCharacterInfo(), currentCharacter);
     ui->DeactivateAllSkillButton();
     if (orderQueue.empty()) {
         std::priority_queue<std::pair< int, int >, std::vector<std::pair<int, int>>,Compare> sortingQueue;
@@ -192,8 +195,9 @@ void BattleManager::UpdateJudgeTurn(float dt)
         if ((*characters)[currentCharacter]->IsAlive())
         {
             ui->ChangeSkillButtonTexture((*characters)[currentCharacter]->GetCharacterInfo());
-            ui->ChangeCharacterInfo((*characters)[currentCharacter]->GetCharacterInfo());
+            ui->ChangeCharacterInfo((*characters)[currentCharacter]->GetCharacterInfo(), currentCharacter);
             orderQueue.pop();
+            SOUND_MGR.PlaySfx("ally_turn");  
             beforeStatus = Status::JudgeTurn;
             currentStatus = Status::ApplyDebuff;
             isCharacterTurn = true;
@@ -275,26 +279,31 @@ void BattleManager::UpdateApplyDebuff(float dt)
         {
             beforeStatus = Status::ApplyDebuff;
             currentStatus = Status::FillEmptyPos;
+            return;
         }
         if (!isCharacterTurn && !((*monsters)[currentMonster]->IsAlive()))
         {
             beforeStatus = Status::ApplyDebuff;
             currentStatus = Status::FillEmptyPos;
+            return;
         }
         if (isStuned)
         {
             beforeStatus = Status::ApplyDebuff;
             currentStatus = Status::FillEmptyPos;
+            return;
         }
         else
         {
             if (isCharacterTurn) {
                 beforeStatus = Status::ApplyDebuff;
                 currentStatus = Status::CharacterTurn;
+                return;
             }
             else {
                 beforeStatus = Status::ApplyDebuff;
                 currentStatus = Status::MonsterTurn;
+                return;
             }
            
         }
@@ -306,6 +315,7 @@ void BattleManager::UpdateCharacterTurn(float dt)
 {
     UpdateMonsterPanel();
     if (beforeStatus == Status::ApplyDebuff){
+
         std::vector<int> skills = (*characters)[currentCharacter]->CheckAvailableSkill();
         if (!skills.empty()) {
             bool availabe[4] = { false };
@@ -533,6 +543,8 @@ void BattleManager::UpdateMonsterTurn(float dt)
 {
     if (!monsterSkillSelected)
     {
+        SOUND_MGR.PlaySfx("enemy_turn");
+        (*monsters)[currentMonster]->ActiavteTargetUi(TargetUi::SELECT);
         std::vector<int> skills = (*monsters)[currentMonster]->CheckAvailableSkill();
         if (!skills.empty()) 
         {
@@ -697,6 +709,23 @@ void BattleManager::UpdateFillEmptyPos(float dt)
             }
         }
     } while (flag);
+
+    flag = true;
+    for (int i = 0; i < 3; i++)
+    {
+        if ((*monsters)[monsterOrder[i]]->IsAlive())
+        {
+            flag = false;
+        }
+    }
+    if (flag)
+    {
+        currentStatus = Status::Victory;
+        ui->PlayVictoryTextFrame("VICTORY");
+        SOUND_MGR.StopBgm();
+        SOUND_MGR.PlaySfx("victory");
+        return;
+    }
     beforeStatus = Status::FillEmptyPos;
     currentStatus = Status::JudgeTurn;
 }
@@ -817,7 +846,7 @@ void BattleManager::AnimateView(bool isCharacter)
             int j = 0;
             for (int i = 0; i < 4; i++)
             {
-                if (range[5 + i] == 1 && (*characters)[(*characterOrder)[i]]->IsAlive())
+                if (range[5 + i] == 1 && (*characters)[(*characterOrder)[i]]->IsActive())
                 {
                     (*characters)[(*characterOrder)[i]]->MoveToCoordDouble(zoomedChracterPos[j]);
                     (*characters)[(*characterOrder)[i]]->sortingLayer = SortingLayers::Popup;
@@ -831,7 +860,7 @@ void BattleManager::AnimateView(bool isCharacter)
             int j = 0;
             for (int i = 0; i < 4; i++)
             {
-                if (range[5 + i] == 1 && (*monsters)[(monsterOrder[i])]->IsAlive())
+                if (range[5 + i] == 1 && (*monsters)[(monsterOrder[i])]->IsActive())
                 {
                     (*monsters)[monsterOrder[i]]->MoveToCoordDouble(zoomedContainerPos[j + 4]);
                     (*monsters)[monsterOrder[i]]->sortingLayer = SortingLayers::Popup;
@@ -857,7 +886,7 @@ void BattleManager::AnimateView(bool isCharacter)
             int j = 0;
             for (int i = 0; i < 4; i++)
             {
-                if (range[5 + i] == 1 && (*monsters)[(monsterOrder[i])]->IsAlive())
+                if (range[5 + i] == 1 && (*monsters)[(monsterOrder[i])]->IsActive())
                 {
                     (*characters)[(*characterOrder)[i]]->MoveToCoordDouble(zoomedContainerPos[j]);
                     (*characters)[(*characterOrder)[i]]->sortingLayer = SortingLayers::Popup;

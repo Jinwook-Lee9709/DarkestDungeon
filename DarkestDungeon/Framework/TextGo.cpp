@@ -56,8 +56,11 @@ void TextGo::SetOrigin(const sf::Vector2f& newOrigin)
 
 void TextGo::Reset()
 {
-	text.setFont(GET_FONT(font));
-	SetOrigin(originPreset);
+	if (font != "")
+	{
+		text.setFont(GET_FONT(font));
+		SetOrigin(originPreset);
+	}
 }
 
 void TextGo::SetPosition(const sf::Vector2f& pos)
@@ -88,4 +91,14 @@ void TextGo::Draw(sf::RenderWindow& window)
 {
 	GameObject::Draw(window);
 	window.draw(text);
+}
+
+sf::FloatRect TextGo::GetLocalBounds() const
+{
+	return text.getLocalBounds();
+}
+
+sf::FloatRect TextGo::GetGlobalBounds() const
+{
+	return text.getGlobalBounds();
 }

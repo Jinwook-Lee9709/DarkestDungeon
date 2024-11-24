@@ -36,7 +36,11 @@
                 "ability_pass" : "resource/Panels/icons_ability/ability_pass.png",
                 "selected_ability" : "resource/Panels/icons_ability/selected_ability.png",
 
-                "Overlay1" : "resource/Overlays/Overlay1.png",
+                "overlay0" : "resource/Overlays/Overlay0.png",
+                "overlay1" : "resource/Overlays/Overlay1.png",
+                "overlay2" : "resource/Overlays/Overlay2.png",
+                "overlay3" : "resource/Overlays/Overlay3.png",
+                "overlay4" : "resource/Overlays/Overlay4.png",
 
                 "overlay_move" : "resource/Overlays/move.png",
                 "overlay_selected" : "resource/Overlays/selected.png",
@@ -62,12 +66,39 @@
             "Font" :{
                 "KOMIKAP_":      "fonts/KOMIKAP_.ttf",
                 "Bokor":      "fonts/Bokor.ttf",
-                "LeeL":      "fonts/LeeL.ttf"
+                "LeeL":      "fonts/LeeB.ttf"
             },
             "Sound" :{
-                "chop":          "sound/chop.wav",
-                "death":         "sound/death.wav",
-                "out_of_time":    "sound/out_of_time.wav"
+                "Explore_Intro": "resource/Sound/Bgm/Explore_Intro.wav",
+                "Explore_Loop": "resource/Sound/Bgm/Explore_Loop.wav",
+                "Combat_Intro": "resource/Sound/Bgm/Combat_Intro.wav",
+                "Combat_Loop": "resource/Sound/Bgm/Combat_Loop.wav",
+                "door_open" :  "resource/Sound/SFX/door_open.wav",
+                "torch_add" :  "resource/Sound/SFX/torch_add.wav",
+                "torch_end" :  "resource/Sound/SFX/torch_end.wav",
+                "foot_dirt_1" :  "resource/Sound/SFX/foot_dirt_01.wav",
+                "foot_dirt_2" :  "resource/Sound/SFX/foot_dirt_02.wav",
+                "foot_dirt_3" :  "resource/Sound/SFX/foot_dirt_03.wav",
+                "bleed" :  "resource/Sound/SFX/bleed.wav",
+                "bleed_onset" :  "resource/Sound/SFX/bleed_onset.wav",
+                "combat_start" :  "resource/Sound/SFX/combat_start.wav",
+                "crit_enemy" :  "resource/Sound/SFX/crit_enemy.wav",
+                "crit_hero" :  "resource/Sound/SFX/crit_hero.wav",
+                "cured" :  "resource/Sound/SFX/cured.wav",
+                "ally_turn" :  "resource/Sound/SFX/ally_turn.wav",
+                "enemy_turn" :  "resource/Sound/SFX/enemy_turn.wav",
+                "heal_ally" :  "resource/Sound/SFX/heal_ally.wav",
+                "heal_ally_crit" :  "resource/Sound/SFX/heal_ally_crit.wav",
+                "heal_dot" :  "resource/Sound/SFX/heal_dot.wav",
+                "pass" :  "resource/Sound/SFX/pass.wav",
+                "stun_on" :  "resource/Sound/SFX/stun_on.wav",
+                "stun_off" :  "resource/Sound/SFX/stun_off.wav",
+                "poison" :  "resource/Sound/SFX/poison.wav",
+                "win" :  "resource/Sound/SFX/win.wav",
+                "skel_death" :  "resource/Sound/SFX/skel_death.wav",
+                "skel_hurt" :  "resource/Sound/SFX/skel_hurt.wav",
+                "sklmi_swordstrike" :  "resource/Sound/SFX/sklmi_swordstrike.wav",
+                "victory" : "resource/Sound/SFX/victory.wav"
             }
         },
         "Ruin": {
@@ -100,6 +131,44 @@
         "vestal_ability_three": "resource/Heroes/Vestal/Icon/vestal.ability.three.png",
         "vestal_ability_four": "resource/Heroes/Vestal/Icon/vestal.ability.four.png"
     },
+    "Character_Sound":
+    {
+        "0":
+        {
+            "cru_battleheal": "resource/Sound/SFX/Crusader/cru_battleheal.wav",
+            "cru_bulwarkfaith": "resource/Sound/SFX/Crusader/cru_bulwarkfaith.wav",
+            "cru_smite": "resource/Sound/SFX/Crusader/cru_smite.wav",
+            "cru_smite_miss": "resource/Sound/SFX/Crusader/cru_smite_miss.wav",
+            "cru_stunningblow": "resource/Sound/SFX/Crusader/cru_stunningblow.wav"
+        },
+        "1":
+        {
+            "hwy_grapeshot": "resource/Sound/SFX/HighwayMan/hwy_grapeshot.wav",
+            "hwy_grapeshot_miss": "resource/Sound/SFX/HighwayMan/hwy_grapeshot_miss.wav",
+            "hwy_pistolshot": "resource/Sound/SFX/HighwayMan/hwy_pistolshot.wav",
+            "hwy_pistolshot_miss": "resource/Sound/SFX/HighwayMan/hwy_pistolshot_miss.wav",
+            "hwy_pointblank": "resource/Sound/SFX/HighwayMan/hwy_pointblank.wav",
+            "hwy_wickedslice": "resource/Sound/SFX/HighwayMan/hwy_wickedslice.wav"
+        },
+        "2":
+        {
+            "plg_battlemed": "resource/Sound/SFX/PlagueDoctor/plg_battlemed.wav",
+            "plg_blindinggas": "resource/Sound/SFX/PlagueDoctor/plg_blindinggas.wav",
+            "plg_blindinggas_miss": "resource/Sound/SFX/PlagueDoctor/plg_blindinggas_miss.wav",
+            "plg_explo_small": "resource/Sound/SFX/PlagueDoctor/plg_explo_small.wav",
+            "plg_noxiousblast": "resource/Sound/SFX/PlagueDoctor/plg_noxiousblast.wav",
+            "plg_noxiousblast_miss": "resource/Sound/SFX/PlagueDoctor/plg_noxiousblast_miss.wav",
+            "plg_plaguegrenade": "resource/Sound/SFX/PlagueDoctor/plg_plaguegrenade.wav",
+            "plg_plaguegrenade_miss": "resource/Sound/SFX/PlagueDoctor/plg_plaguegrenade_miss.wav"
+        },
+        "3":
+        {
+            "vst_divinegrace": "resource/Sound/SFX/Vestal/vst_divinegrace.wav",
+            "vst_godscom": "resource/Sound/SFX/Vestal/vst_godscom.wav",
+            "vst_judgement": "resource/Sound/SFX/Vestal/vst_judgement.wav",
+            "vst_macebash": "resource/Sound/SFX/Vestal/vst_macebash.wav"
+        }
+    },
     "Character_Portrait":
     {
         "portrait0": "resource/Heroes/Crusader/Icon/crusader_portrait_roster.png",
@@ -107,5 +176,6 @@
         "portrait2": "resource/Heroes/PlagueDoctor/Icon/plague_doctor_portrait_roster.png",
         "portrait3": "resource/Heroes/Vestal/Icon/vestal_portrait_roster.png"
     }
+
     
 }

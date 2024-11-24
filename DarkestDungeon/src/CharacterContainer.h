@@ -4,6 +4,7 @@
 #include "DebuffText.h"
 #include "DamageText.h"
 #include "Effector.h";
+#include "DebuffIcon.h"
 
 class MonsterContainer;
 class DebuffText;
@@ -17,7 +18,9 @@ private:
 
 	sf::Sprite spriteSelect;
 	sf::RectangleShape hpBar;
+	sf::RectangleShape hpBarBackground;
 	sf::RectangleShape stressBar[10];
+	DebuffIcon debuffIcon;
 	SpriteGo target;
 
 	Effector BottomEffector;

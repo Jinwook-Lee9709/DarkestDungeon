@@ -8,6 +8,7 @@ void Framework::Init(int width, int height, const std::string& name)
     RES_TABLE_MGR.Init();
     DATATABLE_MGR.Init();
     SCENE_MGR.Init();
+    SOUND_MGR.Init();
     InputManager::Init();
     Utils::Init();
     window.setVerticalSyncEnabled(true);
@@ -37,7 +38,7 @@ void Framework::Do()
                 window.close();
         }
         InputManager::Update(deltaTime);
-
+        SOUND_MGR.Update(deltaTime);
         //Update
         if (InputManager::GetKeyDown(sf::Keyboard::H))
         {
@@ -61,5 +62,6 @@ void Framework::Do()
 void Framework::Release()
 {
     SCENE_MGR.Release();
+    SOUND_MGR.Release();
     DATATABLE_MGR.Release();
 }

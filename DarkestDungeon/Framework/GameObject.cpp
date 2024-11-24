@@ -42,6 +42,17 @@ bool GameObject::IsClicked(sf::Vector2f pos)
 	}
 }
 
+bool GameObject::IsRightClicked(sf::Vector2f pos)
+{
+	if (InputManager::GetMouseButton(sf::Mouse::Right))
+	{
+		return hitbox.rect.getGlobalBounds().contains(pos);
+	}
+	else {
+		return false;
+	}
+}
+
 bool GameObject::IsHover(sf::Vector2f pos)
 {
 	return hitbox.rect.getGlobalBounds().contains(pos);

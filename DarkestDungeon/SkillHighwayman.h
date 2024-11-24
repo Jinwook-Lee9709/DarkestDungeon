@@ -29,12 +29,15 @@ struct SkillHighwayman : public Skill
 		if (Utils::RollTheDice((critical + 5) / 100)) {
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
+			SOUND_MGR.PlaySfx("crit_hero");
 		}
 		if (monsters[target]->OnHit(damage, accuracy + 85))
 		{
 			monsters[target]->PlayMiddleEffect("blood");
+			SOUND_MGR.PlaySfx("bleed_onset");
+
 		}
-		
+		SOUND_MGR.PlaySfx("hwy_wickedslice");
 	}
 	void skill2(
 		std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target
@@ -47,10 +50,16 @@ struct SkillHighwayman : public Skill
 		if (Utils::RollTheDice((critical + 7.5) / 100)) {
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
+			SOUND_MGR.PlaySfx("crit_hero");
 		}
 		if (monsters[target]->OnHit(damage, accuracy + 85))
 		{
 			monsters[target]->PlayMiddleEffect("highwayman_shot_target");
+			SOUND_MGR.PlaySfx("hwy_pistolshot");
+		}
+		else
+		{
+			SOUND_MGR.PlaySfx("hwy_pistolshot_miss");
 		}
 	}
 	void skill3(
@@ -64,10 +73,12 @@ struct SkillHighwayman : public Skill
 		if (Utils::RollTheDice((critical + 5) / 100)) {
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
+			SOUND_MGR.PlaySfx("crit_hero");
 		}
 		if (monsters[target]->OnHit(damage, accuracy + 95))
 		{
 			monsters[target]->PlayMiddleEffect("highwayman_grapeshot_target");
+			SOUND_MGR.PlaySfx("hwy_pointblank");
 		}
 	}
 	void skill4(
@@ -78,16 +89,20 @@ struct SkillHighwayman : public Skill
 		int accuracy = characters[user]->GetCharacterInfo().accuracy;
 		int critical = characters[user]->GetCharacterInfo().critical;
 		int currentTarget = target;
+		bool flag = false;
+		bool crit = false;
 		for (int i = 0; i < 3; i++) {
 			if (monsters[currentTarget]->IsAlive()) {
 				int damage = Utils::Truncate(0.5f * Utils::RandomRange(minDamage, maxDamage));
 				if (Utils::RollTheDice((critical - 9) / 100)) {
 					damage = Utils::Truncate(damage * 1.5f);
 					accuracy = 300;
+					crit = true;
 				}
 				if (monsters[currentTarget]->OnHit(damage, accuracy + 75))
 				{
 					monsters[currentTarget]->PlayMiddleEffect("highwayman_grapeshot_target");
+					flag = true;
 				}
 			}
 			if (monsters[currentTarget]->GetPos() == 4) 
@@ -104,6 +119,19 @@ struct SkillHighwayman : public Skill
 			}
 
 		}
+		if (flag)
+		{
+			SOUND_MGR.PlaySfx("hwy_grapeshot");
+		}
+		else
+		{
+			SOUND_MGR.PlaySfx("hwy_grapeshot_miss");
+		}
+		if (crit)
+		{
+			SOUND_MGR.PlaySfx("crit_hero");
+		}
+
 	}
 };
 

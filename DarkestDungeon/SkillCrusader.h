@@ -28,10 +28,20 @@ struct SkillCrusader : public Skill
 		int damage = 1.15 * Utils::RandomRange(minDamage, maxDamage);
 		if (Utils::RollTheDice((critical + 5) / 100)) {
 			damage = Utils::Truncate(damage * 1.5f);
+			SOUND_MGR.PlaySfx("crit_hero");
 			accuracy = 300;
 		}
-		monsters[target]->OnHit(damage, accuracy + 85);
-		monsters[target]->PlayMiddleEffect("blood");
+		if (monsters[target]->OnHit(damage, accuracy + 85))
+		{
+			monsters[target]->PlayMiddleEffect("blood");
+			SOUND_MGR.PlaySfx("cru_smite");
+			SOUND_MGR.PlaySfx("bleed_onset");
+		}
+		else
+		{
+			SOUND_MGR.PlaySfx("cru_smite_miss");
+		}
+
 
 	}
 	void skill2(
@@ -44,6 +54,7 @@ struct SkillCrusader : public Skill
 		int damage = Utils::RandomRange(minDamage, maxDamage);
 		if (Utils::RollTheDice((critical + 5) / 100)) {
 			damage = Utils::Truncate(damage * 1.5f);
+			SOUND_MGR.PlaySfx("crit_hero");
 			accuracy = 300;
 		}
 		if (monsters[target]->OnHit(damage * 0.5f, accuracy + 90))
@@ -51,6 +62,7 @@ struct SkillCrusader : public Skill
 			monsters[target]->OnDebuffed(DebuffType::Stun, accuracy + 100, 0, 1);
 			monsters[target]->PlayMiddleEffect("crusader_stun_target");
 		}	
+		SOUND_MGR.PlaySfx("cru_stunningblow");
 	}
 	void skill3(
 		std::vector<CharacterContainer*>characters, std::vector<MonsterContainer*> monsters, short user, short target
@@ -61,6 +73,7 @@ struct SkillCrusader : public Skill
 		}
 		characters[target]->OnHeal(heal);
 		characters[target]->PlayBottomEffect("crusader_heal_target");
+		SOUND_MGR.PlaySfx("cru_battleheal");
 	}
 	void skill4(
 		std::vector<CharacterContainer*>characters, std::vector<MonsterContainer*> monsters, short user, short target
@@ -77,6 +90,7 @@ struct SkillCrusader : public Skill
 				if (Utils::RollTheDice((critical + 5) / 100)) {
 					damage = Utils::Truncate(damage * 1.5f);
 					accuracy = 300;
+					SOUND_MGR.PlaySfx("crit_hero");
 				}
 				if (monsters[currentTarget]->OnHit(Utils::Truncate(damage * 0.6f), accuracy + 90))
 				{
@@ -92,6 +106,7 @@ struct SkillCrusader : public Skill
 			}
 
 		}
+		SOUND_MGR.PlaySfx("cru_bulwarkfaith");
 
 	}
 };

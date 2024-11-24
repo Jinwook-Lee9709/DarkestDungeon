@@ -1,8 +1,12 @@
 #pragma once
 #include "Scene.h"
+
+class SkillTooltip;
+
 class SceneDev2 : public Scene
 {
 protected:
+	SkillTooltip* ui;
 
 public:
 	SceneDev2();

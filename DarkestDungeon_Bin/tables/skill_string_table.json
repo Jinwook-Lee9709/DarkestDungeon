@@ -1,0 +1,461 @@
+{
+    "crusader_ability_one":{
+        "name" :  {
+            "stringKey" : "crusader_ability_one_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "crusader_ability_one_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_one_text_0",
+            "color0" : [137, 137, 137]
+        },
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_one_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "Count" : 2
+    },
+    "crusader_ability_two":{
+        "name" :  {
+            "stringKey" : "crusader_ability_two_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "crusader_ability_two_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_two_text_0",
+            "color0" : [137, 137, 137]
+        },
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_two_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 2,
+            "stringKey0" : "crusader_ability_two_text_2",
+            "color0" : [220, 187, 79],
+            "stringKey1" : "crusader_ability_two_text_3",
+            "color1" : [77, 77, 77]
+        },
+        "Count" : 3
+    },
+    "crusader_ability_three":{
+        "name" :  {
+            "stringKey" : "crusader_ability_three_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "NULL",
+            "color" : [0, 0, 0]
+        },
+        "line_0" : {
+            "count" : 2,
+            "stringKey0" : "crusader_ability_three_text_0",
+            "color0" : [101, 122, 78],
+            "stringKey1" : "crusader_ability_three_text_1",
+            "color1" : [137, 137, 137]
+        },
+        "Count" : 1    
+    },
+    "crusader_ability_four":{
+        "name" :  {
+            "stringKey" : "crusader_ability_four_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "crusader_ability_four_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_four_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_four_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "crusader_ability_four_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "Count" : 3  
+    },
+    "highwayman_ability_one":{
+        "name" :  {
+            "stringKey" : "highwayman_ability_one_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "highwayman_ability_one_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_one_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_one_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_one_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "Count" : 3  
+    },
+    "highwayman_ability_two":{
+        "name" :  {
+            "stringKey" : "highwayman_ability_two_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "highwayman_ability_two_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_two_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_two_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_two_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_two_text_3",
+            "color0" : [137, 137, 137]
+        },
+        "Count" : 4
+    },
+    "highwayman_ability_three":{
+        "name" :  {
+            "stringKey" : "highwayman_ability_three_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "highwayman_ability_three_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_three_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_three_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_three_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_three_text_3",
+            "color0" : [137, 137, 137]
+        },
+        "line_4" : {
+            "count" : 2,
+            "stringKey0" : "highwayman_ability_three_text_4",
+            "color0" : [49, 123, 173],
+            "stringKey1" : "highwayman_ability_three_text_5",
+            "color1" : [77, 77, 77]
+        },
+        "Count" : 5  
+    },
+    "highwayman_ability_four":{
+        "name" :  {
+            "stringKey" : "highwayman_ability_four_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "highwayman_ability_four_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_four_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_four_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_four_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 1,
+            "stringKey0" : "highwayman_ability_four_text_3",
+            "color0" : [137, 137, 137]
+        },
+        "line_4" : {
+            "count" : 2,
+            "stringKey0" : "highwayman_ability_four_text_4",
+            "color0" : [137, 137, 137],
+            "stringKey1" : "highwayman_ability_four_text_5",
+            "color1" : [77, 77, 77]
+        },
+        "Count" : 5  
+    },
+    "plague_doctor_ability_one":{
+        "name" :  {
+            "stringKey" : "plague_doctor_ability_one_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "plague_doctor_ability_one_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_one_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_one_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_one_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 4,
+            "stringKey0" : "plague_doctor_ability_one_text_3",
+            "color0" : [121, 135, 26],
+            "stringKey1" : "plague_doctor_ability_one_text_4",
+            "color1" : [77, 77, 77],
+            "stringKey2" : "plague_doctor_ability_one_text_5",
+            "color2" : [137, 137, 137],
+            "stringKey3" : "plague_doctor_ability_one_text_6",
+            "color3" : [77, 77, 77]
+        },
+        "Count" : 4
+    },
+    "plague_doctor_ability_two":{
+        "name" :  {
+            "stringKey" : "plague_doctor_ability_two_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "plague_doctor_ability_two_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_two_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_two_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 2,
+            "stringKey0" : "plague_doctor_ability_two_text_2",
+            "color0" : [137, 137, 137],
+            "stringKey1" : "plague_doctor_ability_two_text_3",
+            "color1" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_two_text_4",
+            "color0" : [121, 135, 26]
+        },
+        "Count" : 4
+    },
+    "plague_doctor_ability_three":{
+        "name" :  {
+            "stringKey" : "plague_doctor_ability_three_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "plague_doctor_ability_three_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_three_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_three_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 2,
+            "stringKey0" : "plague_doctor_ability_three_text_2",
+            "color0" : [220, 187, 79],
+            "stringKey1" : "plague_doctor_ability_three_text_3",
+            "color1" : [77, 77, 77]
+        },
+        "Count" : 3
+    },
+    "plague_doctor_ability_four":{
+        "name" :  {
+            "stringKey" : "plague_doctor_ability_four_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "NULL",
+            "color" : [0, 0, 0]
+        },
+        "line_0" : {
+            "count" : 2,
+            "stringKey0" : "plague_doctor_ability_four_text_0",
+            "color0" : [101, 122, 78],
+            "stringKey1" : "plague_doctor_ability_four_text_1",
+            "color1" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 4,
+            "stringKey0" : "plague_doctor_ability_four_text_2",
+            "color0" : [137, 137, 137],
+            "stringKey1" : "plague_doctor_ability_four_text_3",
+            "color1" : [121, 135, 26],
+            "stringKey2" : "plague_doctor_ability_four_text_4",
+            "color2" : [137, 137, 137],
+            "stringKey3" : "plague_doctor_ability_four_text_5",
+            "color3" : [197, 7, 0]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "plague_doctor_ability_four_text_6",
+            "color0" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 4,
+            "stringKey0" : "plague_doctor_ability_four_text_7",
+            "color0" : [137, 137, 137],
+            "stringKey1" : "plague_doctor_ability_four_text_8",
+            "color1" : [121, 135, 26],
+            "stringKey2" : "plague_doctor_ability_four_text_9",
+            "color2" : [137, 137, 137],
+            "stringKey3" : "plague_doctor_ability_four_text_10",
+            "color3" : [197, 7, 0]
+        },
+        "Count" : 4
+    },
+    "vestal_ability_one":{
+        "name" :  {
+            "stringKey" : "vestal_ability_one_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "vestal_ability_one_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "vestal_ability_one_text_0",
+            "color0" : [137, 137, 137]
+        },
+        "Count" : 1
+    },
+    "vestal_ability_two":{
+        "name" :  {
+            "stringKey" : "vestal_ability_two_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "vestal_ability_two_text_type",
+            "color" : [96, 92, 90]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "vestal_ability_two_text_0",
+            "color0" : [137, 137, 137]
+        },    
+        "line_1" : {
+            "count" : 1,
+            "stringKey0" : "vestal_ability_two_text_1",
+            "color0" : [137, 137, 137]
+        },
+        "line_2" : {
+            "count" : 1,
+            "stringKey0" : "vestal_ability_two_text_2",
+            "color0" : [137, 137, 137]
+        },
+        "line_3" : {
+            "count" : 1,
+            "stringKey0" : "vestal_ability_two_text_3",
+            "color0" : [137, 137, 137]
+        },
+        "line_4" : {
+            "count" : 2,
+            "stringKey0" : "vestal_ability_two_text_4",
+            "color0" : [220, 187, 79],
+            "stringKey1" : "vestal_ability_two_text_5",
+            "color1" : [77, 77, 77]
+        },
+        "Count" : 3
+    },
+    "vestal_ability_three":{
+        "name" :  {
+            "stringKey" : "vestal_ability_three_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "NULL",
+            "color" : [0, 0, 0]
+        },
+        "line_0" : {
+            "count" : 2,
+            "stringKey0" : "vestal_ability_three_text_0",
+            "color0" : [101, 122, 78],
+            "stringKey1" : "vestal_ability_three_text_1",
+            "color1" : [137, 137, 137]
+        },
+        "Count" : 1
+    },
+    "vestal_ability_four":{
+        "name" :  {
+            "stringKey" : "vestal_ability_four_text_name",
+            "color" : [164, 152, 97]
+        },
+        "type" : {
+            "stringKey" : "NULL",
+            "color" : [0, 0, 0]
+        },
+        "line_0" : {
+            "count" : 1,
+            "stringKey0" : "vestal_ability_four_text_0",
+            "color0" : [101, 122, 78],
+            "stringKey1" : "vestal_ability_four_text_1",
+            "color1" : [137, 137, 137]
+        },
+        "Count" : 1
+    }
+}

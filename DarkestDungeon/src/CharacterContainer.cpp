@@ -19,6 +19,7 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
+	hpBarBackground.setPosition(position + sf::Vector2f(-hpBarMargin, 0));
 	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
 
 	damageText.SetPosition(position - sf::Vector2f(hpBar.getSize().y * 2, hpBar.getSize().x * 2.5f));
@@ -28,6 +29,8 @@ void CharacterContainer::SetPosition(const sf::Vector2f& pos)
 	MiddleEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
 	DeathEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
 	BottomEffector.SetPosition(position);
+
+	debuffIcon.SetPosition(hpBar.getPosition() - sf::Vector2f(0.f, 25.f));
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness() * 2) / 10 + hpBar.getSize().x / 10;
 	for (int i = 0; i < 10; i++) {
@@ -70,12 +73,15 @@ void CharacterContainer::Init()
 	character.Init();
 	hpBar.setSize({ 90.f,10.f });
 	hpBar.setFillColor(sf::Color(128, 0, 0, 255));
+	hpBarBackground.setSize({ 90.f,10.f });
+	hpBarBackground.setFillColor(sf::Color(10, 10, 10, 255));
+
 	hitbox.rect.setSize({ 100,290 });
 	Utils::SetOrigin(hitbox.rect, Origins::BC);
 	for (int i = 0; i < 10; i++) {
 		stressBar[i].setSize({ 4.f, 5.f });
 		stressBar[i].setOutlineThickness(2.f);
-		stressBar[i].setFillColor(sf::Color(20, 20, 20, 255));
+		stressBar[i].setFillColor(sf::Color(10, 10, 10, 255));
 		stressBar[i].setOutlineColor(sf::Color(50, 50, 50, 255));
 	}
 	for (int i = 0; i < (int)DebuffType::Count; i++)
@@ -125,12 +131,18 @@ void CharacterContainer::Reset()
 	DeathEffector.SetPosition(position - sf::Vector2f(-hpBar.getSize().y, hpBar.getSize().x * 2.f));
 	DeathEffector.SetOrigin(Origins::MC);
 
+
+
 	hpBar.setScale({ (float)info.hp / (float)info.maxHp, 1.0f });
 	SetOrigin(Origins::BC);
 
 	float hpBarMargin = hpBar.getSize().x * 0.5f;
 	hpBar.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
+	hpBarBackground.setPosition(position + sf::Vector2f(-hpBarMargin, -hpBar.getSize().y));
 	target.SetPosition(position + sf::Vector2f(1.f, 2.4f * hpBar.getSize().y));
+
+	debuffIcon.Reset();
+	debuffIcon.SetPosition(hpBar.getPosition() - sf::Vector2f(0.f, 25.f));
 
 	sf::Vector2f stressRectPos = hpBar.getPosition() + sf::Vector2f(stressBar[0].getOutlineThickness(), 15.f);
 	float rectGap = (hpBar.getSize().x / 10 - stressBar->getSize().x - stressBar[0].getOutlineThickness()*2) / 10 + hpBar.getSize().x / 10;
@@ -160,11 +172,11 @@ void CharacterContainer::Update(float dt)
 
 		if (deathTimer > deathDuration)
 		{
-			isAlive = false;
+			active = false;
 			isDying = false;
 		}
 	}
-	if (isAlive)
+	if (active)
 	{
 		character.Update(dt);
 		debuffText.Update(dt);
@@ -180,23 +192,31 @@ void CharacterContainer::Update(float dt)
 
 void CharacterContainer::Draw(sf::RenderWindow& window)
 {
-	character.Draw(window);
-	window.draw(hpBar);
-	for (int i = 0; i < 10; i++) {
-		window.draw(stressBar[i]);
-	}
-	target.Draw(window);
-	hitbox.Draw(window);
-	if (debuffText.IsActive())
-		debuffText.Draw(window);
-	BottomEffector.Draw(window);
-	MiddleEffector.Draw(window);
-	DeathEffector.Draw(window);
+	if (active)
+	{
+		character.Draw(window);
+		window.draw(hpBarBackground);
+		window.draw(hpBar);
 
-	if (damageText.IsActive())
-		damageText.Draw(window);
-	if (stunEffect.IsActive())
-		stunEffect.Draw(window);
+		for (int i = 0; i < 10; i++) {
+			window.draw(stressBar[i]);
+		}
+		target.Draw(window);
+		hitbox.Draw(window);
+		if (debuffText.IsActive())
+			debuffText.Draw(window);
+		BottomEffector.Draw(window);
+		MiddleEffector.Draw(window);
+		DeathEffector.Draw(window);
+
+		debuffIcon.Draw(window);
+
+		if (damageText.IsActive())
+			damageText.Draw(window);
+		if (stunEffect.IsActive())
+			stunEffect.Draw(window);
+	}
+	
 }
 
 void CharacterContainer::ActiavteTargetUi(TargetUi type)
@@ -270,6 +290,7 @@ void CharacterContainer::SetToDefend()
 void CharacterContainer::SetToDeath()
 {
 	isDying = true;
+	isAlive = false;
 	DeathEffector.AddAnimation("blood");
 	character.SetToDeath();
 }
@@ -300,7 +321,7 @@ bool CharacterContainer::OnHit(int damage, float acc)
 		info.hp -= damageBuf;
 		damageText.AddAnimation(damageBuf);
 		Utils::Clamp(info.hp, 0, info.maxHp);
-		if (info.hp < 0)
+		if (info.hp <= 0)
 		{
 			SetToDeath();
 		}
@@ -308,6 +329,7 @@ bool CharacterContainer::OnHit(int damage, float acc)
 	}
 	else
 	{
+		damageText.AddAnimation(0);
 		return false;
 	}
 }
@@ -317,7 +339,7 @@ void CharacterContainer::OnDamage(int damage)
 	int damageBuf = Utils::Clamp(damage, 0, damage);
 	info.hp -= damageBuf;
 	damageText.AddAnimation(damage);
-	if (info.hp < 0)
+	if (info.hp <= 0)
 	{
 		info.hp = 0;
 		SetToDeath();
@@ -331,30 +353,37 @@ void CharacterContainer::OnDebuffed(DebuffType type, float acc, int damage, int 
 	{
 		case DebuffType::Stun:
 		{
-			if (Utils::RollTheDice(acc - info.resistStun))
+			if (Utils::RollTheDice((acc - info.resistStun) / 100.f))
 			{
 				debuffStack[DebuffType::Stun] = { stack, damage };
 				debuffText.AddAnimation(DebuffType::Stun);
 				stunEffect.SetDuration(1.f);
 				stunEffect.AddAnimation("stunned");
 				stunEffect.AddAnimation("stunned_loop");
-				
+				SOUND_MGR.PlaySfx("stun_on");
+
+				debuffIcon.Insert(DebuffType::Stun);
 			}
 			break;
 		}
 		case DebuffType::Blight:
 		{
-			if (Utils::RollTheDice(acc - info.resistBlight))
+			if (Utils::RollTheDice((acc - info.resistBlight) / 100.f))
 			{
 				debuffStack[DebuffType::Blight] = { stack, damage };
+				debuffText.AddAnimation(DebuffType::Blight);
+				SOUND_MGR.PlaySfx("poison");
+				debuffIcon.Insert(DebuffType::Blight);
 			}
 			break;
 		}
 		case DebuffType::Bleed:
 		{
-			if (Utils::RollTheDice(acc - info.resistBleed))
+			if (Utils::RollTheDice((acc - info.resistBleed)) / 100.f)
 			{
 				debuffStack[DebuffType::Bleed] = { stack, damage };
+				debuffText.AddAnimation(DebuffType::Bleed);
+				debuffIcon.Insert(DebuffType::Bleed);
 			}
 			break;
 		}
@@ -404,7 +433,7 @@ int CharacterContainer::CheckDebuffCount()
 {
 	int cnt = 0;
 	for (auto& debuff : debuffStack)
-	{
+	{ 
 		if (debuff.second.first > 0)
 		{
 			cnt++;
@@ -432,8 +461,14 @@ void CharacterContainer::ApplyDebuff()
 			{
 				if (debuff.second.first > 0)
 				{
+					SOUND_MGR.PlaySfx("poison");
 					OnDamage(debuff.second.second);
 					--debuff.second.first;
+					if (debuff.second.first == 0)
+					{
+						debuffIcon.Delete(DebuffType::Blight);
+					}
+						
 				}
 				break;
 			}
@@ -441,8 +476,13 @@ void CharacterContainer::ApplyDebuff()
 			{
 				if (debuff.second.first > 0)
 				{
+					SOUND_MGR.PlaySfx("bleed");
 					OnDamage(debuff.second.second);
 					--debuff.second.first;
+					if (debuff.second.first == 0)
+					{
+						debuffIcon.Delete(DebuffType::Bleed);
+					}
 				}
 
 				break;
@@ -462,22 +502,25 @@ void CharacterContainer::ApplyDebuff()
 void CharacterContainer::CureDebuff(DebuffType type)
 {
 	if (debuffStack[type].first != 0) {
-		debuffStack[type].first--;
+		debuffStack[type].first = 0;
 		switch (type)
 		{
 		case DebuffType::Stun:
 		{
 			debuffText.PlayAnimation(DebuffType::Stun);
+			debuffIcon.Delete(DebuffType::Stun);
 			break;
 		}
 		case DebuffType::Blight:
 		{
 			debuffText.PlayAnimation(DebuffType::Blight);
+			debuffIcon.Delete(DebuffType::Blight);
 			break;
 		}
 		case DebuffType::Bleed:
 		{
 			debuffText.PlayAnimation(DebuffType::Bleed);
+			debuffIcon.Delete(DebuffType::Bleed);
 			break;
 		}
 		case DebuffType::Debuff:
@@ -495,7 +538,9 @@ void CharacterContainer::EndStun()
 {
 	--debuffStack[DebuffType::Stun].first;
 	debuffText.PlayAnimation(DebuffType::Stun);
+	debuffIcon.Delete(DebuffType::Stun);
 	stunEffect.SetActive(false);
+	SOUND_MGR.PlaySfx("stun_off");
 }
 
 

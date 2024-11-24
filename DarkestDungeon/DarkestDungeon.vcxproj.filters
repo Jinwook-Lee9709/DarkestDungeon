@@ -115,6 +115,24 @@
     <ClCompile Include="Framework\TileMap.cpp">
       <Filter>Framework\9.TileMap</Filter>
     </ClCompile>
+    <ClCompile Include="Torch.cpp">
+      <Filter>Scenes\Dev1\UI\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\SoundMgr.cpp">
+      <Filter>Framework\2.Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillTooltip.cpp">
+      <Filter>Scenes\Dev1\UI\Component\SkillToolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillTooltip_RangeUi.cpp">
+      <Filter>Scenes\Dev1\UI\Component\SkillToolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillStringTable.cpp">
+      <Filter>Framework\Table</Filter>
+    </ClCompile>
+    <ClCompile Include="DebuffIcon.cpp">
+      <Filter>Scenes\Dev1\3.Entity\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Framework.h">
@@ -261,6 +279,24 @@
     <ClInclude Include="Framework\TileMap.h">
       <Filter>Framework\9.TileMap</Filter>
     </ClInclude>
+    <ClInclude Include="Torch.h">
+      <Filter>Scenes\Dev1\UI\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\SoundMgr.h">
+      <Filter>Framework\2.Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillTooltip.h">
+      <Filter>Scenes\Dev1\UI\Component\SkillToolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillTooltip_RangeUi.h">
+      <Filter>Scenes\Dev1\UI\Component\SkillToolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillStringTable.h">
+      <Filter>Framework\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="DebuffIcon.h">
+      <Filter>Scenes\Dev1\3.Entity\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -367,6 +403,15 @@
     </Filter>
     <Filter Include="Scenes\Dev1\Component">
       <UniqueIdentifier>{7a4b642d-462e-4d8c-ae73-a44eae902115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\2.Manager\SoundManager">
+      <UniqueIdentifier>{b8a8bb90-ad0d-4bfd-ab86-12c49619aedb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\3.Entity\Component">
+      <UniqueIdentifier>{61f44c15-b78e-4fed-ad5c-953f0d7c9892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Dev1\UI\Component\SkillToolTip">
+      <UniqueIdentifier>{149f2d07-dd32-4c4b-beb6-cc5467bf6cde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

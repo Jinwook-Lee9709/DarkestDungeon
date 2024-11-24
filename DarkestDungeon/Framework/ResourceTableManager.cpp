@@ -35,7 +35,25 @@ bool ResourceTableManager::LoadCharacterAnimation(const CharacterType& character
 			,(std::string)animation["TEX_ID"] });
 		}
 	}
-	return false;
+	return true;
+}
+
+bool ResourceTableManager::LoadCharacterSound(const CharacterType& character)
+{
+	auto it = PATH["Character_Sound"][std::to_string((int)character)].begin();
+	while (it != PATH["Character_Sound"][std::to_string((int)character)].end())
+	{
+		if (!RES_MGR(sf::SoundBuffer).Load(it.value())) {
+			std::cout << "LoadFail:" << it.value() << std::endl;
+		}
+		else {
+			if (resourceTable.find(it.key()) == resourceTable.end()) {
+				resourceTable.insert({ it.key(), it.value() });
+			}
+		}
+		it++;
+	}
+	return true;
 }
 
 bool ResourceTableManager::LoadMonsterAnimation()
@@ -51,7 +69,7 @@ bool ResourceTableManager::LoadMonsterAnimation()
 			}
 		}
 	}
-	return false;
+	return true;
 }
 
 bool ResourceTableManager::LoadEffectAnimation()
@@ -66,7 +84,7 @@ bool ResourceTableManager::LoadEffectAnimation()
 			
 		}
 	}
-	return false;
+	return true;
 }
 
 bool ResourceTableManager::LoadSkillIcon(const std::string& skillName)
@@ -76,7 +94,7 @@ bool ResourceTableManager::LoadSkillIcon(const std::string& skillName)
 		std::cout << "LoadFail:" << path << std::endl;
 	}
 	resourceTable.insert({ skillName, path });
-	return false;
+	return true;
 }
 
 bool ResourceTableManager::LoadPortrait(const std::string& portraitName)
@@ -86,7 +104,7 @@ bool ResourceTableManager::LoadPortrait(const std::string& portraitName)
 		std::cout << "LoadFail:" << path << std::endl;
 	}
 	resourceTable.insert({ portraitName, path });
-	return false;
+	return true;
 }
 
 bool ResourceTableManager::LoadScene(const std::string& scene)

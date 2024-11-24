@@ -30,10 +30,6 @@ void SceneDev1::Init()
 		monsters.push_back(obj2);
 	}
 	AddGo(new ShadowRect("shadow"));
-	auto obj3 = AddGo(new SpriteGo("Overlay1"));
-	obj3->SetOrigin(Origins::MC);
-	obj3->SetPosition(windowSize * 0.5f);
-
 	corridorWall = AddGo(new TileMap("corridorWall"));
 	corridorBackground = AddGo(new SpriteGo("dungeon_background", "corridorBackground"));
 	corridorBackground->SetOrigin(Origins::MC);
@@ -166,6 +162,7 @@ void SceneDev1::LoadCharacterResource()
 		RES_TABLE_MGR.LoadSkillIcon(it->GetCharacterInfo().skill4[0]);
 		RES_TABLE_MGR.LoadPortrait("portrait" + std::to_string((int)it->GetCharacterInfo().type));
 		RES_TABLE_MGR.LoadCharacterAnimation(it->GetCharacterInfo().type);
+		RES_TABLE_MGR.LoadCharacterSound(it->GetCharacterInfo().type);
 	}
 
 }

@@ -25,7 +25,12 @@ struct SkillSkeletonMilitia : public Skill
 			damage = Utils::Truncate(damage * 1.5f);
 			accuracy = 300;
 		}
-		characters[target]->OnHit(damage, accuracy + 82.5);
+		if (characters[target]->OnHit(damage, accuracy + 82.5))
+		{
+			SOUND_MGR.PlaySfx("bleed_onset");
+		}
+		characters[target]->OnDebuffed(DebuffType::Bleed, 50, 2, 2);
+		SOUND_MGR.PlaySfx("sklmi_swordstrike");
 		characters[target]->PlayMiddleEffect("blood");
 	}
 	void skill2(
@@ -43,10 +48,11 @@ struct SkillSkeletonMilitia : public Skill
 		}
 		if (characters[target]->OnHit(damage * 0.5f, accuracy + 90))
 		{
+			SOUND_MGR.PlaySfx("bleed_onset");
 			characters[target]->OnDebuffed(DebuffType::Stun, accuracy + 100);
 			characters[target]->PlayMiddleEffect("blood");
 		}
-		
+		SOUND_MGR.PlaySfx("sklmi_swordstrike");
 	}
 
 };

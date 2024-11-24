@@ -28,3 +28,99 @@ className0,Crusader
 className1,HighwayMan
 className2,PlagueDoctor
 className3,Vestal
+crusader_ability_one_text_name,Smite
+crusader_ability_one_text_type,Melee
+crusader_ability_one_text_0,ACC base: 95
+crusader_ability_one_text_1,+15% DMG vs Unholy
+crusader_ability_two_text_name,Stunning blow
+crusader_ability_two_text_type,Melee
+crusader_ability_two_text_0,ACC base: 90
+crusader_ability_two_text_1,DMG mod: -50%
+crusader_ability_two_text_2,Stun
+crusader_ability_two_text_3,(100% base)
+crusader_ability_three_text_name,Battle Heal
+crusader_ability_three_text_0,Heal
+crusader_ability_three_text_1,2-3
+crusader_ability_four_text_name,Zealous Accusation
+crusader_ability_four_text_type,Ranged
+crusader_ability_four_text_0,ACC base:85
+crusader_ability_four_text_1,DMG mod:-40%
+crusader_ability_four_text_2,CRIT mod: -4.0%
+highwayman_ability_one_text_name,WIcked Slice
+highwayman_ability_one_text_type,Melee
+highwayman_ability_one_text_0,ACC base: 85
+highwayman_ability_one_text_1,DMG mod: 15%
+highwayman_ability_one_text_2,CRIT mod: +5.0%
+highwayman_ability_two_text_name,PIstol Shot
+highwayman_ability_two_text_type,Ranged
+highwayman_ability_two_text_0,ACC base: 85
+highwayman_ability_two_text_1,DMG mod: -15%
+highwayman_ability_two_text_2,CRIT mod: +7.5%
+highwayman_ability_two_text_3,+25% DMG vs Marked
+highwayman_ability_three_text_name,Point Blank Shot
+highwayman_ability_three_text_type,Ranged
+highwayman_ability_three_text_0,Back 1
+highwayman_ability_three_text_1,ACC base:95
+highwayman_ability_three_text_2,DMG mod: 50%
+highwayman_ability_three_text_3,CRIT mod: +5.0%
+highwayman_ability_three_text_4,Knockback 1
+highwayman_ability_three_text_5,(100% base)
+highwayman_ability_four_text_name,GrapeShot Blast
+highwayman_ability_four_text_type,Ranged
+highwayman_ability_four_text_0,ACC base: 75
+highwayman_ability_four_text_1,DMG mod: -50%
+highwayman_ability_four_text_2,CRIT mod: -9.0%
+highwayman_ability_four_text_3,Debuff Target:
+highwayman_ability_four_text_4,Crits Received Chance: +4%
+highwayman_ability_four_text_5,(100% base)
+plague_doctor_ability_one_text_name,Noxious Blast
+plague_doctor_ability_one_text_type,Ranged
+plague_doctor_ability_one_text_0,ACC base:95
+plague_doctor_ability_one_text_1,DMG mod: -80%
+plague_doctor_ability_one_text_2,CRIT mod: +5.0%
+plague_doctor_ability_one_text_3,Blight
+plague_doctor_ability_one_text_4,(100% base)
+plague_doctor_ability_one_text_5,5pts/rd for 3rds / -5 ACC
+plague_doctor_ability_one_text_6,(100% base)
+plague_doctor_ability_two_text_name,Plague Grenade
+plague_doctor_ability_two_text_type,Ranged
+plague_doctor_ability_two_text_0,ACC base: 95
+plague_doctor_ability_two_text_1,DMG mod: -90%
+plague_doctor_ability_two_text_2,Blight
+plague_doctor_ability_two_text_3,(100% base)
+plague_doctor_ability_two_text_4,4 pts/rd for 3rds
+plague_doctor_ability_three_text_name,Blinding Gas
+plague_doctor_ability_three_text_type,Ranged
+plague_doctor_ability_three_text_0,ACC base: 95
+plague_doctor_ability_three_text_1,DMG mod: -100%
+plague_doctor_ability_three_text_2,Stun
+plague_doctor_ability_three_text_3,(100% base)
+plague_doctor_ability_four_text_name,Battlefield Medicine
+plague_doctor_ability_four_text_0,Heal
+plague_doctor_ability_four_text_1,1-1
+plague_doctor_ability_four_text_2,Cure
+plague_doctor_ability_four_text_3,Blight
+plague_doctor_ability_four_text_4,/
+plague_doctor_ability_four_text_5,Bleed
+plague_doctor_ability_four_text_6,Self:
+plague_doctor_ability_four_text_7,Cure
+plague_doctor_ability_four_text_8,Blight
+plague_doctor_ability_four_text_9,/
+plague_doctor_ability_four_text_10,Bleed
+vestal_ability_one_text_name,Mace Bash
+vestal_ability_one_text_type,Melee
+vestal_ability_one_text_0,ACC base:85
+vestal_ability_two_text_name,Judgement
+vestal_ability_two_text_type,Ranged
+vestal_ability_two_text_0,ACC base: 85
+vestal_ability_two_text_1,DMG mod: -25%
+vestal_ability_two_text_2,"CRIT mod: +5% "
+vestal_ability_two_text_3,"Self : "
+vestal_ability_two_text_4,Heal
+vestal_ability_two_text_5,3 HP
+vestal_ability_three_text_name,Divine Grace
+vestal_ability_three_text_0,Heal
+vestal_ability_three_text_1,4-5
+vestal_ability_four_text_name,Divine Comfort
+vestal_ability_four_text_0,Heal
+vestal_ability_four_text_1,1-3

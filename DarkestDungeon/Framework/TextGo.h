@@ -6,7 +6,9 @@ class TextGo : public GameObject
 protected:
 	sf::Text text;
 	std::string font;
+
 public:
+	TextGo() = default;
 	TextGo(const std::string& font, const std::string& str);
 	~TextGo() = default;
 
@@ -27,6 +29,9 @@ public:
 	void SetStringByTable(const std::string str);
 	void SetCharacterSize(int size);
 	void Draw(sf::RenderWindow& window)override;
+
+	sf::FloatRect GetLocalBounds() const override;
+	sf::FloatRect GetGlobalBounds() const override;
 
 
 

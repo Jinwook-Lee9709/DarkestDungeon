@@ -35,6 +35,9 @@ protected:
 	Status beforeStatus;
 
 	ShadowRect* shadow;
+	
+	float sfxTimer = 0;
+	float sfxDuration = 0.6f;
 
 	SpriteGo* background;
 	float cameraDistance;

@@ -24,6 +24,7 @@ public:
 		MonsterTurn,
 		MonsterAnimate,
 		FillEmptyPos,
+		Victory,
 	};
 
 private:

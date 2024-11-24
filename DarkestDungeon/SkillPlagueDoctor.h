@@ -33,8 +33,13 @@ struct SkillPlagueDoctor : public Skill
 		if (monsters[target]->OnHit(damage, accuracy + 95))
 		{
 			monsters[target]->OnDebuffed(DebuffType::Blight, accuracy + 95, 5, 3);
+			SOUND_MGR.PlaySfx("plg_noxiousblast");
+		}
+		else {
+			SOUND_MGR.PlaySfx("plg_noxiousblast_miss");
 		}
 		monsters[target]->PlayBottomEffect("plagueDoctor_blast_target");
+
 	}
 	void skill2(
 		std::vector<CharacterContainer*> characters, std::vector<MonsterContainer*> monsters, short user, short target
@@ -67,6 +72,7 @@ struct SkillPlagueDoctor : public Skill
 			}
 
 		}
+		SOUND_MGR.PlaySfx("plg_plaguegrenade");
 
 	}
 	void skill3(
@@ -99,6 +105,8 @@ struct SkillPlagueDoctor : public Skill
 			}
 
 		}
+		SOUND_MGR.PlaySfx("plg_explo_small");
+		SOUND_MGR.PlaySfx("plg_blindinggas");
 	}
 	void skill4(
 		std::vector<CharacterContainer*>characters, std::vector<MonsterContainer*> monsters, short user, short target
@@ -111,6 +119,7 @@ struct SkillPlagueDoctor : public Skill
 		characters[target]->PlayBottomEffect("plagueDoctor_heal_target");
 		characters[target]->CureDebuff(DebuffType::Bleed);
 		characters[target]->CureDebuff(DebuffType::Blight);
+		SOUND_MGR.PlaySfx("plg_battlemed");
 	}
 };
 
