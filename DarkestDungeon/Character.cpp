@@ -152,7 +152,7 @@ void Character::AddSkill(int num)
 	switch (num){
 	case 1:
 	{
-		std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill1 = std::bind(&Skill::skill1, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+		std::function<void(std::vector<CharacterContainer*>, std::vector<MonsterContainer*>, short, short)> skill1 =std::bind(&Skill::skill1, skill, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 		skillSlot->InsertSkill(skill1, skill->skillrange1);
 		break;
 	}
