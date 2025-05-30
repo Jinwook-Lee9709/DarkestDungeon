@@ -16,27 +16,23 @@
 
 ## 게임 설명
 
-![에버그로우1](https://github.com/user-attachments/assets/e023f178-bd90-4185-85e1-ab862edea832)|
-|:---:|
-|타이틀 화면|
-|![에버그로우2](https://github.com/user-attachments/assets/fa4903bd-8c23-4172-80b1-07f7e7c7b577)|
-|인 게임 화면|
 
+## 게임 설명
 
-- 다양한 건물들<br>
-농장, 공장, 주택등 다양한 건물을 통해 마을을 꾸며보세요.<br>
-- 농사를 짓고, 제품을 생산하세요!<br>
-농장에서 작물을 수확하고, 목장에서 다양한 물품들을 생산하세요! 이를 가공해서 다양한 제품을 생산가능합니다.<br>
-- 헬기 배달 시스템을 통한 재화 획득<br>
-생산한 자원들을 물물 교환 해보세요! 매일 아침 거래가능한 품목이 초기화 됩니다!<br>
+- 4명의 영웅들<br>
+원작의 성전사, 노상강도, 역병 의사, 성녀를 구현했고 각각 4개의 스킬을 구현했습니다.<br>
+- 복도 탐험 <br>
+간단한 좌우이동이 가능하며, 문과의 상호작용으로 전투에 돌입 가능합니다.<br>
+- 전투<br>
+캐릭터 스킬 사용, 캐릭터 위치 바꾸기 등이 가능합니다.<br>
 
 
 
 ## 콘텐츠
 
-|<img width="1134" alt="스크린샷 2025-05-30 오후 12 30 13" src="https://github.com/user-attachments/assets/4972c65d-5b37-47b5-801d-a4d95e7eed24" />|<img width="1135" alt="스크린샷 2025-05-30 오후 12 31 19" src="https://github.com/user-attachments/assets/1fa5bcf8-cca1-4fbc-b684-54c2da60c0ff" />|<img width="1137" alt="스크린샷 2025-05-30 오후 12 29 26" src="https://github.com/user-attachments/assets/d4bf4160-a21e-4604-866f-cce56ba71d8d" />|<img width="1134" alt="스크린샷 2025-05-30 오후 12 30 29" src="https://github.com/user-attachments/assets/ddae7d77-edbd-4114-825a-d91a9e4eb261" />|
-|:---:|:---:|:---:|:--:|
-|농사|건설|공산품 생산|영역 확장|
+|![복도](https://github.com/user-attachments/assets/c08a1e23-2e09-4fe5-ba40-7008bc53a2e4)|![전투](https://github.com/user-attachments/assets/177a9365-8d09-4e5d-8b32-8ecde5dded62)|
+|:---:|:---:|
+|복도 탐험|전투|
 
 
 
